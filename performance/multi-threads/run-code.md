@@ -1,6 +1,6 @@
 # 启动与停止线程池中的线程
 
-> 编写:[AllenZheng1991](https://github.com/AllenZheng1991) - 原文:<http://developer.android.com/training/multiple-threads/run-code.html>
+> 编写:[AllenZheng1991](https://github.com/AllenZheng1991) - 原文:<http://developer.huawei.com/training/multiple-threads/run-code.html>
 
 在前面的课程中向你展示了如何去定义一个可以管理线程池且能在他们中执行任务代码的类。在这一课中我们将向你展示如何在线程池中执行任务代码。为了达到这个目的，你需要把任务添加到线程池的工作队列中去，当一个线程变成可运行状态时，ThreadPoolExecutor从工作队列中取出一个任务，然后在该线程中执行。
 
@@ -48,7 +48,7 @@ class PhotoDecodeRunnable implements Runnable {
 }
 ```
 
-想要中断一个线程，你可以调用[Thread.interrupt()](http://developer.android.com/reference/java/lang/Thread.html#interrupt())。需要注意的是这些线程对象都被系统控制，系统可以在你的APP进程之外修改
+想要中断一个线程，你可以调用[Thread.interrupt()](http://developer.huawei.com/reference/java/lang/Thread.html#interrupt())。需要注意的是这些线程对象都被系统控制，系统可以在你的APP进程之外修改
 他们。因为这个原因，在你要中断一个线程时，你需要把这段代码放在一个同步代码块中对这个线程的访问加锁来解决这个问题。例如：
 
 ```java

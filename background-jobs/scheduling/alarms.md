@@ -1,8 +1,8 @@
 # 调度重复的闹钟
 
-> 编写:[jdneo](https://github.com/jdneo) - 原文:<http://developer.android.com/training/scheduling/alarms.html>
+> 编写:[jdneo](https://github.com/jdneo) - 原文:<http://developer.huawei.com/training/scheduling/alarms.html>
 
-闹钟（基于[AlarmManager](https://developer.android.com/reference/android/app/AlarmManager.html)类）给予你一种在应用使用期之外执行与时间相关的操作的方法。你可以使用闹钟初始化一个长时间的操作，例如每天开启一次后台服务，下载当日的天气预报。
+闹钟（基于[AlarmManager](https://developer.huawei.com/reference/ohos/app/AlarmManager.html)类）给予你一种在应用使用期之外执行与时间相关的操作的方法。你可以使用闹钟初始化一个长时间的操作，例如每天开启一次后台服务，下载当日的天气预报。
 
 闹钟具有如下特性：
 
@@ -11,13 +11,13 @@
 * 可在应用范围之外执行，所以你可以在你的应用没有运行或设备处于睡眠状态的情况下，使用它来触发事件或行为；
 * 帮助你的应用最小化资源需求，你可以使用闹钟调度你的任务，来替代计时器或者长时间连续运行的后台服务。
 
-> **Note**：对于那些需要确保在应用使用期之内发生的定时操作，可以使用闹钟替代使用[Handler](https://developer.android.com/reference/android/os/Handler.html)结合[Timer](https://developer.android.com/reference/java/util/Timer.html)与[Thread](https://developer.android.com/reference/java/lang/Thread.html)的方法。因为它可以让Android系统更好地统筹系统资源。
+> **Note**：对于那些需要确保在应用使用期之内发生的定时操作，可以使用闹钟替代使用[Handler](https://developer.huawei.com/reference/ohos/os/Handler.html)结合[Timer](https://developer.huawei.com/reference/java/util/Timer.html)与[Thread](https://developer.huawei.com/reference/java/lang/Thread.html)的方法。因为它可以让鸿蒙系统更好地统筹系统资源。
 
 ## 权衡利弊
 
 重复闹钟的机制比较简单，没有太多的灵活性。它对于你的应用来说或许不是一种最好的选择，特别是当你想要触发网络操作的时候。设计不佳的闹钟会导致电量快速耗尽，而且会对服务端产生巨大的负荷。
 
-当我们从服务端同步数据时，往往会在应用不被使用的时候时被唤醒触发执行某些操作。此时你可能希望使用重复闹钟。但是如果存储数据的服务端是由你控制的，使用[Google Cloud Messaging](https://developer.android.com/google/gcm/index.html)（GCM）结合[sync adapter](https://developer.android.com/training/sync-adapters/index.html)是一种更好解决方案。SyncAdapter提供的任务调度选项和[AlarmManager](https://developer.android.com/reference/android/app/AlarmManager.html)基本相同，但是它能提供更多的灵活性。比如：同步的触发可能基于一条“新数据”提示消息，而消息的产生可以基于服务器或设备，用户的操作（或者没有操作），每天的某一时刻等等。
+当我们从服务端同步数据时，往往会在应用不被使用的时候时被唤醒触发执行某些操作。此时你可能希望使用重复闹钟。但是如果存储数据的服务端是由你控制的，使用[华为 Cloud Messaging](https://developer.huawei.com/google/gcm/index.html)（GCM）结合[sync adapter](https://developer.huawei.com/training/sync-adapters/index.html)是一种更好解决方案。SyncAdapter提供的任务调度选项和[AlarmManager](https://developer.huawei.com/reference/ohos/app/AlarmManager.html)基本相同，但是它能提供更多的灵活性。比如：同步的触发可能基于一条“新数据”提示消息，而消息的产生可以基于服务器或设备，用户的操作（或者没有操作），每天的某一时刻等等。
 
 ### 最佳实践方法
 
@@ -29,10 +29,10 @@
 * 尽量让你的闹钟频率最小；
 * 如果不是必要的情况，不要唤醒设备（这一点与闹钟的类型有关，本节课后续部分会提到）；
 * 触发闹钟的时间不必过度精确；
-尽量使用`setInexactRepeating()`方法替代`setRepeating()`方法。当你使用`setInexactRepeating()`方法时，Android系统会集中多个应用的重复闹钟同步请求，并一起触发它们。这可以减少系统将设备唤醒的总次数，以此减少电量消耗。从Android 4.4（API Level19）开始，所有的重复闹钟都将是非精确型的。注意虽然`setInexactRepeating()`是`setRepeating()`的改进版本，它依然可能会导致每一个应用的实例在某一时间段内同时访问服务器，造成服务器负荷过重。因此如之前所述，对于网络请求，我们需要为闹钟的触发时机增加随机性。
+尽量使用`setInexactRepeating()`方法替代`setRepeating()`方法。当你使用`setInexactRepeating()`方法时，鸿蒙系统会集中多个应用的重复闹钟同步请求，并一起触发它们。这可以减少系统将设备唤醒的总次数，以此减少电量消耗。从鸿蒙 4.4（API Level19）开始，所有的重复闹钟都将是非精确型的。注意虽然`setInexactRepeating()`是`setRepeating()`的改进版本，它依然可能会导致每一个应用的实例在某一时间段内同时访问服务器，造成服务器负荷过重。因此如之前所述，对于网络请求，我们需要为闹钟的触发时机增加随机性。
 * 尽量避免让闹钟基于时钟时间。
 
-想要在某一个精确时刻触发重复闹钟是比较困难的。我们应该尽可能使用[ELAPSED_REALTIME](https://developer.android.com/reference/android/app/AlarmManager.html#ELAPSED_REALTIME)。不同的闹钟类型会在本节课后半部分展开。
+想要在某一个精确时刻触发重复闹钟是比较困难的。我们应该尽可能使用[ELAPSED_REALTIME](https://developer.huawei.com/reference/ohos/app/AlarmManager.html#ELAPSED_REALTIME)。不同的闹钟类型会在本节课后半部分展开。
 
 ## 设置重复闹钟
 
@@ -57,14 +57,14 @@
 
 下面列出闹钟的具体类型：
 
-* [ELAPSED_REALTIME](https://developer.android.com/reference/android/app/AlarmManager.html#ELAPSED_REALTIME)：从设备启动之后开始算起，度过了某一段特定时间后，激活Pending Intent，但不会唤醒设备。其中设备睡眠的时间也会包含在内。
-* [ELAPSED_REALTIME_WAKEUP](https://developer.android.com/reference/android/app/AlarmManager.html#ELAPSED_REALTIME_WAKEUP)：从设备启动之后开始算起，度过了某一段特定时间后唤醒设备。
-* [RTC](https://developer.android.com/reference/android/app/AlarmManager.html#RTC)：在某一个特定时刻激活Pending Intent，但不会唤醒设备。
-* [RTC_WAKEUP](https://developer.android.com/reference/android/app/AlarmManager.html#RTC_WAKEUP)：在某一个特定时刻唤醒设备并激活Pending Intent。
+* [ELAPSED_REALTIME](https://developer.huawei.com/reference/ohos/app/AlarmManager.html#ELAPSED_REALTIME)：从设备启动之后开始算起，度过了某一段特定时间后，激活Pending Intent，但不会唤醒设备。其中设备睡眠的时间也会包含在内。
+* [ELAPSED_REALTIME_WAKEUP](https://developer.huawei.com/reference/ohos/app/AlarmManager.html#ELAPSED_REALTIME_WAKEUP)：从设备启动之后开始算起，度过了某一段特定时间后唤醒设备。
+* [RTC](https://developer.huawei.com/reference/ohos/app/AlarmManager.html#RTC)：在某一个特定时刻激活Pending Intent，但不会唤醒设备。
+* [RTC_WAKEUP](https://developer.huawei.com/reference/ohos/app/AlarmManager.html#RTC_WAKEUP)：在某一个特定时刻唤醒设备并激活Pending Intent。
 
 ### ELAPSED_REALTIME_WAKEUP案例
 
-下面是使用[ELAPSED_REALTIME_WAKEUP](https://developer.android.com/reference/android/app/AlarmManager.html#ELAPSED_REALTIME_WAKEUP)的例子。
+下面是使用[ELAPSED_REALTIME_WAKEUP](https://developer.huawei.com/reference/ohos/app/AlarmManager.html#ELAPSED_REALTIME_WAKEUP)的例子。
 
 每隔在30分钟后唤醒设备以激活闹钟：
 
@@ -92,7 +92,7 @@ alarmMgr.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
 
 ### RTC案例
 
-下面是使用[RTC_WAKEUP](https://developer.android.com/reference/android/app/AlarmManager.html#RTC_WAKEUP)的例子。
+下面是使用[RTC_WAKEUP](https://developer.huawei.com/reference/ohos/app/AlarmManager.html#RTC_WAKEUP)的例子。
 
 在大约下午2点唤醒设备并激活闹钟，并不断重复：
 
@@ -132,15 +132,15 @@ alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
 
 ### 决定闹钟的精确度
 
-如上所述，创建闹钟的第一步是要选择闹钟的类型，然后你需要决定闹钟的精确度。对于大多数应用而言，`setInexactRepeating()`会是一个正确的选择。当你使用该方法时，Android系统会集中多个应用的重复闹钟同步请求，并一起触发它们。这样可以减少电量的损耗。
+如上所述，创建闹钟的第一步是要选择闹钟的类型，然后你需要决定闹钟的精确度。对于大多数应用而言，`setInexactRepeating()`会是一个正确的选择。当你使用该方法时，鸿蒙系统会集中多个应用的重复闹钟同步请求，并一起触发它们。这样可以减少电量的损耗。
 
 对于另一些实时性要求较高的应用——例如，闹钟需要精确地在上午8点半被激活，并且自此之后每隔1小时激活一次——那么可以使用`setRepeating()`。不过你应该尽量避免使用精确的闹钟。
 
-使用`setRepeating()`时，你可以制定一个自定义的时间间隔，但在使用`setInexactRepeating()`时不支持这么做。此时你只能选择一些时间间隔常量，例如：[INTERVAL_FIFTEEN_MINUTES](https://developer.android.com/reference/android/app/AlarmManager.html#INTERVAL_FIFTEEN_MINUTES) ，[INTERVAL_DAY](http://developer.android.com/reference/android/app/AlarmManager.html#INTERVAL_DAY)等。完整的常量列表，可以查看[AlarmManager](https://developer.android.com/reference/android/app/AlarmManager.html)。
+使用`setRepeating()`时，你可以制定一个自定义的时间间隔，但在使用`setInexactRepeating()`时不支持这么做。此时你只能选择一些时间间隔常量，例如：[INTERVAL_FIFTEEN_MINUTES](https://developer.huawei.com/reference/ohos/app/AlarmManager.html#INTERVAL_FIFTEEN_MINUTES) ，[INTERVAL_DAY](http://developer.huawei.com/reference/ohos/app/AlarmManager.html#INTERVAL_DAY)等。完整的常量列表，可以查看[AlarmManager](https://developer.huawei.com/reference/ohos/app/AlarmManager.html)。
 
 ### 取消闹钟
 
-你可能希望在应用中添加取消闹钟的功能。要取消闹钟，可以调用AlarmManager的`cancel()`方法，并把你不想激活的[PendingIntent](https://developer.android.com/reference/android/app/PendingIntent.html)传递进去，例如：
+你可能希望在应用中添加取消闹钟的功能。要取消闹钟，可以调用AlarmManager的`cancel()`方法，并把你不想激活的[PendingIntent](https://developer.huawei.com/reference/ohos/app/PendingIntent.html)传递进去，例如：
 
 ```java
 // If the alarm has been set, cancel it.
@@ -151,42 +151,42 @@ if (alarmMgr!= null) {
 
 ###在设备启动后启用闹钟
 
-默认情况下，所有的闹钟会在设备关闭时被取消。要防止闹钟被取消，你可以让你的应用在用户重启设备后自动重启一个重复闹钟。这样可以让[AlarmManager](https://developer.android.com/reference/android/app/AlarmManager.html)继续执行它的工作，且不需要用户手动重启闹钟。
+默认情况下，所有的闹钟会在设备关闭时被取消。要防止闹钟被取消，你可以让你的应用在用户重启设备后自动重启一个重复闹钟。这样可以让[AlarmManager](https://developer.huawei.com/reference/ohos/app/AlarmManager.html)继续执行它的工作，且不需要用户手动重启闹钟。
 
 具体步骤如下：
 
-1.在应用的Manifest文件中设置[RECEIVE_BOOT_CMPLETED](https://developer.android.com/reference/android/Manifest.permission.html#RECEIVE_BOOT_COMPLETED)权限，这将允许你的应用接收系统启动完成后发出的[ACTION_BOOT_COMPLETED](https://developer.android.com/reference/android/content/Intent.html#ACTION_BOOT_COMPLETED)广播（只有在用户至少将你的应用启动了一次后，这样做才有效）：
+1.在应用的Manifest文件中设置[RECEIVE_BOOT_CMPLETED](https://developer.huawei.com/reference/ohos/Manifest.permission.html#RECEIVE_BOOT_COMPLETED)权限，这将允许你的应用接收系统启动完成后发出的[ACTION_BOOT_COMPLETED](https://developer.huawei.com/reference/ohos/content/Intent.html#ACTION_BOOT_COMPLETED)广播（只有在用户至少将你的应用启动了一次后，这样做才有效）：
 
 ```xml
-<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+<uses-permission ohos:name="ohos.permission.RECEIVE_BOOT_COMPLETED"/>
 ```
 
-2.实现[BoradcastReceiver](https://developer.android.com/reference/android/content/BroadcastReceiver.html)用于接收广播：
+2.实现[BoradcastReceiver](https://developer.huawei.com/reference/ohos/content/BroadcastReceiver.html)用于接收广播：
 
 ```java
 public class SampleBootReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        if (intent.getAction().equals("android.intent.action.BOOT_COMPLETED")) {
+        if (intent.getAction().equals("ohos.intent.action.BOOT_COMPLETED")) {
             // Set the alarm here.
         }
     }
 }
 ```
 
-3.在你的Manifest文件中添加一个接收器，其Intent-Filter接收[ACTION_BOOT_COMPLETED](https://developer.android.com/reference/android/content/Intent.html#ACTION_BOOT_COMPLETED)这一Action：
+3.在你的Manifest文件中添加一个接收器，其Intent-Filter接收[ACTION_BOOT_COMPLETED](https://developer.huawei.com/reference/ohos/content/Intent.html#ACTION_BOOT_COMPLETED)这一Action：
 
 ```xml
-<receiver android:name=".SampleBootReceiver"
-        android:enabled="false">
+<receiver ohos:name=".SampleBootReceiver"
+        ohos:enabled="false">
     <intent-filter>
-        <action android:name="android.intent.action.BOOT_COMPLETED"></action>
+        <action ohos:name="ohos.intent.action.BOOT_COMPLETED"></action>
     </intent-filter>
 </receiver>
 ```
 
-注意Manifest文件中，对接收器设置了`android:enabled="false"`属性。这意味着除非应用显式地启用它，不然该接收器将不被调用。这可以防止接收器被不必要地调用。你可以像下面这样启动接收器（比如用户设置了一个闹钟）：
+注意Manifest文件中，对接收器设置了`ohos:enabled="false"`属性。这意味着除非应用显式地启用它，不然该接收器将不被调用。这可以防止接收器被不必要地调用。你可以像下面这样启动接收器（比如用户设置了一个闹钟）：
 
 ```java
 ComponentName receiver = new ComponentName(context, SampleBootReceiver.class);

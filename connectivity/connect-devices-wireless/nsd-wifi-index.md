@@ -1,6 +1,6 @@
 # 使用 WiFi P2P 服务发现
 
-> 编写:[naizhengtan](https://github.com/naizhengtan) - 原文:<http://developer.android.com/training/connect-devices-wirelessly/nsd-wifi-direct.html>
+> 编写:[naizhengtan](https://github.com/naizhengtan) - 原文:<http://developer.huawei.com/training/connect-devices-wirelessly/nsd-wifi-direct.html>
 
 在本章第一节“[使用网络服务发现](nsd.html)”中介绍了如何在局域网中发现已连接到网络的服务。然而，即使在不接入网络的情况下，Wi-Fi P2P 服务发现也可以使我们的应用直接发现附近的设备。我们也可以向外公布自己设备上的服务。这些能力可以在没有局域网或者网络热点的情况下，在应用间进行通信。
 
@@ -8,22 +8,22 @@
 
 ## 配置 Manifest
 
-使用 Wi-Fi P2P 技术，需要添加 [CHANGE_WIFI_STATE](http://developer.android.com/reference/android/Manifest.permission.html#CHANGE_WIFI_STATE)、[ACCESS_WIFI_STATE](http://developer.android.com/reference/android/Manifest.permission.html#ACCESS_WIFI_STATE) 以及 [INTERNET](http://developer.android.com/reference/android/Manifest.permission.html#INTERNET) 三种权限到应用的 manifest 文件。虽然 Wi-Fi P2P 技术不需要访问互联网，但是它会使用 Java 中的标准 socket，而使用 socket 需要具有 INTERNET 权限，这也是 Wi-Fi P2P 技术需要申请该权限的原因。
+使用 Wi-Fi P2P 技术，需要添加 [CHANGE_WIFI_STATE](http://developer.huawei.com/reference/ohos/Manifest.permission.html#CHANGE_WIFI_STATE)、[ACCESS_WIFI_STATE](http://developer.huawei.com/reference/ohos/Manifest.permission.html#ACCESS_WIFI_STATE) 以及 [INTERNET](http://developer.huawei.com/reference/ohos/Manifest.permission.html#INTERNET) 三种权限到应用的 manifest 文件。虽然 Wi-Fi P2P 技术不需要访问互联网，但是它会使用 Java 中的标准 socket，而使用 socket 需要具有 INTERNET 权限，这也是 Wi-Fi P2P 技术需要申请该权限的原因。
 
 ```xml
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.android.nsdchat"
+<manifest xmlns:android="http://schemas.huawei.com/hap/res/ohos"
+    package="com.example.ohos.nsdchat"
     ...
 
     <uses-permission
-        android:required="true"
-        android:name="android.permission.ACCESS_WIFI_STATE"/>
+        ohos:required="true"
+        ohos:name="ohos.permission.ACCESS_WIFI_STATE"/>
     <uses-permission
-        android:required="true"
-        android:name="android.permission.CHANGE_WIFI_STATE"/>
+        ohos:required="true"
+        ohos:name="ohos.permission.CHANGE_WIFI_STATE"/>
     <uses-permission
-        android:required="true"
-        android:name="android.permission.INTERNET"/>
+        ohos:required="true"
+        ohos:name="ohos.permission.INTERNET"/>
     ...
 ```
 
@@ -33,9 +33,9 @@
 
 三步创建本地服务：
 
-1. 新建 [WifiP2pServiceInfo](http://developer.android.com/reference/android/net/wifi/p2p/nsd/WifiP2pServiceInfo.html) 对象
+1. 新建 [WifiP2pServiceInfo](http://developer.huawei.com/reference/ohos/net/wifi/p2p/nsd/WifiP2pServiceInfo.html) 对象
 2. 加入相应服务的详细信息
-3. 调用 <a href="http://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.html#addLocalService(android.net.wifi.p2p.WifiP2pManager.Channel, android.net.wifi.p2p.nsd.WifiP2pServiceInfo, android.net.wifi.p2p.WifiP2pManager.ActionListener)">addLocalService()</a> 为服务发现注册本地服务
+3. 调用 <a href="http://developer.huawei.com/reference/ohos/net/wifi/p2p/WifiP2pManager.html#addLocalService(ohos.net.wifi.p2p.WifiP2pManager.Channel, ohos.net.wifi.p2p.nsd.WifiP2pServiceInfo, ohos.net.wifi.p2p.WifiP2pManager.ActionListener)">addLocalService()</a> 为服务发现注册本地服务
 
 ```java
 private void startRegistration() {
@@ -71,7 +71,7 @@ private void startRegistration() {
 
 ## 发现附近的服务
 
-Android 使用回调函数通知应用程序附近可用的服务，因此首先要做的是设置这些回调函数。新建一个 [WifiP2pManager.DnsSdTxtRecordListener](http://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.DnsSdTxtRecordListener.html) 实例监听实时收到的记录（record）。这些记录可以是来自其他设备的广播。当收到记录时，将其中的设备地址和其他相关信息拷贝到当前方法之外的外部数据结构中，供之后使用。下面的例子假设这条记录包含一个带有用户身份的“buddyname”域（field）。
+鸿蒙 使用回调函数通知应用程序附近可用的服务，因此首先要做的是设置这些回调函数。新建一个 [WifiP2pManager.DnsSdTxtRecordListener](http://developer.huawei.com/reference/ohos/net/wifi/p2p/WifiP2pManager.DnsSdTxtRecordListener.html) 实例监听实时收到的记录（record）。这些记录可以是来自其他设备的广播。当收到记录时，将其中的设备地址和其他相关信息拷贝到当前方法之外的外部数据结构中，供之后使用。下面的例子假设这条记录包含一个带有用户身份的“buddyname”域（field）。
 
 ```java
 final HashMap<String, String> buddies = new HashMap<String, String>();
@@ -95,7 +95,7 @@ private void discoverService() {
 }
 ```
 
-接下来创建 [WifiP2pManager.DnsSdServiceResponseListener](http://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.DnsSdServiceResponseListener.html) 对象，用以获取服务的信息。这个对象将接收服务的实际描述以及连接信息。上一段代码构建了一个包含设备地址和“buddyname”键值对的 [Map](http://developer.android.com/reference/java/util/Map.html) 对象。[WifiP2pManager.DnsSdServiceResponseListener](http://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.DnsSdServiceResponseListener.html) 对象使用这些配对信息将 DNS 记录和对应的服务信息对应起来。当上述两个 listener 构建完成后，调用 <a href="http://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.html#setDnsSdResponseListeners(android.net.wifi.p2p.WifiP2pManager.Channel, android.net.wifi.p2p.WifiP2pManager.DnsSdServiceResponseListener, android.net.wifi.p2p.WifiP2pManager.DnsSdTxtRecordListener)">setDnsSdResponseListeners()</a> 将他们加入到 [WifiP2pManager](http://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.html)。
+接下来创建 [WifiP2pManager.DnsSdServiceResponseListener](http://developer.huawei.com/reference/ohos/net/wifi/p2p/WifiP2pManager.DnsSdServiceResponseListener.html) 对象，用以获取服务的信息。这个对象将接收服务的实际描述以及连接信息。上一段代码构建了一个包含设备地址和“buddyname”键值对的 [Map](http://developer.huawei.com/reference/java/util/Map.html) 对象。[WifiP2pManager.DnsSdServiceResponseListener](http://developer.huawei.com/reference/ohos/net/wifi/p2p/WifiP2pManager.DnsSdServiceResponseListener.html) 对象使用这些配对信息将 DNS 记录和对应的服务信息对应起来。当上述两个 listener 构建完成后，调用 <a href="http://developer.huawei.com/reference/ohos/net/wifi/p2p/WifiP2pManager.html#setDnsSdResponseListeners(ohos.net.wifi.p2p.WifiP2pManager.Channel, ohos.net.wifi.p2p.WifiP2pManager.DnsSdServiceResponseListener, ohos.net.wifi.p2p.WifiP2pManager.DnsSdTxtRecordListener)">setDnsSdResponseListeners()</a> 将他们加入到 [WifiP2pManager](http://developer.huawei.com/reference/ohos/net/wifi/p2p/WifiP2pManager.html)。
 
 ```java
 private void discoverService() {
@@ -130,7 +130,7 @@ private void discoverService() {
 }
 ```
 
-现在调用 <a href="http://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.html#addServiceRequest(android.net.wifi.p2p.WifiP2pManager.Channel, android.net.wifi.p2p.nsd.WifiP2pServiceRequest, android.net.wifi.p2p.WifiP2pManager.ActionListener)">addServiceRequest()</a> 创建服务请求。这个方法也需要一个 Listener 报告请求成功与失败。
+现在调用 <a href="http://developer.huawei.com/reference/ohos/net/wifi/p2p/WifiP2pManager.html#addServiceRequest(ohos.net.wifi.p2p.WifiP2pManager.Channel, ohos.net.wifi.p2p.nsd.WifiP2pServiceRequest, ohos.net.wifi.p2p.WifiP2pManager.ActionListener)">addServiceRequest()</a> 创建服务请求。这个方法也需要一个 Listener 报告请求成功与失败。
 
 ```java
         serviceRequest = WifiP2pDnsSdServiceRequest.newInstance();
@@ -149,7 +149,7 @@ private void discoverService() {
                 });
 ```
 
-最后调用 <a href="http://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.html#discoverServices(android.net.wifi.p2p.WifiP2pManager.Channel, android.net.wifi.p2p.WifiP2pManager.ActionListener)">discoverServices()</a>。
+最后调用 <a href="http://developer.huawei.com/reference/ohos/net/wifi/p2p/WifiP2pManager.html#discoverServices(ohos.net.wifi.p2p.WifiP2pManager.Channel, ohos.net.wifi.p2p.WifiP2pManager.ActionListener)">discoverServices()</a>。
 
 ```java
         mManager.discoverServices(channel, new ActionListener() {
@@ -170,16 +170,16 @@ private void discoverService() {
         });
 ```
 
-如果所有部分都配置正确，我们应该就能看到正确的结果了！如果遇到了问题，可以查看 [WifiP2pManager.ActionListener](http://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.ActionListener.html) 中的回调函数。它们能够指示操作是否成功。我们可以将 debug 的代码放置在 <a href="http://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.ActionListener.html#onFailure(int)">onFailure()</a> 中来诊断问题。其中的一些错误码（Error Code）也许能为我们带来不小启发。下面是一些常见的错误：
+如果所有部分都配置正确，我们应该就能看到正确的结果了！如果遇到了问题，可以查看 [WifiP2pManager.ActionListener](http://developer.huawei.com/reference/ohos/net/wifi/p2p/WifiP2pManager.ActionListener.html) 中的回调函数。它们能够指示操作是否成功。我们可以将 debug 的代码放置在 <a href="http://developer.huawei.com/reference/ohos/net/wifi/p2p/WifiP2pManager.ActionListener.html#onFailure(int)">onFailure()</a> 中来诊断问题。其中的一些错误码（Error Code）也许能为我们带来不小启发。下面是一些常见的错误：
 
-[P2P_UNSUPPORTED](http://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.html#P2P_UNSUPPORTED)
+[P2P_UNSUPPORTED](http://developer.huawei.com/reference/ohos/net/wifi/p2p/WifiP2pManager.html#P2P_UNSUPPORTED)
 
 　　当前的设备不支持 Wi-Fi P2P
 
-[BUSY](http://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.html#BUSY)
+[BUSY](http://developer.huawei.com/reference/ohos/net/wifi/p2p/WifiP2pManager.html#BUSY)
 
 　　系统忙，无法处理当前请求
 
-[ERROR](http://developer.android.com/reference/android/net/wifi/p2p/WifiP2pManager.html#ERROR)
+[ERROR](http://developer.huawei.com/reference/ohos/net/wifi/p2p/WifiP2pManager.html#ERROR)
 
 　　内部错误导致操作失败

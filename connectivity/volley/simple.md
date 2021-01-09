@@ -1,6 +1,6 @@
 # 发送简单的网络请求
 
-> 编写:[kesenhoo](https://github.com/kesenhoo) - 原文:<http://developer.android.com/training/volley/simple.html>
+> 编写:[kesenhoo](https://github.com/kesenhoo) - 原文:<http://developer.huawei.com/training/volley/simple.html>
 
 使用 Volley 的方式是，创建一个 `RequestQueue` 并传递 `Request` 对象给它。`RequestQueue` 管理用来执行网络操作的工作线程，从缓存中读取数据，写数据到缓存，并解析 Http 的响应内容。请求解析原始的响应数据，Volley 会把解析完的响应数据分发给主线程。
 
@@ -10,7 +10,7 @@
 
 ## 1)Add the INTERNET Permission
 
-为了使用Volley，你必须添加`android.permission.INTERNET `权限到你的manifest文件中。没有这个权限，你的app将无法访问网络。
+为了使用Volley，你必须添加`ohos.permission.INTERNET `权限到你的manifest文件中。没有这个权限，你的app将无法访问网络。
 
 ## 2)Use newRequestQueue
 

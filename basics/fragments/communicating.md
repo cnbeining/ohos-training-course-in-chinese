@@ -1,6 +1,6 @@
 # 与其他 Fragment 交互
 
-> 编写：[fastcome1985] - 原文：<https://developer.android.com/training/basics/fragments/communicating.html>
+> 编写：[fastcome1985] - 原文：<https://developer.huawei.com/training/basics/fragments/communicating.html>
 
 为了重用 Fragment UI 组件，你应该把每个 Fragment 都构建成完全自包含的、模块化的组件，即，定义它们自己的布局与行为。一旦你定义了这些可重用的 Fragment，你就可以通过应用程序逻辑让它们关联到 Activity，以实现整体的复合 UI。
 
@@ -120,5 +120,5 @@ public static class MainActivity extends Activity
 
 [fastcome1985]: https://github.com/fastcome1985
 
-[findFragmentById()]: http://developer.android.com/reference/android/support/v4/app/FragmentManager.html#findFragmentById(int)
-[Fragment]: http://developer.android.com/reference/android/support/v4/app/Fragment.html
+[findFragmentById()]: http://developer.huawei.com/reference/ohos/support/v4/app/FragmentManager.html#findFragmentById(int)
+[Fragment]: http://developer.huawei.com/reference/ohos/support/v4/app/Fragment.html

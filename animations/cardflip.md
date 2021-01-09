@@ -1,6 +1,6 @@
 # 展示Card翻转动画
 
-> 编写:[XizhiXu](https://github.com/XizhiXu) - 原文:<http://developer.android.com/training/animation/cardflip.html>
+> 编写:[XizhiXu](https://github.com/XizhiXu) - 原文:<http://developer.huawei.com/training/animation/cardflip.html>
 
 这节课展示如何使用自定义Fragment动画实现Card翻转动画。Card翻转动画通过模拟Card翻转的效果实现view内容的切换。
 
@@ -18,7 +18,7 @@ scroll top left; padding: 26px 68px 38px 72px; overflow: hidden;">
 
 </div>
 
-如果你想直接查看整个例子，[下载](http://developer.android.com/shareables/training/Animations.zip)并运行App样例然后选择Card翻转例子。查看下列文件中的代码实现：
+如果你想直接查看整个例子，[下载](http://developer.huawei.com/shareables/training/Animations.zip)并运行App样例然后选择Card翻转例子。查看下列文件中的代码实现：
 
 * `src/CardFlipActivity.java`
 * `animator/card_flip_right_in.xml`
@@ -35,102 +35,102 @@ scroll top left; padding: 26px 68px 38px 72px; overflow: hidden;">
 **card_flip_left_in.xml**
 
 ```xml
-<set xmlns:android="http://schemas.android.com/apk/res/android">
+<set xmlns:android="http://schemas.huawei.com/hap/res/ohos">
     <!-- Before rotating, immediately set the alpha to 0. -->
     <objectAnimator
-        android:valueFrom="1.0"
-        android:valueTo="0.0"
-        android:propertyName="alpha"
-        android:duration="0" />
+        ohos:valueFrom="1.0"
+        ohos:valueTo="0.0"
+        ohos:propertyName="alpha"
+        ohos:duration="0" />
 
     <!-- Rotate. -->
     <objectAnimator
-        android:valueFrom="-180"
-        android:valueTo="0"
-        android:propertyName="rotationY"
-        android:interpolator="@android:interpolator/accelerate_decelerate"
-        android:duration="@integer/card_flip_time_full" />
+        ohos:valueFrom="-180"
+        ohos:valueTo="0"
+        ohos:propertyName="rotationY"
+        ohos:interpolator="@ohos:interpolator/accelerate_decelerate"
+        ohos:duration="@integer/card_flip_time_full" />
 
     <!-- Half-way through the rotation (see startOffset), set the alpha to 1. -->
     <objectAnimator
-        android:valueFrom="0.0"
-        android:valueTo="1.0"
-        android:propertyName="alpha"
-        android:startOffset="@integer/card_flip_time_half"
-        android:duration="1" />
+        ohos:valueFrom="0.0"
+        ohos:valueTo="1.0"
+        ohos:propertyName="alpha"
+        ohos:startOffset="@integer/card_flip_time_half"
+        ohos:duration="1" />
 </set>
 ```
 
 **card_flip_left_out.xml**
 
 ```xml
-<set xmlns:android="http://schemas.android.com/apk/res/android">
+<set xmlns:android="http://schemas.huawei.com/hap/res/ohos">
     <!-- Rotate. -->
     <objectAnimator
-        android:valueFrom="0"
-        android:valueTo="180"
-        android:propertyName="rotationY"
-        android:interpolator="@android:interpolator/accelerate_decelerate"
-        android:duration="@integer/card_flip_time_full" />
+        ohos:valueFrom="0"
+        ohos:valueTo="180"
+        ohos:propertyName="rotationY"
+        ohos:interpolator="@ohos:interpolator/accelerate_decelerate"
+        ohos:duration="@integer/card_flip_time_full" />
 
     <!-- Half-way through the rotation (see startOffset), set the alpha to 0. -->
     <objectAnimator
-        android:valueFrom="1.0"
-        android:valueTo="0.0"
-        android:propertyName="alpha"
-        android:startOffset="@integer/card_flip_time_half"
-        android:duration="1" />
+        ohos:valueFrom="1.0"
+        ohos:valueTo="0.0"
+        ohos:propertyName="alpha"
+        ohos:startOffset="@integer/card_flip_time_half"
+        ohos:duration="1" />
 </set>
 ```
 
 **card_flip_right_in.xml**
 
 ```xml
-<set xmlns:android="http://schemas.android.com/apk/res/android">
+<set xmlns:android="http://schemas.huawei.com/hap/res/ohos">
     <!-- Before rotating, immediately set the alpha to 0. -->
     <objectAnimator
-        android:valueFrom="1.0"
-        android:valueTo="0.0"
-        android:propertyName="alpha"
-        android:duration="0" />
+        ohos:valueFrom="1.0"
+        ohos:valueTo="0.0"
+        ohos:propertyName="alpha"
+        ohos:duration="0" />
 
     <!-- Rotate. -->
     <objectAnimator
-        android:valueFrom="180"
-        android:valueTo="0"
-        android:propertyName="rotationY"
-        android:interpolator="@android:interpolator/accelerate_decelerate"
-        android:duration="@integer/card_flip_time_full" />
+        ohos:valueFrom="180"
+        ohos:valueTo="0"
+        ohos:propertyName="rotationY"
+        ohos:interpolator="@ohos:interpolator/accelerate_decelerate"
+        ohos:duration="@integer/card_flip_time_full" />
 
     <!-- Half-way through the rotation (see startOffset), set the alpha to 1. -->
     <objectAnimator
-        android:valueFrom="0.0"
-        android:valueTo="1.0"
-        android:propertyName="alpha"
-        android:startOffset="@integer/card_flip_time_half"
-        android:duration="1" />
+        ohos:valueFrom="0.0"
+        ohos:valueTo="1.0"
+        ohos:propertyName="alpha"
+        ohos:startOffset="@integer/card_flip_time_half"
+        ohos:duration="1" />
 </set>
 ```
 
 **card_flip_right_out.xml**
 
 ```xml
-<set xmlns:android="http://schemas.android.com/apk/res/android">
+<set xmlns:android="http://schemas.huawei.com/hap/res/ohos">
     <!-- Rotate. -->
     <objectAnimator
-        android:valueFrom="0"
-        android:valueTo="-180"
-        android:propertyName="rotationY"
-        android:interpolator="@android:interpolator/accelerate_decelerate"
-        android:duration="@integer/card_flip_time_full" />
+        ohos:valueFrom="0"
+        ohos:valueTo="-180"
+        ohos:propertyName="rotationY"
+        ohos:interpolator="@ohos:interpolator/accelerate_decelerate"
+        ohos:duration="@integer/card_flip_time_full" />
 
     <!-- Half-way through the rotation (see startOffset), set the alpha to 0. -->
     <objectAnimator
-        android:valueFrom="1.0"
-        android:valueTo="0.0"
-        android:propertyName="alpha"
-        android:startOffset="@integer/card_flip_time_half"
-        android:duration="1" />
+        ohos:valueFrom="1.0"
+        ohos:valueTo="0.0"
+        ohos:propertyName="alpha"
+        ohos:startOffset="@integer/card_flip_time_half"
+        ohos:duration="1" />
 </set>
 ```
 
@@ -139,48 +139,48 @@ scroll top left; padding: 26px 68px 38px 72px; overflow: hidden;">
 Card的每一面是一个独立的布局，比如两屏文字，两张图片，或者任何View的组合。然后我们将在应用动画的Fragment里面用到这两个布局。下面的布局创建了展示文本Card的一面：
 
 ```xml
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#a6c"
-    android:padding="16dp"
-    android:gravity="bottom">
+<LinearLayout xmlns:android="http://schemas.huawei.com/hap/res/ohos"
+    ohos:layout_width="match_parent"
+    ohos:layout_height="match_parent"
+    ohos:orientation="vertical"
+    ohos:background="#a6c"
+    ohos:padding="16dp"
+    ohos:gravity="bottom">
 
-    <TextView android:id="@android:id/text1"
-        style="?android:textAppearanceLarge"
-        android:textStyle="bold"
-        android:textColor="#fff"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/card_back_title" />
+    <TextView ohos:id="@ohos:id/text1"
+        style="?ohos:textAppearanceLarge"
+        ohos:textStyle="bold"
+        ohos:textColor="#fff"
+        ohos:layout_width="match_parent"
+        ohos:layout_height="wrap_content"
+        ohos:text="@string/card_back_title" />
 
-    <TextView style="?android:textAppearanceSmall"
-        android:textAllCaps="true"
-        android:textColor="#80ffffff"
-        android:textStyle="bold"
-        android:lineSpacingMultiplier="1.2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/card_back_description" />
+    <TextView style="?ohos:textAppearanceSmall"
+        ohos:textAllCaps="true"
+        ohos:textColor="#80ffffff"
+        ohos:textStyle="bold"
+        ohos:lineSpacingMultiplier="1.2"
+        ohos:layout_width="match_parent"
+        ohos:layout_height="wrap_content"
+        ohos:text="@string/card_back_description" />
 
 </LinearLayout>
 ```
 
-Card另一面显示一个 [`ImageView`](http://developer.android.com/reference/android/widget/ImageView.html)：
+Card另一面显示一个 [`ImageView`](http://developer.huawei.com/reference/ohos/widget/ImageView.html)：
 
 ```xml
-<ImageView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:src="@drawable/image1"
-    android:scaleType="centerCrop"
-    android:contentDescription="@string/description_image_1" />
+<ImageView xmlns:android="http://schemas.huawei.com/hap/res/ohos"
+    ohos:layout_width="match_parent"
+    ohos:layout_height="match_parent"
+    ohos:src="@drawable/image1"
+    ohos:scaleType="centerCrop"
+    ohos:contentDescription="@string/description_image_1" />
 ```
 
 ## 创建Fragment
 
-为Card正反面创建Fragment，这些类从<a href="http://developer.android.com/reference/android/app/Fragment.html#onCreateView(android.view.LayoutInflater, android.view.ViewGroup, android.os.Bundle)"> `onCreateView()` </a>方法中分别为每个Framgent返回你之前创建的布局。在想要显示Card的父Activity中，我们可以创建对应的Fragment 实例。下面的例子展示父Activity内嵌套的Fragment：
+为Card正反面创建Fragment，这些类从<a href="http://developer.huawei.com/reference/ohos/app/Fragment.html#onCreateView(ohos.view.LayoutInflater, ohos.view.ViewGroup, ohos.os.Bundle)"> `onCreateView()` </a>方法中分别为每个Framgent返回你之前创建的布局。在想要显示Card的父Activity中，我们可以创建对应的Fragment 实例。下面的例子展示父Activity内嵌套的Fragment：
 
 ```java
 public class CardFlipActivity extends Activity {
@@ -211,13 +211,13 @@ public class CardFlipActivity extends Activity {
 
 ## 应用card翻转动画
 
-现在，我们需要在父Activity中展示Fragment。为此，首先创建Activity的布局。下面例子创建了一个可以在运行时添加Fragment的 [`FrameLayout`](http://developer.android.com/reference/android/widget/FrameLayout.html)。
+现在，我们需要在父Activity中展示Fragment。为此，首先创建Activity的布局。下面例子创建了一个可以在运行时添加Fragment的 [`FrameLayout`](http://developer.huawei.com/reference/ohos/widget/FrameLayout.html)。
 
 ```xml
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/container"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" />
+<FrameLayout xmlns:android="http://schemas.huawei.com/hap/res/ohos"
+    ohos:id="@+id/container"
+    ohos:layout_width="match_parent"
+    ohos:layout_height="match_parent" />
 ```
 在Activity代码中，把先前创建的布局设置成其ContentVew。当Activity创建时展示一个默认的Fragment是个不错的注意。所以下面的Activity样例表明了如何默认显示卡片正面：
 

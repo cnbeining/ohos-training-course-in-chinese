@@ -1,6 +1,6 @@
 # 管理音频播放
 
-> 编写:[kesenhoo](https://github.com/kesenhoo) - 原文:<http://developer.android.com/training/managing-audio/index.html>
+> 编写:[kesenhoo](https://github.com/kesenhoo) - 原文:<http://developer.huawei.com/training/managing-audio/index.html>
 
 如果我们的应用能够播放音频，那么让用户能够以自己预期的方式控制音频是很重要的。为了保证良好的用户体验，我们应该让应用能够管理当前的音频焦点，因为这样才能确保多个应用不会在同一时刻一起播放音频。
 
@@ -15,7 +15,7 @@
 
 * [**管理音频焦点(Managing Audio Focus)**](audio-focus.html)
 
-  由于可能会有多个应用具有播放音频的功能，考虑他们如何交互非常重要。为了防止多个音乐应用同时播放音频，Android使用音频焦点（Audio Focus）来控制音频的播放。在这节课中可以学习如何请求音频焦点，监听音频焦点的丢失，以及在这种情况发生时应该如何做出响应。
+  由于可能会有多个应用具有播放音频的功能，考虑他们如何交互非常重要。为了防止多个音乐应用同时播放音频，鸿蒙使用音频焦点（Audio Focus）来控制音频的播放。在这节课中可以学习如何请求音频焦点，监听音频焦点的丢失，以及在这种情况发生时应该如何做出响应。
 
 
 * [**兼容音频输出设备(Dealing with Audio Output Hardware)**](audio-output.html)

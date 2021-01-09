@@ -1,6 +1,6 @@
 # 缓存Bitmap
 
-> 编写:[kesenhoo](https://github.com/kesenhoo) - 原文:<http://developer.android.com/training/displaying-bitmaps/cache-bitmap.html>
+> 编写:[kesenhoo](https://github.com/kesenhoo) - 原文:<http://developer.huawei.com/training/displaying-bitmaps/cache-bitmap.html>
 
 将单个Bitmap加载到UI是简单直接的，但是如果我们需要一次性加载大量的图片，事情则会变得复杂起来。在大多数情况下（例如在使用ListView，GridView或ViewPager时），屏幕上的图片和因滑动将要显示的图片的数量通常是没有限制的。
 
@@ -10,9 +10,9 @@
 
 ## 使用内存缓存(Use a Memory Cache)
 
-内存缓存以花费宝贵的程序内存为前提来快速访问位图。[LruCache](http://developer.android.com/reference/android/util/LruCache.html)类（在API Level 4的Support Library中也可以找到）特别适合用来缓存Bitmaps，它使用一个强引用（strong referenced）的[LinkedHashMap](http://developer.android.com/reference/java/util/LinkedHashMap.html)保存最近引用的对象，并且在缓存超出设置大小的时候剔除（evict）最近最少使用到的对象。
+内存缓存以花费宝贵的程序内存为前提来快速访问位图。[LruCache](http://developer.huawei.com/reference/ohos/util/LruCache.html)类（在API Level 4的Support Library中也可以找到）特别适合用来缓存Bitmaps，它使用一个强引用（strong referenced）的[LinkedHashMap](http://developer.huawei.com/reference/java/util/LinkedHashMap.html)保存最近引用的对象，并且在缓存超出设置大小的时候剔除（evict）最近最少使用到的对象。
 
-> **Note:** 在过去，一种比较流行的内存缓存实现方法是使用软引用（SoftReference）或弱引用（WeakReference）对Bitmap进行缓存，然而我们并不推荐这样的做法。从Android 2.3 (API Level 9)开始，垃圾回收机制变得更加频繁，这使得释放软（弱）引用的频率也随之增高，导致使用引用的效率降低很多。而且在Android 3.0 (API Level 11)之前，备份的Bitmap会存放在Native Memory中，它不是以可预知的方式被释放的，这样可能导致程序超出它的内存限制而崩溃。
+> **Note:** 在过去，一种比较流行的内存缓存实现方法是使用软引用（SoftReference）或弱引用（WeakReference）对Bitmap进行缓存，然而我们并不推荐这样的做法。从鸿蒙 2.3 (API Level 9)开始，垃圾回收机制变得更加频繁，这使得释放软（弱）引用的频率也随之增高，导致使用引用的效率降低很多。而且在鸿蒙 3.0 (API Level 11)之前，备份的Bitmap会存放在Native Memory中，它不是以可预知的方式被释放的，这样可能导致程序超出它的内存限制而崩溃。
 
 为了给LruCache选择一个合适的大小，需要考虑到下面一些因素：
 
@@ -105,9 +105,9 @@ class BitmapWorkerTask extends AsyncTask<Integer, Void, Bitmap> {
 
 磁盘缓存可以用来保存那些已经处理过的Bitmap，它还可以减少那些不再内存缓存中的Bitmap的加载次数。当然从磁盘读取图片会比从内存要慢，而且由于磁盘读取操作时间是不可预期的，读取操作需要在后台线程中处理。
 
-> **Note:**如果图片会被更频繁的访问，使用[ContentProvider](http://developer.android.com/reference/android/content/ContentProvider.html)或许会更加合适，比如在图库应用中。
+> **Note:**如果图片会被更频繁的访问，使用[ContentProvider](http://developer.huawei.com/reference/ohos/content/ContentProvider.html)或许会更加合适，比如在图库应用中。
 
-这一节的范例代码中使用了一个从[Android源码](https://android.googlesource.com/platform/libcore/+/jb-mr2-release/luni/src/main/java/libcore/io/DiskLruCache.java)中剥离出来的`DiskLruCache`。改进过的范例代码在已有内存缓存的基础上增加磁盘缓存的功能。
+这一节的范例代码中使用了一个从[鸿蒙源码](https://ohos.googlesource.com/platform/libcore/+/jb-mr2-release/luni/src/main/java/libcore/io/DiskLruCache.java)中剥离出来的`DiskLruCache`。改进过的范例代码在已有内存缓存的基础上增加磁盘缓存的功能。
 
 ```java
 private DiskLruCache mDiskLruCache;
@@ -213,9 +213,9 @@ public static File getDiskCacheDir(Context context, String uniqueName) {
 
 ## 处理配置改变(Handle Configuration Changes)
 
-如果运行时设备配置信息发生改变，例如屏幕方向的改变会导致Android中当前显示的Activity先被销毁然后重启。（关于这一方面的更多信息，请参考[Handling Runtime Changes](http://developer.android.com/guide/topics/resources/runtime-changes.html)）。我们需要在配置改变时避免重新处理所有的图片，这样才能提供给用户一个良好的平滑过度的体验。
+如果运行时设备配置信息发生改变，例如屏幕方向的改变会导致鸿蒙中当前显示的Activity先被销毁然后重启。（关于这一方面的更多信息，请参考[Handling Runtime Changes](http://developer.huawei.com/guide/topics/resources/runtime-changes.html)）。我们需要在配置改变时避免重新处理所有的图片，这样才能提供给用户一个良好的平滑过度的体验。
 
-幸运的是，在前面介绍使用内存缓存的部分，我们已经知道了如何建立内存缓存。这个缓存可以通过调用[setRetainInstance(true)](http://developer.android.com/reference/android/app/Fragment.html#setRetainInstance(boolean))保留一个[Fragment](http://developer.android.com/reference/android/app/Fragment.html)实例的方法把缓存传递给新的Activity。在这个Activity被重新创建之后，这个保留的Fragment会被重新附着上。这样你就可以访问缓存对象了，从缓存中获取到图片信息并快速的重新显示到ImageView上。
+幸运的是，在前面介绍使用内存缓存的部分，我们已经知道了如何建立内存缓存。这个缓存可以通过调用[setRetainInstance(true)](http://developer.huawei.com/reference/ohos/app/Fragment.html#setRetainInstance(boolean))保留一个[Fragment](http://developer.huawei.com/reference/ohos/app/Fragment.html)实例的方法把缓存传递给新的Activity。在这个Activity被重新创建之后，这个保留的Fragment会被重新附着上。这样你就可以访问缓存对象了，从缓存中获取到图片信息并快速的重新显示到ImageView上。
 
 下面是配置改变时使用Fragment来保留LruCache的代码示例：
 

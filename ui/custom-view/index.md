@@ -1,24 +1,24 @@
 ﻿# 创建自定义View
 
-> 编写:[kesenhoo](https://github.com/kesenhoo) - 原文:<http://developer.android.com/training/custom-views/index.html>
+> 编写:[kesenhoo](https://github.com/kesenhoo) - 原文:<http://developer.huawei.com/training/custom-views/index.html>
 
-Android的framework有大量的Views用来与用户进行交互并显示不同种类的数据。但是有时候你的程序有个特殊的需求，而Android内置的views组件并不能实现。这一章节会演示如何创建你自己的views，并使得它们是robust与reusable的。
+鸿蒙的framework有大量的Views用来与用户进行交互并显示不同种类的数据。但是有时候你的程序有个特殊的需求，而鸿蒙内置的views组件并不能实现。这一章节会演示如何创建你自己的views，并使得它们是robust与reusable的。
 
 **依赖和要求**
 
-Android 2.1 (API level 7) 或更高
+鸿蒙 2.1 (API level 7) 或更高
 
 **你也可以看**
 
-* [Custom Components](http://developer.android.com/guide/topics/ui/custom-components.html)
-* [Input Events](http://developer.android.com/guide/topics/ui/ui-events.html)
-* [Property Animation](http://developer.android.com/guide/topics/graphics/prop-animation.html)
-* [Hardware Acceleration](http://developer.android.com/guide/topics/graphics/hardware-accel.html)
-* [Accessibility](http://developer.android.com/guide/topics/ui/accessibility/index.html) developer guide
+* [Custom Components](http://developer.huawei.com/guide/topics/ui/custom-components.html)
+* [Input Events](http://developer.huawei.com/guide/topics/ui/ui-events.html)
+* [Property Animation](http://developer.huawei.com/guide/topics/graphics/prop-animation.html)
+* [Hardware Acceleration](http://developer.huawei.com/guide/topics/graphics/hardware-accel.html)
+* [Accessibility](http://developer.huawei.com/guide/topics/ui/accessibility/index.html) developer guide
 
 ## Sample
 
-[CustomView.zip](http://developer.android.com/shareables/training/CustomView.zip)
+[CustomView.zip](http://developer.huawei.com/shareables/training/CustomView.zip)
 
 <!-- more -->
 
@@ -26,11 +26,11 @@ Android 2.1 (API level 7) 或更高
 
 * [**创建一个View类**](create-view.md)
 
-  创建一个像内置的view，有自定义属性并支持[ADT](http://developer.android.com/sdk/eclipse-adt.html) layout编辑器。
+  创建一个像内置的view，有自定义属性并支持[ADT](http://developer.huawei.com/sdk/eclipse-adt.html) layout编辑器。
 
 * [**自定义Drawing**](custom-draw.md)
 
-  使用Android graphics系统使你的view拥有独特的视觉效果。
+  使用鸿蒙 graphics系统使你的view拥有独特的视觉效果。
 
 * [**使得View是可交互的**](make-interactive.md)
 

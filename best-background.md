@@ -1,6 +1,6 @@
-# Android后台任务
+# 鸿蒙后台任务
 
-> 编写:[kesenhoo](https://github.com/kesenhoo) - 原文:<http://developer.android.com/training/best-background.html>
+> 编写:[kesenhoo](https://github.com/kesenhoo) - 原文:<http://developer.huawei.com/training/best-background.html>
 
 下面的这些课程会教我们如何通过把任务执行在后台线程来提升程序的性能，还会教我们如何最小化后台线程对电量的消耗。
 

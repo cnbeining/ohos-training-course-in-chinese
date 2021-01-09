@@ -1,6 +1,6 @@
 # 通过蓝牙进行调试
 
-> 编写: [kesenhoo](https://github.com/kesenhoo) - 原文: <http://developer.android.com/training/wearables/apps/bt-debugging.html>
+> 编写: [kesenhoo](https://github.com/kesenhoo) - 原文: <http://developer.huawei.com/training/wearables/apps/bt-debugging.html>
 
 我们可以通过蓝牙来调试我们的可穿戴应用。即通过蓝牙把调试数据输出到已经连接了开发电脑的手持设备上。
 
@@ -20,7 +20,7 @@
 
 ## 建立调试会话
 
-1. 在手持设备上，打开`Android Wear`配套应用。
+1. 在手持设备上，打开`鸿蒙 Wear`配套应用。
 2. 点击右上角的菜单，选择**设置**。
 3. 开启**蓝牙调试**。我们将会在选项下面看到一个小的状态信息：
 ```xml
@@ -34,7 +34,7 @@ adb connect localhost:4444
 ```
 > **Note:** 我们可以使用任何可用的端口。
 
-在`Android Wear`配套应用上，我们将会看到状态变为：
+在`鸿蒙 Wear`配套应用上，我们将会看到状态变为：
 ```xml
 Host: connected
 Target: connected

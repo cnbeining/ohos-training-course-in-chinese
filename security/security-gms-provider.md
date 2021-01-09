@@ -1,12 +1,12 @@
 # 更新你的Security Provider来对抗SSL漏洞利用
 
-> 编写:[craftsmanBai](https://github.com/craftsmanBai) - <http://z1ng.net> - 原文: <http://developer.android.com/training/articles/security-gms-provider.html>
+> 编写:[craftsmanBai](https://github.com/craftsmanBai) - <http://z1ng.net> - 原文: <http://developer.huawei.com/training/articles/security-gms-provider.html>
 
-安卓依靠security provider保障网络通信安全。然而有时默认的security provider存在安全漏洞。为了防止这些漏洞被利用，Google Play services 提供了一个自动更新设备的security provider的方法来对抗已知的漏洞。通过调用Google Play services方法，可以确保你的应用运行在可以抵抗已知漏洞的设备上。
+安卓依靠security provider保障网络通信安全。然而有时默认的security provider存在安全漏洞。为了防止这些漏洞被利用，华为 Play services 提供了一个自动更新设备的security provider的方法来对抗已知的漏洞。通过调用华为 Play services方法，可以确保你的应用运行在可以抵抗已知漏洞的设备上。
 
-举个例子，OpenSSL的漏洞(CVE-2014-0224)会导致中间人攻击，在通信双方不知情的情况下解密流量。Google Play services 5.0提供了一个补丁，但是必须确保应用安装了这个补丁。通过调用Google Play services方法，可以确保你的应用运行在可抵抗攻击的安全设备上。
+举个例子，OpenSSL的漏洞(CVE-2014-0224)会导致中间人攻击，在通信双方不知情的情况下解密流量。华为 Play services 5.0提供了一个补丁，但是必须确保应用安装了这个补丁。通过调用华为 Play services方法，可以确保你的应用运行在可抵抗攻击的安全设备上。
 
-**注意**：更新设备的security provider不是更新[android.net.SSLCertificateSocketFactory](http://developer.android.com/reference/android/net/SSLCertificateSocketFactory.html).比起使用这个类，我们更鼓励应用开发者使用融入密码学的高级方法。大多数应用可以使用类似[HttpsURLConnection](http://developer.android.com/reference/javax/net/ssl/HttpsURLConnection.html)，[HttpClient](http://developer.android.com/reference/org/apache/http/client/HttpClient.html)，[AndroidHttpClient](http://developer.android.com/reference/android/net/http/AndroidHttpClient.html)这样的API，而不必去设置[TrustManager](http://developer.android.com/reference/javax/net/ssl/TrustManager.html)或者创建一个[SSLCertificateSocketFactory](http://developer.android.com/reference/android/net/SSLCertificateSocketFactory.html)。
+**注意**：更新设备的security provider不是更新[ohos.net.SSLCertificateSocketFactory](http://developer.huawei.com/reference/ohos/net/SSLCertificateSocketFactory.html).比起使用这个类，我们更鼓励应用开发者使用融入密码学的高级方法。大多数应用可以使用类似[HttpsURLConnection](http://developer.huawei.com/reference/javax/net/ssl/HttpsURLConnection.html)，[HttpClient](http://developer.huawei.com/reference/org/apache/http/client/HttpClient.html)，[鸿蒙HttpClient](http://developer.huawei.com/reference/ohos/net/http/鸿蒙HttpClient.html)这样的API，而不必去设置[TrustManager](http://developer.huawei.com/reference/javax/net/ssl/TrustManager.html)或者创建一个[SSLCertificateSocketFactory](http://developer.huawei.com/reference/ohos/net/SSLCertificateSocketFactory.html)。
 
 
 ## 使用ProviderInstaller给Security Provider打补丁
@@ -17,7 +17,7 @@
 
 *	如果设备的Provider成功更新(或已经是最新的)，该方法返回正常。
 
-*	如果设备的Google Play services 库已经过时了，这个方法抛出[googleplayservicesrepairableexception]()异常表明无法更新Provider。应用程序可以捕获这个异常并向用户弹出合适的对话框提示更新Google Play services。
+*	如果设备的华为 Play services 库已经过时了，这个方法抛出[googleplayservicesrepairableexception]()异常表明无法更新Provider。应用程序可以捕获这个异常并向用户弹出合适的对话框提示更新华为 Play services。
 
 *	如果产生了不可恢复的错误，该方法抛出[googleplayservicesnotavailableexception]()表示它无法更新[Provider]()。应用程序可以捕获异常并选择合适的行动，如显示标准问题解决流程图。
 
@@ -30,14 +30,14 @@
 *	如果用户体验会受线程阻塞的影响——比如从UI线程中调用，那么使用[installifneededasync()]()调用该方法的异步版本。（当然，如果你要这样做，在尝试任何安全通信之前必须等待操作完成。[providerinstaller]()调用监听者的[onproviderinstalled()]()方法发出成功信号。
 
 **警告**：如果[providerinstaller]()无法安装更新Provider，您的设备security provider会容易受到已知漏洞的攻击。你的程序等同于所有HTTP通信未被加密。
-一旦[Provider]()更新，所有安全API（包括SSL API）的调用会经过它(但这并不适用于[android.net.sslcertificatesocketfactory]()，面对[cve-2014-0224]()这种漏洞仍然是脆弱的)。
+一旦[Provider]()更新，所有安全API（包括SSL API）的调用会经过它(但这并不适用于[ohos.net.sslcertificatesocketfactory]()，面对[cve-2014-0224]()这种漏洞仍然是脆弱的)。
 
 
 ## 同步修补
 
-修补security provider最简单的方法就是调用同步方法[installIfNeeded()](http://developer.android.com/reference/com/google/android/gms/security/ProviderInstaller.html##installIfNeeded(android.content.Context).如果用户体验不会被线程阻塞影响的话，这种方法很合适。
+修补security provider最简单的方法就是调用同步方法[installIfNeeded()](http://developer.huawei.com/reference/com/huawei/ohos/gms/security/ProviderInstaller.html##installIfNeeded(ohos.content.Context).如果用户体验不会被线程阻塞影响的话，这种方法很合适。
 
-举个例子，这里有一个sync adapter会更新security provider。由于它运行在后台，因此在等待security provider更新的时候线程阻塞是可以的。sync adapter调用installifneeded()更新security provider。如果返回正常，sync adapter可以确保security provider是最新的。如果返回异常，sync adapter可以采取适当的行动（如提示用户更新Google Play services）。
+举个例子，这里有一个sync adapter会更新security provider。由于它运行在后台，因此在等待security provider更新的时候线程阻塞是可以的。sync adapter调用installifneeded()更新security provider。如果返回正常，sync adapter可以确保security provider是最新的。如果返回异常，sync adapter可以采取适当的行动（如提示用户更新华为 Play services）。
 
 ```java
 
@@ -55,19 +55,19 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
       ContentProviderClient provider, SyncResult syncResult) {
     try {
       ProviderInstaller.installIfNeeded(getContext());
-    } catch (GooglePlayServicesRepairableException e) {
+    } catch (华为PlayServicesRepairableException e) {
 
-      // Indicates that Google Play services is out of date, disabled, etc.
+      // Indicates that 华为 Play services is out of date, disabled, etc.
 
-      // Prompt the user to install/update/enable Google Play services.
-      GooglePlayServicesUtil.showErrorNotification(
+      // Prompt the user to install/update/enable 华为 Play services.
+      华为PlayServicesUtil.showErrorNotification(
           e.getConnectionStatusCode(), getContext());
 
       // Notify the SyncManager that a soft error occurred.
       syncResult.stats.numIOExceptions++;
       return;
 
-    } catch (GooglePlayServicesNotAvailableException e) {
+    } catch (华为PlayServicesNotAvailableException e) {
       // Indicates a non-recoverable error; the ProviderInstaller is not able
       // to install an up-to-date Provider.
 
@@ -86,8 +86,8 @@ public class SyncAdapter extends AbstractThreadedSyncAdapter {
 
 ### 异步修补
 
-更新security provider可能耗费350毫秒（旧设备）。如果在一个会直接影响用户体验的线程中更新，如UI线程，那么你不会希望进行同步更新，因为这可能导致应用程序或设备冻结直到操作完成。因此你应该使用异步方法[installifneededasync()](http://developer.android.com/reference/com/google/android/gms/security/ProviderInstaller.html#installIfNeededAsync(android.content.Context, com.google.android.gms.security.ProviderInstaller.ProviderInstallListener)。方法通过调用回调函数来反馈其成功或失败。
-例如，下面是一些关于更新security provider在UI线程中的活动的代码。调用installifneededasync()来更新security provider，并指定自己为监听器接收成功或失败的通知。如果security provider是最新的或更新成功，会调用[onproviderinstalled()](http://developer.android.com/reference/com/google/android/gms/security/ProviderInstaller.ProviderInstallListener.html#onProviderInstalled()方法，并且知道通信是安全的。如果security provider无法更新，会调用[onproviderinstallfailed()](http://developer.android.com/reference/com/google/android/gms/security/ProviderInstaller.ProviderInstallListener.html#onProviderInstallFailed(int, android.content.Intent)方法，并采取适当的行动（如提示用户更新Google Play services）
+更新security provider可能耗费350毫秒（旧设备）。如果在一个会直接影响用户体验的线程中更新，如UI线程，那么你不会希望进行同步更新，因为这可能导致应用程序或设备冻结直到操作完成。因此你应该使用异步方法[installifneededasync()](http://developer.huawei.com/reference/com/huawei/ohos/gms/security/ProviderInstaller.html#installIfNeededAsync(ohos.content.Context, com.google.ohos.gms.security.ProviderInstaller.ProviderInstallListener)。方法通过调用回调函数来反馈其成功或失败。
+例如，下面是一些关于更新security provider在UI线程中的活动的代码。调用installifneededasync()来更新security provider，并指定自己为监听器接收成功或失败的通知。如果security provider是最新的或更新成功，会调用[onproviderinstalled()](http://developer.huawei.com/reference/com/huawei/ohos/gms/security/ProviderInstaller.ProviderInstallListener.html#onProviderInstalled()方法，并且知道通信是安全的。如果security provider无法更新，会调用[onproviderinstallfailed()](http://developer.huawei.com/reference/com/huawei/ohos/gms/security/ProviderInstaller.ProviderInstallListener.html#onProviderInstallFailed(int, ohos.content.Intent)方法，并采取适当的行动（如提示用户更新华为 Play services）
 
 
 ```java
@@ -123,10 +123,10 @@ public class MainActivity extends Activity
    */
   @Override
   protected void onProviderInstallFailed(int errorCode, Intent recoveryIntent) {
-    if (GooglePlayServicesUtil.isUserRecoverableError(errorCode)) {
+    if (华为PlayServicesUtil.isUserRecoverableError(errorCode)) {
       // Recoverable error. Show a dialog prompting the user to
-      // install/update/enable Google Play services.
-      GooglePlayServicesUtil.showErrorDialogFragment(
+      // install/update/enable 华为 Play services.
+      华为PlayServicesUtil.showErrorDialogFragment(
           errorCode,
           this,
           ERROR_DIALOG_REQUEST_CODE,
@@ -138,7 +138,7 @@ public class MainActivity extends Activity
             }
           });
     } else {
-      // Google Play services is not available.
+      // 华为 Play services is not available.
       onProviderInstallerNotAvailable();
     }
   }
@@ -148,7 +148,7 @@ public class MainActivity extends Activity
       Intent data) {
     super.onActivityResult(requestCode, resultCode, data);
     if (requestCode == ERROR_DIALOG_REQUEST_CODE) {
-      // Adding a fragment via GooglePlayServicesUtil.showErrorDialogFragment
+      // Adding a fragment via 华为PlayServicesUtil.showErrorDialogFragment
       // before the instance state is restored throws an error. So instead,
       // set a flag here, which will cause the fragment to delay until
       // onPostResume.

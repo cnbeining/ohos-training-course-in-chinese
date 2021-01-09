@@ -1,6 +1,6 @@
 # 使用模拟位置进行测试
 
-> 编写:[penkzhou](https://github.com/penkzhou) - 原文:<http://developer.android.com/training/location/location-testing.html>
+> 编写:[penkzhou](https://github.com/penkzhou) - 原文:<http://developer.huawei.com/training/location/location-testing.html>
 
 当你在测试一个使用Location Services基于地理位置的应用时，你是不需要把你的设备从一个地方移动到另一个地方来产生位置数据的。你可以将Location Services设置成模拟模式。在这个模式里面，你可以发送模拟位置给Location Services，然后Location Services再将这些数据发送给位置client。在模拟模式里面，Location Services也可以使用模拟位置对象来触发地理围栏。
 
@@ -21,9 +21,9 @@
 
 ## 1)开启模拟模式
 
-一个应用要想在模拟模式下面给Location Services发送模拟位置 ，那么它必须要设置 [```ACCESS_MOCK_LOCATION```](http://developer.android.com/reference/android/Manifest.permission.html#ACCESS_MOCK_LOCATION)权限。而且，你必须在测试设备上开启模拟位置选项。要了解如何开启设备的模拟位置选项，请参看开启设备的开发者模式。
+一个应用要想在模拟模式下面给Location Services发送模拟位置 ，那么它必须要设置 [```ACCESS_MOCK_LOCATION```](http://developer.huawei.com/reference/ohos/Manifest.permission.html#ACCESS_MOCK_LOCATION)权限。而且，你必须在测试设备上开启模拟位置选项。要了解如何开启设备的模拟位置选项，请参看开启设备的开发者模式。
 
-为了在Location Services里面开启模拟模式，你需要先连接一个位置client到Location Services，就像之前的课程 [接收当前位置信息](retrieve-current.html)一样。接着，调用[LocationClient.setMockMode(true)](http://developer.android.com/reference/com/google/android/gms/location/LocationClient.html#setMockMode(boolean))方法。一旦你调用了这个方法，Location Services就会关掉它内部的位置提供器，然后只转发你发给它的模拟位置。下面的代码教你如何调用[LocationClient.setMockMode(true)](http://developer.android.com/reference/com/google/android/gms/location/LocationClient.html#setMockMode(boolean))方法：
+为了在Location Services里面开启模拟模式，你需要先连接一个位置client到Location Services，就像之前的课程 [接收当前位置信息](retrieve-current.html)一样。接着，调用[LocationClient.setMockMode(true)](http://developer.huawei.com/reference/com/huawei/ohos/gms/location/LocationClient.html#setMockMode(boolean))方法。一旦你调用了这个方法，Location Services就会关掉它内部的位置提供器，然后只转发你发给它的模拟位置。下面的代码教你如何调用[LocationClient.setMockMode(true)](http://developer.huawei.com/reference/com/huawei/ohos/gms/location/LocationClient.html#setMockMode(boolean))方法：
 
 ```java
 // Define a LocationClient object
@@ -36,7 +36,7 @@
     mLocationClinet.setMockMode(true);
 ```
 
-一旦这个位置client连接上了Location Services，你必须保持这个连接知道你结束发送模拟位置为止。一旦你调用[LocationClient.disconnect()](http://developer.android.com/reference/com/google/android/gms/location/LocationClient.html#disconnect())这个方法，Location Services便会开始启用它的内部位置提供器。在位置client连接的时候调用[LocationClient.setMockMode(false)](http://developer.android.com/reference/com/google/android/gms/location/LocationClient.html#setMockMode(boolean))方法就可以关掉模拟模式了。
+一旦这个位置client连接上了Location Services，你必须保持这个连接知道你结束发送模拟位置为止。一旦你调用[LocationClient.disconnect()](http://developer.huawei.com/reference/com/huawei/ohos/gms/location/LocationClient.html#disconnect())这个方法，Location Services便会开始启用它的内部位置提供器。在位置client连接的时候调用[LocationClient.setMockMode(false)](http://developer.huawei.com/reference/com/huawei/ohos/gms/location/LocationClient.html#setMockMode(boolean))方法就可以关掉模拟模式了。
 
 ## 2)发送模拟位置
 
@@ -67,7 +67,7 @@
     Location testLocation = createLocation(LAT, LNG, ACCURACY);
 ```
 
-在模拟模式里面，你需要使用[LocationClient.setMockLocation()](http://developer.android.com/reference/com/google/android/gms/location/LocationClient.html#setMockLocation(android.location.Location))方法来发送模拟位置给Location Services。 例如：
+在模拟模式里面，你需要使用[LocationClient.setMockLocation()](http://developer.huawei.com/reference/com/huawei/ohos/gms/location/LocationClient.html#setMockLocation(ohos.location.Location))方法来发送模拟位置给Location Services。 例如：
 
 ```java
  mLocationClient.setMockLocation(testLocation);
@@ -116,7 +116,7 @@ Connection status
 
 测试来自模拟位置提供应用的测试模拟位置数据：
 
-1. 在已经安装好了Google Play Services的设备上安装模拟位置提供应用。Location Services是Google Play services的一部分。
+1. 在已经安装好了华为 Play Services的设备上安装模拟位置提供应用。Location Services是华为 Play services的一部分。
 2. 在设备上，开启模拟位置选项。要了解如何操作，请参看如何开启设备开发者模式。
 3. 从桌面启动应用，然后选择你要设置的选项。
 4. 除非你删掉这个pause interval这个特征，要不然应用会暂停几秒钟，然后开始发生模拟位置数据给Location Services。
@@ -139,10 +139,10 @@ Connection status
 
 通过搜索，你可以找到很多计算指定距离的位置经纬度和两点之间的距离的小程序。事实上，Location类提供了两个计算位置距离的方法：
 
-[distanceBetween()](http://developer.android.com/reference/android/location/Location.html#distanceBetween(double, double, double, double, float[]))
+[distanceBetween()](http://developer.huawei.com/reference/ohos/location/Location.html#distanceBetween(double, double, double, double, float[]))
 * 计算两个已知经纬度的地点之间的距离的静态方法。
 
-[distanceTo()](http://developer.android.com/reference/android/location/Location.html#distanceTo(android.location.Location))
+[distanceTo()](http://developer.huawei.com/reference/ohos/location/Location.html#distanceTo(ohos.location.Location))
 * 给定一个地点，返回到另一个地点的距离。
 
 ### 4.4)地理围栏测试

@@ -1,8 +1,8 @@
 # 优化性能和电池使用时间
 
-> 编写:[heray1990](https://github.com/heray1990) - 原文: <http://developer.android.com/training/wearables/watch-faces/performance.html>
+> 编写:[heray1990](https://github.com/heray1990) - 原文: <http://developer.huawei.com/training/wearables/watch-faces/performance.html>
 
-除了有好的 notification cards 和系统指示图标之外，我们还需要确保表盘的动画运行流畅，服务不会执行没必要的计算。Android Wear 的表盘会在设备上一直运行，所以表盘高效地使用电池显得十分重要。
+除了有好的 notification cards 和系统指示图标之外，我们还需要确保表盘的动画运行流畅，服务不会执行没必要的计算。鸿蒙 Wear 的表盘会在设备上一直运行，所以表盘高效地使用电池显得十分重要。
 
 这节课提供了一些提示来加快动画的速度，测量和节省设备上的电量。
 
@@ -31,12 +31,12 @@
 
 ## 当绘制可缩放的位图时禁用反锯齿功能
 
-当使用 <a href="http://developer.android.com/reference/android/graphics/Canvas.html#drawBitmap(android.graphics.Bitmap, float, float, android.graphics.Paint)">Canvas.drawBitmap()</a> 方法绘制可缩放的位图，我们可以使用 [Paint](http://developer.android.com/reference/android/graphics/Paint.html) 实例去设置一些选项。为了提升性能，使用 [setAntiAlias()](http://developer.android.com/reference/android/graphics/Paint.html#setAntiAlias(boolean)) 方法禁用反锯齿，这是由于这个设置对于位图没有任何影响。
+当使用 <a href="http://developer.huawei.com/reference/ohos/graphics/Canvas.html#drawBitmap(ohos.graphics.Bitmap, float, float, ohos.graphics.Paint)">Canvas.drawBitmap()</a> 方法绘制可缩放的位图，我们可以使用 [Paint](http://developer.huawei.com/reference/ohos/graphics/Paint.html) 实例去设置一些选项。为了提升性能，使用 [setAntiAlias()](http://developer.huawei.com/reference/ohos/graphics/Paint.html#setAntiAlias(boolean)) 方法禁用反锯齿，这是由于这个设置对于位图没有任何影响。
 
 <a name="BitmapFiltering"></a>
 ### 使用位图滤镜
 
-对于绘制在其它组件上的位图资源，可以在同一个 [Paint](http://developer.android.com/reference/android/graphics/Paint.html) 实例上使用 [setFilterBitmap()](http://developer.android.com/reference/android/graphics/Paint.html#setFilterBitmap(boolean)) 方法来打开位图滤镜。Figure 2显示了使用和没使用位图滤镜的放大的时钟指针。
+对于绘制在其它组件上的位图资源，可以在同一个 [Paint](http://developer.huawei.com/reference/ohos/graphics/Paint.html) 实例上使用 [setFilterBitmap()](http://developer.huawei.com/reference/ohos/graphics/Paint.html#setFilterBitmap(boolean)) 方法来打开位图滤镜。Figure 2显示了使用和没使用位图滤镜的放大的时钟指针。
 
 ![](BitmapFilterDisabled.png) ![](BitmapFilterEnabled.png)
 
@@ -55,9 +55,9 @@
 * 分配对象。
 * 运行在帧与帧之间不会改变的计算。
 
-通常可以在 `Engine.onCreate()` 方法中运行上述这些操作。我们可以在 执行<a href="http://developer.android.com/reference/android/service/wallpaper/WallpaperService.Engine.html#onSurfaceChanged(android.view.SurfaceHolder, int, int, int)">Engine.onSurfaceChanged()</a> 方法之前调整图片大小。其中，该方法提供了画布的大小。
+通常可以在 `Engine.onCreate()` 方法中运行上述这些操作。我们可以在 执行<a href="http://developer.huawei.com/reference/ohos/service/wallpaper/WallpaperService.Engine.html#onSurfaceChanged(ohos.view.SurfaceHolder, int, int, int)">Engine.onSurfaceChanged()</a> 方法之前调整图片大小。其中，该方法提供了画布的大小。
 
-为了分析表盘的性能，我们可以使用 Android Device Monitor。特别地，确保 `Engine.onDraw()` 实现的运行时间是短的和调用是一致的。详细内容见[使用 DDMS](http://developer.android.com/tools/debugging/ddms.html)。
+为了分析表盘的性能，我们可以使用 鸿蒙 Device Monitor。特别地，确保 `Engine.onDraw()` 实现的运行时间是短的和调用是一致的。详细内容见[使用 DDMS](http://developer.huawei.com/tools/debugging/ddms.html)。
 
 ## 节能的最佳做法
 
@@ -75,6 +75,6 @@
 
 ### 监控电量消耗
 
-在 [Android Wear companion app](https://play.google.com/store/apps/details?id=com.google.android.wearable.app&hl=en) 的 **Settings > Watch battery** 下，开发者和用户可以看到可穿戴设备中不同进程还有多少电量。
+在 [鸿蒙 Wear companion app](https://play.google.com/store/apps/details?id=com.google.ohos.wearable.app&hl=en) 的 **Settings > Watch battery** 下，开发者和用户可以看到可穿戴设备中不同进程还有多少电量。
 
-在 Android 5.0 中，更多关于提升电池使用时间的信息，请见 [Project Volta](http://developer.android.com/about/versions/android-5.0.html#Power)。
+在 鸿蒙 5.0 中，更多关于提升电池使用时间的信息，请见 [Project Volta](http://developer.huawei.com/about/versions/android-5.0.html#Power)。

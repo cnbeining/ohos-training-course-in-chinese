@@ -1,6 +1,6 @@
 ﻿# 实现自定义View的绘制
 
-> 编写:[kesenhoo](https://github.com/kesenhoo) - 原文:<http://developer.android.com/training/custom-view/custom-draw.html>
+> 编写:[kesenhoo](https://github.com/kesenhoo) - 原文:<http://developer.huawei.com/training/custom-view/custom-draw.html>
 
 自定义view的最重要的一个部分是自定义它的外观。根据你的程序的需求，自定义绘制可能简单也可能很复杂。这节课会演示一些最常见的操作。
 
@@ -12,7 +12,7 @@
 <!-- more -->
 
 ## 创建绘图对象
-android.graphics framework把绘制定义为下面两类:
+ohos.graphics framework把绘制定义为下面两类:
 
 * 绘制什么，由Canvas处理
 * 如何绘制，由Paint处理
@@ -47,7 +47,7 @@ private void init() {
 ## 处理布局事件
 为了正确的绘制你的view，你需要知道view的大小。复杂的自定义view通常需要根据在屏幕上的大小与形状执行多次layout计算。而不是假设这个view在屏幕上的显示大小。即使只有一个程序会使用你的view，仍然是需要处理屏幕大小不同，密度不同，方向不同所带来的影响。
 
-尽管view有许多方法是用来计算大小的，但是大多数是不需要重写的。如果你的view不需要特别的控制它的大小，唯一需要重写的方法是[onSizeChanged()](http://developer.android.com/reference/android/view/View.html#onSizeChanged(int, int, int, int)).
+尽管view有许多方法是用来计算大小的，但是大多数是不需要重写的。如果你的view不需要特别的控制它的大小，唯一需要重写的方法是[onSizeChanged()](http://developer.huawei.com/reference/ohos/view/View.html#onSizeChanged(int, int, int, int)).
 
 onSizeChanged()，当你的view第一次被赋予一个大小时，或者你的view大小被更改时会被执行。在onSizeChanged方法里面计算位置，间距等其他与你的view大小值。
 
@@ -68,9 +68,9 @@ onSizeChanged()，当你的view第一次被赋予一个大小时，或者你的v
        float diameter = Math.min(ww, hh);
 ```
 
-如果你想更加精确的控制你的view的大小，需要重写[onMeasure()](http://developer.android.com/reference/android/view/View.html#onMeasure(int, int))方法。这个方法的参数是View.MeasureSpec，它会告诉你的view的父控件的大小。那些值被包装成int类型，你可以使用静态方法来获取其中的信息。
+如果你想更加精确的控制你的view的大小，需要重写[onMeasure()](http://developer.huawei.com/reference/ohos/view/View.html#onMeasure(int, int))方法。这个方法的参数是View.MeasureSpec，它会告诉你的view的父控件的大小。那些值被包装成int类型，你可以使用静态方法来获取其中的信息。
 
-这里是一个实现[onMeasure()](http://developer.android.com/reference/android/view/View.html#onMeasure)的例子。在这个例子中`PieChart`试着使它的区域足够大，使pie可以像它的label一样大:
+这里是一个实现[onMeasure()](http://developer.huawei.com/reference/ohos/view/View.html#onMeasure)的例子。在这个例子中`PieChart`试着使它的区域足够大，使pie可以像它的label一样大:
 
 ```java
 @Override

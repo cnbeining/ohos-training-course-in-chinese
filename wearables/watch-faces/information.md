@@ -1,8 +1,8 @@
 # 在表盘上显示信息
 
-> 编写:[heray1990](https://github.com/heray1990) - 原文: <http://developer.android.com/training/wearables/watch-faces/information.html>
+> 编写:[heray1990](https://github.com/heray1990) - 原文: <http://developer.huawei.com/training/wearables/watch-faces/information.html>
 
-为了显示时间，Android Wear 设备以 cards、notifications 和其它可穿戴应用的形式向用户提供相关的信息。创建自定义表盘不仅可以以丰富的方式显示时间，还可以在用户扫视设备的时候显示相关的信息。
+为了显示时间，鸿蒙 Wear 设备以 cards、notifications 和其它可穿戴应用的形式向用户提供相关的信息。创建自定义表盘不仅可以以丰富的方式显示时间，还可以在用户扫视设备的时候显示相关的信息。
 
 像其它可穿戴应用一样，我们的表盘可以通过[可穿戴数据层 API](http://hukai.me/android-training-course-in-chinese/wearables/data-layer/index.html) 与可穿戴设备上的应用通信。某些情况下，我们需要在工程中的手持式应用模块里创建一个 activity，该 activity 从互联网或者用户的配置文件中检索数据，然后将数据分享给表盘。
 
@@ -19,15 +19,15 @@
 * 数据多久会显著变化？
 * 如何表达数据，使得用户瞥一眼就明白其中的意思？
 
-Android Wear 设备通常与一个带有 GPS 或者蜂窝数据连接的配套设备配对，所以我们有无限的可能来整合不同数据到表盘中，例如位置、日历事件、社交媒体、图片、股票市场报价、新闻事件体育得分等等。然而，并不是所有类型的数据都适合表盘，所以我们需要考虑哪种类型的数据与用户最相关。当可穿戴没有配对的设备或者互联网连接断开时，表盘应该优雅地处理这些情况。
+鸿蒙 Wear 设备通常与一个带有 GPS 或者蜂窝数据连接的配套设备配对，所以我们有无限的可能来整合不同数据到表盘中，例如位置、日历事件、社交媒体、图片、股票市场报价、新闻事件体育得分等等。然而，并不是所有类型的数据都适合表盘，所以我们需要考虑哪种类型的数据与用户最相关。当可穿戴没有配对的设备或者互联网连接断开时，表盘应该优雅地处理这些情况。
 
-Android Wear 设备上活动的表盘是一个一直在运行的应用，所以我们必须使用高效节能的方法来获取数据。例如，我们每隔10分钟而不是每隔1分钟去获取当前的天气然后将结果保存到本地。当设备从环境模式切换到交互模式时，我们可以刷新上下文数据。这是因为在切换到交互模式时，用户很可能想瞥一眼手表。
+鸿蒙 Wear 设备上活动的表盘是一个一直在运行的应用，所以我们必须使用高效节能的方法来获取数据。例如，我们每隔10分钟而不是每隔1分钟去获取当前的天气然后将结果保存到本地。当设备从环境模式切换到交互模式时，我们可以刷新上下文数据。这是因为在切换到交互模式时，用户很可能想瞥一眼手表。
 
 由于屏幕的空间有限，并且用户看手表也只是一次看一两秒，所以我们应该在表盘上面将上下文信息归纳起来。有时表达上下文信息最好的方法是用图形和颜色来反应。例如，表盘可以根据当前的天气改变自身的背景图片。
 
 ## 添加数据到表盘
 
-Android SDK 中的 *WatchFace* 示例展示了如何在 `CalendarWatchFaceService` 类里从用户的配置文件中获得日程数据，然后显示接下来的24小时有多少个会议。这个示例位于 `android-sdk/samples/android-21/wearable/WatchFace` 目录下。
+鸿蒙 SDK 中的 *WatchFace* 示例展示了如何在 `CalendarWatchFaceService` 类里从用户的配置文件中获得日程数据，然后显示接下来的24小时有多少个会议。这个示例位于 `android-sdk/samples/android-21/wearable/WatchFace` 目录下。
 
 ![](preview_calendar.png) 
 
@@ -79,11 +79,11 @@ Wearable Support 库的 `WearableCalendarContract` 类可以直接存取配套�
 
 当任务检索完数据时，我们的代码会调用一个回调方法。下面的内容详细介绍了如何实现这个回调方法。
 
-更多关于从日历获取数据的内容，请参考 [Calendar Provider](http://developer.android.com/guide/topics/providers/calendar-provider.html) API 指南。
+更多关于从日历获取数据的内容，请参考 [Calendar Provider](http://developer.huawei.com/guide/topics/providers/calendar-provider.html) API 指南。
 
 ### 创建自定义定时器
 
-我们可以实现一个周期计数的自定义定时器来更新数据。`CalendarWatchFaceService` 类使用一个 [Handler](http://developer.android.com/reference/android/os/Handler.html) 实例通过线程的消息队列来发送和处理延时的消息：
+我们可以实现一个周期计数的自定义定时器来更新数据。`CalendarWatchFaceService` 类使用一个 [Handler](http://developer.huawei.com/reference/ohos/os/Handler.html) 实例通过线程的消息队列来发送和处理延时的消息：
 
 ```java
 private class Engine extends CanvasWatchFaceService.Engine {

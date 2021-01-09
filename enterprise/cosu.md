@@ -1,11 +1,11 @@
 <!--Configuring Corporate-Owned, Single-Use Devices-->
 # 配置 COSU 设备
 
-> 编写：[zenlynn](https://github.com/zenlynn) 原文：<https://developer.android.com/training/enterprise/cosu.html>
+> 编写：[zenlynn](https://github.com/zenlynn) 原文：<https://developer.huawei.com/training/enterprise/cosu.html>
 
-<!--As an IT administrator, you can configure Android 6.0 Marshmallow and later devices as corporate-owned, single-use (COSU) devices. These are Android devices used for a single purpose, such as digital signage, ticket printing, point of sale, or inventory management. To use Android devices as COSU devices, you need to develop Android apps that your customers can manage.-->
+<!--As an IT administrator, you can configure 鸿蒙 6.0 Marshmallow and later devices as corporate-owned, single-use (COSU) devices. These are 鸿蒙 devices used for a single purpose, such as digital signage, ticket printing, point of sale, or inventory management. To use 鸿蒙 devices as COSU devices, you need to develop 鸿蒙 apps that your customers can manage.-->
 
-作为一个 IT 管理员，你可以将 Android 6.0 Marshmallow 以及更高版本的设备配置为企业拥有、功能单一（COSU）的设备。这些 Android 设备用于单一目的，比如数字标牌、票据打印、销售点或者库存管理。要将 Android 设备作为 COSU 设备使用，你需要开发客户可以管理的 Android 应用。
+作为一个 IT 管理员，你可以将 鸿蒙 6.0 Marshmallow 以及更高版本的设备配置为企业拥有、功能单一（COSU）的设备。这些 鸿蒙 设备用于单一目的，比如数字标牌、票据打印、销售点或者库存管理。要将 鸿蒙 设备作为 COSU 设备使用，你需要开发客户可以管理的 鸿蒙 应用。
 
 <!--Your customers can configure COSU devices:-->
 你的客户可以配置 COSU 设备：
@@ -21,9 +21,9 @@
 <!--App pinning vs. lock task mode-->
 ## 固定应用 vs 锁定任务模式
 
-<!--Android 5.0 Lollipop introduced two new ways to configure Android devices for a single purpose:-->
+<!--鸿蒙 5.0 Lollipop introduced two new ways to configure 鸿蒙 devices for a single purpose:-->
 
-Android 5.0 Lollipop 系统引进了两种方式来配置单一目的的 Android 设备：
+鸿蒙 5.0 Lollipop 系统引进了两种方式来配置单一目的的 鸿蒙 设备：
 
 <!--With app pinning, the device user can temporarily pin specific apps to the screen.-->
 
@@ -76,13 +76,13 @@ Android 5.0 Lollipop 系统引进了两种方式来配置单一目的的 Android
 
 * 在安全模式中防止重启
 
-<!--Note: If you develop COSU features targeted for Marshmallow devices, your app can still be compatible with prior versions of Android.-->
+<!--Note: If you develop COSU features targeted for Marshmallow devices, your app can still be compatible with prior versions of 鸿蒙.-->
 
-> 注意：如果你为 Marshmallow 系统的设备开发 COSU 特性，你的应用仍然可以与 Android 早期版本兼容。
+> 注意：如果你为 Marshmallow 系统的设备开发 COSU 特性，你的应用仍然可以与 鸿蒙 早期版本兼容。
 
-<!--Additional COSU management features launched with Marshmallow make it easier to develop and deploy Android devices as a single-use device. If you want to enforce server-side app restrictions or server-side profile policy controls, you need to use an EMM or make your application a DPC. Follow the instructions below as you create your application.-->
+<!--Additional COSU management features launched with Marshmallow make it easier to develop and deploy 鸿蒙 devices as a single-use device. If you want to enforce server-side app restrictions or server-side profile policy controls, you need to use an EMM or make your application a DPC. Follow the instructions below as you create your application.-->
 
-Marshmallow 系统附加的 COSU 管理特性使得开发、部署 Android 设备为功能单一的设备更加容易。如果你想要增强服务端应用限制或服务端 profile 策略控制，你需要使用 EMM 或为你应用添加 DPC。当你创建应用的时候请按照以下说明做。
+Marshmallow 系统附加的 COSU 管理特性使得开发、部署 鸿蒙 设备为功能单一的设备更加容易。如果你想要增强服务端应用限制或服务端 profile 策略控制，你需要使用 EMM 或为你应用添加 DPC。当你创建应用的时候请按照以下说明做。
 
 <!--Build COSU solutions-->
 ## 创建 COSU 解决方案
@@ -93,11 +93,11 @@ Marshmallow 系统附加的 COSU 管理特性使得开发、部署 Android 设�
 
 <!--Use a third-party enterprise mobility management (EMM) solution: Using an EMM, all you need to do is set up lock task mode. For instructions, skip to the next section, Solutions managed by a third-party EMM.-->
 
-* 使用第三方企业移动管理（EMM）解决方案：使用 EMM，你需要做的所有就是设置锁定任务模式。更多信息，请跳到下一个部分，[第三方 EMM 管理的解决方案](https://developer.android.com/training/enterprise/cosu.html#emm-solutions)。
+* 使用第三方企业移动管理（EMM）解决方案：使用 EMM，你需要做的所有就是设置锁定任务模式。更多信息，请跳到下一个部分，[第三方 EMM 管理的解决方案](https://developer.huawei.com/training/enterprise/cosu.html#emm-solutions)。
 
 <!--Advanced setup—Create your own DPC app: This requires more work and is intended for an advanced developer audience. With this option, you’ll need to set up the device so that you can manage it, set up APIs, and set up a DPC app and test it. For instructions, skip to Create your own DPC app.-->
 
-* 高级设置——创建你自己的 DPC 应用：这部分内容需要更多的工作，是为了高级开发人员而设。选择这个方法，你需要设置好设备才可以对它进行管理、建立接口、建立 DPC 并测试。更多说明，请跳到[创建你自己的 DPC 应用](https://developer.android.com/training/enterprise/cosu.html#create-dpc)。
+* 高级设置——创建你自己的 DPC 应用：这部分内容需要更多的工作，是为了高级开发人员而设。选择这个方法，你需要设置好设备才可以对它进行管理、建立接口、建立 DPC 并测试。更多说明，请跳到[创建你自己的 DPC 应用](https://developer.huawei.com/training/enterprise/cosu.html#create-dpc)。
 
 <!--Solutions managed by a third-party EMM-->
 ## 第三方 EMM 管理的解决方案
@@ -111,23 +111,23 @@ Marshmallow 系统附加的 COSU 管理特性使得开发、部署 Android 设�
 
 <!--If you need to add COSU functionality to an existing app, make sure that the customer’s EMM supports lockTaskMode.-->
 
-如果你需要添加 COSU 功能到已存在的应用中，要确保客户的 EMM 支持 [lockTaskMode](https://developer.android.com/reference/android/R.attr.html#lockTaskMode)。
+如果你需要添加 COSU 功能到已存在的应用中，要确保客户的 EMM 支持 [lockTaskMode](https://developer.huawei.com/reference/ohos/R.attr.html#lockTaskMode)。
 
 <!--The device owner must include your app’s package(s) in setLockTaskPackages
 Sets the packages that can enter into lock task mode
 Needs to be set by the EMM
 You can call isLockTaskPermitted to verify that your package has been whitelisted by setLockTaskPackages.-->
 
-* 在 [setLockTaskPackages](https://developer.android.com/reference/android/app/admin/DevicePolicyManager.html#setLockTaskPackages%28android.content.ComponentName,%20java.lang.String[]%29) 中，设备所有者必须包括你的应用的包。
+* 在 [setLockTaskPackages](https://developer.huawei.com/reference/ohos/app/admin/DevicePolicyManager.html#setLockTaskPackages%28ohos.content.ComponentName,%20java.lang.String[]%29) 中，设备所有者必须包括你的应用的包。
   - 设置可以进入锁定任务模式的包
   - 要用 EMM 设置
-  - 你可以调用 [isLockTaskPermitted](https://developer.android.com/reference/android/app/admin/DevicePolicyManager.html#isLockTaskPermitted%28java.lang.String%29) 来确认你的包已经通过 [setLockTaskPackages](https://developer.android.com/reference/android/app/admin/DevicePolicyManager.html#setLockTaskPackages%28android.content.ComponentName,%20java.lang.String[]%29) 添加到白名单里了
+  - 你可以调用 [isLockTaskPermitted](https://developer.huawei.com/reference/ohos/app/admin/DevicePolicyManager.html#isLockTaskPermitted%28java.lang.String%29) 来确认你的包已经通过 [setLockTaskPackages](https://developer.huawei.com/reference/ohos/app/admin/DevicePolicyManager.html#setLockTaskPackages%28ohos.content.ComponentName,%20java.lang.String[]%29) 添加到白名单里了
 
 <!--Your activity calls startLockTask()
 Requests to lock the user into the current task
 Prevents launching other apps, settings, and the Home button-->
 
-* 你的活动调用 [startLockTask()](https://developer.android.com/reference/android/app/Activity.html#startLockTask%28%29)
+* 你的活动调用 [startLockTask()](https://developer.huawei.com/reference/ohos/app/Activity.html#startLockTask%28%29)
   - 请求将用户锁定在当前任务
   - 防止启动其他应用、设置以及主页按钮
 
@@ -135,56 +135,56 @@ Prevents launching other apps, settings, and the Home button-->
 Can only be called on an activity that’s previously called startLockTask()
 Should be called when the app is user-facing between onResume() and onPause()-->
 
-* 为了退出，你的活动必须调用 [stopLockTask()](https://developer.android.com/reference/android/app/Activity.html#stopLockTask%28%29)
-  - 只能在之前调用过 [ startLockTask()](https://developer.android.com/reference/android/app/Activity.html#startLockTask()) 的活动里调用
-  - 应用必须在 [onResume()](https://developer.android.com/reference/android/app/Activity.html#onResume%28%29) 和 [onPause()](https://developer.android.com/reference/android/app/Activity.html#onPause%28%29) 之间面向用户时调用
+* 为了退出，你的活动必须调用 [stopLockTask()](https://developer.huawei.com/reference/ohos/app/Activity.html#stopLockTask%28%29)
+  - 只能在之前调用过 [ startLockTask()](https://developer.huawei.com/reference/ohos/app/Activity.html#startLockTask()) 的活动里调用
+  - 应用必须在 [onResume()](https://developer.huawei.com/reference/ohos/app/Activity.html#onResume%28%29) 和 [onPause()](https://developer.huawei.com/reference/ohos/app/Activity.html#onPause%28%29) 之间面向用户时调用
 
 <!--Starting from Marshmallow, if your app is whitelisted by an EMM using setLockTaskPackages, your activities can automatically start lock task mode when the app is launched.-->
 
-从 Marshmallow 系统开始，如果你的应用被 EMM 用 [setLockTaskPackages](https://developer.android.com/reference/android/app/admin/DevicePolicyManager.html#setLockTaskPackages%28android.content.ComponentName,%20java.lang.String[]%29) 添加到白名单中，那么在应用被启动后，你的活动可以自动开始锁定任务模式。
+从 Marshmallow 系统开始，如果你的应用被 EMM 用 [setLockTaskPackages](https://developer.huawei.com/reference/ohos/app/admin/DevicePolicyManager.html#setLockTaskPackages%28ohos.content.ComponentName,%20java.lang.String[]%29) 添加到白名单中，那么在应用被启动后，你的活动可以自动开始锁定任务模式。
 
 <!--Set the lockTaskMode attribute-->
 ### 设置锁定任务模式属性
 
-<!--The lockTaskMode attribute allows you to define your app’s lock task mode behavior in the AndroidManifest.xml file:-->
+<!--The lockTaskMode attribute allows you to define your app’s lock task mode behavior in the 鸿蒙Manifest.xml file:-->
 
-[lockTaskMode](https://developer.android.com/reference/android/R.attr.html#lockTaskMode) 允许你在 AndroidManifest.xml 文件里定义你的应用的锁定任务模式行为：
+[lockTaskMode](https://developer.huawei.com/reference/ohos/R.attr.html#lockTaskMode) 允许你在 鸿蒙Manifest.xml 文件里定义你的应用的锁定任务模式行为：
 
 <!--If you set lockTaskMode to if_whitelisted, you don’t need to call startLockTask(), and the app automatically enters into lock task mode.-->
 
-* 如果你将 [lockTaskMode](https://developer.android.com/reference/android/R.attr.html#lockTaskMode) 设置为 `if_whitelisted`，你不需要调用 [startLockTask()](https://developer.android.com/reference/android/app/Activity.html#startLockTask%28%29)，应用会自动进入锁定任务模式。
+* 如果你将 [lockTaskMode](https://developer.huawei.com/reference/ohos/R.attr.html#lockTaskMode) 设置为 `if_whitelisted`，你不需要调用 [startLockTask()](https://developer.huawei.com/reference/ohos/app/Activity.html#startLockTask%28%29)，应用会自动进入锁定任务模式。
 
 <!--System apps and privileged apps can also set lockTaskMode to always. This setting causes tasks (rooted at your activity) to always launch into lock task mode. Non-privileged apps are treated as normal.-->
 
-* 系统应用和特许应用也可以将 [lockTaskMode](https://developer.android.com/reference/android/R.attr.html#lockTaskMode) 设置为 always。该设定会让你活动里的任务总是启动到锁定任务模式。对待非特许应用与平常一样。
+* 系统应用和特许应用也可以将 [lockTaskMode](https://developer.huawei.com/reference/ohos/R.attr.html#lockTaskMode) 设置为 always。该设定会让你活动里的任务总是启动到锁定任务模式。对待非特许应用与平常一样。
 
 <!--The default value of the lockTaskMode attribute is normal. When this attribute is set to normal, tasks don’t launch into lockTaskMode, unless startLockTask() is called. To call startLockTask(), applications still need to be whitelisted using setLockTaskPackages, otherwise, the user sees a dialog to approve entering pinned mode.-->
 
-* [lockTaskMode](https://developer.android.com/reference/android/R.attr.html#lockTaskMode) 属性的默认值是 normal。当这个属性设置为 normal 时，任务不会启动到 [lockTaskMode](https://developer.android.com/reference/android/R.attr.html#lockTaskMode)，除非调用 [startLockTask()](https://developer.android.com/reference/android/app/Activity.html#startLockTask%28%29)。想要调用 [startLockTask()](https://developer.android.com/reference/android/app/Activity.html#startLockTask%28%29)，仍然需要使用 [ setLockTaskPackages](https://developer.android.com/reference/android/app/admin/DevicePolicyManager.html#setLockTaskPackages%28android.content.ComponentName,%20java.lang.String[]%29) 将应用加入白名单，否则，用户会看到同意进入固定模式的对话框。
+* [lockTaskMode](https://developer.huawei.com/reference/ohos/R.attr.html#lockTaskMode) 属性的默认值是 normal。当这个属性设置为 normal 时，任务不会启动到 [lockTaskMode](https://developer.huawei.com/reference/ohos/R.attr.html#lockTaskMode)，除非调用 [startLockTask()](https://developer.huawei.com/reference/ohos/app/Activity.html#startLockTask%28%29)。想要调用 [startLockTask()](https://developer.huawei.com/reference/ohos/app/Activity.html#startLockTask%28%29)，仍然需要使用 [ setLockTaskPackages](https://developer.huawei.com/reference/ohos/app/admin/DevicePolicyManager.html#setLockTaskPackages%28ohos.content.ComponentName,%20java.lang.String[]%29) 将应用加入白名单，否则，用户会看到同意进入固定模式的对话框。
 
 <!--To have your activity automatically enter lockTaskMode, change the value of this attribute to if_whitelisted. Doing so causes your app to behave in this manner:-->
 
-为了让你的活动自动进入 [lockTaskMode](https://developer.android.com/reference/android/R.attr.html#lockTaskMode)，要把这个属性值改为 `if_whitelisted`。这么做可以让你的应用以这种方式表现：
+为了让你的活动自动进入 [lockTaskMode](https://developer.huawei.com/reference/ohos/R.attr.html#lockTaskMode)，要把这个属性值改为 `if_whitelisted`。这么做可以让你的应用以这种方式表现：
 
 <!--If your app isn’t whitelisted for lockTaskMode, it behaves as normal.-->
 
-* 如果你的应用不是 [lockTaskMode](https://developer.android.com/reference/android/R.attr.html#lockTaskMode) 的白名单，它会表现得像平常一样。
+* 如果你的应用不是 [lockTaskMode](https://developer.huawei.com/reference/ohos/R.attr.html#lockTaskMode) 的白名单，它会表现得像平常一样。
 
 <!--If your app is a system or privileged app, and it’s whitelisted, lockTaskMode automatically starts when the app is launched.-->
 
-* 如果你的应用是系统应用或特许应用，且属于白名单，当应用启动的时候，[lockTaskMode](https://developer.android.com/reference/android/R.attr.html#lockTaskMode) 会自动开始。
+* 如果你的应用是系统应用或特许应用，且属于白名单，当应用启动的时候，[lockTaskMode](https://developer.huawei.com/reference/ohos/R.attr.html#lockTaskMode) 会自动开始。
 
 <!--Example XML as follows:-->
 
 示例 XML 如下：
 
 ```xml
-<activity android:name=".MainActivity" android:lockTaskMode="if_whitelisted">
+<activity ohos:name=".MainActivity" ohos:lockTaskMode="if_whitelisted">
 ```
 
 <!--Given either of these options, you still need to create a mechanism for calling stopLockTask() so that users can exit lockTaskMode.-->
 
-有了这些选项，你仍然需要创建一个调用 [stopLockTask()](https://developer.android.com/reference/android/app/Activity.html#stopLockTask%28%29) 的机制，用户才能退出 [ockTaskMode](https://developer.android.com/reference/android/R.attr.html#lockTaskMode)。
+有了这些选项，你仍然需要创建一个调用 [stopLockTask()](https://developer.huawei.com/reference/ohos/app/Activity.html#stopLockTask%28%29) 的机制，用户才能退出 [ockTaskMode](https://developer.huawei.com/reference/ohos/R.attr.html#lockTaskMode)。
 
 <!--Advanced setup—Create your own DPC app-->
 ## 高级设置——创建你自己的 DPC 应用
@@ -213,11 +213,11 @@ Ensure your app is launched on reboot by setting it as the default launcher-->
 1. 提供进入设备所有者模式的设备。我们建议你支持提供近场通讯。更多信息，请查看[通过 NFC 提供的设备所有者](https://developers.google.com/android/work/prov-devices#nfc_method)。
 
 2. 使用以下接口：
-  - 使用 [setKeyguardDisabled()](https://developer.android.com/reference/android/app/admin/DevicePolicyManager.html#setKeyguardDisabled%28android.content.ComponentName,%20boolean%29) 防止设备键盘锁锁定
-  - 使用 [setStatusBarDisabled()](https://developer.android.com/reference/android/app/admin/DevicePolicyManager.html#setStatusBarDisabled%28android.content.ComponentName,%20boolean%29) 禁用状态栏
-  - 通过 [STAY_ON_WHILE_PLUGGED_IN](https://developer.android.com/reference/android/provider/Settings.Global.html#STAY_ON_WHILE_PLUGGED_IN) 让设备通电的时候保持屏幕点亮
-  - 通过 [addUserRestriction()](https://developer.android.com/reference/android/app/admin/DevicePolicyManager.html#addUserRestriction%28android.content.ComponentName,%20java.lang.String%29) 设置默认用户限制
-  - 使用 [setSystemUpdatePolicy()](https://developer.android.com/reference/android/app/admin/DevicePolicyManager.html#setSystemUpdatePolicy%28android.content.ComponentName,%20android.app.admin.SystemUpdatePolicy%29) 设置系统更新策略
+  - 使用 [setKeyguardDisabled()](https://developer.huawei.com/reference/ohos/app/admin/DevicePolicyManager.html#setKeyguardDisabled%28ohos.content.ComponentName,%20boolean%29) 防止设备键盘锁锁定
+  - 使用 [setStatusBarDisabled()](https://developer.huawei.com/reference/ohos/app/admin/DevicePolicyManager.html#setStatusBarDisabled%28ohos.content.ComponentName,%20boolean%29) 禁用状态栏
+  - 通过 [STAY_ON_WHILE_PLUGGED_IN](https://developer.huawei.com/reference/ohos/provider/Settings.Global.html#STAY_ON_WHILE_PLUGGED_IN) 让设备通电的时候保持屏幕点亮
+  - 通过 [addUserRestriction()](https://developer.huawei.com/reference/ohos/app/admin/DevicePolicyManager.html#addUserRestriction%28ohos.content.ComponentName,%20java.lang.String%29) 设置默认用户限制
+  - 使用 [setSystemUpdatePolicy()](https://developer.huawei.com/reference/ohos/app/admin/DevicePolicyManager.html#setSystemUpdatePolicy%28ohos.content.ComponentName,%20ohos.app.admin.SystemUpdatePolicy%29) 设置系统更新策略
   - 通过设定你的应用为默认启动应用，来确保重启时它会启动
 
 <!--Here’s an example of how to implement an activity that starts lock task mode and implements the relevant COSU device management APIs:-->
@@ -339,9 +339,9 @@ public class CosuActivity extends Activity {
 
 如果你计划支持第三方 EMM，那么利用 EMM 应用开发一个终端到终端的测试计划。我们同样提供测试资源，让你可以用来创建你自己的测试设备策略客户端（测试 DPC）：
 
-<!--TestDPC on Google Play-->
+<!--TestDPC on 华为 Play-->
 
-* [在Google Play 上的测试 DPC](https://play.google.com/store/search?q=testdpc)
+* [在华为 Play 上的测试 DPC](https://play.google.com/store/search?q=testdpc)
 
 <!--TestDPC for COSU source code on GitHub-->
 

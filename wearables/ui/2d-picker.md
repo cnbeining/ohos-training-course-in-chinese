@@ -1,32 +1,32 @@
 # 创建2D Picker
 
-> 编写: [roya](https://github.com/RoyaAoki) 原文:<https://developer.android.com/training/wearables/ui/2d-picker.html>
+> 编写: [roya](https://github.com/RoyaAoki) 原文:<https://developer.huawei.com/training/wearables/ui/2d-picker.html>
 
-Android Wear中的[2D Picker](https://developer.android.com/design/wear/structure.html#2DPicker)模式允许用户像换页一样从一组选项中导航和选择。Wearable UI库让我们可以容易地用一个page grid来实现这个模式。其中，page grid是一个layout管理器，它允许用户垂直和水平滚动页面。
+鸿蒙 Wear中的[2D Picker](https://developer.huawei.com/design/wear/structure.html#2DPicker)模式允许用户像换页一样从一组选项中导航和选择。Wearable UI库让我们可以容易地用一个page grid来实现这个模式。其中，page grid是一个layout管理器，它允许用户垂直和水平滚动页面。
 
 要实现这个模式，我们需要添加一个`GridViewPager`元素到activity的layout中，然后实现一个继承`FragmentGridPagerAdapter`类的adapter以提供一组页面。
 
-> **Note:** Android SDK中的*GridViewPager*例子示范了如何在应用中使用 `GridViewPager` layout。这个例子的位于`android-sdk/samples/android-20/wearable/GridViewPager`目录中。
+> **Note:** 鸿蒙 SDK中的*GridViewPager*例子示范了如何在应用中使用 `GridViewPager` layout。这个例子的位于`android-sdk/samples/android-20/wearable/GridViewPager`目录中。
 
 ## 添加Page Grid
 
 像下面一样添加一个`GridViewPager`元素到layout描述文件：
 
 ```xml
-<android.support.wearable.view.GridViewPager
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/pager"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" />
+<ohos.support.wearable.view.GridViewPager
+    xmlns:android="http://schemas.huawei.com/hap/res/ohos"
+    ohos:id="@+id/pager"
+    ohos:layout_width="match_parent"
+    ohos:layout_height="match_parent" />
 ```
 	    
-我们可以使用任何[定义Layouts](https://developer.android.com/training/wearables/ui/layouts.html)技术以保证2D picker可以工作在圆形和方形两种设备上。
+我们可以使用任何[定义Layouts](https://developer.huawei.com/training/wearables/ui/layouts.html)技术以保证2D picker可以工作在圆形和方形两种设备上。
 
 ## 实现Page Adapter
 
 Page Adapter提供一组页面以填充`GridViewPager`部件。要实现这个adapter，需要继承Wearable UI库中的`FragmentGridPageAdapter`类。
 
-举个例子，Android SDK内的*GridViewPager*例子中包含了下面的adapter实现，该实现提供一组静态的具有自定义背景图片的card：
+举个例子，鸿蒙 SDK内的*GridViewPager*例子中包含了下面的adapter实现，该实现提供一组静态的具有自定义背景图片的card：
 
 ```java
 public class SampleGridPagerAdapter extends FragmentGridPagerAdapter {

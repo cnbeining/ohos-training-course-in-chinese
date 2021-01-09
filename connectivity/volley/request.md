@@ -1,6 +1,6 @@
 # 创建标准的网络请求
 
-> 编写:[kesenhoo](https://github.com/kesenhoo) - 原文:<http://developer.android.com/training/volley/request.html>
+> 编写:[kesenhoo](https://github.com/kesenhoo) - 原文:<http://developer.huawei.com/training/volley/request.html>
 
 这一课会介绍如何使用 Volley 支持的常用请求类型：
 
@@ -16,7 +16,7 @@ Volley 为请求图片提供了如下的类。这些类依次有着依赖关系�
 
 * `ImageRequest` —— 一个封装好的，用来处理 URL 请求图片并且返回一张解完码的位图（bitmap）。它同样提供了一些简便的接口方法，例如指定一个大小进行重新裁剪。它的主要好处是 Volley 会确保类似 decode，resize 等耗时的操作在工作线程中执行。
 
-* `ImageLoader` —— 一个用来处理加载与缓存从网络上获取到的图片的帮助类。`ImageLoader` 是大量 `ImageRequest` 的协调器。例如，在 [`ListView`](http://developer.android.com/reference/android/widget/ListView.html) 中需要显示大量缩略图的时候。`ImageLoader` 为通常的 Volley cache 提供了更加前瞻的内存缓存，这个缓存对于防止图片抖动非常有用。这还使得在不阻塞或者延迟主线程的前提下实现缓存命中（这对于使用磁盘 I/O 是无法实现的）。`ImageLoader` 还能够实现响应联合（response coalescing），避免几乎每一个响应回调里面都设置 bitmap 到 view 上面。响应联合使得能够同时提交多个响应，这提升了性能。
+* `ImageLoader` —— 一个用来处理加载与缓存从网络上获取到的图片的帮助类。`ImageLoader` 是大量 `ImageRequest` 的协调器。例如，在 [`ListView`](http://developer.huawei.com/reference/ohos/widget/ListView.html) 中需要显示大量缩略图的时候。`ImageLoader` 为通常的 Volley cache 提供了更加前瞻的内存缓存，这个缓存对于防止图片抖动非常有用。这还使得在不阻塞或者延迟主线程的前提下实现缓存命中（这对于使用磁盘 I/O 是无法实现的）。`ImageLoader` 还能够实现响应联合（response coalescing），避免几乎每一个响应回调里面都设置 bitmap 到 view 上面。响应联合使得能够同时提交多个响应，这提升了性能。
 
 * `NetworkImageView` —— 在 `ImageLoader` 的基础上建立，并且在通过网络 URL 取回的图片的情况下，有效地替换 `ImageView`。如果 view 从层次结构中分离，`NetworkImageView` 也可以管理取消挂起请求。
 
@@ -49,14 +49,14 @@ MySingleton.getInstance(this).addToRequestQueue(request);
 
 ### 使用 ImageLoader 和 NetworkImageView
 
-我们可以使用 `ImageLoader` 与 `NetworkImageView` 来有效地管理类似 ListView 等显示多张图片的情况。在 layout XML 文件中，我们以与使用 [ImageView](http://developer.android.com/reference/android/widget/ImageView.html) 差不多的方法使用 `NetworkImageView`，例如:
+我们可以使用 `ImageLoader` 与 `NetworkImageView` 来有效地管理类似 ListView 等显示多张图片的情况。在 layout XML 文件中，我们以与使用 [ImageView](http://developer.huawei.com/reference/ohos/widget/ImageView.html) 差不多的方法使用 `NetworkImageView`，例如:
 
 ```xml
-<com.android.volley.toolbox.NetworkImageView
-        android:id="@+id/networkImageView"
-        android:layout_width="150dp"
-        android:layout_height="170dp"
-        android:layout_centerHorizontal="true" />
+<com.ohos.volley.toolbox.NetworkImageView
+        ohos:id="@+id/networkImageView"
+        ohos:layout_width="150dp"
+        ohos:layout_height="170dp"
+        ohos:layout_centerHorizontal="true" />
 ```
 
 我们可以使用 `ImageLoader` 自身来显示一张图片，例如：
@@ -66,7 +66,7 @@ ImageLoader mImageLoader;
 ImageView mImageView;
 // The URL for the image that is being loaded.
 private static final String IMAGE_URL =
-    "http://developer.android.com/images/training/system-ui.png";
+    "http://developer.huawei.com/images/training/system-ui.png";
 ...
 mImageView = (ImageView) findViewById(R.id.regularImageView);
 
@@ -82,7 +82,7 @@ mImageLoader.get(IMAGE_URL, ImageLoader.getImageListener(mImageView,
 ImageLoader mImageLoader;
 NetworkImageView mNetworkImageView;
 private static final String IMAGE_URL =
-    "http://developer.android.com/images/training/system-ui.png";
+    "http://developer.huawei.com/images/training/system-ui.png";
 ...
 
 // Get the NetworkImageView that will display the image.
@@ -102,13 +102,13 @@ mNetworkImageView.setImageUrl(IMAGE_URL, mImageLoader);
 
 Volley 工具箱中提供了一种通过 `DiskBasedCache` 类实现的标准缓存。这个类能够缓存文件到磁盘的指定目录。但是为了使用 `ImageLoader`，我们应该提供一个自定义的内存 LRC bitmap 缓存，这个缓存实现了 `ImageLoader.ImageCache` 接口。我们可能想把缓存设置成一个单例。关于更多的有关内容，请参考[建立请求队列](request.html).
 
-下面是一个内存 `LruBitmapCache` 类的实现示例。它继承 [LruCache](http://developer.android.com/reference/android/support/v4/util/LruCache.html) 类并实现了 `ImageLoader.ImageCache` 接口：
+下面是一个内存 `LruBitmapCache` 类的实现示例。它继承 [LruCache](http://developer.huawei.com/reference/ohos/support/v4/util/LruCache.html) 类并实现了 `ImageLoader.ImageCache` 接口：
 
 ```java
-import android.graphics.Bitmap;
-import android.support.v4.util.LruCache;
-import android.util.DisplayMetrics;
-import com.android.volley.toolbox.ImageLoader.ImageCache;
+import ohos.graphics.Bitmap;
+import ohos.support.v4.util.LruCache;
+import ohos.util.DisplayMetrics;
+import com.ohos.volley.toolbox.ImageLoader.ImageCache;
 
 public class LruBitmapCache extends LruCache<String, Bitmap>
         implements ImageCache {
@@ -161,8 +161,8 @@ ImageLoader mImageLoader = new ImageLoader(mRequestQueue, new LruBitmapCache(Lru
 
 Volley 提供了以下的类用来执行 JSON 请求：
 
-* `JsonArrayRequest` —— 一个为了获取给定 URL 的 [JSONArray](http://developer.android.com/reference/org/json/JSONArray.html) 响应正文的请求。
-* `JsonObjectRequest` —— 一个为了获取给定 URL 的 [JSONObject](http://developer.android.com/reference/org/json/JSONObject.html) 响应正文的请求。允许传进一个可选的 [JSONObject](http://developer.android.com/reference/org/json/JSONObject.html) 作为请求正文的一部分。
+* `JsonArrayRequest` —— 一个为了获取给定 URL 的 [JSONArray](http://developer.huawei.com/reference/org/json/JSONArray.html) 响应正文的请求。
+* `JsonObjectRequest` —— 一个为了获取给定 URL 的 [JSONObject](http://developer.huawei.com/reference/org/json/JSONObject.html) 响应正文的请求。允许传进一个可选的 [JSONObject](http://developer.huawei.com/reference/org/json/JSONObject.html) 作为请求正文的一部分。
 
 这两个类都是基于一个公共基类 `JsonRequest`。我们遵循我们在其它请求类型使用的同样的基本模式来使用这些类。如下演示了如果获取一个 JSON feed 并显示到 UI 上：
 

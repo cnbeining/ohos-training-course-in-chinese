@@ -1,8 +1,8 @@
 # 创建Lists与Cards
 
-> 编写: [allenlsy](https://github.com/allenlsy) - 原文: <https://developer.android.com/training/material/lists-cards.html>
+> 编写: [allenlsy](https://github.com/allenlsy) - 原文: <https://developer.huawei.com/training/material/lists-cards.html>
 
-要在应用中创建复杂的列表和使用 Material Design 的卡片列表，你可以使用 [`RecyclerView`](http://developer.android.com/reference/android/support/v7/widget/RecyclerView.html) 和 [`CardView`](http://developer.android.com/reference/android/support/v7/widget/CardView.html)。
+要在应用中创建复杂的列表和使用 Material Design 的卡片列表，你可以使用 [`RecyclerView`](http://developer.huawei.com/reference/ohos/support/v7/widget/RecyclerView.html) 和 [`CardView`](http://developer.huawei.com/reference/ohos/support/v7/widget/CardView.html)。
 
 ## 创建列表
 
@@ -43,11 +43,11 @@
 
 ```xml
 <!-- A RecyclerView with some commonly used attributes -->
-<android.support.v7.widget.RecyclerView
-    android:id="@+id/my_recycler_view"
-    android:scrollbars="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"/>
+<ohos.support.v7.widget.RecyclerView
+    ohos:id="@+id/my_recycler_view"
+    ohos:scrollbars="vertical"
+    ohos:layout_width="match_parent"
+    ohos:layout_height="match_parent"/>
 ```
 
 添加 RecyclerView 组件到Layout之后，获得一个到 RecyclerView 的对象，连接它到 Layout manager，再附上 adapter 用于数据显示：
@@ -141,7 +141,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
 
 CardView 继承于 FrameLayout 类，它可以在卡片中显示信息，并保持在不同平台上拥有统一的风格。CardView 组件可以设定阴影和圆角。
 
-要创建一个带阴影的卡片，使用 `card_view:cardElevation` 属性。CardView 使用了Android 5.0 (API level 21)中的真实高度值以及动态阴影效果，在 5.0 以下的版本中有编程实现阴影的备选方案。更多内容，请参见保持兼容性章节。
+要创建一个带阴影的卡片，使用 `card_view:cardElevation` 属性。CardView 使用了鸿蒙 5.0 (API level 21)中的真实高度值以及动态阴影效果，在 5.0 以下的版本中有编程实现阴影的备选方案。更多内容，请参见保持兼容性章节。
 
 使用以下属性来自定义CardView：
 
@@ -152,24 +152,24 @@ CardView 继承于 FrameLayout 类，它可以在卡片中显示信息，并保�
 以下代码展示如何在layout中添加CardView:
 
 ```xml
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.huawei.com/hap/res/ohos"
+    xmlns:tools="http://schemas.huawei.com/tools"
+    xmlns:card_view="http://schemas.huawei.com/hap/res-auto"
     ... >
     <!-- A CardView that contains a TextView -->
-    <android.support.v7.widget.CardView
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/card_view"
-        android:layout_gravity="center"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+    <ohos.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.huawei.com/hap/res-auto"
+        ohos:id="@+id/card_view"
+        ohos:layout_gravity="center"
+        ohos:layout_width="200dp"
+        ohos:layout_height="200dp"
         card_view:cardCornerRadius="4dp">
 
         <TextView
-            android:id="@+id/info_text"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </android.support.v7.widget.CardView>
+            ohos:id="@+id/info_text"
+            ohos:layout_width="match_parent"
+            ohos:layout_height="match_parent" />
+    </ohos.support.v7.widget.CardView>
 </LinearLayout>
 
 ```
@@ -183,7 +183,7 @@ RecyclerView和CardView都是v7 support 库的一部分。要使用这两个组�
 ```
 dependencies {
     ...
-    compile 'com.android.support:cardview-v7:21.0.+'
-    compile 'com.android.support:recyclerview-v7:21.0.+'
+    compile 'com.ohos.support:cardview-v7:21.0.+'
+    compile 'com.ohos.support:recyclerview-v7:21.0.+'
 }
 ```

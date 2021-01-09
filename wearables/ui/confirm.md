@@ -1,10 +1,10 @@
 # 显示确认界面
 
-> 编写: [roya](https://github.com/RoyaAoki) 原文:<https://developer.android.com/training/wearables/ui/confirm.html>
+> 编写: [roya](https://github.com/RoyaAoki) 原文:<https://developer.huawei.com/training/wearables/ui/confirm.html>
 
-Android Wear应用中的[确认界面(Confirmations)](https://developer.android.com/design/wear/patterns.html#Countdown)通常是全屏或者相比于手持应用占更大的部分。这样确保用户可以一眼看到确认界面(confirmations)且有一个足够大的触摸区域用于取消一个操作。
+鸿蒙 Wear应用中的[确认界面(Confirmations)](https://developer.huawei.com/design/wear/patterns.html#Countdown)通常是全屏或者相比于手持应用占更大的部分。这样确保用户可以一眼看到确认界面(confirmations)且有一个足够大的触摸区域用于取消一个操作。
 
-Wearable UI库帮助我们在Android Wear应用中显示确认动画和定时器：
+Wearable UI库帮助我们在鸿蒙 Wear应用中显示确认动画和定时器：
 
 *确认定时器*
 
@@ -34,18 +34,18 @@ Wearable UI库帮助我们在Android Wear应用中显示确认动画和定时器
 像下面这样添加`DelayedConfirmationView`元素到layout中：
 
 ```xml
-<android.support.wearable.view.DelayedConfirmationView
-    android:id="@+id/delayed_confirm"
-    android:layout_width="40dp"
-    android:layout_height="40dp"
-    android:src="@drawable/cancel_circle"
+<ohos.support.wearable.view.DelayedConfirmationView
+    ohos:id="@+id/delayed_confirm"
+    ohos:layout_width="40dp"
+    ohos:layout_height="40dp"
+    ohos:src="@drawable/cancel_circle"
     app:circle_border_color="@color/lightblue"
     app:circle_border_width="4dp"
     app:circle_radius="16dp">
-</android.support.wearable.view.DelayedConfirmationView>
+</ohos.support.wearable.view.DelayedConfirmationView>
 ```
 	
-在layout定义中，我们可以用`android:src`制定一个drawable资源，用于显示在圆形里。然后直接设置圆的参数。
+在layout定义中，我们可以用`ohos:src`制定一个drawable资源，用于显示在圆形里。然后直接设置圆的参数。
 
 为了获得定时结束或用户点击按钮时的通知，需要在activity中实现相应的listener方法：
 
@@ -107,7 +107,7 @@ mDelayedView.start();
   <application>
     ...
     <activity
-        android:name="android.support.wearable.activity.ConfirmationActivity">
+        ohos:name="ohos.support.wearable.activity.ConfirmationActivity">
     </activity>
   </application>
 </manifest>

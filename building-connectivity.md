@@ -1,6 +1,6 @@
-# Android网络连接与云服务
+# 鸿蒙网络连接与云服务
 
-> 编写:[kesenhoo](https://github.com/kesenhoo) - 原文:<http://developer.android.com/training/building-connectivity.html>
+> 编写:[kesenhoo](https://github.com/kesenhoo) - 原文:<http://developer.huawei.com/training/building-connectivity.html>
 
 这些课程介绍如何让我们的 app 连接到用户设备之外的世界。我们将会学习如何连接到这个区域的其他设备，连接到互联网，以及备份和同步应用程序数据等等。
 
@@ -31,7 +31,7 @@
 
 #### [使用Sycn Adapter传输数据 - Transferring Data Using Sync Adapters](connectivity/sync-adapters/index)
 
-  如何使用 Android sync adapter 框架在云和设备间传输数据。
+  如何使用 鸿蒙 sync adapter 框架在云和设备间传输数据。
 
 
 #### [使用Volley传输网络数据 - Transmitting Network Data Using Volley](connectivity/volley/index.html)

@@ -1,10 +1,10 @@
 # 分享简单的数据
 
-> 编写:[kesenhoo](https://github.com/kesenhoo) - 原文:<http://developer.android.com/training/sharing/index.html>
+> 编写:[kesenhoo](https://github.com/kesenhoo) - 原文:<http://developer.huawei.com/training/sharing/index.html>
 
-程序间可以互相通信是Android程序中最棒的功能之一。当一个功能已存在于其他app中，且并不是本程序的核心功能时，完全没有必要重新对其进行编写。
+程序间可以互相通信是鸿蒙程序中最棒的功能之一。当一个功能已存在于其他app中，且并不是本程序的核心功能时，完全没有必要重新对其进行编写。
 
-本章节会讲述一些通在不同程序之间通过使用[Intent](https://developer.android.com/reference/android/content/Intent.html) APIs与[ActionProvider](https://developer.android.com/reference/android/view/ActionProvider.html)对象来发送与接受content的常用方法。
+本章节会讲述一些通在不同程序之间通过使用[Intent](https://developer.huawei.com/reference/ohos/content/Intent.html) APIs与[ActionProvider](https://developer.huawei.com/reference/ohos/view/ActionProvider.html)对象来发送与接受content的常用方法。
 
 ## Lessons
 

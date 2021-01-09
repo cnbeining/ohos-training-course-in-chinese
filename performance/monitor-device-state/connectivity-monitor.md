@@ -1,13 +1,13 @@
 # 判断并监测网络连接状态
 
-> 编写:[kesenhoo](https://github.com/kesenhoo) - 原文:<http://developer.android.com/training/monitoring-device-state/connectivity-monitoring.html>
+> 编写:[kesenhoo](https://github.com/kesenhoo) - 原文:<http://developer.huawei.com/training/monitoring-device-state/connectivity-monitoring.html>
 
 重复闹钟和后台服务最常见的功能之一，是用来从网络上获取应用更新，存储数据或者执行大文件的下载。但是如果没有获得网络连接，或者连接的速度太慢以至于下载无法完成，那么就没有必要唤醒设备并执行那些更新等操作了。
 
-我们可以使用[ConnectivityManager](http://developer.android.com/reference/android/net/ConnectivityManager.html)来检查设备是否连接到网络，以及网络的类型（译注：通过网络的连接状况改变，相应的改变app的行为，减少无谓的操作，从而延长设备的续航能力）。
+我们可以使用[ConnectivityManager](http://developer.huawei.com/reference/ohos/net/ConnectivityManager.html)来检查设备是否连接到网络，以及网络的类型（译注：通过网络的连接状况改变，相应的改变app的行为，减少无谓的操作，从而延长设备的续航能力）。
 
 ## 判断当前是否有网络连接
-如果没有网络连接，那么就没有必要做那些需要联网的事情。下面的代码片段展示了如何通过[ConnectivityManager](http://developer.android.com/reference/android/net/ConnectivityManager.html)检查当前活动的网络类型，并确定它是否可以连接到互联网：
+如果没有网络连接，那么就没有必要做那些需要联网的事情。下面的代码片段展示了如何通过[ConnectivityManager](http://developer.huawei.com/reference/ohos/net/ConnectivityManager.html)检查当前活动的网络类型，并确定它是否可以连接到互联网：
 
 ```java
 ConnectivityManager cm =
@@ -34,11 +34,11 @@ boolean isWiFi = activeNetwork.getType() == ConnectivityManager.TYPE_WIFI;
 
 ## 监听网络连接的变化
 
-当网络连接发生改变时，[ConnectivityManager](http://developer.android.com/reference/android/net/ConnectivityManager.html)会广播[CONNECTIVITY_ACTION](http://developer.android.com/reference/android/net/ConnectivityManager.html#CONNECTIVITY_ACTION)（`android.net.conn.CONNECTIVITY_CHANGE`）的Action消息。
+当网络连接发生改变时，[ConnectivityManager](http://developer.huawei.com/reference/ohos/net/ConnectivityManager.html)会广播[CONNECTIVITY_ACTION](http://developer.huawei.com/reference/ohos/net/ConnectivityManager.html#CONNECTIVITY_ACTION)（`ohos.net.conn.CONNECTIVITY_CHANGE`）的Action消息。
 我们可以在Manifest文件里面注册一个BroadcastReceiver，来监听这些变化，并适当地恢复（或挂起）你的后台更新:
 
 ```xml
-<action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+<action ohos:name="ohos.net.conn.CONNECTIVITY_CHANGE"/>
 ```
 
 设备的网络变化可能会比较频繁，因此每当你在移动网络与Wi-Fi之间切换的时候，这一广播就会被触发。因此，我们可以仅在之前的更新或者下载任务被挂起的时候去监听这一广播（用来恢复那些任务）。通常我们可以在开始更新前检查一下网络连接，如果当前没有连接到互联网，那么就将更新任务挂起，直到连接恢复。

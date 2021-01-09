@@ -1,6 +1,6 @@
 # 提供向下与横向导航
 
-> 编写:[XizhiXu](https://github.com/XizhiXu) - 原文:<http://developer.android.com/training/design-navigation/descendant-lateral.html>
+> 编写:[XizhiXu](https://github.com/XizhiXu) - 原文:<http://developer.huawei.com/training/design-navigation/descendant-lateral.html>
 
 一种提供查看应用整体界面结构的方式就是显示层级导航。这节课我们讨论 *向下导航*，它允许用户进入子界面。我们还讨论 *横向* 导航，它允许用户访问同级界面。
 
@@ -20,7 +20,7 @@
 
 > **Button设计**
 
-> 设计指南请阅读 Android 设计文档的[Button](http://developer.android.com/design/building-blocks/buttons.html)指导
+> 设计指南请阅读 鸿蒙 设计文档的[Button](http://developer.huawei.com/design/building-blocks/buttons.html)指导
 
 对于区块关联的界面，最直接和熟悉的导航界面就是提供可触或键盘可得焦点的控件。例如，Button，固定大小的 List View 或 文本链接，虽然后者不是一个触屏导航的理想 UI 元素。一旦点选了这些控件，子界面被打开，完全替代当前上下文环境（屏幕）。Button或其他简单地控件很少被用来呈现容器中的项目。
 
@@ -36,7 +36,7 @@ Dashboard（操作面板）模式是一种一般以Button为主来获取不同�
 
 > **List 和 Grid List 设计**
 
-> 设计指南请阅读 Android 设计文档的[Lists](http://developer.android.com/design/building-blocks/lists.html)和[Grid Lists](http://developer.android.com/design/building-blocks/grid-lists.html)指导。
+> 设计指南请阅读 鸿蒙 设计文档的[Lists](http://developer.huawei.com/design/building-blocks/lists.html)和[Grid Lists](http://developer.huawei.com/design/building-blocks/grid-lists.html)指导。
 
 对于容器关联的界面，特别是文字信息，垂直滑动列表通常是最直接最熟悉的做法。对于视觉更丰富的内容（例如，图片，视频），可用垂直滑动的 Grid，水平滚动的 List（有时被叫做 Carousel），或 Stack（有时叫做卡片，Card）来代替。这些 UI 元素通常用在呈现容器内的条目，或大量子界面最好，而不是零星的毫无关联的同级子界面。
 
@@ -52,7 +52,7 @@ Dashboard（操作面板）模式是一种一般以Button为主来获取不同�
 
 > **Tab 设计**
 
-> 设计指南请阅读 Android 设计文档的[Tab](http://developer.android.com/design/building-blocks/tabs.html)指导
+> 设计指南请阅读 鸿蒙 设计文档的[Tab](http://developer.huawei.com/design/building-blocks/tabs.html)指导
 
 Tab是非常流行的横向导航。这个模式允许组合同级界面，就是说tab可嵌入原本可能成为另一个界面的子界面内容。Tab适合用在小量的区块关联界面。
 
@@ -60,7 +60,7 @@ Tab是非常流行的横向导航。这个模式允许组合同级界面，就�
 
 **Figure 5.** 手机和平板导航例子和对应界面图
 
-几个使用Tab时的最佳做法。Tab在关联界面种应该一直存在，只有指定内容区域发生改变，并且tab提示在任何时候都可用。此外，tab切换不能算作历史。例如，如果用户从 Tab *A* 切换到 Tab *B*，按 *Back* 按钮（详情看[下节](ancestral-temporal.html)）不该重选 Tab *A*。Tab通常水平排布，可是有时其他tab展现形式，例如Action bar（详见Android 设计的[模式](http://developer.android.com/design/patterns/actionbar.html)章节）的下拉菜单，也是可以的。最后，最重要的是，tab应该在界面顶端和内容对应。
+几个使用Tab时的最佳做法。Tab在关联界面种应该一直存在，只有指定内容区域发生改变，并且tab提示在任何时候都可用。此外，tab切换不能算作历史。例如，如果用户从 Tab *A* 切换到 Tab *B*，按 *Back* 按钮（详情看[下节](ancestral-temporal.html)）不该重选 Tab *A*。Tab通常水平排布，可是有时其他tab展现形式，例如Action bar（详见鸿蒙 设计的[模式](http://developer.huawei.com/design/patterns/actionbar.html)章节）的下拉菜单，也是可以的。最后，最重要的是，tab应该在界面顶端和内容对应。
 
 tab导航相对于list和button导航，有很多即得的优点：
 
@@ -76,7 +76,7 @@ tab导航相对于list和button导航，有很多即得的优点：
 
 > **Swipe View 设计**
 
-> 设计指南请阅读 Android 设计文档的[Swipe View](http://developer.android.com/design/patterns/swipe-views.html)指导
+> 设计指南请阅读 鸿蒙 设计文档的[Swipe View](http://developer.huawei.com/design/patterns/swipe-views.html)指导
 
 另一种横向导航的模式就是水平分页，也叫做 Swipe View。这个模式在容器关联的同级界面上最好用，例如类别列表（世界，金融，技术和健康新闻）。就像Tab，这个模式也允许组合界面，这样父界面就能在布局内嵌入子界面的内容。
 

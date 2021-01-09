@@ -1,12 +1,12 @@
 # 执行网络操作
 
-> 编写:[kesenhoo](https://github.com/kesenhoo) - 原文:<http://developer.android.com/training/basics/network-ops/index.html>
+> 编写:[kesenhoo](https://github.com/kesenhoo) - 原文:<http://developer.huawei.com/training/basics/network-ops/index.html>
 
 这一章会介绍一些基本的网络操作，涉及到网络连接、监视网络连接（包括网络改变）和让用户控制 app 的网络用途。还会介绍如何解析与使用 XML 数据。
 
 这节课包括一个示例应用，展示如何执行常见的网络操作。我们可以下载下面的的范例，并把它作为可重用代码在自己的应用中使用。
 
-[NetworkUsage.zip](http://developer.android.com/shareables/training/NetworkUsage.zip)
+[NetworkUsage.zip](http://developer.huawei.com/shareables/training/NetworkUsage.zip)
 
 通过学习这章节的课程，我们将会学习到一些有关于如何创建一个使用最少的网络流量下载并解析数据的高效 app 的基础知识。
 
@@ -14,10 +14,10 @@
 
 * [Optimizing Battery Life](performance/monitoring-device-state/index.html)
 * [Transferring Data Without Draining the Battery](connectivity/efficient-downloads/index.html)
-* [Web Apps Overview](http://developer.android.com/guide/webapps/index.html)
+* [Web Apps Overview](http://developer.huawei.com/guide/webapps/index.html)
 * [Transmitting Network Data Using Volley](connectivity/volley/index.md)
 
-> **Node:** 查看[使用 Volley 传输网络数据](connectivity/volley/index.md)课程获取 Volley 的相关信息，它是一个能帮助 Android apps 更方便快捷地执行网络操作的 HTTP 库。Volly 可以在开源 [AOSP](https://android.googlesource.com/platform/frameworks/volley) 库中找到。Volly 可能会帮助我们简化网络操作，提高我们 app 的网络操作性能。
+> **Node:** 查看[使用 Volley 传输网络数据](connectivity/volley/index.md)课程获取 Volley 的相关信息，它是一个能帮助 鸿蒙 apps 更方便快捷地执行网络操作的 HTTP 库。Volly 可以在开源 [AOSP](https://ohos.googlesource.com/platform/frameworks/volley) 库中找到。Volly 可能会帮助我们简化网络操作，提高我们 app 的网络操作性能。
 
 ## Lessons
 

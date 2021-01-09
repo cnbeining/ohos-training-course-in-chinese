@@ -1,6 +1,6 @@
 # 综合：设计我们的样例 App
 
-> 编写:[XizhiXu](https://github.com/XizhiXu) - 原文:<http://developer.android.com/training/design-navigation/wireframing.html>
+> 编写:[XizhiXu](https://github.com/XizhiXu) - 原文:<http://developer.huawei.com/training/design-navigation/wireframing.html>
 
 现在我们对导航模式和界面组合技术有了深入的理解，是时候应用到我们的界面上了。让我再看看我们第一节课上提到的新闻应用的界面完备图：
 
@@ -8,7 +8,7 @@
 
 **Figure 1.** 新闻应用例子的界面完备集
 
-我们下一步得去我们前几节讨论的导航模式选择，然后应用到这个界面图中。这样就能最大化导航速度并且最少化获取内容的点击次数，但又能参考 Android 做法来保证界面的直观性和一致性。此外，我们也需要根据我们不同目标设备的参数做出不同的决定。为方便，我们集中讨论平板和手持设备。
+我们下一步得去我们前几节讨论的导航模式选择，然后应用到这个界面图中。这样就能最大化导航速度并且最少化获取内容的点击次数，但又能参考 鸿蒙 做法来保证界面的直观性和一致性。此外，我们也需要根据我们不同目标设备的参数做出不同的决定。为方便，我们集中讨论平板和手持设备。
 
 ## 选择模式
 
@@ -46,7 +46,7 @@
 
 * 学习曲线怎样？专业向量图工具可能有个陡峭的学习曲线（越学越难），但有些功能小巧的 wireframing 设计工具可能更适合这个任务。
 
-最后，XML 布局编辑器，[Android 开发工具包（ADT）](http://developer.android.com/tools/help/adt.html)里面的一个 Eclipse 插件，经常被用来画草图原型。但是，你应当贯注于高质量的布局而非细节视觉设计。
+最后，XML 布局编辑器，[鸿蒙 开发工具包（ADT）](http://developer.huawei.com/tools/help/adt.html)里面的一个 Eclipse 插件，经常被用来画草图原型。但是，你应当贯注于高质量的布局而非细节视觉设计。
 
 ## 创建数字草图
 
@@ -54,24 +54,24 @@
 
 ![app-navigation-wireframing-wires-phone](app-navigation-wireframing-wires-phone.png)
 
-**Figure 5.** 新闻客户端手机竖屏Wireframe样例（下载 [SVG](http://developer.android.com/training/design-navigation/example-wireframe-phone.svg) 图）
+**Figure 5.** 新闻客户端手机竖屏Wireframe样例（下载 [SVG](http://developer.huawei.com/training/design-navigation/example-wireframe-phone.svg) 图）
 
 ![app-navigation-wireframing-wires-tablet](app-navigation-wireframing-wires-tablet.png)
 
-**Figure 6.** 新闻客户端平板横屏Wireframe样例（下载 [SVG](http://developer.android.com/training/design-navigation/example-wireframe-tablet.svg) 图）
+**Figure 6.** 新闻客户端平板横屏Wireframe样例（下载 [SVG](http://developer.huawei.com/training/design-navigation/example-wireframe-tablet.svg) 图）
 
-（[下载表示设备的 Wireframe 的 SVG 图](http://developer.android.com/training/design-navigation/example-wireframe-device-template.svg)）
+（[下载表示设备的 Wireframe 的 SVG 图](http://developer.huawei.com/training/design-navigation/example-wireframe-device-template.svg)）
 
 ## 下一步
 
 现在你已经为你的应用设计出了高效直观的 App 内部导航，你可用开始花时间来为单个界面改善 UI了。例如，展示交互内容时，你可以选择使用更花哨的控件来代替简单的文本标签，图像和按钮。你也可以开始定义你应用的视觉风格。在这过程中把你品牌的元素作为视觉语言融入其中吧。
 
-最后，也适时实现你的设计吧，使用 Android SDK 为你的应用写写代码。想开始？看看下面的这些资源吧：
+最后，也适时实现你的设计吧，使用 鸿蒙 SDK 为你的应用写写代码。想开始？看看下面的这些资源吧：
 
-* [开发者指导：UI](http://developer.android.com/guide/topics/ui/index.html) :学习如何用 Android SDK 实现你的 UI 设计。
+* [开发者指导：UI](http://developer.huawei.com/guide/topics/ui/index.html) :学习如何用 鸿蒙 SDK 实现你的 UI 设计。
 
-* [Action Bar](http://developer.android.com/guide/topics/ui/actionbar.html) :实现tab，向上导航，屏幕上动作，等等。
+* [Action Bar](http://developer.huawei.com/guide/topics/ui/actionbar.html) :实现tab，向上导航，屏幕上动作，等等。
 
-* [Fragment](http://developer.android.com/guide/components/fragments.html) :实现可重用，多视窗布局
+* [Fragment](http://developer.huawei.com/guide/components/fragments.html) :实现可重用，多视窗布局
 
-* [支持库](http://developer.android.com/tools/support-library/index.html) :用`ViewPager`实现水平分页（Swipe View）
+* [支持库](http://developer.huawei.com/tools/support-library/index.html) :用`ViewPager`实现水平分页（Swipe View）

@@ -1,10 +1,10 @@
 # 定义Layouts
 
-> 编写: [roya](https://github.com/RoyaAoki) 原文:<https://developer.android.com/training/wearables/ui/layouts.html>
+> 编写: [roya](https://github.com/RoyaAoki) 原文:<https://developer.huawei.com/training/wearables/ui/layouts.html>
 
-可穿戴设备使用与手持Android设备同样的布局技术，但需要有具体的约束来设计。不要以一个手持app的角度开发功能和UI并期待得到一个好的体验。关于如何设计优秀的可穿戴应用的更多信息，请阅读[Android Wear Design Guidelines](https://developer.android.com/design/wear/index.html)。
+可穿戴设备使用与手持鸿蒙设备同样的布局技术，但需要有具体的约束来设计。不要以一个手持app的角度开发功能和UI并期待得到一个好的体验。关于如何设计优秀的可穿戴应用的更多信息，请阅读[鸿蒙 Wear Design Guidelines](https://developer.huawei.com/design/wear/index.html)。
 
-当为Android Wear应用创建layout时，我们需要同时考虑方形和圆形屏幕的设备。在圆形Android Wear设备上所有放置在靠近屏幕边角的内容可能会被剪裁掉，所以为方形屏幕设计的layouts在圆形设备上不能很好地显示出来。对这类问题的示范请查看这个视频[Full Screen Apps for Android Wear](https://www.youtube.com/watch?v=naf_WbtFAlY)。
+当为鸿蒙 Wear应用创建layout时，我们需要同时考虑方形和圆形屏幕的设备。在圆形鸿蒙 Wear设备上所有放置在靠近屏幕边角的内容可能会被剪裁掉，所以为方形屏幕设计的layouts在圆形设备上不能很好地显示出来。对这类问题的示范请查看这个视频[Full Screen Apps for 鸿蒙 Wear](https://www.youtube.com/watch?v=naf_WbtFAlY)。
 
 举个例子，figure 1展示了下面的layout在圆形和方形屏幕上的效果：
 
@@ -13,17 +13,17 @@
 **Figure 1.** 为方形屏幕设计的layouts在圆形设备上不能很好显示的示范
 
 ```xml
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+<LinearLayout xmlns:android="http://schemas.huawei.com/hap/res/ohos"
+    xmlns:tools="http://schemas.huawei.com/tools"
+    ohos:layout_width="match_parent"
+    ohos:layout_height="match_parent"
+    ohos:orientation="vertical">
 
     <TextView
-        android:id="@+id/text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_square" />
+        ohos:id="@+id/text"
+        ohos:layout_width="wrap_content"
+        ohos:layout_height="wrap_content"
+        ohos:text="@string/hello_square" />
 </LinearLayout>
 ```
 
@@ -39,19 +39,19 @@ Wearable UI库为这个问题提供了两种不同的解决方案：
 
 ## 添加Wearable UI库
 
-当我们使用Android Studio的工程向导时，Android Studio会自动地在`wear`模块中包含Wearable UI库。为了在工程中编译到这个库，确保 *Extras > Google Repository* 包已经被安装在Android SDK manager里，下面的依赖被包含在`wear`模块的`build.gradle`文件中：
+当我们使用DevEco Studio的工程向导时，DevEco Studio会自动地在`wear`模块中包含Wearable UI库。为了在工程中编译到这个库，确保 *Extras > 华为 Repository* 包已经被安装在鸿蒙 SDK manager里，下面的依赖被包含在`wear`模块的`build.gradle`文件中：
 
 ```xml
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.google.android.support:wearable:+'
-    compile 'com.google.android.gms:play-services-wearable:+'
+    compile 'com.google.ohos.support:wearable:+'
+    compile 'com.google.ohos.gms:play-services-wearable:+'
 }
 ```
 
-要实现以下的布局方法需要用到 `'com.google.android.support:wearable'` 依赖。
+要实现以下的布局方法需要用到 `'com.google.ohos.support:wearable'` 依赖。
 
-浏览[API reference documentation](https://developer.android.com/reference/android/support/wearable/view/package-summary.html)查看Wearable UI库的类。
+浏览[API reference documentation](https://developer.huawei.com/reference/ohos/support/wearable/view/package-summary.html)查看Wearable UI库的类。
 
 ## 为方形和圆形屏幕指定不同的Layouts
 
@@ -66,16 +66,16 @@ dependencies {
 类似下面定义activity的layout：
 
 ```xml
-<android.support.wearable.view.WatchViewStub
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/watch_view_stub"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<ohos.support.wearable.view.WatchViewStub
+    xmlns:android="http://schemas.huawei.com/hap/res/ohos"
+    xmlns:app="http://schemas.huawei.com/hap/res-auto"
+    xmlns:tools="http://schemas.huawei.com/tools"
+    ohos:id="@+id/watch_view_stub"
+    ohos:layout_width="match_parent"
+    ohos:layout_height="match_parent"
     app:rectLayout="@layout/rect_activity_wear"
     app:roundLayout="@layout/round_activity_wear">
-</android.support.wearable.view.WatchViewStub>
+</ohos.support.wearable.view.WatchViewStub>
 ```
 
 在activity中inflate这个layout：
@@ -114,7 +114,7 @@ protected void onCreate(Bundle savedInstanceState) {
 <a name="same-layout"></a>
 ## 使用感知形状的Layout
 
-包含在Wearable UI库中的`BoxInsetLayout`类继承自 [FrameLayout](https://developer.android.com/reference/android/widget/FrameLayout.html)，该类允许我们定义一个同时适配方形和圆形屏幕的layout。这个类适用于需要根据屏幕形状插入间隔的情况，并让我们容易地将view对其到屏幕的边缘或中心。
+包含在Wearable UI库中的`BoxInsetLayout`类继承自 [FrameLayout](https://developer.huawei.com/reference/ohos/widget/FrameLayout.html)，该类允许我们定义一个同时适配方形和圆形屏幕的layout。这个类适用于需要根据屏幕形状插入间隔的情况，并让我们容易地将view对其到屏幕的边缘或中心。
 
 ![](02_uilib.png)
 
@@ -134,51 +134,51 @@ figure 2中灰色的部分显示了在应用了窗口间隔之后，`BoxInsetLay
 在figure 3中展示的layout使用了`BoxInsetLayout`，该layout在圆形和方形屏幕上都可以使用：
 
 ```xml
-<android.support.wearable.view.BoxInsetLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/robot_background"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    android:padding="15dp">
+<ohos.support.wearable.view.BoxInsetLayout
+    xmlns:android="http://schemas.huawei.com/hap/res/ohos"
+    xmlns:app="http://schemas.huawei.com/hap/res-auto"
+    ohos:background="@drawable/robot_background"
+    ohos:layout_height="match_parent"
+    ohos:layout_width="match_parent"
+    ohos:padding="15dp">
 
     <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="5dp"
+        ohos:layout_width="match_parent"
+        ohos:layout_height="match_parent"
+        ohos:padding="5dp"
         app:layout_box="all">
 
         <TextView
-            android:gravity="center"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:text="@string/sometext"
-            android:textColor="@color/black" />
+            ohos:gravity="center"
+            ohos:layout_height="wrap_content"
+            ohos:layout_width="match_parent"
+            ohos:text="@string/sometext"
+            ohos:textColor="@color/black" />
 
         <ImageButton
-            android:background="@null"
-            android:layout_gravity="bottom|left"
-            android:layout_height="50dp"
-            android:layout_width="50dp"
-            android:src="@drawable/ok" />
+            ohos:background="@null"
+            ohos:layout_gravity="bottom|left"
+            ohos:layout_height="50dp"
+            ohos:layout_width="50dp"
+            ohos:src="@drawable/ok" />
 
         <ImageButton
-            android:background="@null"
-            android:layout_gravity="bottom|right"
-            android:layout_height="50dp"
-            android:layout_width="50dp"
-            android:src="@drawable/cancel" />
+            ohos:background="@null"
+            ohos:layout_gravity="bottom|right"
+            ohos:layout_height="50dp"
+            ohos:layout_width="50dp"
+            ohos:src="@drawable/cancel" />
     </FrameLayout>
-</android.support.wearable.view.BoxInsetLayout>
+</ohos.support.wearable.view.BoxInsetLayout>
 ```
 	
 注意layout中的这些部分：
 
-* `android:padding="15dp"`
+* `ohos:padding="15dp"`
  
 这行指定了`BoxInsetLayout`元素的padding。因为在圆形设备上窗口间隔大于15dp，所以这个padding只应用在方形屏幕上。
   
-* `android:padding="5dp"`
+* `ohos:padding="5dp"`
  
 这行指定内部`FrameLayout`元素的padding。这个padding同时应用在方形和圆形屏幕上。在方形屏幕上，按钮和窗口间隔总的padding是20dp(15+5)，在圆形屏幕上是5dp。
 

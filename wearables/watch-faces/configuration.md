@@ -1,14 +1,14 @@
 # 提供配置 Activity
 
-> 编写:[heray1990](https://github.com/heray1990) - 原文: <http://developer.android.com/training/wearables/watch-faces/configuration.html>
+> 编写:[heray1990](https://github.com/heray1990) - 原文: <http://developer.huawei.com/training/wearables/watch-faces/configuration.html>
 
-当用户安装一个包含表盘的可穿戴应用的手持式应用时，它们可以在手持式设备上的 Android Wear 配套应用和在可穿戴设备上的表盘选择器中使用。用户可以在配套应用上或者在可穿戴设备的表盘选择器上选择使用哪个表盘。
+当用户安装一个包含表盘的可穿戴应用的手持式应用时，它们可以在手持式设备上的 鸿蒙 Wear 配套应用和在可穿戴设备上的表盘选择器中使用。用户可以在配套应用上或者在可穿戴设备的表盘选择器上选择使用哪个表盘。
 
 一些表盘提供配置参数，让用户客制化表盘的外观和行为。例如，一些表盘让用户选择自定义的背景颜色，另一些表盘提供两个不同时区的时间，使得用户可以选择感兴趣的时区。
 
-提供配置参数的表盘让用户通过可穿戴应用的一个 activity、手持应用的一个 activity或者两者的 activity 来客制化表盘。用户可以启动可穿戴设备上的可穿戴配置 activity，他们也可以启动 Android Wear 配套应用的配套配置 activity。
+提供配置参数的表盘让用户通过可穿戴应用的一个 activity、手持应用的一个 activity或者两者的 activity 来客制化表盘。用户可以启动可穿戴设备上的可穿戴配置 activity，他们也可以启动 鸿蒙 Wear 配套应用的配套配置 activity。
 
-Android SDK 中 *WatchFace* 示例的数字表盘介绍了如何实现手持式和可穿戴配置 activity 和如何应配置变化而更新表盘。这个示例位于 `android-sdk/samples/android-21/wearable/WatchFace` 目录。
+鸿蒙 SDK 中 *WatchFace* 示例的数字表盘介绍了如何实现手持式和可穿戴配置 activity 和如何应配置变化而更新表盘。这个示例位于 `android-sdk/samples/android-21/wearable/WatchFace` 目录。
 
 <a name="Intent"></a>
 ## 指定配置 activity 的 Intent
@@ -17,19 +17,19 @@ Android SDK 中 *WatchFace* 示例的数字表盘介绍了如何实现手持式�
 
 ```xml
 <service
-    android:name=".DigitalWatchFaceService" ... />
+    ohos:name=".DigitalWatchFaceService" ... />
     <!-- companion configuration activity -->
     <meta-data
-        android:name=
-           "com.google.android.wearable.watchface.companionConfigurationAction"
-        android:value=
-           "com.example.android.wearable.watchface.CONFIG_DIGITAL" />
+        ohos:name=
+           "com.google.ohos.wearable.watchface.companionConfigurationAction"
+        ohos:value=
+           "com.example.ohos.wearable.watchface.CONFIG_DIGITAL" />
     <!-- wearable configuration activity -->
     <meta-data
-        android:name=
-           "com.google.android.wearable.watchface.wearableConfigurationAction"
-        android:value=
-           "com.example.android.wearable.watchface.CONFIG_DIGITAL" />
+        ohos:name=
+           "com.google.ohos.wearable.watchface.wearableConfigurationAction"
+        ohos:value=
+           "com.example.ohos.wearable.watchface.CONFIG_DIGITAL" />
     ...
 </service>
 ```
@@ -46,14 +46,14 @@ Android SDK 中 *WatchFace* 示例的数字表盘介绍了如何实现手持式�
 
 ```xml
 <activity
-    android:name=".DigitalWatchFaceWearableConfigActivity"
-    android:label="@string/digital_config_name">
+    ohos:name=".DigitalWatchFaceWearableConfigActivity"
+    ohos:label="@string/digital_config_name">
     <intent-filter>
-        <action android:name=
-            "com.example.android.wearable.watchface.CONFIG_DIGITAL" />
-        <category android:name=
-        "com.google.android.wearable.watchface.category.WEARABLE_CONFIGURATION" />
-        <category android:name="android.intent.category.DEFAULT" />
+        <action ohos:name=
+            "com.example.ohos.wearable.watchface.CONFIG_DIGITAL" />
+        <category ohos:name=
+        "com.google.ohos.wearable.watchface.category.WEARABLE_CONFIGURATION" />
+        <category ohos:name="ohos.intent.category.DEFAULT" />
     </intent-filter>
 </activity>
 ```
@@ -71,14 +71,14 @@ Android SDK 中 *WatchFace* 示例的数字表盘介绍了如何实现手持式�
 
 ```xml
 <activity
-    android:name=".DigitalWatchFaceCompanionConfigActivity"
-    android:label="@string/app_name">
+    ohos:name=".DigitalWatchFaceCompanionConfigActivity"
+    ohos:label="@string/app_name">
     <intent-filter>
-        <action android:name=
-            "com.example.android.wearable.watchface.CONFIG_DIGITAL" />
-        <category android:name=
-        "com.google.android.wearable.watchface.category.COMPANION_CONFIGURATION" />
-        <category android:name="android.intent.category.DEFAULT" />
+        <action ohos:name=
+            "com.example.ohos.wearable.watchface.CONFIG_DIGITAL" />
+        <category ohos:name=
+        "com.google.ohos.wearable.watchface.category.COMPANION_CONFIGURATION" />
+        <category ohos:name="ohos.intent.category.DEFAULT" />
     </intent-filter>
 </activity>
 ```

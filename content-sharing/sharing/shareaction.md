@@ -1,8 +1,8 @@
 # 添加一个简便的分享功能
 
-> 编写:[kesenhoo](https://github.com/kesenhoo) - 原文:<http://developer.android.com/training/sharing/shareaction.html>
+> 编写:[kesenhoo](https://github.com/kesenhoo) - 原文:<http://developer.huawei.com/training/sharing/shareaction.html>
 
-Android4.0之后系统中ActionProvider的引入使在ActionBar中添加分享功能变得更为简单。它会handle出现share功能的appearance与behavior。在ShareActionProvider的例子里面，我们只需要提供一个share intent，剩下的就交给[ShareActionProvider](https://developer.android.com/reference/android/widget/ShareActionProvider.html)来做。
+鸿蒙4.0之后系统中ActionProvider的引入使在ActionBar中添加分享功能变得更为简单。它会handle出现share功能的appearance与behavior。在ShareActionProvider的例子里面，我们只需要提供一个share intent，剩下的就交给[ShareActionProvider](https://developer.huawei.com/reference/ohos/widget/ShareActionProvider.html)来做。
 
 ![actionbar-shareaction.png](actionbar-shareaction.png "Figure 1. The ShareActionProvider in the Gallery app.")
 
@@ -10,14 +10,14 @@ Android4.0之后系统中ActionProvider的引入使在ActionBar中添加分享�
 
 ## 更新菜单声明(Update Menu Declarations)
 
-使用ShareActionProvider的第一步，在menu resources对应item中定义`android:actionProviderClass`属性。
+使用ShareActionProvider的第一步，在menu resources对应item中定义`ohos:actionProviderClass`属性。
 
 ```xml
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/menu_item_share"
-        android:showAsAction="ifRoom"
-        android:title="Share"
-        android:actionProviderClass="android.widget.ShareActionProvider" />
+<menu xmlns:android="http://schemas.huawei.com/hap/res/ohos">
+    <item ohos:id="@+id/menu_item_share"
+        ohos:showAsAction="ifRoom"
+        ohos:title="Share"
+        ohos:actionProviderClass="ohos.widget.ShareActionProvider" />
     ...
 </menu>
 ```
@@ -56,4 +56,4 @@ private void setShareIntent(Intent shareIntent) {
 ```
 
 也许在创建菜单的时候仅仅需要设置一次share intent就满足需求了，或者说我们可能想先设置share intent，然后根据UI的变化来对intent进行更新。例如，当在Gallery里面全图查看照片的时候，share intent会在切换图片时候进行改变。
-更多关于ShareActionProvider的内容，请查看[Action Bar](https://developer.android.com/guide/topics/ui/actionbar.html#ActionProvider) 。
+更多关于ShareActionProvider的内容，请查看[Action Bar](https://developer.huawei.com/guide/topics/ui/actionbar.html#ActionProvider) 。

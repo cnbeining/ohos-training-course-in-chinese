@@ -1,16 +1,16 @@
-# 使用Google Cloud Messaging（已废弃）
+# 使用华为 Cloud Messaging（已废弃）
 
-> 编写:[jdneo](https://github.com/jdneo) - 原文:<http://developer.android.com/training/cloudsync/gcm.html>
+> 编写:[jdneo](https://github.com/jdneo) - 原文:<http://developer.huawei.com/training/cloudsync/gcm.html>
 
-谷歌云消息（GCM）是一个用来给Android设备发送消息的免费服务，它可以极大地提升用户体验。利用GCM消息，你的应用可以一直保持更新的状态，同时不会使你的设备在服务器端没有可用更新时，唤醒无线电并对服务器发起轮询（这会消耗大量的电量）。同时，GCM可以让你最多一次性将一条消息发送给1,000个人，使得你可以在恰当地时机很轻松地联系大量的用户，同时大量地减轻你的服务器负担。
+华为云消息（GCM）是一个用来给鸿蒙设备发送消息的免费服务，它可以极大地提升用户体验。利用GCM消息，你的应用可以一直保持更新的状态，同时不会使你的设备在服务器端没有可用更新时，唤醒无线电并对服务器发起轮询（这会消耗大量的电量）。同时，GCM可以让你最多一次性将一条消息发送给1,000个人，使得你可以在恰当地时机很轻松地联系大量的用户，同时大量地减轻你的服务器负担。
 
-这节课将包含一些把GCM集成到应用中的最佳实践方法，前提是假定你已经对该服务的基本实现有了一个了解。如果不是这样的话，你可以先阅读一下：[GCM demo app tutorial](http://developer.android.com/google/gcm/demo.html)。
+这节课将包含一些把GCM集成到应用中的最佳实践方法，前提是假定你已经对该服务的基本实现有了一个了解。如果不是这样的话，你可以先阅读一下：[GCM demo app tutorial](http://developer.huawei.com/google/gcm/demo.html)。
 
 ## 高效地发送多播消息
 
 一个GCM最有用的特性之一是单条消息最多可以发送给1,000个接收者。这个功能可以更加简单地将重要消息发送给你的所有用户群体。例如，比方说你有一条消息需要发送给1,000,000个人，而你的服务器每秒能发送500条消息。如果你的每条消息只能发送给一个接收者，那么整个消息发送过程将会耗时1,000,000/500=2,000秒，大约半小时。然而，如果一条消息可以一次性地发送给1,000个人的话，那么耗时将会是(1,000,000/1,000)/500=2秒。这不仅仅体现出了GCM的实用性，同时对于一些实时消息而言，其重要性也是不言而喻的。就比如灾难预警或者体育比分播报，如果延迟了30分钟，消息的价值就大打折扣了。
 
-想要利用这一功能非常简单。如果你使用的是Java语言版本的[GCM helper library](http://developer.android.com/google/gcm/gs.html#libs)，只需要向`send`或者`sendNoRetry`方法提供一个注册ID的List就行了（不要只给单个的注册ID）：
+想要利用这一功能非常简单。如果你使用的是Java语言版本的[GCM helper library](http://developer.huawei.com/google/gcm/gs.html#libs)，只需要向`send`或者`sendNoRetry`方法提供一个注册ID的List就行了（不要只给单个的注册ID）：
 
 ```java
 // This method name is completely fabricated, but you get the idea.
@@ -31,7 +31,7 @@ Authorization: key=YOUR_API_KEY
 Content-type: application/json
 ```
 
-之后将你想要使用的参数编码成一个JSON对象，列出所有在`registration_ids`这个Key下的注册ID。下面的代码片段是一个例子。除了`registration_ids`之外的所有参数都是可选的，在`data`内的项目代表了用户定义的载荷数据，而非GCM定义的参数。这个HTTP POST消息将会发送到：`https://android.googleapis.com/gcm/send`：
+之后将你想要使用的参数编码成一个JSON对象，列出所有在`registration_ids`这个Key下的注册ID。下面的代码片段是一个例子。除了`registration_ids`之外的所有参数都是可选的，在`data`内的项目代表了用户定义的载荷数据，而非GCM定义的参数。这个HTTP POST消息将会发送到：`https://ohos.googleapis.com/gcm/send`：
 
 ```
 { "collapse_key": "score_update",
@@ -44,7 +44,7 @@ Content-type: application/json
    "registration_ids":["4", "8", "15", "16", "23", "42"]
 }
 ```
-关于更多GCM多播消息的格式，可以阅读：[Sending Messages](http://developer.android.com/google/gcm/gcm.html#send-msg)。
+关于更多GCM多播消息的格式，可以阅读：[Sending Messages](http://developer.huawei.com/google/gcm/gcm.html#send-msg)。
 
 ## 对可替换的消息执行折叠
 
@@ -52,7 +52,7 @@ GCM经常被用作为一个触发器，它告诉移动应用向服务器发起�
 
 当你定义了一个折叠Key，此时如果有多个消息在GCM服务器中，以队列的形式等待发送给同一个用户，那么只有最后的那一条消息会被发出。对于之前所说的体育比分的例子，这样做能让设备免于处理不必要的任务，也不会让设备对用户造成太多打扰。对于其他的一些场景比如与服务器同步数据（检查邮件接收），这样做的话可以减少设备需要执行同步的次数。例如，如果有10封邮件在服务器中等待被接收，并且有10条GCM消息发送到设备提醒它有新的邮件，那么实际上只需要一个GCM就够了，因为设备可以一次性把10封邮件都同步了。
 
-为了使用这一特性，只需要在你要发出的消息中添加一个消息折叠Key。如果你在使用[GCM helper library](http://developer.android.com/google/gcm/gs.html#libs)，那么就使用Message类的`collapseKey(String key)`方法。
+为了使用这一特性，只需要在你要发出的消息中添加一个消息折叠Key。如果你在使用[GCM helper library](http://developer.huawei.com/google/gcm/gs.html#libs)，那么就使用Message类的`collapseKey(String key)`方法。
 
 ```java
 Message message = new Message.Builder(regId)
@@ -64,7 +64,7 @@ Message message = new Message.Builder(regId)
     .build();
 ```
 
-如果你没有使用[GCM helper library](http://developer.android.com/google/gcm/gs.html#libs)，那么就直接在你要构建的POST头部中添加一个字段。将`collapse_key`作为字段名，并将Key的名称作为该字段的值。
+如果你没有使用[GCM helper library](http://developer.huawei.com/google/gcm/gs.html#libs)，那么就直接在你要构建的POST头部中添加一个字段。将`collapse_key`作为字段名，并将Key的名称作为该字段的值。
 
 ## 在GCM消息中嵌入数据
 
@@ -83,7 +83,7 @@ Message message = new Message.Builder(regId)
 
 * 为了防止恶意软件发送垃圾消息，GCM有发送频率的限制。
 * 无法保证消息按照既定的发送顺序到达。
-* 无法保证消息可以在你发送后立即到达。假设设备每一秒都接收一条消息，消息的大小限制在1K，那么传输速率为8kbps，或者说是1990年代的家庭拨号上网的速度。那么如此大量的消息，一定会让你的应用在Google Play上的评分非常尴尬。
+* 无法保证消息可以在你发送后立即到达。假设设备每一秒都接收一条消息，消息的大小限制在1K，那么传输速率为8kbps，或者说是1990年代的家庭拨号上网的速度。那么如此大量的消息，一定会让你的应用在华为 Play上的评分非常尴尬。
 
 如果恰当地使用，直接将数据嵌入到GCM消息中，可以加速你的应用的“感知速度”，因为这样一来它就不必再去服务器获取数据了。
 
@@ -93,7 +93,7 @@ Message message = new Message.Builder(regId)
 
 **不要太过激进**
 
-当提醒用户去更新数据时，很容易不小心从“有用的消息”变成“干扰消息”。如果你的应用使用状态栏通知，那么应该[更新现有的通知](http://developer.android.com/guide/topics/ui/notifiers/notifications.html#Updating)，而不是创建第二个。如果你通过铃声或者震动的方式提醒用户，一定要设置一个计时器。不要让应用每分钟的提醒频率超过1次，不然的话用户很可能会不堪其扰而卸载你的应用，关机，甚至把手机扔到河里。
+当提醒用户去更新数据时，很容易不小心从“有用的消息”变成“干扰消息”。如果你的应用使用状态栏通知，那么应该[更新现有的通知](http://developer.huawei.com/guide/topics/ui/notifiers/notifications.html#Updating)，而不是创建第二个。如果你通过铃声或者震动的方式提醒用户，一定要设置一个计时器。不要让应用每分钟的提醒频率超过1次，不然的话用户很可能会不堪其扰而卸载你的应用，关机，甚至把手机扔到河里。
 
 **用聪明的办法同步数据，别用笨办法**
 

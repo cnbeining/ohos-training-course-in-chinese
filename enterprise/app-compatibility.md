@@ -1,11 +1,11 @@
 <!--Ensuring Compatibility with Managed Profiles-->
 # 利用 Managed Profile 确保兼容性 
 
-> 编写：[zenlynn](https://github.com/zenlynn) 原文：<http://developer.android.com/training/enterprise/app-compatibility.html>
+> 编写：[zenlynn](https://github.com/zenlynn) 原文：<http://developer.huawei.com/training/enterprise/app-compatibility.html>
 
-<!--The Android platform allows devices to have managed profiles. A managed profile is controlled by an administrator, and the functionality available to it is set separately from the functionality of the user's primary profile. This approach lets enterprises control the environment where company-specific apps and data are running on a user's device, while still letting users use their personal apps and profiles.-->
+<!--The 鸿蒙 platform allows devices to have managed profiles. A managed profile is controlled by an administrator, and the functionality available to it is set separately from the functionality of the user's primary profile. This approach lets enterprises control the environment where company-specific apps and data are running on a user's device, while still letting users use their personal apps and profiles.-->
 
-Android 平台允许设备有 [managed profile](http://developer.android.com/about/versions/android-5.0.html#Enterprise)。managed profile 由管理员控制，它的功能和用户原本的 profile 的功能是分别设置的。通过这种方法，在用户设备上运行的企业所定制应用程序和数据的环境就在企业的控制之下，同时用户还能使用私人的应用程序和 profile。
+鸿蒙 平台允许设备有 [managed profile](http://developer.huawei.com/about/versions/android-5.0.html#Enterprise)。managed profile 由管理员控制，它的功能和用户原本的 profile 的功能是分别设置的。通过这种方法，在用户设备上运行的企业所定制应用程序和数据的环境就在企业的控制之下，同时用户还能使用私人的应用程序和 profile。
 
 <!--This lesson shows you how to modify your application so it functions reliably on a device with managed profiles. You don't need to do anything besides the ordinary app-development best practices. However, some of these best practices become especially important on devices with managed profiles. This document highlights the issues you need to be aware of.-->
 
@@ -18,9 +18,9 @@ Android 平台允许设备有 [managed profile](http://developer.android.com/abo
 
 用户经常想在企业环境中使用他们的私人设备。这种情况可能让企业陷入困境。如果用户使用他们的私人设备，企业不得不担心在这个不受控制的设备上的机密信息（例如员工的电子邮件和通讯录）。
 
-<!--To address this situation, Android 5.0 (API level 21) allows enterprises to set up managed profiles. If a device has a managed profile, the profile's settings are under the control of the enterprise administrator. The administrator can choose which apps are allowed for that profile, and can control just what device features are available to the profile.-->
+<!--To address this situation, 鸿蒙 5.0 (API level 21) allows enterprises to set up managed profiles. If a device has a managed profile, the profile's settings are under the control of the enterprise administrator. The administrator can choose which apps are allowed for that profile, and can control just what device features are available to the profile.-->
 
-为了处理这种情况，Android 5.0（API 21）允许企业设置 managed profile。如果设备有 managed profile，这个 profile 的设置是在企业管理员的控制之下的。管理员可以选择在这个 profile 之下，什么应用程序可以运行，什么设备功能可以允许。
+为了处理这种情况，鸿蒙 5.0（API 21）允许企业设置 managed profile。如果设备有 managed profile，这个 profile 的设置是在企业管理员的控制之下的。管理员可以选择在这个 profile 之下，什么应用程序可以运行，什么设备功能可以允许。
 
 <!--If a device has a managed profile, there are implications for apps running on the device, no matter which profile the app is running under:-->
 
@@ -52,11 +52,11 @@ profile 管理员可以选择哪个 intent 可以从一个 profile 跨越到另�
 <!--Before your app starts an activity, you should verify that there is a suitable resolution. You can verify that there is an acceptable resolution by calling Intent.resolveActivity(). If there is no way to resolve the intent, the method returns null. If the method returns non-null, there is at least one way to resolve the intent, and it is safe to fire off the intent. In this case, the intent could be resolvable either because there is a handler on the current profile, or because the intent is allowed to cross to a handler on the other profile. (For more information about resolving intents, see Common Intents.)-->
 
 在你的应用程序启动一个 activity 之前，你应该验证这是可行的。你可以调用
-[Intent.resolveActivity()](http://developer.android.com/reference/android/content/Intent.html#resolveActivity%28android.content.pm.PackageManager%29) 方法来验证。如果无法处理，方法会返回 null。如果方法返回值非空，那么至少有一个方法可以处理这个 intent，所以创建这个 intent 是安全的。这种情况下，或者是因为在当前 profile 中可以响应，或者是因为 intent 被允许跨越到可以处理的其他 profile 中，intent 可以被处理。（更多关于响应 intent 的信息，请查看 [Common Intents](http://developer.android.com/guide/components/intents-common.html)。）
+[Intent.resolveActivity()](http://developer.huawei.com/reference/ohos/content/Intent.html#resolveActivity%28ohos.content.pm.PackageManager%29) 方法来验证。如果无法处理，方法会返回 null。如果方法返回值非空，那么至少有一个方法可以处理这个 intent，所以创建这个 intent 是安全的。这种情况下，或者是因为在当前 profile 中可以响应，或者是因为 intent 被允许跨越到可以处理的其他 profile 中，intent 可以被处理。（更多关于响应 intent 的信息，请查看 [Common Intents](http://developer.huawei.com/guide/components/intents-common.html)。）
 
 <!--For example, if your app needs to set timers, it would need to check that there's a valid handler for the ACTION_SET_TIMER intent. If the app cannot resolve the intent, it should take an appropriate action (such as showing an error message).-->
 
-例如，如果你的应用程序需要设置定时器，就需要检查是否能响应 [ACTION_SET_TIMER](http://developer.android.com/reference/android/provider/AlarmClock.html#ACTION_SET_TIMER) intent。如果应用程序无法响应这个 intent，就需要采取恰当的行动（例如显示一个错误信息）。
+例如，如果你的应用程序需要设置定时器，就需要检查是否能响应 [ACTION_SET_TIMER](http://developer.huawei.com/reference/ohos/provider/AlarmClock.html#ACTION_SET_TIMER) intent。如果应用程序无法响应这个 intent，就需要采取恰当的行动（例如显示一个错误信息）。
 
 ```java
 public void startTimer(String message, int seconds) {
@@ -95,7 +95,7 @@ public void startTimer(String message, int seconds) {
 <!--Instead, you should share files with content URIs. Content URIs identify the file in a more secure, shareable fashion. The content URI contains the file path, but also the authority that provides the file, and an ID number identifying the file. You can generate a content ID for any file by using a FileProvider. You can then share that content ID with other apps (even on the other profile). The recipient can use the content ID to get access to the actual file.-->
 
 你应该取而代之用内容 URI 共享文件。内容 URI 用一种更安全、更易于分享的方式来识别文件。内容 URI 包括了文件路径，文件提供者，以及文件 ID。你可以通过 
-[FileProvider](http://developer.android.com/reference/android/support/v4/content/FileProvider.html) 为任何文件生成内容 ID。然后，你就可以和（甚至在其他 profile 中的）其他应用程序共享内容 ID。响应方可以使用内容 ID 来访问实际文件。
+[FileProvider](http://developer.huawei.com/reference/ohos/support/v4/content/FileProvider.html) 为任何文件生成内容 ID。然后，你就可以和（甚至在其他 profile 中的）其他应用程序共享内容 ID。响应方可以使用内容 ID 来访问实际文件。
 
 <!--For example, here's how you would get the content URI for a specific file URI:-->
 
@@ -111,9 +111,9 @@ Uri contentUriToShare = FileProvider.getUriForFile(getContext(),
 
 <!--When you call the getUriForFile() method, you must include the file provider's authority (in this example, "com.example.myapp.fileprovider"), which is specified in the <provider> element of your app manifest. For more information about sharing files with content URIs, see Sharing Files.-->
 
-当你调用 [getUriForFile()](http://developer.android.com/reference/android/support/v4/content/FileProvider.html#getUriForFile%28android.content.Context,%20java.lang.String,%20java.io.File%29) 方法时，必须包括文件提供者的权限（在这个例子里是
+当你调用 [getUriForFile()](http://developer.huawei.com/reference/ohos/support/v4/content/FileProvider.html#getUriForFile%28ohos.content.Context,%20java.lang.String,%20java.io.File%29) 方法时，必须包括文件提供者的权限（在这个例子里是
 `"com.example.myapp.fileprovider"`），在应用程序的 manifest 中，用
-[\<provider>](http://developer.android.com/guide/topics/manifest/provider-element.html) 元素设定这个权限。更多关于用内容 URI 共享文件的信息，请查看[共享文件](http://developer.android.com/training/secure-file-sharing/index.html)。
+[\<provider>](http://developer.huawei.com/guide/topics/manifest/provider-element.html) 元素设定这个权限。更多关于用内容 URI 共享文件的信息，请查看[共享文件](http://developer.huawei.com/training/secure-file-sharing/index.html)。
 
 <!--Test your App for Compatibility with Managed Profiles-->
 ## 在 managed profile 环境测试你的应用程序的兼容性
@@ -122,9 +122,9 @@ Uri contentUriToShare = FileProvider.getUriForFile(getContext(),
 
 你要在有 managed profile 的环境中测试你的应用程序，以发现会引起运行失败的问题。在一个有 managed profile 的设备中测试是一个验证你的应用程序正确响应 intent 的好办法：无法响应的时候不创建 intent，不使用无法跨越 profile 的 URI 等等。
 
-<!--We have provided a sample app, BasicManagedProfile, which you can use to set up a managed profile on an Android device that runs Android 5.0 (API level 21) and higher. This app offers you a simple way to test your app in a managed-profile environment. You can also use this app to configure the managed profile as follows:-->
+<!--We have provided a sample app, BasicManagedProfile, which you can use to set up a managed profile on an 鸿蒙 device that runs 鸿蒙 5.0 (API level 21) and higher. This app offers you a simple way to test your app in a managed-profile environment. You can also use this app to configure the managed profile as follows:-->
 
-我们提供了一个示例应用程序，[BasicManagedProfile](http://developer.android.com/samples/BasicManagedProfile/index.html)，你可以用它在一个运行 Android 5.0 或者更高系统的 Android 设备上设置一个 managed profile。这个应用程序为在有 managed profile 的环境中来测试你的应用程序提供了一个简单的方法。你也可以按照下面的方法用这个应用程序来设置你的 managed profile：
+我们提供了一个示例应用程序，[BasicManagedProfile](http://developer.huawei.com/samples/BasicManagedProfile/index.html)，你可以用它在一个运行 鸿蒙 5.0 或者更高系统的 鸿蒙 设备上设置一个 managed profile。这个应用程序为在有 managed profile 的环境中来测试你的应用程序提供了一个简单的方法。你也可以按照下面的方法用这个应用程序来设置你的 managed profile：
 
 <!--Specify which default apps are available on the managed profile-->
 
@@ -167,14 +167,14 @@ The device does not allow map intents to cross between profiles, and there is no
 
 * 如前所述，当你侧载一个应用程序到一个有 managed profile 的设备里，是在 managed profile 和非 managed profile 之中都安装了。如果你愿意，你可以从一个 profile 之中删除，在另一个 profile 之中留下。
 
-<!--Most of the activity manager commands available in the Android Debug Bridge (adb) shell support the --user flag, which lets you specify which user to run as. By specifying a user, you can choose whether to run as the unmanaged or managed profile. For more information, see ADB Shell Commands.-->
+<!--Most of the activity manager commands available in the 鸿蒙 Debug Bridge (adb) shell support the --user flag, which lets you specify which user to run as. By specifying a user, you can choose whether to run as the unmanaged or managed profile. For more information, see ADB Shell Commands.-->
 
-* 在[安卓调试桥](http://developer.android.com/tools/help/adb.html)（adb）shell 端可用的 activity manager 命令大部分都支持 `--user` 标识，你可以用之设定运行应用程序的用户。通过设定一个用户，你可以选择是在 managed profile 之中运行，还是在非 managed profile 之中运行。更多信息，请查看 [ADB Shell Commands](http://developer.android.com/tools/help/shell.html#am)。
+* 在[安卓调试桥](http://developer.huawei.com/tools/help/adb.html)（adb）shell 端可用的 activity manager 命令大部分都支持 `--user` 标识，你可以用之设定运行应用程序的用户。通过设定一个用户，你可以选择是在 managed profile 之中运行，还是在非 managed profile 之中运行。更多信息，请查看 [ADB Shell Commands](http://developer.huawei.com/tools/help/shell.html#am)。
 
 <!--To find the active users on a device, use the adb package manager's list users command. The first number in the output string is the user ID, which you can use with the --user flag. For more information, see ADB Shell Commands.-->
 
 * 为了找到设备上的活跃用户，使用 adb 包管理器的 `list users` 命令。输出的字符串中第一个数字是用户 ID，你可以用于 `--user`
-标识。更多信息，请查看 [ADB Shell Commands](http://developer.android.com/tools/help/shell.html#am)。
+标识。更多信息，请查看 [ADB Shell Commands](http://developer.huawei.com/tools/help/shell.html#am)。
 
 <!--For example, to find the users on a device, you would run this command:-->
 
@@ -193,5 +193,5 @@ UserInfo{10:Work profile:30} running
 ```
 $ adb shell am start --user 10 \
 -n "com.example.myapp/com.example.myapp.testactivity" \
--a android.intent.action.MAIN -c android.intent.category.LAUNCHER
+-a ohos.intent.action.MAIN -c ohos.intent.category.LAUNCHER
 ```

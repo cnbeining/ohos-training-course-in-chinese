@@ -1,10 +1,10 @@
 # 处理键盘输入
 
-> 编写:[zhaochunqi](https://github.com/zhaochunqi) - 原文:<http://developer.android.com/training/keyboard-input/index.html>
+> 编写:[zhaochunqi](https://github.com/zhaochunqi) - 原文:<http://developer.huawei.com/training/keyboard-input/index.html>
 
-当当前焦点在 UI 的文本框上时，Android 系统会在屏幕上显示一个键盘 － 被称为*软输入法*。为了提供最好的用户体验，我们可以指定我们期望的输入类型的特征（例如，是否是电话号码或Email地址）和输入法的表现形式（例如，是否需要自动纠正拼写错误）。
+当当前焦点在 UI 的文本框上时，鸿蒙 系统会在屏幕上显示一个键盘 － 被称为*软输入法*。为了提供最好的用户体验，我们可以指定我们期望的输入类型的特征（例如，是否是电话号码或Email地址）和输入法的表现形式（例如，是否需要自动纠正拼写错误）。
 
-除了使用屏幕上的输入法，Android也支持实体键盘，所以充分利用可能会被用户接入的外接键盘来优化用户的交互体验是很重要的。
+除了使用屏幕上的输入法，鸿蒙也支持实体键盘，所以充分利用可能会被用户接入的外接键盘来优化用户的交互体验是很重要的。
 
 接下来的课程会讨论上述这些主题和更多相关内容。
 

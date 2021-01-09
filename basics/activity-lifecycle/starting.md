@@ -1,8 +1,8 @@
 # 启动与销毁Activity
 
-> 编写:[kesenhoo](https://github.com/kesenhoo) - 原文:<http://developer.android.com/training/basics/activity-lifecycle/starting.html>
+> 编写:[kesenhoo](https://github.com/kesenhoo) - 原文:<http://developer.huawei.com/training/basics/activity-lifecycle/starting.html>
 
-不同于使用 `main()` 方法启动应用的其他编程范例，Android 系统会通过调用对应于其生命周期中特定阶段的特定回调方法在 Activity 实例中启动代码。 有一系列可启动Activity的回调方法，以及一系列可分解Activity的回调方法。
+不同于使用 `main()` 方法启动应用的其他编程范例，鸿蒙 系统会通过调用对应于其生命周期中特定阶段的特定回调方法在 Activity 实例中启动代码。 有一系列可启动Activity的回调方法，以及一系列可分解Activity的回调方法。
 
 本课程概述了最重要的生命周期方法，并向您展示如何处理创建Activity新实例的第一个生命周期回调。
 
@@ -33,7 +33,7 @@
 
 其他状态（“创建”和“开始”）是瞬态，
 
-其它状态 (**Created**与**Started**)都是短暂的瞬态，系统会通过调用下一个生命周期回调方法从这些状态快速移到下一个状态。 也就是说，在系统调用 [onCreate()](http://developer.android.com/reference/android/app/Activity.html#onCreate(android.os.Bundle)) 之后，它会快速调用 [onStart()](http://developer.android.com/reference/android/app/Activity.html#onStart())，紧接着快速调用 [onResume()](http://developer.android.com/reference/android/app/Activity.html#onResume())。
+其它状态 (**Created**与**Started**)都是短暂的瞬态，系统会通过调用下一个生命周期回调方法从这些状态快速移到下一个状态。 也就是说，在系统调用 [onCreate()](http://developer.huawei.com/reference/ohos/app/Activity.html#onCreate(ohos.os.Bundle)) 之后，它会快速调用 [onStart()](http://developer.huawei.com/reference/ohos/app/Activity.html#onStart())，紧接着快速调用 [onResume()](http://developer.huawei.com/reference/ohos/app/Activity.html#onResume())。
 
 基本生命周期部分到此为止。现在，您将开始学习特定生命周期行为的一些知识。
 
@@ -41,22 +41,22 @@
 
 当用户从主界面点击程序图标时，系统会调用app中被声明为"launcher" (or "main") activity中的onCreate()方法。这个Activity被用来当作程序的主要进入点。
 
-我们可以在[AndroidManifest.xml](http://developer.android.com/guide/topics/manifest/manifest-intro.html)中定义作为主activity的activity。
+我们可以在[鸿蒙Manifest.xml](http://developer.huawei.com/guide/topics/manifest/manifest-intro.html)中定义作为主activity的activity。
 
-这个main activity必须在manifest使用包括 `MAIN` action 与 `LAUNCHER` category 的[`<intent-filter>`](http://developer.android.com/guide/topics/manifest/intent-filter-element.html)标签来声明。例如：
+这个main activity必须在manifest使用包括 `MAIN` action 与 `LAUNCHER` category 的[`<intent-filter>`](http://developer.huawei.com/guide/topics/manifest/intent-filter-element.html)标签来声明。例如：
 
 ```xml
-<activity android:name=".MainActivity" android:label="@string/app_name">
+<activity ohos:name=".MainActivity" ohos:label="@string/app_name">
     <intent-filter>
-        <action android:name="android.intent.action.MAIN" />
-        <category android:name="android.intent.category.LAUNCHER" />
+        <action ohos:name="ohos.intent.action.MAIN" />
+        <category ohos:name="ohos.intent.category.LAUNCHER" />
     </intent-filter>
 </activity>
 ```
 
-> **Note**:当你使用Android SDK工具来创建Android工程时，工程中就包含了一个默认的声明有这个filter的activity类。
+> **Note**:当你使用鸿蒙 SDK工具来创建鸿蒙工程时，工程中就包含了一个默认的声明有这个filter的activity类。
 
-如果程序中没有声明了[MAIN](http://developer.android.com/reference/android/content/Intent.html#ACTION_MAIN) action 或者[LAUNCHER](http://developer.android.com/reference/android/content/Intent.html#CATEGORY_LAUNCHER) category的activity，那么在设备的主界面列表里面不会呈现app图标。
+如果程序中没有声明了[MAIN](http://developer.huawei.com/reference/ohos/content/Intent.html#ACTION_MAIN) action 或者[LAUNCHER](http://developer.huawei.com/reference/ohos/content/Intent.html#CATEGORY_LAUNCHER) category的activity，那么在设备的主界面列表里面不会呈现app图标。
 
 ## 创建一个新的实例
 
@@ -90,7 +90,7 @@ public void onCreate(Bundle savedInstanceState) {
 }
 ```
 
-> **Caution**：用[SDK_INT](http://developer.android.com/reference/android/os/Build.VERSION.html#SDK_INT)来避免旧的系统调用了只在Android 2.0（API level 5）或者更新的系统可用的方法（上述if条件中的代码）。旧的系统调用了这些方法会抛出一个运行时异常。
+> **Caution**：用[SDK_INT](http://developer.huawei.com/reference/ohos/os/Build.VERSION.html#SDK_INT)来避免旧的系统调用了只在鸿蒙 2.0（API level 5）或者更新的系统可用的方法（上述if条件中的代码）。旧的系统调用了这些方法会抛出一个运行时异常。
 
 一旦onCreate 操作完成，系统会迅速调用onStart() 与onResume()方法。我们的activity不会在Created或者Started状态停留。技术上来说, activity在onStart()被调用后开始被用户可见，但是 onResume()会迅速被执行使得activity停留在Resumed状态，直到一些因素发生变化才会改变这个状态。例如接收到一个来电，用户切换到另外一个activity，或者是设备屏幕关闭。
 
@@ -104,7 +104,7 @@ public void onCreate(Bundle savedInstanceState) {
 
 ## 销毁Activity
 
-activity的第一个生命周期回调函数是 onCreate(),它最后一个回调是<a href="http://developer.android.com/reference/android/app/Activity.html#onDestroy()">onDestroy()</a>.当收到需要将该activity彻底移除的信号时，系统会调用这个方法。
+activity的第一个生命周期回调函数是 onCreate(),它最后一个回调是<a href="http://developer.huawei.com/reference/ohos/app/Activity.html#onDestroy()">onDestroy()</a>.当收到需要将该activity彻底移除的信号时，系统会调用这个方法。
 
 大多数 app并不需要实现这个方法，因为局部类的references会随着activity的销毁而销毁，并且我们的activity应该在onPause()与onStop()中执行清除activity资源的操作。然而，如果activity含有在onCreate调用时创建的后台线程，或者是其他有可能导致内存泄漏的资源，则应该在OnDestroy()时进行资源清理，杀死后台线程。
 
@@ -114,7 +114,7 @@ public void onDestroy() {
     super.onDestroy();  // Always call the superclass
 
     // Stop method tracing that the activity started during onCreate()
-    android.os.Debug.stopMethodTracing();
+    ohos.os.Debug.stopMethodTracing();
 }
 ```
 

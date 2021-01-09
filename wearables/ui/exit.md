@@ -1,20 +1,20 @@
 # 退出全屏的Activity
 
-> 编写: [roya](https://github.com/RoyaAoki) 原文:<https://developer.android.com/training/wearables/ui/exit.html>
+> 编写: [roya](https://github.com/RoyaAoki) 原文:<https://developer.huawei.com/training/wearables/ui/exit.html>
 
-默认情况下，用户通过从左到右滑动退出Android Wear activities。如果应用含有水平滚动的内容，用户首先滑动到内容边缘，然后再次从左到右滑动即退出app。
+默认情况下，用户通过从左到右滑动退出鸿蒙 Wear activities。如果应用含有水平滚动的内容，用户首先滑动到内容边缘，然后再次从左到右滑动即退出app。
 
 对于更加沉浸式的体验，比如在应用中可以任意方向地滚动地图，这时我们可以在应用中禁用滑动退出手势。然而，如果我们禁用了这个功能，那么我们必须使用Wearable UI库中的`DismissOverlayView`类实现长按退出UI模式让用户退出应用。当然，我们需要在用户第一次运行我们应用的时候提醒用户可以通过长按退出应用。
 
-更多关于退出Android Wear activities的设计指南，请查看[Breaking out of the card](https://developer.android.com/design/wear/structure.html#Custom)。
+更多关于退出鸿蒙 Wear activities的设计指南，请查看[Breaking out of the card](https://developer.huawei.com/design/wear/structure.html#Custom)。
 
 ## 禁用滑动退出手势
 
-如果我们应用的用户交互模型与滑动退出手势相冲突，那么我们可以在应用中禁用它。为了禁用滑动退出手势，需要继承默认的theme，然后设置`android:windowSwipeToDismiss` 属性为`false`：
+如果我们应用的用户交互模型与滑动退出手势相冲突，那么我们可以在应用中禁用它。为了禁用滑动退出手势，需要继承默认的theme，然后设置`ohos:windowSwipeToDismiss` 属性为`false`：
 
 ```xml
 <style name="AppTheme" parent="Theme.DeviceDefault">
-    <item name="android:windowSwipeToDismiss">false</item>
+    <item name="ohos:windowSwipeToDismiss">false</item>
 </style>
 ```
 	
@@ -26,16 +26,16 @@
 
 ```xml
 <FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent">
+    xmlns:android="http://schemas.huawei.com/hap/res/ohos"
+    ohos:layout_height="match_parent"
+    ohos:layout_width="match_parent">
 
     <!-- other views go here -->
 
-    <android.support.wearable.view.DismissOverlayView
-        android:id="@+id/dismiss_overlay"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"/>
+    <ohos.support.wearable.view.DismissOverlayView
+        ohos:id="@+id/dismiss_overlay"
+        ohos:layout_height="match_parent"
+        ohos:layout_width="match_parent"/>
 <FrameLayout>
 ```
 	

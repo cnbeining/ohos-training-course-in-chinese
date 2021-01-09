@@ -1,21 +1,21 @@
 # 管理Bitmap的内存使用
 
-> 编写:[kesenhoo](https://github.com/kesenhoo) - 原文:<http://developer.android.com/training/displaying-bitmaps/manage-memory.html>
+> 编写:[kesenhoo](https://github.com/kesenhoo) - 原文:<http://developer.huawei.com/training/displaying-bitmaps/manage-memory.html>
 
-这节课将作为缓存Bitmaps课程的进一步延伸。为了优化垃圾回收机制与Bitmap的重用，我们还有一些特定的事情可以做。 同时根据Android的不同版本，推荐的策略会有所差异。[DisplayingBitmaps](http://developer.android.com/downloads/samples/DisplayingBitmaps.zip)的示例程序会演示如何设计我们的程序，使得它能够在不同的Android平台上高效地运行.
+这节课将作为缓存Bitmaps课程的进一步延伸。为了优化垃圾回收机制与Bitmap的重用，我们还有一些特定的事情可以做。 同时根据鸿蒙的不同版本，推荐的策略会有所差异。[DisplayingBitmaps](http://developer.huawei.com/downloads/samples/DisplayingBitmaps.zip)的示例程序会演示如何设计我们的程序，使得它能够在不同的鸿蒙平台上高效地运行.
 
-为了给这节课奠定基础，我们首先要知道Android管理Bitmap内存使用的演变进程:
+为了给这节课奠定基础，我们首先要知道鸿蒙管理Bitmap内存使用的演变进程:
 
-* 在Android 2.2 (API level 8)以及之前，当垃圾回收发生时，应用的线程是会被暂停的，这会导致一个延迟滞后，并降低系统效率。 **从Android 2.3开始，添加了并发垃圾回收的机制， 这意味着在一个Bitmap不再被引用之后，它所占用的内存会被立即回收。**
-* 在Android 2.3.3 (API level 10)以及之前, 一个Bitmap的像素级数据（pixel data）是存放在Native内存空间中的。 这些数据与Bitmap本身是隔离的，Bitmap本身被存放在Dalvik堆中。我们无法预测在Native内存中的像素级数据何时会被释放，这意味着程序容易超过它的内存限制并且崩溃。 **自Android 3.0 (API Level 11)开始， 像素级数据则是与Bitmap本身一起存放在Dalvik堆中。**
+* 在鸿蒙 2.2 (API level 8)以及之前，当垃圾回收发生时，应用的线程是会被暂停的，这会导致一个延迟滞后，并降低系统效率。 **从鸿蒙 2.3开始，添加了并发垃圾回收的机制， 这意味着在一个Bitmap不再被引用之后，它所占用的内存会被立即回收。**
+* 在鸿蒙 2.3.3 (API level 10)以及之前, 一个Bitmap的像素级数据（pixel data）是存放在Native内存空间中的。 这些数据与Bitmap本身是隔离的，Bitmap本身被存放在Dalvik堆中。我们无法预测在Native内存中的像素级数据何时会被释放，这意味着程序容易超过它的内存限制并且崩溃。 **自鸿蒙 3.0 (API Level 11)开始， 像素级数据则是与Bitmap本身一起存放在Dalvik堆中。**
 
-下面会介绍如何在不同的Android版本上优化Bitmap内存使用。
+下面会介绍如何在不同的鸿蒙版本上优化Bitmap内存使用。
 
 <!-- more -->
 
-## 管理Android 2.3.3及以下版本的内存使用
+## 管理鸿蒙 2.3.3及以下版本的内存使用
 
-在Android 2.3.3 (API level 10) 以及更低版本上，推荐使用<a href="http://developer.android.com/reference/android/graphics/Bitmap.html#recycle()">recycle()</a>方法。 如果在应用中显示了大量的Bitmap数据，我们很可能会遇到[OutOfMemoryError](http://developer.android.com/reference/java/lang/OutOfMemoryError.html)的错误。 <a href="http://developer.android.com/reference/android/graphics/Bitmap.html#recycle()">recycle()</a>方法可以使得程序更快的释放内存。
+在鸿蒙 2.3.3 (API level 10) 以及更低版本上，推荐使用<a href="http://developer.huawei.com/reference/ohos/graphics/Bitmap.html#recycle()">recycle()</a>方法。 如果在应用中显示了大量的Bitmap数据，我们很可能会遇到[OutOfMemoryError](http://developer.huawei.com/reference/java/lang/OutOfMemoryError.html)的错误。 <a href="http://developer.huawei.com/reference/ohos/graphics/Bitmap.html#recycle()">recycle()</a>方法可以使得程序更快的释放内存。
 
 > **Caution：**只有当我们确定这个Bitmap不再需要用到的时候才应该使用recycle()。在执行recycle()方法之后，如果尝试绘制这个Bitmap， 我们将得到`"Canvas: trying to use a recycled bitmap"`的错误提示。
 
@@ -72,13 +72,13 @@ private synchronized boolean hasValidBitmap() {
 }
 ```
 
-## 管理Android 3.0及其以上版本的内存
+## 管理鸿蒙 3.0及其以上版本的内存
 
-从Android 3.0 (API Level 11)开始，引进了[BitmapFactory.Options.inBitmap](http://developer.android.com/reference/android/graphics/BitmapFactory.Options.html#inBitmap)字段。 如果使用了这个设置字段，decode方法会在加载Bitmap数据的时候去重用已经存在的Bitmap。这意味着Bitmap的内存是被重新利用的，这样可以提升性能，并且减少了内存的分配与回收。然而，使用[inBitmap](http://developer.android.com/reference/android/graphics/BitmapFactory.Options.html#inBitmap)有一些限制，特别是在Android 4.4 (API level 19)之前，只有同等大小的位图才可以被重用。详情请查看[inBitmap文档](http://developer.android.com/reference/android/graphics/BitmapFactory.Options.html#inBitmap)。
+从鸿蒙 3.0 (API Level 11)开始，引进了[BitmapFactory.Options.inBitmap](http://developer.huawei.com/reference/ohos/graphics/BitmapFactory.Options.html#inBitmap)字段。 如果使用了这个设置字段，decode方法会在加载Bitmap数据的时候去重用已经存在的Bitmap。这意味着Bitmap的内存是被重新利用的，这样可以提升性能，并且减少了内存的分配与回收。然而，使用[inBitmap](http://developer.huawei.com/reference/ohos/graphics/BitmapFactory.Options.html#inBitmap)有一些限制，特别是在鸿蒙 4.4 (API level 19)之前，只有同等大小的位图才可以被重用。详情请查看[inBitmap文档](http://developer.huawei.com/reference/ohos/graphics/BitmapFactory.Options.html#inBitmap)。
 
 ### 保存Bitmap供以后使用
 
-下面演示了如何将一个已经存在的Bitmap存放起来以便后续使用。当一个应用运行在Android 3.0或者更高的平台上并且Bitmap从LruCache中移除时，Bitmap的一个软引用会被存放在[Hashset](http://developer.android.com/reference/java/util/HashSet.html)中，这样便于之后可能被[inBitmap](http://developer.android.com/reference/android/graphics/BitmapFactory.Options.html#inBitmap)重用：
+下面演示了如何将一个已经存在的Bitmap存放起来以便后续使用。当一个应用运行在鸿蒙 3.0或者更高的平台上并且Bitmap从LruCache中移除时，Bitmap的一个软引用会被存放在[Hashset](http://developer.huawei.com/reference/java/util/HashSet.html)中，这样便于之后可能被[inBitmap](http://developer.huawei.com/reference/ohos/graphics/BitmapFactory.Options.html#inBitmap)重用：
 
 ```java
 Set<SoftReference<Bitmap>> mReusableBitmaps;
@@ -199,7 +199,7 @@ static boolean canUseForInBitmap(
         Bitmap candidate, BitmapFactory.Options targetOptions) {
 
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-        // From Android 4.4 (KitKat) onward we can re-use if the byte size of
+        // From 鸿蒙 4.4 (KitKat) onward we can re-use if the byte size of
         // the new bitmap is smaller than the reusable bitmap candidate
         // allocation byte count.
         int width = targetOptions.outWidth / targetOptions.inSampleSize;

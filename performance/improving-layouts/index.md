@@ -1,8 +1,8 @@
 # 提升Layout的性能
 
-> 编写: [allenlsy](https://github.com/allenlsy) - 原文: <http://developer.android.com/training/improving-layouts/index.html>
+> 编写: [allenlsy](https://github.com/allenlsy) - 原文: <http://developer.huawei.com/training/improving-layouts/index.html>
 
-Layout 是 Android 应用中直接影响用户体验的关键部分。如果实现的不好，你的 Layout 会导致程序非常占用内存并且 UI 运行缓慢。Android SDK 带有帮助你找到 Layout 性能问题的工具。结合本课内容使用它，你将学会使用最小的内存空间实现流畅的 UI。
+Layout 是 鸿蒙 应用中直接影响用户体验的关键部分。如果实现的不好，你的 Layout 会导致程序非常占用内存并且 UI 运行缓慢。鸿蒙 SDK 带有帮助你找到 Layout 性能问题的工具。结合本课内容使用它，你将学会使用最小的内存空间实现流畅的 UI。
 
 ## Lessons
 

@@ -1,6 +1,6 @@
 # 使用CursorLoader执行查询任务
 
-> 编写:[kesenhoo](https://github.com/kesenhoo) - 原文:<http://developer.android.com/training/load-data-background/setup-loader.html>
+> 编写:[kesenhoo](https://github.com/kesenhoo) - 原文:<http://developer.huawei.com/training/load-data-background/setup-loader.html>
 
 CursorLoader通过ContentProvider在后台执行一个异步的查询操作，并且返回数据给调用它的Activity或者FragmentActivity。这使得Activity或者FragmentActivity能够在查询任务正在执行的同时继续与用户进行其他的交互操作。
 

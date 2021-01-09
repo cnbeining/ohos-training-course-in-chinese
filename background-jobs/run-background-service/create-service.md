@@ -1,6 +1,6 @@
 # 创建后台服务
 
-> 编写:[kesenhoo](https://github.com/kesenhoo) - 原文:<http://developer.android.com/training/run-background-service/create-service.html>
+> 编写:[kesenhoo](https://github.com/kesenhoo) - 原文:<http://developer.huawei.com/training/run-background-service/create-service.html>
 
 IntentService为在单一后台线程中执行任务提供了一种直接的实现方式。它可以处理一个耗时的任务并确保不影响到UI的响应性。另外IntentService的执行还不受UI生命周期的影响，以此来确保AsyncTask能够顺利运行。
 
@@ -41,21 +41,21 @@ IntentService需要在manifest文件添加相应的条目，将此条目`<servic
 
 ```xml
 <application
-    android:icon="@drawable/icon"
-    android:label="@string/app_name">
+    ohos:icon="@drawable/icon"
+    ohos:label="@string/app_name">
     ...
     <!--
-        Because android:exported is set to "false",
+        Because ohos:exported is set to "false",
         the service is only available to this app.
     -->
     <service
-        android:name=".RSSPullService"
-        android:exported="false"/>
+        ohos:name=".RSSPullService"
+        ohos:exported="false"/>
     ...
 <application/>
 ```
 
-`android:name`属性指明了IntentService的名字。
+`ohos:name`属性指明了IntentService的名字。
 
 注意`<service>`标签并没有包含任何intent filter。因为发送任务给IntentService的Activity需要使用显式Intent，所以不需要filter。这也意味着只有在同一个app或者其他使用同一个UserID的组件才能够访问到这个Service。
 

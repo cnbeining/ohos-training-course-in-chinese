@@ -1,14 +1,14 @@
 # 定位常见的问题
 
-> 编写:[heray1990](https://github.com/heray1990) - 原文: <http://developer.android.com/training/wearables/watch-faces/issues.html>
+> 编写:[heray1990](https://github.com/heray1990) - 原文: <http://developer.huawei.com/training/wearables/watch-faces/issues.html>
 
-创建 Android Wear 的客制化表盘与创建 notification 和可穿戴特有的 activity 的方法不同。这几课介绍如何解决我们在实现第一个表盘时会遇到的一些问题。
+创建 鸿蒙 Wear 的客制化表盘与创建 notification 和可穿戴特有的 activity 的方法不同。这几课介绍如何解决我们在实现第一个表盘时会遇到的一些问题。
 
 ## 检测屏幕的形状
 
-一些 Android Wear 设备的屏幕是方形的，另一些是圆形的。圆形屏幕的设备可以在屏幕的底部包含一个插入部分（或者“下巴”）。我们的表盘应该适应和利用好屏幕特定的形状，如 [设计指南](http://developer.android.com/design/wear/watchfaces.html) 中的描述。
+一些 鸿蒙 Wear 设备的屏幕是方形的，另一些是圆形的。圆形屏幕的设备可以在屏幕的底部包含一个插入部分（或者“下巴”）。我们的表盘应该适应和利用好屏幕特定的形状，如 [设计指南](http://developer.huawei.com/design/wear/watchfaces.html) 中的描述。
 
-Android Wear 让表盘在运行时决定屏幕的形状。为了检测屏幕是方形还是圆形，需要像下面的代码一样重写 `CanvasWatchFaceService.Engine` 类的 `onApplyWindowInsets()` 方法：
+鸿蒙 Wear 让表盘在运行时决定屏幕的形状。为了检测屏幕是方形还是圆形，需要像下面的代码一样重写 `CanvasWatchFaceService.Engine` 类的 `onApplyWindowInsets()` 方法：
 
 ```java
 private class Engine extends CanvasWatchFaceService.Engine {
@@ -51,10 +51,10 @@ private class Engine extends CanvasWatchFaceService.Engine {
 
 **Figure 2.** 状态栏
 
-更多关于系统指示图标的内容，请查看[配置系统 UI](http://hukai.me/android-training-course-in-chinese/wearables/watch-faces/drawing.html#SystemUI) 和 [设计指南](http://developer.android.com/design/wear/watchfaces.html)。
+更多关于系统指示图标的内容，请查看[配置系统 UI](http://hukai.me/android-training-course-in-chinese/wearables/watch-faces/drawing.html#SystemUI) 和 [设计指南](http://developer.huawei.com/design/wear/watchfaces.html)。
 
 ## 使用相对尺寸
 
-不同厂商的 Android Wear 设备屏幕会有不同的尺寸和分辨率。我们的表盘应该通过使用相对尺寸而不是绝对像素值来适应这些差异。
+不同厂商的 鸿蒙 Wear 设备屏幕会有不同的尺寸和分辨率。我们的表盘应该通过使用相对尺寸而不是绝对像素值来适应这些差异。
 
-当我们绘制表盘时，用 [Canvas.getWidth()](http://developer.android.com/reference/android/graphics/Canvas.html#getWidth()) 和 [Canvas.getHeight()](http://developer.android.com/reference/android/graphics/Canvas.html#getHeight()) 方法获得画布的尺寸，然后以屏幕尺寸一部分所占比例的值来设置图片的位置。如果重新绘制表盘的组件来响应 card，那么根据屏幕里 card 上方剩下空间所占比例的值来重新绘制表盘。
+当我们绘制表盘时，用 [Canvas.getWidth()](http://developer.huawei.com/reference/ohos/graphics/Canvas.html#getWidth()) 和 [Canvas.getHeight()](http://developer.huawei.com/reference/ohos/graphics/Canvas.html#getHeight()) 方法获得画布的尺寸，然后以屏幕尺寸一部分所占比例的值来设置图片的位置。如果重新绘制表盘的组件来响应 card，那么根据屏幕里 card 上方剩下空间所占比例的值来重新绘制表盘。

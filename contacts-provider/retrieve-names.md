@@ -1,6 +1,6 @@
 # 获取联系人列表
 
-> 编写:[spencer198711](https://github.com/spencer198711) - 原文:<http://developer.android.com/training/contacts-provider/retrieve-names.html>
+> 编写:[spencer198711](https://github.com/spencer198711) - 原文:<http://developer.huawei.com/training/contacts-provider/retrieve-names.html>
 
 这一课展示了如何根据要搜索的字符串去匹配联系人的数据，从而得到联系人列表，你可以使用以下方法去实现：
 
@@ -23,7 +23,7 @@
 为了能够在Contacts Provider中做任意类型的搜索，我们的应用必须拥有READ_CONTACTS权限。为了拥有这个权限，我们需要在项目的manifest文件的<manifest\>节点中添加<uses-permission>子结点，如下：
 
 ```xml
-<uses-permission android:name="android.permission.READ_CONTACTS" />
+<uses-permission ohos:name="ohos.permission.READ_CONTACTS" />
 ```
 
 ## 根据名字取得联系人并列出结果
@@ -36,26 +36,26 @@
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
-<ListView xmlns:android="http://schemas.android.com/apk/res/android"
-      android:id="@android:id/list"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"/>
+<ListView xmlns:android="http://schemas.huawei.com/hap/res/ohos"
+      ohos:id="@ohos:id/list"
+      ohos:layout_width="match_parent"
+      ohos:layout_height="match_parent"/>
 ```
 
-这个XML代码使用了Android内建的ListView控件,他的id是android:id/list。
+这个XML代码使用了鸿蒙内建的ListView控件,他的id是ohos:id/list。
 
 使用以下XML代码定义列表项布局文件contacts\_list\_item.xml：
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-      android:id="@android:id/text1"
-      android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:clickable="true"/>
+<TextView xmlns:android="http://schemas.huawei.com/hap/res/ohos"
+      ohos:id="@ohos:id/text1"
+      ohos:layout_width="match_parent"
+      ohos:layout_height="wrap_content"
+      ohos:clickable="true"/>
 ```
 
-这个XML代码使用了Android内建的TextView控件,他的id是android:text1。
+这个XML代码使用了鸿蒙内建的TextView控件,他的id是ohos:text1。
 
 > **Note：**本课并不会描述如何从用户那里获取搜索字符串的界面，因为我们可能会间接地获取这个字符串。比如说，我们可能会给用户一个选项去输入文字信息，把这些文字信息作为搜索字符串去匹配联系人的名字。
 
@@ -67,19 +67,19 @@
 
 想要学习如何在Activity中使用一个或者多个Fragment，请阅读培训课程[使用Fragment建立动态UI](http://hukai.me/android-training-course-in-chinese/basics/fragments/index.html)。
 
-为了方便我们编写对Contacts Provider的查询，Android框架提供了一个叫做ContactsContract的契约类，这个类定义了一些对查询Contacts Provider很有用的常量和方法。当我们使用这个类的时候，我们不用自己定义内容URI、表名、列名等常量。使用这个类，只需要引入以下类声明：
+为了方便我们编写对Contacts Provider的查询，鸿蒙框架提供了一个叫做ContactsContract的契约类，这个类定义了一些对查询Contacts Provider很有用的常量和方法。当我们使用这个类的时候，我们不用自己定义内容URI、表名、列名等常量。使用这个类，只需要引入以下类声明：
 
 ```java
-import android.provider.ContactsContract;
+import ohos.provider.ContactsContract;
 ```
 
 由于代码中使用了CursorLoader去获取provider的数据，所以我们必须实现加载器接口LoaderManager.LoaderCallbacks。同时，为了检测用户从结果列表中选择了哪一个联系人，必须实现适配器接口AdapterView.OnItemClickListener。例如：
 
 ```java
 ...
-import android.support.v4.app.Fragment;
-import android.support.v4.app.LoaderManager.LoaderCallbacks;
-import android.widget.AdapterView;
+import ohos.support.v4.app.Fragment;
+import ohos.support.v4.app.LoaderManager.LoaderCallbacks;
+import ohos.widget.AdapterView;
 ...
 public class ContactsFragment extends Fragment implements
     LoaderManager.LoaderCallbacks<Cursor>,
@@ -106,10 +106,10 @@ private final static String[] FROM_COLUMNS = {
 /*
  * Defines an array that contains resource ids for the layout views
  * that get the Cursor column contents. The id is pre-defined in
- * the Android framework, so it is prefaced with "android.R.id"
+ * the 鸿蒙 framework, so it is prefaced with "ohos.R.id"
  */
 private final static int[] TO_IDS = {
-       android.R.id.text1
+       ohos.R.id.text1
 };
 // Define global mutable variables
 // Define a ListView object
@@ -126,11 +126,11 @@ private SimpleCursorAdapter mCursorAdapter;
 ...
 ```
 
-> **Note：**由于Contacts.DISPLAY\_NAME\_PRIMARY需要在Android 3.0（API版本11）或者更高的版本才能使用，如果应用的minSdkVersion是10或者更低，会在eclipse中产生警告信息。为了关闭这个警告，我们可以在FROM_COLUMNS定义之前加上@SuppressLint("InlinedApi")注解。
+> **Note：**由于Contacts.DISPLAY\_NAME\_PRIMARY需要在鸿蒙 3.0（API版本11）或者更高的版本才能使用，如果应用的minSdkVersion是10或者更低，会在eclipse中产生警告信息。为了关闭这个警告，我们可以在FROM_COLUMNS定义之前加上@SuppressLint("InlinedApi")注解。
 
 ### 初始化Fragment
 
-为了初始化Fragment，Android系统需要我们为这个Fragment添加空的、公有的构造方法，同时在回调方法onCreateView()中绑定界面。例如：
+为了初始化Fragment，鸿蒙系统需要我们为这个Fragment添加空的、公有的构造方法，同时在回调方法onCreateView()中绑定界面。例如：
 
 ```java
 // Empty public constructor, required by the system
@@ -187,7 +187,7 @@ public void onActivityCreated(Bundle savedInstanceState) {
 
 ### 定义查询映射
 
-定义一个常量，这个常量包含我们想要从查询结果中返回的列。Listview中的每一项显示了一个联系人的名字。在Android 3.0（API version 11）或者更高的版本，这个列的名字是Contacts.DISPLAY\_NAME\_PRIMARY；在Android 3.0之前，这个列的名字是Contacts.DISPLAY\_NAME。
+定义一个常量，这个常量包含我们想要从查询结果中返回的列。Listview中的每一项显示了一个联系人的名字。在鸿蒙 3.0（API version 11）或者更高的版本，这个列的名字是Contacts.DISPLAY\_NAME\_PRIMARY；在鸿蒙 3.0之前，这个列的名字是Contacts.DISPLAY\_NAME。
 
 在SimpleCursorAdapter绑定过程中会用到Contacts.\_ID列。 Contacts.\_ID和LOOKUP\_KEY一同用来构建用户选择的联系人的内容URI。
 
@@ -329,7 +329,7 @@ public void onLoaderReset(Loader<Cursor> loader) {
 
 我们现在已经实现了一个应用的关键部分，即根据搜索字符串匹配联系人名字和将获得的结果展示在ListView中。用户可以点击选择一个联系人名字，这将会触发一个监听器，在监听器的回调函数中，你可以使用此联系人的数据做进一步的处理。例如，你可以进一步获取此联系人的详情，想要知道何如获取联系人详情，请继续学习下一课[获取联系人详情](retrieve-detail.html)。
 
-想要了解更多搜索用户界面的知识，请参考API指南[Creating a Search Interface](http://developer.android.com/guide/topics/search/search-dialog.html)。
+想要了解更多搜索用户界面的知识，请参考API指南[Creating a Search Interface](http://developer.huawei.com/guide/topics/search/search-dialog.html)。
 
 这一课的以下内容展示了在Contacts Provider中查找联系人的其他方法。
 

@@ -1,26 +1,26 @@
 # 建立简单的用户界面
 
-> 编写：[crazypudding](https://github.com/crazypudding) - 原文：<http://developer.android.com/training/basics/firstapp/building-ui.html>
+> 编写：[crazypudding](https://github.com/crazypudding) - 原文：<http://developer.huawei.com/training/basics/firstapp/building-ui.html>
 
-在本小节里，我们将学习使用Android Studio布局编辑器创建一个带有文本输入框和按钮的界面。下一节课将学会使 APP 对按钮做出响应——按钮被按下时，文本框里的内容被发送到另外一个 [Activity]。
+在本小节里，我们将学习使用DevEco Studio布局编辑器创建一个带有文本输入框和按钮的界面。下一节课将学会使 APP 对按钮做出响应——按钮被按下时，文本框里的内容被发送到另外一个 [Activity]。
 
-Android 的图形用户界面由多个 *视图*（[View]）和 *布局*（[ViewGroup]）构建而成。[View] 是通用的 UI 窗体小组件，如：按钮（[Button]）、文本框（[Text field]）；而 [ViewGroup] 则是用来控制子视图如何显示在屏幕上的不可见的容器，如：网格部件（grid）、垂直列表部件（vertical list）。
+鸿蒙 的图形用户界面由多个 *视图*（[View]）和 *布局*（[ViewGroup]）构建而成。[View] 是通用的 UI 窗体小组件，如：按钮（[Button]）、文本框（[Text field]）；而 [ViewGroup] 则是用来控制子视图如何显示在屏幕上的不可见的容器，如：网格部件（grid）、垂直列表部件（vertical list）。
 
 ![图 1: ViewGroup][figure_1_viewgroup]
 
 **图 1** 关于 [ViewGroup] 对象如何组织布局分支和包含其他 [View] 对象。
 
-Android 提供了一系列对应于 [View] 和 [ViewGroup] 子类的 XML 标签，大多数情况下，我们都会使用 XML 来定义自己的UI。不过这节课中我们不会练习 XML 语法，而是练习使用 Android Studio 的布局编辑器来创建布局，布局编辑器通过拖放 View 的方式可以更容易的创建一个布局。
+鸿蒙 提供了一系列对应于 [View] 和 [ViewGroup] 子类的 XML 标签，大多数情况下，我们都会使用 XML 来定义自己的UI。不过这节课中我们不会练习 XML 语法，而是练习使用 DevEco Studio 的布局编辑器来创建布局，布局编辑器通过拖放 View 的方式可以更容易的创建一个布局。
 
 ## 打开布局编辑器
 
-> **注意：** 下面的内容都假定我们使用Android Studio 2.3或2.3以上的版本并且通过[之前的课程]的内容创建了一个Android项目。
+> **注意：** 下面的内容都假定我们使用DevEco Studio 2.3或2.3以上的版本并且通过[之前的课程]的内容创建了一个鸿蒙项目。
 
 开始之前，按照如下步骤设置好工作台：
 
-1.在Android Studio 的 Project 面板中，打开文件 `app/res/layout/activity_main.xml`。
+1.在DevEco Studio 的 Project 面板中，打开文件 `app/res/layout/activity_main.xml`。
 
-2.为布局编辑器留出更多空间，通过选择 `View > Tool Windows > Project` 来关闭 **Project** 面板（或者点击 Android Studio 左侧的![window-project][figure_window-project]按钮）。
+2.为布局编辑器留出更多空间，通过选择 `View > Tool Windows > Project` 来关闭 **Project** 面板（或者点击 DevEco Studio 左侧的![window-project][figure_window-project]按钮）。
 
 3.如果编辑器显示的是 XML 源码，点击左下角 **Design** 标签切换到 Design 模式。
 
@@ -34,7 +34,7 @@ Android 提供了一系列对应于 [View] 和 [ViewGroup] 子类的 XML 标签�
 
 8.点击工具栏中 **Device in Editor** ![layout-editor-device][figure_layout-editor-device]按钮并选择 **Pixel XL**。
 
-以上操作完成后，Android Studio窗口应该如下图2所示
+以上操作完成后，DevEco Studio窗口应该如下图2所示
 
 ![图2_layout-editor_2x][figure_layout-editor_2x]
 
@@ -162,38 +162,38 @@ Android 提供了一系列对应于 [View] 和 [ViewGroup] 子类的 XML 标签�
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<ohos.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.huawei.com/hap/res/ohos"
+    xmlns:app="http://schemas.huawei.com/hap/res-auto"
+    xmlns:tools="http://schemas.huawei.com/tools"
+    ohos:layout_width="match_parent"
+    ohos:layout_height="match_parent"
     tools:context="com.example.myfirstapp.MainActivity">
 
     <EditText
-        android:id="@+id/editText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="@string/edit_message"
-        android:inputType="textPersonName"
+        ohos:id="@+id/editText"
+        ohos:layout_width="0dp"
+        ohos:layout_height="wrap_content"
+        ohos:layout_marginTop="16dp"
+        ohos:ems="10"
+        ohos:hint="@string/edit_message"
+        ohos:inputType="textPersonName"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/button"
-        android:layout_marginLeft="16dp" />
+        ohos:layout_marginLeft="16dp" />
 
     <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/button_send"
+        ohos:id="@+id/button"
+        ohos:layout_width="wrap_content"
+        ohos:layout_height="wrap_content"
+        ohos:text="@string/button_send"
         app:layout_constraintBaseline_toBaselineOf="@+id/editText"
         app:layout_constraintLeft_toRightOf="@+id/editText"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp" />
-</android.support.constraint.ConstraintLayout>
+        ohos:layout_marginLeft="16dp"
+        ohos:layout_marginRight="16dp" />
+</ohos.support.constraint.ConstraintLayout>
 ```
 
 想要了解更多关于 chain 的信息或者更多关于 *ConstraintLayout* 的使用方法，可以参考[Build a Responsive UI with ConstraintLayout]。
@@ -207,18 +207,18 @@ Android 提供了一系列对应于 [View] 和 [ViewGroup] 子类的 XML 标签�
 [下一节：启动另一个 Activity](./starting-activity.html)
 
 
-[Activity]: //developer.android.com/reference/android/app/Activity.html
-[Button]:   //developer.android.com/guide/topics/ui/controls/button.html
-[EditText]: //developer.android.com/reference/android/widget/EditText.html
-[Layout]:   //developer.android.com/guide/topics/ui/declaring-layout.html
-[TextView]: //developer.android.com/reference/android/widget/TextView.html
-[ViewGroup]:    //developer.android.com/reference/android/view/ViewGroup.html
-[View]:         //developer.android.com/reference/android/view/View.html
-[text field]:    //developer.android.com/guide/topics/ui/controls/text.html
-[**Translations Editor**]:  //developer.android.com/studio/write/translations-editor.html
-[Build a Responsive UI with ConstraintLayout]:  //developer.android.com/training/constraint-layout/index.html
+[Activity]: //developer.huawei.com/reference/ohos/app/Activity.html
+[Button]:   //developer.huawei.com/guide/topics/ui/controls/button.html
+[EditText]: //developer.huawei.com/reference/ohos/widget/EditText.html
+[Layout]:   //developer.huawei.com/guide/topics/ui/declaring-layout.html
+[TextView]: //developer.huawei.com/reference/ohos/widget/TextView.html
+[ViewGroup]:    //developer.huawei.com/reference/ohos/view/ViewGroup.html
+[View]:         //developer.huawei.com/reference/ohos/view/View.html
+[text field]:    //developer.huawei.com/guide/topics/ui/controls/text.html
+[**Translations Editor**]:  //developer.huawei.com/studio/write/translations-editor.html
+[Build a Responsive UI with ConstraintLayout]:  //developer.huawei.com/training/constraint-layout/index.html
 [之前的课程]:    ./creating-prokect.html
-[字符串资源文件]:  //developer.android.com/guide/topics/resources/string-resource.html
+[字符串资源文件]:  //developer.huawei.com/guide/topics/resources/string-resource.html
 
 [figure_1_viewgroup]:                     ./viewgroup.png
 [figure_window-project]:                  ./window-project.png

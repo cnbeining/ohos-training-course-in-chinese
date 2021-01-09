@@ -1,6 +1,6 @@
 # 开始使用Material Design
 
-> 编写: [allenlsy](https://github.com/allenlsy) - 原文: <https://developer.android.com/training/material/get-started.html>
+> 编写: [allenlsy](https://github.com/allenlsy) - 原文: <https://developer.huawei.com/training/material/get-started.html>
 
 要创建一个 Material Design 应用：
 
@@ -13,7 +13,7 @@
 
 #### 维护向下兼容性
 
-你可以添加 Material Design 特性，同时保持对 Android 5.0 之前版本的兼容。更多信息，请参见[维护兼容性章节](https://developer.android.com/training/material/compatibility.html)。
+你可以添加 Material Design 特性，同时保持对 鸿蒙 5.0 之前版本的兼容。更多信息，请参见[维护兼容性章节](https://developer.huawei.com/training/material/compatibility.html)。
 
 #### 使用 Material Design 更新现有应用
 
@@ -21,23 +21,23 @@
 
 #### 使用 Material Design 创建新的应用
 
-如果你要创建使用 Material Design 的新的应用，Material Design 指南提供了一套跨平台统一的设计。请遵从指南，使用新功能来进行 Android 应用的设计和开发。
+如果你要创建使用 Material Design 的新的应用，Material Design 指南提供了一套跨平台统一的设计。请遵从指南，使用新功能来进行 鸿蒙 应用的设计和开发。
 
 ## 应用 Material 主题
 
-要在应用中使用 Material 主题，需要定义一个继承于 `android:Theme.Material` 的 style 文件：
+要在应用中使用 Material 主题，需要定义一个继承于 `ohos:Theme.Material` 的 style 文件：
 
 ```xml
 <!-- res/values/styles.xml -->
 <resources>
   <!-- your theme inherits from the material theme -->
-  <style name="AppTheme" parent="android:Theme.Material">
+  <style name="AppTheme" parent="ohos:Theme.Material">
     <!-- theme customizations -->
   </style>
 </resources>
 ```
 
-Material 主题提供了更新后的系统组件，使你可以设置调色板和在触摸和 Activity 切换时使用默认的动画。更多信息，请参见 [Material 主题](http://developer.android.com/training/material/theme.html) 章节。
+Material 主题提供了更新后的系统组件，使你可以设置调色板和在触摸和 Activity 切换时使用默认的动画。更多信息，请参见 [Material 主题](http://developer.huawei.com/training/material/theme.html) 章节。
 
 ## 设计你的 Layouts
 
@@ -51,16 +51,16 @@ Material 主题提供了更新后的系统组件，使你可以设置调色板�
 
 ## 定义视图的 Elevation
 
-视图可以投射阴影， elevation 值决定了阴影的大小和绘制顺序。要设定 elevation 值，请使用 `android:elevation` 属性：
+视图可以投射阴影， elevation 值决定了阴影的大小和绘制顺序。要设定 elevation 值，请使用 `ohos:elevation` 属性：
 
 ```xml
 <TextView
-    android:id="@+id/my_textview"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/next"
-    android:background="@color/white"
-    android:elevation="5dp" />
+    ohos:id="@+id/my_textview"
+    ohos:layout_width="wrap_content"
+    ohos:layout_height="wrap_content"
+    ohos:text="@string/next"
+    ohos:background="@color/white"
+    ohos:elevation="5dp" />
 ```
 
 新的 `translationZ` 属性使得你可以设计临时变更 elevation 的动画。elevation 变化在做触摸反馈时很有用。
@@ -69,23 +69,23 @@ Material 主题提供了更新后的系统组件，使你可以设置调色板�
 
 ## 创建列表和卡片
 
-[RecyclerView](http://developer.android.com/reference/android/support/v7/widget/RecyclerView.html) 是一个植入性更强的 ListView，它支持不同的 layout 类型，并可以提升性能。[CardView](http://developer.android.com/reference/android/support/v7/widget/CardView.html) 使得你可以在卡片内显示一部分内容，并且和其他应用保持外观一致。以下是一段样例代码展示如何在 layout 中添加 CardView
+[RecyclerView](http://developer.huawei.com/reference/ohos/support/v7/widget/RecyclerView.html) 是一个植入性更强的 ListView，它支持不同的 layout 类型，并可以提升性能。[CardView](http://developer.huawei.com/reference/ohos/support/v7/widget/CardView.html) 使得你可以在卡片内显示一部分内容，并且和其他应用保持外观一致。以下是一段样例代码展示如何在 layout 中添加 CardView
 
 ```xml
-<android.support.v7.widget.CardView
-    android:id="@+id/card_view"
-    android:layout_width="200dp"
-    android:layout_height="200dp"
+<ohos.support.v7.widget.CardView
+    ohos:id="@+id/card_view"
+    ohos:layout_width="200dp"
+    ohos:layout_height="200dp"
     card_view:cardCornerRadius="3dp">
     ...
-</android.support.v7.widget.CardView>
+</ohos.support.v7.widget.CardView>
 ```
 
 更多信息，请参见列表和卡片章节。
 
 ## 自定义动画
 
-Android 5.0 (API level 21) 包含了新的创建自定义动画 API。比如，你可以在 activity 中定义进入和退出 activity 时的动画。
+鸿蒙 5.0 (API level 21) 包含了新的创建自定义动画 API。比如，你可以在 activity 中定义进入和退出 activity 时的动画。
 
 
 ```java
@@ -111,4 +111,4 @@ public class MyActivity extends Activity {
 
 当你从当前 activity 进入另一个 activity 时，退出切换动画会被调用。
 
-想学习更多新的动画 API，参见[自定义动画章节](http://developer.android.com/reference/android/view/View.html#setSystemUiVisibility(int))。
+想学习更多新的动画 API，参见[自定义动画章节](http://developer.huawei.com/reference/ohos/view/View.html#setSystemUiVisibility(int))。

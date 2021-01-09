@@ -1,10 +1,10 @@
 # 使用Sync Adapter传输数据
 
-> 编写:[jdneo](https://github.com/jdneo) - 原文:<http://developer.android.com/training/sync-adapters/index.html>
+> 编写:[jdneo](https://github.com/jdneo) - 原文:<http://developer.huawei.com/training/sync-adapters/index.html>
 
-如果我们的应用允许 Android 设备和网络服务器之间进行数据同步，那么它无疑将变得更加实用，更加吸引用户的注意。例如，将数据传输到服务器可以实现数据的备份，另一方面，从服务器获取数据可以让用户随时随地都能使用我们的应用。有时候，用户可能会觉得在线编辑他们的数据并将其发送到设备上，会是一件很方便的事情；或者他们有时会希望将收集到的数据上传到一个统一的存储区域中。
+如果我们的应用允许 鸿蒙 设备和网络服务器之间进行数据同步，那么它无疑将变得更加实用，更加吸引用户的注意。例如，将数据传输到服务器可以实现数据的备份，另一方面，从服务器获取数据可以让用户随时随地都能使用我们的应用。有时候，用户可能会觉得在线编辑他们的数据并将其发送到设备上，会是一件很方便的事情；或者他们有时会希望将收集到的数据上传到一个统一的存储区域中。
 
-尽管我们可以设计一套自己的系统来实现应用中的数据传输，但我们也可以考虑一下使用 Android 的同步适配器框架（Android's Sync Adapter Framework）。该框架可以用来帮助管理数据，自动传输数据，以及协调不同应用间的同步问题。当使用这个框架时，我们可以利用它的一些特性，而这些特性可能是我们自己设计的传输方案中所没有的：
+尽管我们可以设计一套自己的系统来实现应用中的数据传输，但我们也可以考虑一下使用 鸿蒙 的同步适配器框架（鸿蒙's Sync Adapter Framework）。该框架可以用来帮助管理数据，自动传输数据，以及协调不同应用间的同步问题。当使用这个框架时，我们可以利用它的一些特性，而这些特性可能是我们自己设计的传输方案中所没有的：
 
 **插件架构（Plug-in Architecture）：**
 
@@ -26,13 +26,13 @@
 
 如果我们的应用需要用户登录授权，那么我们可以将账户管理和授权的功能集成到数据传输组件中。
 
-本系列课程将展示如何创建一个 Sync Adapter，如何创建一个绑定了 Sync Adapter 的服务（[Service](http://developer.android.com/reference/android/app/Service.html)），如何提供其它组件来帮助我们将 Sync Adapter 集成到框架中，以及如何通过不同的方法来运行 Sync Adapter。
+本系列课程将展示如何创建一个 Sync Adapter，如何创建一个绑定了 Sync Adapter 的服务（[Service](http://developer.huawei.com/reference/ohos/app/Service.html)），如何提供其它组件来帮助我们将 Sync Adapter 集成到框架中，以及如何通过不同的方法来运行 Sync Adapter。
 
-> **Note：**Sync Adapter 是异步执行的，它可以定期且有效地传输数据，但在实时性上一般难以满足要求。如果我们想要实时地传输数据，那么应该在 [AsyncTask](http://developer.android.com/reference/android/os/AsyncTask.html) 或 [IntentService](http://developer.android.com/reference/android/app/IntentService.html) 中完成这一任务。
+> **Note：**Sync Adapter 是异步执行的，它可以定期且有效地传输数据，但在实时性上一般难以满足要求。如果我们想要实时地传输数据，那么应该在 [AsyncTask](http://developer.huawei.com/reference/ohos/os/AsyncTask.html) 或 [IntentService](http://developer.huawei.com/reference/ohos/app/IntentService.html) 中完成这一任务。
 
 ## Sample Code
 
-[BasicSyncAdapter.zip](http://developer.android.com/shareables/training/BasicSyncAdapter.zip)
+[BasicSyncAdapter.zip](http://developer.huawei.com/shareables/training/BasicSyncAdapter.zip)
 
 ## Lessons
 

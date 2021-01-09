@@ -1,8 +1,8 @@
 # 报告任务执行状态
 
-> 编写:[kesenhoo](https://github.com/kesenhoo) - 原文:<http://developer.android.com/training/run-background-service/report-status.html>
+> 编写:[kesenhoo](https://github.com/kesenhoo) - 原文:<http://developer.huawei.com/training/run-background-service/report-status.html>
 
-这章节会演示如何回传IntentService中执行的任务状态与结果给发送方。 例如，回传任务的执行状态给Activity并进行更新UI。推荐的方式是使用[LocalBroadcastManager](http://developer.android.com/reference/android/support/v4/content/LocalBroadcastManager.html)，这个组件可以限制broadcast intent只在自己的app中进行传递。
+这章节会演示如何回传IntentService中执行的任务状态与结果给发送方。 例如，回传任务的执行状态给Activity并进行更新UI。推荐的方式是使用[LocalBroadcastManager](http://developer.huawei.com/reference/ohos/support/v4/content/LocalBroadcastManager.html)，这个组件可以限制broadcast intent只在自己的app中进行传递。
 
 ## 利用IntentService 发送任务状态
 
@@ -15,11 +15,11 @@ public final class Constants {
     ...
     // Defines a custom Intent action
     public static final String BROADCAST_ACTION =
-        "com.example.android.threadsample.BROADCAST";
+        "com.example.ohos.threadsample.BROADCAST";
     ...
     // Defines the key for the status "extra" in an Intent
     public static final String EXTENDED_DATA_STATUS =
-        "com.example.android.threadsample.STATUS";
+        "com.example.ohos.threadsample.STATUS";
     ...
 }
 public class RSSPullService extends IntentService {
@@ -65,7 +65,7 @@ private class ResponseReceiver extends BroadcastReceiver
 }
 ```
 
-一旦定义了BroadcastReceiver，也应该定义actions，categories与data用过滤广播。为了实现这些，需要使用[IntentFilter](http://developer.android.com/reference/android/content/IntentFilter.html)。如下所示：
+一旦定义了BroadcastReceiver，也应该定义actions，categories与data用过滤广播。为了实现这些，需要使用[IntentFilter](http://developer.huawei.com/reference/ohos/content/IntentFilter.html)。如下所示：
 
 ```java
 // Class that displays photos
@@ -112,4 +112,4 @@ LocalBroadcastManager.getInstance(getActivity()).registerReceiver(
         mIntentFilter);
 ```
 
-发送一个广播Intent并不会启动或重启一个Activity。即使是你的app在后台运行，Activity的BroadcastReceiver也可以接收、处理Intent对象。但是这不会迫使你的app进入前台。当你的app不可见时，如果想通知用户一个发生在后台的事件，建议使用[Notification](http://developer.android.com/reference/android/app/Notification.html)。**永远**不要为了响应一个广播Intent而去启动Activity。
+发送一个广播Intent并不会启动或重启一个Activity。即使是你的app在后台运行，Activity的BroadcastReceiver也可以接收、处理Intent对象。但是这不会迫使你的app进入前台。当你的app不可见时，如果想通知用户一个发生在后台的事件，建议使用[Notification](http://developer.huawei.com/reference/ohos/app/Notification.html)。**永远**不要为了响应一个广播Intent而去启动Activity。

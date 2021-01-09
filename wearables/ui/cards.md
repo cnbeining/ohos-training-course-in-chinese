@@ -1,8 +1,8 @@
 # 创建Card
 
-> 编写: [roya](https://github.com/RoyaAoki) 原文:<https://developer.android.com/training/wearables/ui/cards.html>
+> 编写: [roya](https://github.com/RoyaAoki) 原文:<https://developer.huawei.com/training/wearables/ui/cards.html>
 
-Card在不同的应用上以一致的外观为用户显示信息。这个章节介绍如何在Android Wear应用中创建Card。
+Card在不同的应用上以一致的外观为用户显示信息。这个章节介绍如何在鸿蒙 Wear应用中创建Card。
 
 Wearable UI库提供了为穿戴设备特别设计的Card实现。这个库包含了`CardFrame`类，它将view包在一个Card风格的框架中，该框架有白色的背景、圆角和光投射阴影。`CardFrame`只能包含一个直接子类，通常是一个layout管理器，我们可以向它添加其他views以定制Card内容。
 
@@ -11,7 +11,7 @@ Wearable UI库提供了为穿戴设备特别设计的Card实现。这个库包�
 * 使用或继承`CardFragment`类。
 * 在layout的`CardScrollView`中添加一个Card。
 
-> **Note:** 这个课程展示了如何在Android Wear activities中添加Card。Android可穿戴设备上的notifications同样以Card的形式显示。更多信息请查看[为Notification赋加可穿戴特性](https://developer.android.com/training/wearables/notifications/index.html)。
+> **Note:** 这个课程展示了如何在鸿蒙 Wear activities中添加Card。鸿蒙可穿戴设备上的notifications同样以Card的形式显示。更多信息请查看[为Notification赋加可穿戴特性](https://developer.huawei.com/training/wearables/notifications/index.html)。
 
 ## 创建Card Fragment
 
@@ -30,21 +30,21 @@ Wearable UI库提供了为穿戴设备特别设计的Card实现。这个库包�
 下面的示例代码显示了Figure 1中的屏幕显示代码：
 
 ```xml
-<android.support.wearable.view.BoxInsetLayout
-xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-android:background="@drawable/robot_background"
-android:layout_height="match_parent"
-android:layout_width="match_parent">
+<ohos.support.wearable.view.BoxInsetLayout
+xmlns:android="http://schemas.huawei.com/hap/res/ohos"
+xmlns:app="http://schemas.huawei.com/hap/res-auto"
+ohos:background="@drawable/robot_background"
+ohos:layout_height="match_parent"
+ohos:layout_width="match_parent">
 
     <FrameLayout
-        android:id="@+id/frame_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        ohos:id="@+id/frame_layout"
+        ohos:layout_width="match_parent"
+        ohos:layout_height="match_parent"
         app:layout_box="bottom">
 
     </FrameLayout>
-</android.support.wearable.view.BoxInsetLayout>
+</ohos.support.wearable.view.BoxInsetLayout>
 ```
 
 下面的代码添加`CardFragment`实例到Figure 1的activity中：
@@ -77,46 +77,46 @@ protected void onCreate(Bundle savedInstanceState) {
 下面的layout代码例子示范了一个含有两个节点的垂直linear layout。你可以创建更加复杂的layouts以适合你应用的需要。
 
 ```xml
-<android.support.wearable.view.BoxInsetLayout
-xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-android:background="@drawable/robot_background"
-android:layout_height="match_parent"
-android:layout_width="match_parent">
+<ohos.support.wearable.view.BoxInsetLayout
+xmlns:android="http://schemas.huawei.com/hap/res/ohos"
+xmlns:app="http://schemas.huawei.com/hap/res-auto"
+ohos:background="@drawable/robot_background"
+ohos:layout_height="match_parent"
+ohos:layout_width="match_parent">
 
-    <android.support.wearable.view.CardScrollView
-        android:id="@+id/card_scroll_view"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"
+    <ohos.support.wearable.view.CardScrollView
+        ohos:id="@+id/card_scroll_view"
+        ohos:layout_height="match_parent"
+        ohos:layout_width="match_parent"
         app:layout_box="bottom">
 
-        <android.support.wearable.view.CardFrame
-            android:layout_height="wrap_content"
-            android:layout_width="fill_parent">
+        <ohos.support.wearable.view.CardFrame
+            ohos:layout_height="wrap_content"
+            ohos:layout_width="fill_parent">
 
             <LinearLayout
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:paddingLeft="5dp">
+                ohos:layout_height="wrap_content"
+                ohos:layout_width="match_parent"
+                ohos:orientation="vertical"
+                ohos:paddingLeft="5dp">
                 <TextView
-                    android:fontFamily="sans-serif-light"
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    android:text="@string/custom_card"
-                    android:textColor="@color/black"
-                    android:textSize="20sp"/>
+                    ohos:fontFamily="sans-serif-light"
+                    ohos:layout_height="wrap_content"
+                    ohos:layout_width="match_parent"
+                    ohos:text="@string/custom_card"
+                    ohos:textColor="@color/black"
+                    ohos:textSize="20sp"/>
                 <TextView
-                    android:fontFamily="sans-serif-light"
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"
-                    android:text="@string/description"
-                    android:textColor="@color/black"
-                    android:textSize="14sp"/>
+                    ohos:fontFamily="sans-serif-light"
+                    ohos:layout_height="wrap_content"
+                    ohos:layout_width="match_parent"
+                    ohos:text="@string/description"
+                    ohos:textColor="@color/black"
+                    ohos:textSize="14sp"/>
             </LinearLayout>
-        </android.support.wearable.view.CardFrame>
-    </android.support.wearable.view.CardScrollView>
-</android.support.wearable.view.BoxInsetLayout>
+        </ohos.support.wearable.view.CardFrame>
+    </ohos.support.wearable.view.CardScrollView>
+</ohos.support.wearable.view.BoxInsetLayout>
 ```
 
 当`CardScrollView`的内容小于容器时，这个例子上的`CardScrollView`节点让我们可以配置Card的gravity，。这个例子是Card对齐屏幕底部：

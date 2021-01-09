@@ -1,6 +1,6 @@
 # 保存并搜索数据
 
-> 编写:[Lin-H](https://github.com/Lin-H) - 原文:<http://developer.android.com/training/search/search.html>
+> 编写:[Lin-H](https://github.com/Lin-H) - 原文:<http://developer.huawei.com/training/search/search.html>
 
 有很多方法可以储存你的数据，比如储存在线上的数据库，本地的SQLite数据库，甚至是文本文件。你自己来选择最适合你应用的存储方式。本节课程会向你展示如何创建一个健壮的可以提供全文搜索的SQLite虚拟表。并从一个每行有一组单词-解释对的文件中将数据填入。
 
@@ -18,7 +18,7 @@ public class DatabaseTable {
 }
 ```
 
-在`DatabaseTable`类中创建一个继承[SQLiteOpenHelper](http://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper.html)的内部类。你必须重写类[SQLiteOpenHelper](http://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper.html)中定义的abstract方法，才能在必要的时候创建和更新你的数据库表。例如，下面一段代码声明了一个数据库表，用来储存字典app所需的单词。
+在`DatabaseTable`类中创建一个继承[SQLiteOpenHelper](http://developer.huawei.com/reference/ohos/database/sqlite/SQLiteOpenHelper.html)的内部类。你必须重写类[SQLiteOpenHelper](http://developer.huawei.com/reference/ohos/database/sqlite/SQLiteOpenHelper.html)中定义的abstract方法，才能在必要的时候创建和更新你的数据库表。例如，下面一段代码声明了一个数据库表，用来储存字典app所需的单词。
 
 ```java
 public class DatabaseTable {
@@ -120,7 +120,7 @@ public long addWord(String word, String definition) {
 }
 ```
 
-任何恰当的地方，都可以调用`loadDictionary()`方法向表中填入数据。一个比较好的地方是`DatabaseOpenHelper`类的[onCreate()](http://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper.html#onCreate(android.database.sqlite.SQLiteDatabase))方法中，紧随创建表之后:
+任何恰当的地方，都可以调用`loadDictionary()`方法向表中填入数据。一个比较好的地方是`DatabaseOpenHelper`类的[onCreate()](http://developer.huawei.com/reference/ohos/database/sqlite/SQLiteOpenHelper.html#onCreate(ohos.database.sqlite.SQLiteDatabase))方法中，紧随创建表之后:
 
 ```java
 @Override
@@ -133,7 +133,7 @@ public void onCreate(SQLiteDatabase db) {
 
 ##搜索请求
 
-当你的虚拟表创建好并填入数据后，根据[SearchView](http://developer.android.com/reference/android/widget/SearchView.html)提供的请求搜索数据。将下面的方法添加到`DatabaseTable`类中，用来创建搜索请求的SQL语句:
+当你的虚拟表创建好并填入数据后，根据[SearchView](http://developer.huawei.com/reference/ohos/widget/SearchView.html)提供的请求搜索数据。将下面的方法添加到`DatabaseTable`类中，用来创建搜索请求的SQL语句:
 
 ```java
 public Cursor getWordMatches(String query, String[] columns) {
@@ -160,7 +160,7 @@ private Cursor query(String selection, String[] selectionArgs, String[] columns)
 }
 ```
 
-调用`getWordMatches()`来搜索请求。任何符合的结果返回到[Cursor](http://developer.android.com/reference/android/database/Cursor.html)中，可以直接遍历或是建立一个[ListView](http://developer.android.com/reference/android/widget/ListView.html)。这个例子是在检索activity的`handleIntent()`方法中调用`getWordMatches()`。请记住，因为之前创建的intent filter，检索activity会在[ACTION_SEARCH](http://developer.android.com/reference/android/content/Intent.html#ACTION_SEARCH) intent中额外接收请求作为变量存储:
+调用`getWordMatches()`来搜索请求。任何符合的结果返回到[Cursor](http://developer.huawei.com/reference/ohos/database/Cursor.html)中，可以直接遍历或是建立一个[ListView](http://developer.huawei.com/reference/ohos/widget/ListView.html)。这个例子是在检索activity的`handleIntent()`方法中调用`getWordMatches()`。请记住，因为之前创建的intent filter，检索activity会在[ACTION_SEARCH](http://developer.huawei.com/reference/ohos/content/Intent.html#ACTION_SEARCH) intent中额外接收请求作为变量存储:
 
 ```java
 DatabaseTable db = new DatabaseTable(this);

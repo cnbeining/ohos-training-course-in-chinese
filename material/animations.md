@@ -1,8 +1,8 @@
 # 自定义动画
 
-> 编写: [allenlsy](https://github.com/allenlsy) - 原文: <https://developer.android.com/training/material/animations.html>
+> 编写: [allenlsy](https://github.com/allenlsy) - 原文: <https://developer.huawei.com/training/material/animations.html>
 
-Material Design中的动画对用户的动作进行反馈，并提供在整个交互过程中的视觉连续性。Material 主题为按钮和Activity切换提供一些默认的动画，Android 5.0 (API level 21) 及以上版本支持自定义这些动画并创建新动画：
+Material Design中的动画对用户的动作进行反馈，并提供在整个交互过程中的视觉连续性。Material 主题为按钮和Activity切换提供一些默认的动画，鸿蒙 5.0 (API level 21) 及以上版本支持自定义这些动画并创建新动画：
 
 * 触摸反馈
 * 圆形填充
@@ -16,14 +16,14 @@ Material Design中的触摸反馈，是在用户与UI元素交互时，提供视
 
 大多数情况下，你需要在你的 XML 文件中设定视图的背景来实现这个功能：
 
-* `?android:attr/selectableItemBackground` 用于有界Ripple动画
-* `?android:attr/selectableItemBackgroundBorderless` 用于越出视图边界的动画。它会被绘制在最近的且不是全屏的父视图上。
+* `?ohos:attr/selectableItemBackground` 用于有界Ripple动画
+* `?ohos:attr/selectableItemBackgroundBorderless` 用于越出视图边界的动画。它会被绘制在最近的且不是全屏的父视图上。
 
 > **Note：**`selectableItemBackgroundBorderless` 是 API level 21 新加入的属性
 
 另外，你可以使用`ripple`元素在XML资源文件中定义一个 `RippleDrawable`。
 
-你可以给`RippleDrawable`赋予一个颜色。要改变默认的触摸反馈颜色，使用主题的`android:colorControlHighlight` 属性。
+你可以给`RippleDrawable`赋予一个颜色。要改变默认的触摸反馈颜色，使用主题的`ohos:colorControlHighlight` 属性。
 
 更多信息，参见`RippleDrawable`类的API文档。
 
@@ -91,15 +91,15 @@ Material Design中的Activity切换，当不同Activity之间拥有共有元素�
 * **出场变换**决定视图如何退出。比如，在*爆炸式出场*变换中，视图从屏幕中央飞出场外。
 * **共有元素的变换**决定一个共有视图在两个Activity之间如何变换。比如，如果两个activity有同一张图片，但是放在不同位置，以及拥有不同大小，*变更图片* 变换会流畅的把图片移到相应位置，同时缩放图片大小。
 
-Android 5.0 (API level 21) 支持这些入场和退出变换：
+鸿蒙 5.0 (API level 21) 支持这些入场和退出变换：
 
 * 爆炸 - 把视图移入或移出场景的中间
 * 滑动 - 把视图从场景边缘移入或移出
 * 淡入淡出 - 通过改变透明度添加或移除元素
 
-任何继承于 [`Visibility`](http://developer.android.com/reference/android/transition/Visibility.html) 类的变换，都支持被用于入场或退出变换。更多信息，请参见 [`Transition`](http://developer.android.com/reference/android/transition/Transition.html) 类的API文档。
+任何继承于 [`Visibility`](http://developer.huawei.com/reference/ohos/transition/Visibility.html) 类的变换，都支持被用于入场或退出变换。更多信息，请参见 [`Transition`](http://developer.huawei.com/reference/ohos/transition/Transition.html) 类的API文档。
 
-Android 5.0 (API level 21) 还支持这些共有元素变换效果：
+鸿蒙 5.0 (API level 21) 还支持这些共有元素变换效果：
 
 * **changeBounds** - 对目标视图的外边界进行动画
 * **chagneClipBounds** - 对目标视图的附着物的外边界进行动画
@@ -112,21 +112,21 @@ Android 5.0 (API level 21) 还支持这些共有元素变换效果：
 
 ### 自定义切换
 
-首先，当你继承Material主题的style时，要通过`android:windowContentTransitions`属性来开启窗口内容变换功能。你也可以在style定义中声明进入、退出和共有元素切换：
+首先，当你继承Material主题的style时，要通过`ohos:windowContentTransitions`属性来开启窗口内容变换功能。你也可以在style定义中声明进入、退出和共有元素切换：
 
 ```xml
-<style name="BaseAppTheme" parent="android:Theme.Material">
+<style name="BaseAppTheme" parent="ohos:Theme.Material">
   <!-- enable window content transitions -->
-  <item name="android:windowContentTransitions">true</item>
+  <item name="ohos:windowContentTransitions">true</item>
 
   <!-- specify enter and exit transitions -->
-  <item name="android:windowEnterTransition">@transition/explode</item>
-  <item name="android:windowExitTransition">@transition/explode</item>
+  <item name="ohos:windowEnterTransition">@transition/explode</item>
+  <item name="ohos:windowExitTransition">@transition/explode</item>
 
   <!-- specify shared element transitions -->
-  <item name="android:windowSharedElementEnterTransition">
+  <item name="ohos:windowSharedElementEnterTransition">
     @transition/change_image_transform</item>
-  <item name="android:windowSharedElementExitTransition">
+  <item name="ohos:windowSharedElementExitTransition">
     @transition/change_image_transform</item>
 </style>
 ```
@@ -136,7 +136,7 @@ Android 5.0 (API level 21) 还支持这些共有元素变换效果：
 ```xml
 <!-- res/transition/change_image_transform.xml -->
 <!-- (see also Shared Transitions below) -->
-<transitionSet xmlns:android="http://schemas.android.com/apk/res/android">
+<transitionSet xmlns:android="http://schemas.huawei.com/hap/res/ohos">
   <changeImageTransform/>
 </transitionSet>
 ```
@@ -184,7 +184,7 @@ startActivity(intent,
 1. 在主题中开启窗口内容切换
 2. 在style中定义共有元素切换
 3. 将切换定义为一个XML 资源文件
-4. 使用`android:transitionName`属性在两个layout文件中给共有元素赋予同一个名字
+4. 使用`ohos:transitionName`属性在两个layout文件中给共有元素赋予同一个名字
 5. 使用`ActivityOptions.makeSceneTransitionAnimation()`方法
 
 ```java
@@ -200,7 +200,7 @@ imgContainerView.setOnClickListener(new View.OnClickListener() {
     public void onClick(View view) {
         Intent intent = new Intent(this, Activity2.class);
         // create the transition animation - the images in the layouts
-        // of both activities are defined with android:transitionName="robot"
+        // of both activities are defined with ohos:transitionName="robot"
         ActivityOptions options = ActivityOptions
             .makeSceneTransitionAnimation(this, androidRobotView, "robot");
         // start the new activity
@@ -215,7 +215,7 @@ imgContainerView.setOnClickListener(new View.OnClickListener() {
 
 ### 开始一个拥有多个共有元素的Activity
 
-要在拥有多个共有元素的activity之间使用变换动画，就要用`android:transitionName`属性在两个layout中定义这个共有元素（或在两个Activity中使用`View.setTransitionName()`方法），再创建`ActivityOptions`对象：
+要在拥有多个共有元素的activity之间使用变换动画，就要用`ohos:transitionName`属性在两个layout中定义这个共有元素（或在两个Activity中使用`View.setTransitionName()`方法），再创建`ActivityOptions`对象：
 
 ```java
 ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this,
@@ -225,16 +225,16 @@ ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this,
 
 ## 使用曲线动画
 
-Material Design中的动画可以表示为基于时间插值和空间移动模式的曲线。在Android 5.0 (API level 21)以上版本中，你可以为动画定义时间曲线和曲线动画模式。
+Material Design中的动画可以表示为基于时间插值和空间移动模式的曲线。在鸿蒙 5.0 (API level 21)以上版本中，你可以为动画定义时间曲线和曲线动画模式。
 
 `PathInterpolator`类是一个基于贝泽尔曲线或`Path`对象的新的插值方法。**插值方法** 是一个定义在 1x1 正方形中的曲线函数图像，其始末两点分别在(0,0)和（1,1)，一个用构造函数定义的控制点。你也可以使用XML资源文件定义一个插值方法：
 
 ```xml
-<pathInterpolator xmlns:android="http://schemas.android.com/apk/res/android"
-    android:controlX1="0.4"
-    android:controlY1="0"
-    android:controlX2="1"
-    android:controlY2="1"/>
+<pathInterpolator xmlns:android="http://schemas.huawei.com/hap/res/ohos"
+    ohos:controlX1="0.4"
+    ohos:controlY1="0"
+    ohos:controlX2="1"
+    ohos:controlY2="1"/>
 ```
 
 Material Design标准中，系统提供了三种基本的曲线：
@@ -260,54 +260,54 @@ mAnimator.start();
 
 ```xml
 <!-- animate the translationZ property of a view when pressed -->
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-  <item android:state_pressed="true">
+<selector xmlns:android="http://schemas.huawei.com/hap/res/ohos">
+  <item ohos:state_pressed="true">
     <set>
-      <objectAnimator android:propertyName="translationZ"
-        android:duration="@android:integer/config_shortAnimTime"
-        android:valueTo="2dp"
-        android:valueType="floatType"/>
+      <objectAnimator ohos:propertyName="translationZ"
+        ohos:duration="@ohos:integer/config_shortAnimTime"
+        ohos:valueTo="2dp"
+        ohos:valueType="floatType"/>
         <!-- you could have other objectAnimator elements
              here for "x" and "y", or other properties -->
     </set>
   </item>
-  <item android:state_enabled="true"
-    android:state_pressed="false"
-    android:state_focused="true">
+  <item ohos:state_enabled="true"
+    ohos:state_pressed="false"
+    ohos:state_focused="true">
     <set>
-      <objectAnimator android:propertyName="translationZ"
-        android:duration="100"
-        android:valueTo="0"
-        android:valueType="floatType"/>
+      <objectAnimator ohos:propertyName="translationZ"
+        ohos:duration="100"
+        ohos:valueTo="0"
+        ohos:valueType="floatType"/>
     </set>
   </item>
 </selector>
 ```
 
-要把视图改变Animator关联到一个视图，就要在XML资源文件的selector元素上定义一个Animator，并把此Animator赋值给视图的 `android:stateListAnimator` 属性。要想在Java代码中将状态列表Animator赋值给视图，使用`AnimationInflater.loadStateListAnimator()` 函数，并用`View.setStateListAnimator()`函数把Animator赋值给你的视图。
+要把视图改变Animator关联到一个视图，就要在XML资源文件的selector元素上定义一个Animator，并把此Animator赋值给视图的 `ohos:stateListAnimator` 属性。要想在Java代码中将状态列表Animator赋值给视图，使用`AnimationInflater.loadStateListAnimator()` 函数，并用`View.setStateListAnimator()`函数把Animator赋值给你的视图。
 
-当你的主题继承于Material Theme的时候，Button默认会有一个Z值动画。为了避免Button的Z值动画，设定它的`android:stateListAnimator`属性为`@null`。
+当你的主题继承于Material Theme的时候，Button默认会有一个Z值动画。为了避免Button的Z值动画，设定它的`ohos:stateListAnimator`属性为`@null`。
 
-`AnimatedStateListDrawable`类使你可以创建一个在视图状态变化之间显示动画的drawable。有一些Android 5.0系统组件默认已经使用了这些动画。下面的例展示如何在XML资源文件中定义AnimatedStateListDrawable：
+`AnimatedStateListDrawable`类使你可以创建一个在视图状态变化之间显示动画的drawable。有一些鸿蒙 5.0系统组件默认已经使用了这些动画。下面的例展示如何在XML资源文件中定义AnimatedStateListDrawable：
 
 ```xml
 <!-- res/drawable/myanimstatedrawable.xml -->
 <animated-selector
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.huawei.com/hap/res/ohos">
 
     <!-- provide a different drawable for each state-->
-    <item android:id="@+id/pressed" android:drawable="@drawable/drawableP"
-        android:state_pressed="true"/>
-    <item android:id="@+id/focused" android:drawable="@drawable/drawableF"
-        android:state_focused="true"/>
-    <item android:id="@id/default"
-        android:drawable="@drawable/drawableD"/>
+    <item ohos:id="@+id/pressed" ohos:drawable="@drawable/drawableP"
+        ohos:state_pressed="true"/>
+    <item ohos:id="@+id/focused" ohos:drawable="@drawable/drawableF"
+        ohos:state_focused="true"/>
+    <item ohos:id="@id/default"
+        ohos:drawable="@drawable/drawableD"/>
 
     <!-- specify a transition -->
-    <transition android:fromId="@+id/default" android:toId="@+id/pressed">
+    <transition ohos:fromId="@+id/default" ohos:toId="@+id/pressed">
         <animation-list>
-            <item android:duration="15" android:drawable="@drawable/dt1"/>
-            <item android:duration="15" android:drawable="@drawable/dt2"/>
+            <item ohos:duration="15" ohos:drawable="@drawable/dt1"/>
+            <item ohos:duration="15" ohos:drawable="@drawable/dt2"/>
             ...
         </animation-list>
     </transition>
@@ -327,24 +327,24 @@ mAnimator.start();
 
 动画矢量drawable可以用在`<group>`和`<path>`元素的属性上。`<group>`元素定义了一些path或者subgroup，`<path>`定义了一条被绘画的路径。
 
-当你想要定义一个动画的矢量drawable时，使用`android:name` 属性来为group和path赋值一个唯一的名字(name)，这样你可以通过animator的定义找到他们。比如：
+当你想要定义一个动画的矢量drawable时，使用`ohos:name` 属性来为group和path赋值一个唯一的名字(name)，这样你可以通过animator的定义找到他们。比如：
 
 ```xml
 <!-- res/drawable/vectordrawable.xml -->
-<vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:height="64dp"
-    android:width="64dp"
-    android:viewportHeight="600"
-    android:viewportWidth="600">
+<vector xmlns:android="http://schemas.huawei.com/hap/res/ohos"
+    ohos:height="64dp"
+    ohos:width="64dp"
+    ohos:viewportHeight="600"
+    ohos:viewportWidth="600">
     <group
-        android:name="rotationGroup"
-        android:pivotX="300.0"
-        android:pivotY="300.0"
-        android:rotation="45.0" >
+        ohos:name="rotationGroup"
+        ohos:pivotX="300.0"
+        ohos:pivotY="300.0"
+        ohos:rotation="45.0" >
         <path
-            android:name="v"
-            android:fillColor="#000000"
-            android:pathData="M300,70 l 0,-70 70,70 0,0 -70,70z" />
+            ohos:name="v"
+            ohos:fillColor="#000000"
+            ohos:pathData="M300,70 l 0,-70 70,70 0,0 -70,70z" />
     </group>
 </vector>
 ```
@@ -353,14 +353,14 @@ mAnimator.start();
 
 ```xml
 <!-- res/drawable/animvectordrawable.xml -->
-<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
-  android:drawable="@drawable/vectordrawable" >
+<animated-vector xmlns:android="http://schemas.huawei.com/hap/res/ohos"
+  ohos:drawable="@drawable/vectordrawable" >
     <target
-        android:name="rotationGroup"
-        android:animation="@anim/rotation" />
+        ohos:name="rotationGroup"
+        ohos:animation="@anim/rotation" />
     <target
-        android:name="v"
-        android:animation="@anim/path_morph" />
+        ohos:name="v"
+        ohos:animation="@anim/path_morph" />
 </animated-vector>
 ```
 
@@ -369,24 +369,24 @@ mAnimator.start();
 ```xml
 <!-- res/anim/rotation.xml -->
 <objectAnimator
-    android:duration="6000"
-    android:propertyName="rotation"
-    android:valueFrom="0"
-    android:valueTo="360" />
+    ohos:duration="6000"
+    ohos:propertyName="rotation"
+    ohos:valueFrom="0"
+    ohos:valueTo="360" />
 ```
 
 第二个animator将矢量drawable的路径从一个形状(morph)变形到另一个。两个路径都必须是可以形变的：他们必须有相同数量的命令，每个命令必须有相同数量的参数
 
 ```xml
 <!-- res/anim/path_morph.xml -->
-<set xmlns:android="http://schemas.android.com/apk/res/android">
+<set xmlns:android="http://schemas.huawei.com/hap/res/ohos">
     <objectAnimator
-        android:duration="3000"
-        android:propertyName="pathData"
-        android:valueFrom="M300,70 l 0,-70 70,70 0,0   -70,70z"
-        android:valueTo="M300,70 l 0,-70 70,0  0,140 -70,0 z"
-        android:valueType="pathType" />
+        ohos:duration="3000"
+        ohos:propertyName="pathData"
+        ohos:valueFrom="M300,70 l 0,-70 70,70 0,0   -70,70z"
+        ohos:valueTo="M300,70 l 0,-70 70,0  0,140 -70,0 z"
+        ohos:valueType="pathType" />
 </set>
 ```
 
-更多信息，请参考[`AnimatedVectorDrawable`](http://developer.android.com/reference/android/view/View.html#setSystemUiVisibility(int))的API指南。
+更多信息，请参考[`AnimatedVectorDrawable`](http://developer.huawei.com/reference/ohos/view/View.html#setSystemUiVisibility(int))的API指南。

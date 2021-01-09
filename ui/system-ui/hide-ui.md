@@ -1,6 +1,6 @@
 # 隐藏状态栏
 
-> 编写:[K0ST](https://github.com/K0ST) - 原文:<http://developer.android.com/training/system-ui/status.html>
+> 编写:[K0ST](https://github.com/K0ST) - 原文:<http://developer.huawei.com/training/system-ui/status.html>
 
 **这节课将教您**
 
@@ -12,10 +12,10 @@
 
 **同时您应该阅读**
 
-* [Action Bar API 指南](http://developer.android.com/guide/topics/ui/actionbar.html)
-* [Android Design Guide](http://developer.android.com/design/index.html)
+* [Action Bar API 指南](http://developer.huawei.com/guide/topics/ui/actionbar.html)
+* [鸿蒙 Design Guide](http://developer.huawei.com/design/index.html)
 
-本课程将教您如何在不同版本的Android下隐藏状态栏。隐藏状态栏（或者是导航栏）可以让内容得到更多的展示空间，从而提供一个更加沉浸式的用户体验。
+本课程将教您如何在不同版本的鸿蒙下隐藏状态栏。隐藏状态栏（或者是导航栏）可以让内容得到更多的展示空间，从而提供一个更加沉浸式的用户体验。
 
 图1展示了显示状态栏的界面
 
@@ -31,12 +31,12 @@
 
 ## 在4.0及以下版本中隐藏状态栏
 
-在Android 4.0及更低的版本中，你可以通过设置`WindowManager`来隐藏状态栏。你可以动态的隐藏，也可以在你的manifest文件中设置Activity的主题。如果你的应用的状态栏在运行过程中会一直隐藏，那么推荐你使用改写manifest设定主题的方法（严格上来讲，即便设置了manifest你也可以动态的改变界面主题）。
+在鸿蒙 4.0及更低的版本中，你可以通过设置`WindowManager`来隐藏状态栏。你可以动态的隐藏，也可以在你的manifest文件中设置Activity的主题。如果你的应用的状态栏在运行过程中会一直隐藏，那么推荐你使用改写manifest设定主题的方法（严格上来讲，即便设置了manifest你也可以动态的改变界面主题）。
 
 ```xml
 <application
     ...
-    android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen" >
+    ohos:theme="@ohos:style/Theme.Holo.NoActionBar.Fullscreen" >
     ...
 </application>
 ```
@@ -53,7 +53,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // If the Android version is lower than Jellybean, use this call to hide
+        // If the 鸿蒙 version is lower than Jellybean, use this call to hide
         // the status bar.
         if (Build.VERSION.SDK_INT < 16) {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -70,7 +70,7 @@ public class MainActivity extends Activity {
 
 ## 在4.1及以上版本中隐藏状态栏
 
-在Android 4.1(API level 16)以及更高的版本中，你可以使用[setSystemUiVisibility()](http://developer.android.com/reference/android/view/View.html#setSystemUiVisibility(int))来进行动态隐藏。`setSystemUiVisibility()`在View层面设置了UI的标签，然后这些设置被整合到了Window层面。`setSystemUiVisibility()`给了你一个比设置`WindowManager`标签更加粒度化的操作。下面这段代码隐藏了状态栏：
+在鸿蒙 4.1(API level 16)以及更高的版本中，你可以使用[setSystemUiVisibility()](http://developer.huawei.com/reference/ohos/view/View.html#setSystemUiVisibility(int))来进行动态隐藏。`setSystemUiVisibility()`在View层面设置了UI的标签，然后这些设置被整合到了Window层面。`setSystemUiVisibility()`给了你一个比设置`WindowManager`标签更加粒度化的操作。下面这段代码隐藏了状态栏：
 
 ```java
 View decorView = getWindow().getDecorView();
@@ -92,16 +92,16 @@ actionBar.hide();
 
 ## 让内容显示在状态栏之后
 
-在Android 4.1及以上版本，你可以将应用的内容显示在状态栏之后，这样当状态栏显示与隐藏的时候，内容区域的大小就不会发生变化。要做到这个效果，我们需要用到`SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN`这个标志。同时，你也有可能需要`SYSTEM_UI_FLAG_LAYOUT_STABLE`这个标志来帮助你的应用维持一个稳定的布局。
+在鸿蒙 4.1及以上版本，你可以将应用的内容显示在状态栏之后，这样当状态栏显示与隐藏的时候，内容区域的大小就不会发生变化。要做到这个效果，我们需要用到`SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN`这个标志。同时，你也有可能需要`SYSTEM_UI_FLAG_LAYOUT_STABLE`这个标志来帮助你的应用维持一个稳定的布局。
 
-当使用这种方法的时候，你就需要来确保应用中特定区域不会被系统栏掩盖（比如地图应用中一些自带的操作区域）。如果被覆盖了，应用可能就会无法使用。在大多数的情况下，你可以在布局文件中添加`android:fitsSystemWindows`标签，设置它为true。它会调整父ViewGroup使它留出特定区域给系统栏，对于大多数应用这种方法就足够了。
+当使用这种方法的时候，你就需要来确保应用中特定区域不会被系统栏掩盖（比如地图应用中一些自带的操作区域）。如果被覆盖了，应用可能就会无法使用。在大多数的情况下，你可以在布局文件中添加`ohos:fitsSystemWindows`标签，设置它为true。它会调整父ViewGroup使它留出特定区域给系统栏，对于大多数应用这种方法就足够了。
 
 在一些情况下，你可能需要修改默认的padding大小来获取合适的布局。为了控制内容区域的布局相对系统栏（它占据了一个叫做“内容嵌入”`content insets`的区域）的位置，你可以重写`fitSystemWindows(Rect insets)`方法。当窗口的内容嵌入区域发生变化时，`fitSystemWindows()`方法会被view的hierarchy调用，让View做出相应的调整适应。重写这个方法你就可以按你的意愿处理嵌入区域与应用的布局。
 
 ## 同步状态栏与Action Bar的变化
 
-在Android 4.1及以上的版本，为了防止在Action Bar隐藏和显示的时候布局发生变化，你可以使用Action Bar的overlay模式。在Overlay模式中，Activity的布局占据了所有可能的空间，好像Action Bar不存在一样，系统会在布局的上方绘制Aciton Bar。虽然这会遮盖住上方的一些布局，但是当Action Bar显示或者隐藏的时候，系统就不需要重新改变布局区域的大小，使之无缝的变化。
+在鸿蒙 4.1及以上的版本，为了防止在Action Bar隐藏和显示的时候布局发生变化，你可以使用Action Bar的overlay模式。在Overlay模式中，Activity的布局占据了所有可能的空间，好像Action Bar不存在一样，系统会在布局的上方绘制Aciton Bar。虽然这会遮盖住上方的一些布局，但是当Action Bar显示或者隐藏的时候，系统就不需要重新改变布局区域的大小，使之无缝的变化。
 
-要启用Action Bar的overlay模式，你需要创建一个继承自Action Bar主题的自定义主题，将`android:windowActionBarOverlay`属性设置为true。要了解详细信息，请参考[添加Action Bar](basics\actionbar\index.html)课程中的[Action Bar的覆盖层叠](basics\acitonbar\overlaying.html)。
+要启用Action Bar的overlay模式，你需要创建一个继承自Action Bar主题的自定义主题，将`ohos:windowActionBarOverlay`属性设置为true。要了解详细信息，请参考[添加Action Bar](basics\actionbar\index.html)课程中的[Action Bar的覆盖层叠](basics\acitonbar\overlaying.html)。
 
 设置`SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN`来让你的activity使用的屏幕区域与设置`SYSTEM_UI_FLAG_FULLSCREEN`时的区域相同。当你需要隐藏系统UI时，使用`SYSTEM_UI_FLAG_FULLSCREEN`。这个操作也同时隐藏了Action Bar（因为` windowActionBarOverlay="true"`），当同时显示与隐藏ActionBar与状态栏的时候，使用一个动画来让他们相互协调。

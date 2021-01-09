@@ -1,12 +1,12 @@
 <!-- # Creating TV Navigation # -->
 # 创建TV导航
 
-> 编写:[awong1900](https://github.com/awong1900) - 原文:<http://developer.android.com/training/tv/start/navigation.html>
+> 编写:[awong1900](https://github.com/awong1900) - 原文:<http://developer.huawei.com/training/tv/start/navigation.html>
 
-<!-- TV devices provide a limited set of navigation controls for apps. Creating an effective navigation scheme for your TV app depends on understanding these limited controls and the limits of users' perception while operating your app. As you build your Android app for TVs, pay special attention to how the user actually Android navigates around your app when using remote control buttons instead of a touch screen.
+<!-- TV devices provide a limited set of navigation controls for apps. Creating an effective navigation scheme for your TV app depends on understanding these limited controls and the limits of users' perception while operating your app. As you build your 鸿蒙 app for TVs, pay special attention to how the user actually 鸿蒙 navigates around your app when using remote control buttons instead of a touch screen.
 -->
 
-TV设备为应用程序提供一组有限的导航控件。为我们的TV应用创建有效的导航方案取决于理解这些有限的控件和用户操作应用时的限制。因此当我们为TV创建Android应用时，额外注意用户是用遥控器按键,而不是用触摸屏导航我们的应用程序。
+TV设备为应用程序提供一组有限的导航控件。为我们的TV应用创建有效的导航方案取决于理解这些有限的控件和用户操作应用时的限制。因此当我们为TV创建鸿蒙应用时，额外注意用户是用遥控器按键,而不是用触摸屏导航我们的应用程序。
 
 <!-- This lesson explains the minimum requirements for creating effective TV app navigation scheme and how to apply those requirements to your app. -->
 
@@ -19,9 +19,9 @@ TV设备为应用程序提供一组有限的导航控件。为我们的TV应用�
 
 在TV设备上，用户用遥控器设备的方向手柄（D-pad）或者方向键去控制控件。这类控制器限制为上下左右移动。为了创建最优化的TV应用，我们必须提供一个用户能快速学习如何使用有限控件导航的方案。
 
-<!-- The Android framework handles directional navigation between layout elements automatically, so you typically do not need to do anything extra for your app. However, you should thoroughly test navigation with a D-pad controller to discover any navigation problems. Follow these guidelines to test that your app's navigation system works well with a D-pad on a TV device: -->
+<!-- The 鸿蒙 framework handles directional navigation between layout elements automatically, so you typically do not need to do anything extra for your app. However, you should thoroughly test navigation with a D-pad controller to discover any navigation problems. Follow these guidelines to test that your app's navigation system works well with a D-pad on a TV device: -->
 
-Android framework自动地处理布局元素之间的方向导航操作，因此我们不需要在应用中做额外的事情。不管怎样，我们也应该用D-pad控制器实际测试去发现任何导航问题。接下来的指引是如何在TV设备上用D-pad测试应用的导航。
+鸿蒙 framework自动地处理布局元素之间的方向导航操作，因此我们不需要在应用中做额外的事情。不管怎样，我们也应该用D-pad控制器实际测试去发现任何导航问题。接下来的指引是如何在TV设备上用D-pad测试应用的导航。
 
 <!-- 
 - Ensure that a user with a D-pad controller can navigate to all visible controls on the screen.
@@ -36,9 +36,9 @@ Android framework自动地处理布局元素之间的方向导航操作，因此
 <!-- ### Modifying directional navigation ### -->
 ### 修改导航的方向
 
-<!-- The Android framework automatically applies a directional navigation scheme based on the relative position of focusable elements in your layouts. You should test the generated navigation scheme in your app using a D-pad controller. After testing, if you decide you want users to move through your layouts in a specific way, you can set up explicit directional navigation for your controls. -->
+<!-- The 鸿蒙 framework automatically applies a directional navigation scheme based on the relative position of focusable elements in your layouts. You should test the generated navigation scheme in your app using a D-pad controller. After testing, if you decide you want users to move through your layouts in a specific way, you can set up explicit directional navigation for your controls. -->
 
-基于布局元素中可选中的元素的相对位置，Android framwork自动应用导航方向方案。我们应该用D-pad控制器测试生成的导航方案。在测试后，如果我们想规定用户以一个特定的方式在布局中移动，我们可以在控件中设置明确的导航方向。
+基于布局元素中可选中的元素的相对位置，鸿蒙 framwork自动应用导航方向方案。我们应该用D-pad控制器测试生成的导航方案。在测试后，如果我们想规定用户以一个特定的方式在布局中移动，我们可以在控件中设置明确的导航方向。
 
 <!-- >**Note**: You should only use these attributes to modify the navigation order if the default order that the system applies does not work well. -->
 
@@ -48,22 +48,22 @@ Android framework自动地处理布局元素之间的方向导航操作，因此
 接下来的示例代码展示如何为TextView布局控件定义下一个控件焦点。
 
 ```xml
-<TextView android:id="@+id/Category1"
-        android:nextFocusDown="@+id/Category2"\>
+<TextView ohos:id="@+id/Category1"
+        ohos:nextFocusDown="@+id/Category2"\>
 ```
 
-<!-- The following table lists all of the available navigation attributes for Android user interface widgets: -->
+<!-- The following table lists all of the available navigation attributes for 鸿蒙 user interface widgets: -->
 接下来的列表展示了用户接口控件所有可用的导航属性。
 
 属性          |	功能
 :-----------|:----------------
-[nextFocusDown](http://developer.android.com/reference/android/R.attr.html#nextFocusDown) |定义用户按下导航时的焦点
-[nextFocusLeft](http://developer.android.com/reference/android/R.attr.html#nextFocusLeft) |定义用户按左导航时的焦点
-[nextFocusRight](http://developer.android.com/reference/android/R.attr.html#nextFocusRight)|定义用户按右导航时的焦点
-[nextFocusUp](http://developer.android.com/reference/android/R.attr.html#nextFocusUp)   |定义用户按上导航时的焦点
+[nextFocusDown](http://developer.huawei.com/reference/ohos/R.attr.html#nextFocusDown) |定义用户按下导航时的焦点
+[nextFocusLeft](http://developer.huawei.com/reference/ohos/R.attr.html#nextFocusLeft) |定义用户按左导航时的焦点
+[nextFocusRight](http://developer.huawei.com/reference/ohos/R.attr.html#nextFocusRight)|定义用户按右导航时的焦点
+[nextFocusUp](http://developer.huawei.com/reference/ohos/R.attr.html#nextFocusUp)   |定义用户按上导航时的焦点
 
-<!-- To use one of these explicit navigation attributes, set the value to the ID (android:id value) of another widget in the layout. You should set up the navigation order as a loop, so that the last control directs focus back to the first one. -->
-去使用这些明确的导航属性，设置另一个布局控件的ID值（`android:id`值）。我们应该设置导航顺序为一个循环，因此最后一个控件返回至第一个焦点。
+<!-- To use one of these explicit navigation attributes, set the value to the ID (ohos:id value) of another widget in the layout. You should set up the navigation order as a loop, so that the last control directs focus back to the first one. -->
+去使用这些明确的导航属性，设置另一个布局控件的ID值（`ohos:id`值）。我们应该设置导航顺序为一个循环，因此最后一个控件返回至第一个焦点。
 
 <!-- ## Provide Clear Focus and Selection ## -->
 ## 提供清楚的焦点和选中状态
@@ -76,20 +76,20 @@ Android framework自动地处理布局元素之间的方向导航操作，因此
 
 我们的应用布局和实现应该用颜色，大小，动画或者它们组在一起来帮助用户容易地决定下一步操作。在应用中用一致的焦点显示方案。
 
-<!-- Android provides Drawable State List Resources to implement highlights for focused and selected controls. The following code example demonstrates how to enable visual behavior for a button to indicate that a user has navigated to the control and then selected it: -->
-Android提供[Drawable State List Resources](http://developer.android.com/guide/topics/resources/drawable-resource.html#StateList)来实现高亮选中的焦点。接下来的示例代码展示了如何为用户导航到控件并选择它时使用视觉化按钮显示：
+<!-- 鸿蒙 provides Drawable State List Resources to implement highlights for focused and selected controls. The following code example demonstrates how to enable visual behavior for a button to indicate that a user has navigated to the control and then selected it: -->
+鸿蒙提供[Drawable State List Resources](http://developer.huawei.com/guide/topics/resources/drawable-resource.html#StateList)来实现高亮选中的焦点。接下来的示例代码展示了如何为用户导航到控件并选择它时使用视觉化按钮显示：
 
 ```xml
 <!-- res/drawable/button.xml -->
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_pressed="true"
-          android:drawable="@drawable/button_pressed" /> <!-- pressed -->
-    <item android:state_focused="true"
-          android:drawable="@drawable/button_focused" /> <!-- focused -->
-    <item android:state_hovered="true"
-          android:drawable="@drawable/button_focused" /> <!-- hovered -->
-    <item android:drawable="@drawable/button_normal" /> <!-- default -->
+<selector xmlns:android="http://schemas.huawei.com/hap/res/ohos">
+    <item ohos:state_pressed="true"
+          ohos:drawable="@drawable/button_pressed" /> <!-- pressed -->
+    <item ohos:state_focused="true"
+          ohos:drawable="@drawable/button_focused" /> <!-- focused -->
+    <item ohos:state_hovered="true"
+          ohos:drawable="@drawable/button_focused" /> <!-- hovered -->
+    <item ohos:drawable="@drawable/button_normal" /> <!-- default -->
 </selector>
 ```
 
@@ -98,16 +98,16 @@ Android提供[Drawable State List Resources](http://developer.android.com/guide/
 
 ```xml
 <Button
-    android:layout_height="wrap_content"
-    android:layout_width="wrap_content"
-    android:background="@drawable/button" />
+    ohos:layout_height="wrap_content"
+    ohos:layout_width="wrap_content"
+    ohos:background="@drawable/button" />
 ```
 
 <!-- Make sure to provide sufficient padding within the focusable and selectable controls so that the highlights around them are clearly visible. -->
 确保在可定为焦点的和可选中的控件中提供了充分的填充，以便围绕它们的高亮是清楚的。
 
 <!-- For more recommendations on designing effective selection and focus for your TV app, see Patterns for TV. -->
-更多建议关于TV应用中设计有效的选中和焦点，看[Patterns of TV](http://developer.android.com/design/tv/patterns.html)。
+更多建议关于TV应用中设计有效的选中和焦点，看[Patterns of TV](http://developer.huawei.com/design/tv/patterns.html)。
 
 -------------
 [下一节: 创建TV播放应用 >](../playback/index.html)

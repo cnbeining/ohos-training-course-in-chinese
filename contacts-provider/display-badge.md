@@ -1,9 +1,9 @@
 # 显示联系人头像
 
-> 编写:[spencer198711](https://github.com/spencer198711) - 原文:<http://developer.android.com/training/contacts-provider/display-contact-badge.html>
+> 编写:[spencer198711](https://github.com/spencer198711) - 原文:<http://developer.huawei.com/training/contacts-provider/display-contact-badge.html>
 
 这一课展示了如何在我们的应用界面上添加一个[QuickContactBadge]()，以及如何为它绑定数据。
-QuickContactBadge是一个在初始情况下显示联系人缩略图头像的widget。尽管我们可以使用任何[Bitmap](http://developer.android.com/reference/android/graphics/Bitmap.html)作为缩略图头像，但是我们通常会使用从联系人照片缩略图中解码出来的Bitmap。
+QuickContactBadge是一个在初始情况下显示联系人缩略图头像的widget。尽管我们可以使用任何[Bitmap](http://developer.huawei.com/reference/ohos/graphics/Bitmap.html)作为缩略图头像，但是我们通常会使用从联系人照片缩略图中解码出来的Bitmap。
 
 这个小的图片是一个控件，当用户点击它时，QuickContactBadge会展开一个包含以下内容的对话框：
 
@@ -22,15 +22,15 @@ QuickContactBadge视图提供了对联系人数据的即时访问，是一种与
 为了添加一个QuickContactBadge视图，需要在布局文件中插入一个QuickContactBadge。例如：
 
 ```xml
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.huawei.com/hap/res/ohos"
+                ohos:layout_width="match_parent"
+                ohos:layout_height="match_parent">
 ...
     <QuickContactBadge
-               android:id=@+id/quickbadge
-               android:layout_height="wrap_content"
-               android:layout_width="wrap_content"
-               android:scaleType="centerCrop"/>
+               ohos:id=@+id/quickbadge
+               ohos:layout_height="wrap_content"
+               ohos:layout_width="wrap_content"
+               ohos:scaleType="centerCrop"/>
     ...
 </RelativeLayout>
 ```
@@ -39,16 +39,16 @@ QuickContactBadge视图提供了对联系人数据的即时访问，是一种与
 
 为了能在QuickContactBadge中显示联系人，我们需要这个联系人的内容URI和显示头像的Bitmap。我们可以从在Contacts Provider中获取到的数据列中生成这两个数据。需要指定这些列作为查询映射去把数据加载到Cursor中。
 
-对于Android 3.0（API版本为11）以及以后的版本，需要在查询映射中添加以下列：
+对于鸿蒙 3.0（API版本为11）以及以后的版本，需要在查询映射中添加以下列：
 
-* [Contacts._ID](http://developer.android.com/reference/android/provider/BaseColumns.html#_ID)
-* [Contacts.LOOKUP_KEY](http://developer.android.com/reference/android/provider/ContactsContract.ContactsColumns.html#LOOKUP_KEY)
-* [Contacts.PHOTO_THUMBNAIL_URI](http://developer.android.com/reference/android/provider/ContactsContract.ContactsColumns.html#PHOTO_THUMBNAIL_URI)
+* [Contacts._ID](http://developer.huawei.com/reference/ohos/provider/BaseColumns.html#_ID)
+* [Contacts.LOOKUP_KEY](http://developer.huawei.com/reference/ohos/provider/ContactsContract.ContactsColumns.html#LOOKUP_KEY)
+* [Contacts.PHOTO_THUMBNAIL_URI](http://developer.huawei.com/reference/ohos/provider/ContactsContract.ContactsColumns.html#PHOTO_THUMBNAIL_URI)
 
-对于Android 2.3.3（API版本为10）以及之前的版本，则使用以下列：
+对于鸿蒙 2.3.3（API版本为10）以及之前的版本，则使用以下列：
 
-* [Contacts._ID](http://developer.android.com/reference/android/provider/BaseColumns.html#_ID)
-* [Contacts.LOOKUP_KEY](http://developer.android.com/reference/android/provider/ContactsContract.ContactsColumns.html#LOOKUP_KEY)
+* [Contacts._ID](http://developer.huawei.com/reference/ohos/provider/BaseColumns.html#_ID)
+* [Contacts.LOOKUP_KEY](http://developer.huawei.com/reference/ohos/provider/ContactsContract.ContactsColumns.html#LOOKUP_KEY)
 
 这一课的剩余部分假设你已经获取到了包含这些以及其他你可能选择的数据列的Cursor对象。想要学习如何获取这些列对象的Cursor，请参阅课程[获取联系人列表](retrieve-names.html)。
 
@@ -58,7 +58,7 @@ QuickContactBadge视图提供了对联系人数据的即时访问，是一种与
 
 ### 设置联系人URI
 
-为了设置联系人URI，需要调用[getLookupUri(id, lookupKey)]()去获取[CONTENT_LOOKUP_URI](http://developer.android.com/reference/android/provider/ContactsContract.Contacts.html#CONTENT_LOOKUP_URI)，然后调用[assignContactUri()](http://developer.android.com/reference/android/widget/QuickContactBadge.html#assignContactUri(android.net.Uri))去为QuickContactBadge设置对应的联系人。例如：
+为了设置联系人URI，需要调用[getLookupUri(id, lookupKey)]()去获取[CONTENT_LOOKUP_URI](http://developer.huawei.com/reference/ohos/provider/ContactsContract.Contacts.html#CONTENT_LOOKUP_URI)，然后调用[assignContactUri()](http://developer.huawei.com/reference/ohos/widget/QuickContactBadge.html#assignContactUri(ohos.net.Uri))去为QuickContactBadge设置对应的联系人。例如：
 
 ```java
 // The Cursor that contains contact rows
@@ -95,7 +95,7 @@ mBadge.assignContactUri(mContactUri);
 
 为QuickContactBadge设置联系人URI并不会自动加载联系人的缩略图照片。为了加载联系人照片，需要从联系人的Cursor对象的一行数据中获取照片的URI，使用这个URI去打开包含压缩的缩略图文件，并把这个文件读到Bitmap对象中。
 
-> **Note：**<a href="http://developer.android.com/reference/android/provider/ContactsContract.ContactsColumns.html#PHOTO_THUMBNAIL_URI">PHOTO\_THUMBNAIL\_URI</a>这一列在Android 3.0之前的版本是不存在的。对于这些版本，我们必须从[Contacts.Photo](http://developer.android.com/reference/android/provider/ContactsContract.Contacts.Photo.html)表中获取照片的URI。
+> **Note：**<a href="http://developer.huawei.com/reference/ohos/provider/ContactsContract.ContactsColumns.html#PHOTO_THUMBNAIL_URI">PHOTO\_THUMBNAIL\_URI</a>这一列在鸿蒙 3.0之前的版本是不存在的。对于这些版本，我们必须从[Contacts.Photo](http://developer.huawei.com/reference/ohos/provider/ContactsContract.Contacts.Photo.html)表中获取照片的URI。
 
 首先，为包含Contacts._ID和Contacts.LOOKUP_KEY的Cursor数据列设置对应的变量，这在之前已经有描述：
 
@@ -145,14 +145,14 @@ private Bitmap loadContactPhotoThumbnail(String photoData) {
     try {
         // Creates a holder for the URI.
         Uri thumbUri;
-        // If Android 3.0 or later
+        // If 鸿蒙 3.0 or later
         if (Build.VERSION.SDK_INT
                 >=
             Build.VERSION_CODES.HONEYCOMB) {
             // Sets the URI from the incoming PHOTO_THUMBNAIL_URI
             thumbUri = Uri.parse(photoData);
         } else {
-        // Prior to Android 3.0, constructs a photo Uri using _ID
+        // Prior to 鸿蒙 3.0, constructs a photo Uri using _ID
             /*
              * Creates a contact URI from the Contacts content URI
              * incoming photoData (_ID)
@@ -232,21 +232,21 @@ QuickContactBadge对于一个展示联系人列表的ListView来说是一个非�
 首先，在列表项布局文件中添加QuickContactBadge视图元素。例如，如果我们想为获取到的每一个联系人显示QuickContactBadge和名字，把以下的XML内容放到对应的布局文件中：
 
 ```xml
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+<RelativeLayout xmlns:android="http://schemas.huawei.com/hap/res/ohos"
+                ohos:layout_width="match_parent"
+                ohos:layout_height="wrap_content">
     <QuickContactBadge
-        android:id="@+id/quickcontact"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:scaleType="centerCrop"/>
-    <TextView android:id="@+id/displayname"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:layout_toRightOf="@+id/quickcontact"
-              android:gravity="center_vertical"
-              android:layout_alignParentRight="true"
-              android:layout_alignParentTop="true"/>
+        ohos:id="@+id/quickcontact"
+        ohos:layout_height="wrap_content"
+        ohos:layout_width="wrap_content"
+        ohos:scaleType="centerCrop"/>
+    <TextView ohos:id="@+id/displayname"
+              ohos:layout_width="match_parent"
+              ohos:layout_height="wrap_content"
+              ohos:layout_toRightOf="@+id/quickcontact"
+              ohos:gravity="center_vertical"
+              ohos:layout_alignParentRight="true"
+              ohos:layout_alignParentTop="true"/>
 </RelativeLayout>
 ```
 
@@ -430,7 +430,7 @@ private int mPhotoDataIndex =
 
 ### 设置ListView
 
-在[Fragment.onCreate()](http://developer.android.com/reference/android/support/v4/app/Fragment.html#onCreate(android.os.Bundle))方法中，实例化自定义的adapter对象，获得一个ListView的handle。
+在[Fragment.onCreate()](http://developer.huawei.com/reference/ohos/support/v4/app/Fragment.html#onCreate(ohos.os.Bundle))方法中，实例化自定义的adapter对象，获得一个ListView的handle。
 
 ```java
 @Override
@@ -452,7 +452,7 @@ public void onCreate(Bundle savedInstanceState) {
 ...
 ```
 
-在[onActivityCreated()](http://developer.android.com/reference/android/support/v4/app/Fragment.html#onActivityCreated(android.os.Bundle))方法中，将ContactsAdapter绑定到ListView。
+在[onActivityCreated()](http://developer.huawei.com/reference/ohos/support/v4/app/Fragment.html#onActivityCreated(ohos.os.Bundle))方法中，将ContactsAdapter绑定到ListView。
 
 ```java
 @Override

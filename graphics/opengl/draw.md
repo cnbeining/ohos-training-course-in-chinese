@@ -1,6 +1,6 @@
 # 绘制形状(Drawing Shapes)
 
-> 编写:[jdneo](https://github.com/jdneo) - 原文:<http://developer.android.com/training/graphics/opengl/draw.html>
+> 编写:[jdneo](https://github.com/jdneo) - 原文:<http://developer.huawei.com/training/graphics/opengl/draw.html>
 
 在定义了将要绘制的形状之后，你可能希望使用 OpenGL 绘制出它们。使用 OpenGL ES 2.0 绘制图形可能会比你想象当中更复杂一些，因为 API 中提供了大量对于图形渲染流程的控制。
 
@@ -8,7 +8,7 @@
 
 ## 初始化形状(Initialize Shapes)
 
-在你开始绘画之前，你需要初始化并加载你期望绘制的图形。除非你所使用的形状结构（原始坐标）在执行过程中发生了变化，不然的话你应该在渲染器的<a href="http://developer.android.com/reference/android/opengl/GLSurfaceView.Renderer.html#onSurfaceCreated(javax.microedition.khronos.opengles.GL10, javax.microedition.khronos.egl.EGLConfig)"> onSurfaceCreated() </a>方法中初始化它们，这样做是出于内存和执行效率的考量。
+在你开始绘画之前，你需要初始化并加载你期望绘制的图形。除非你所使用的形状结构（原始坐标）在执行过程中发生了变化，不然的话你应该在渲染器的<a href="http://developer.huawei.com/reference/ohos/opengl/GLSurfaceView.Renderer.html#onSurfaceCreated(javax.microedition.khronos.opengles.GL10, javax.microedition.khronos.egl.EGLConfig)"> onSurfaceCreated() </a>方法中初始化它们，这样做是出于内存和执行效率的考量。
 
 ```java
 public class MyGLRenderer implements GLSurfaceView.Renderer {
@@ -148,7 +148,7 @@ public void draw() {
 }
 ```
 
-一旦你完成了上述所有代码，仅需要在你渲染器的<a href="http://developer.android.com/reference/android/opengl/GLSurfaceView.Renderer.html#onDrawFrame(javax.microedition.khronos.opengles.GL10)">onDrawFrame()</a>方法中调用`draw()`方法就可以画出我们想要画的对象了：
+一旦你完成了上述所有代码，仅需要在你渲染器的<a href="http://developer.huawei.com/reference/ohos/opengl/GLSurfaceView.Renderer.html#onDrawFrame(javax.microedition.khronos.opengles.GL10)">onDrawFrame()</a>方法中调用`draw()`方法就可以画出我们想要画的对象了：
 
 ```java
 public void onDrawFrame(GL10 unused) {
@@ -162,6 +162,6 @@ public void onDrawFrame(GL10 unused) {
 
 ![ogl-triangle](ogl-triangle.png "不使用投影或者相机视图画出来的三角形")
 
-在这个代码样例中，还存在一些问题。首先，它无法给用户带来什么深刻的印象。其次，这个三角形看上去有一些扁，另外当你改变屏幕方向时，它的形状也会随之改变。发生形变的原因是因为对象的顶点没有根据显示[GLSurfaceView](http://developer.android.com/reference/android/opengl/GLSurfaceView.html)的屏幕区域的长宽比进行修正。你可以在下一节课中使用投影（Projection）或者相机视角（Camera View）来解决这个问题。
+在这个代码样例中，还存在一些问题。首先，它无法给用户带来什么深刻的印象。其次，这个三角形看上去有一些扁，另外当你改变屏幕方向时，它的形状也会随之改变。发生形变的原因是因为对象的顶点没有根据显示[GLSurfaceView](http://developer.huawei.com/reference/ohos/opengl/GLSurfaceView.html)的屏幕区域的长宽比进行修正。你可以在下一节课中使用投影（Projection）或者相机视角（Camera View）来解决这个问题。
 
 最后，这个三角形是静止的，这看上去有些无聊。在[添加移动](motion.html)课程当中（后续课程），你会让这个形状发生旋转，并使用一些OpenGL ES图形处理流程中更加新奇的用法。

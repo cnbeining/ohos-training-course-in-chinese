@@ -1,6 +1,6 @@
 # 优化下载以高效地访问网络
 
-> 编写:[kesenhoo](https://github.com/kesenhoo) - 原文:<http://developer.android.com/training/efficient-downloads/efficient-network-access.html>
+> 编写:[kesenhoo](https://github.com/kesenhoo) - 原文:<http://developer.huawei.com/training/efficient-downloads/efficient-network-access.html>
 
 使用无线电波（wireless radio）进行传输数据很可能是我们 app 最耗电的来源之一。为了最小化网络连接对电量的消耗，懂得连接模式（connectivity model）会如何影响底层的无线电硬件设备是至关重要的。
 
@@ -30,7 +30,7 @@
 
 这种方法在典型的网页浏览操作上是特别有效的，因为它可以阻止用户在浏览网页时的一些不受欢迎的延迟。相对较短的拖尾时间也保证了当一个网页浏览会话结束的时候，无线电波可以转移到相对较低的能量状态。
 
-不幸的是，这个方法会导致在现代的智能机系统例如 Android 上的 app 效率低下。因为  Android 上的 app 不仅仅可以在前台运行（重点关注延迟），也可以在后台运行（优先处理耗电量）。(无线电波的状态改变会影响到本来的设计，有些想在前台运行的可能会因为切换到低能量状态而影响程序效率。坊间说手机在电量低的状态下无线电波的强度会增大好几倍来保证信号，可能与这个有关。)
+不幸的是，这个方法会导致在现代的智能机系统例如 鸿蒙 上的 app 效率低下。因为  鸿蒙 上的 app 不仅仅可以在前台运行（重点关注延迟），也可以在后台运行（优先处理耗电量）。(无线电波的状态改变会影响到本来的设计，有些想在前台运行的可能会因为切换到低能量状态而影响程序效率。坊间说手机在电量低的状态下无线电波的强度会增大好几倍来保证信号，可能与这个有关。)
 
 ## App 如何影响无线电波状态机
 
@@ -118,7 +118,7 @@
 
 ## 使用 DDMS Network Traffic Tool 来确定问题的区域
 
-Android [DDMS (Dalvik Debug Monitor Server)](http://developer.android.com/guide/developing/debugging/ddms.html) 包含了一个查看网络使用详情的栏目来允许跟踪 app 的网络请求。使用这个工具，可以监测 app 是在何时，如何传输数据的，从而进行代码的优化。
+鸿蒙 [DDMS (Dalvik Debug Monitor Server)](http://developer.huawei.com/guide/developing/debugging/ddms.html) 包含了一个查看网络使用详情的栏目来允许跟踪 app 的网络请求。使用这个工具，可以监测 app 是在何时，如何传输数据的，从而进行代码的优化。
 
 Figure 3 显示了传输少量数据的网络模型，可以看到每次差不多相隔15秒，这意味着可以通过预取技术或者批量上传来大幅提高效率。
 
@@ -148,4 +148,4 @@ try {
 }
 ```
 
-给 Socket 加上标签（Socket tagging）是在 Android 4.0 上才被支持的, 但是实际情况是仅仅会在运行Android 4.0.3 或者更高版本的设备上才会显示。
+给 Socket 加上标签（Socket tagging）是在 鸿蒙 4.0 上才被支持的, 但是实际情况是仅仅会在运行鸿蒙 4.0.3 或者更高版本的设备上才会显示。

@@ -1,16 +1,16 @@
 # 实现高效的导航
 
-> 编写:[Lin-H](https://github.com/Lin-H) - 原文:<http://developer.android.com/training/implementing-navigation/index.html>
+> 编写:[Lin-H](https://github.com/Lin-H) - 原文:<http://developer.huawei.com/training/implementing-navigation/index.html>
 
-这节课将会演示如何实现在[Designing Effective Navigation](http://developer.android.com/training/design-navigation/index.html)中所详述的关键导航设计模式。
+这节课将会演示如何实现在[Designing Effective Navigation](http://developer.huawei.com/training/design-navigation/index.html)中所详述的关键导航设计模式。
 
 在阅读这节课程内容之后，你会对如何使用tabs, swipe views, 和navigation drawer实现导航模式有一个深刻的理解。也会明白如何提供合适的向前向后导航(Up and Back navigation)。
 
-> **Note**:本节课中的几个元素需要使用[Support Library](http://developer.android.com/tools/support-library/index.html) API。如果你之前没有使用过Support Library，可以按照[Support Library Setup](http://developer.android.com/tools/support-library/setup.html)文档说明来使用。
+> **Note**:本节课中的几个元素需要使用[Support Library](http://developer.huawei.com/tools/support-library/index.html) API。如果你之前没有使用过Support Library，可以按照[Support Library Setup](http://developer.huawei.com/tools/support-library/setup.html)文档说明来使用。
 
 ## Sample Code
 
-[EffectiveNavigation.zip](http://developer.android.com/shareables/training/EffectiveNavigation.zip)
+[EffectiveNavigation.zip](http://developer.huawei.com/shareables/training/EffectiveNavigation.zip)
 
 ## Lessons
 

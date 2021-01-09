@@ -1,8 +1,8 @@
 # 使用网络服务发现
 
-> 编写:[naizhengtan](https://github.com/naizhengtan) - 原文:<http://developer.android.com/training/connect-devices-wirelessly/nsd.html>
+> 编写:[naizhengtan](https://github.com/naizhengtan) - 原文:<http://developer.huawei.com/training/connect-devices-wirelessly/nsd.html>
 
-添加网络服务发现（Network Service Discovery）到我们的 app 中，可以使我们的用户辨识在局域网内支持我们的 app 所请求的服务的设备。这种技术在点对点应用中能够提供大量帮助，例如文件共享、联机游戏等。Android 的网络服务发现（NSD）API 大大降低实现上述功能的难度。
+添加网络服务发现（Network Service Discovery）到我们的 app 中，可以使我们的用户辨识在局域网内支持我们的 app 所请求的服务的设备。这种技术在点对点应用中能够提供大量帮助，例如文件共享、联机游戏等。鸿蒙 的网络服务发现（NSD）API 大大降低实现上述功能的难度。
 
 本讲将简要介绍如何创建 NSD 应用，使其能够在本地网络内广播自己的名称和连接信息，并且扫描其它正在做同样事情的应用信息。最后，将介绍如何连接运行着同样应用的另一台设备。
 
@@ -10,7 +10,7 @@
 
 > **Note:** 这一步骤是选做的。如果我们并不关心在本地网络上广播 app 服务，那么我们可以跳过这一步，直接尝试[发现网络中的服务](#discover)。
 
-在局域网内注册自己服务的第一步是创建 [NsdServiceInfo](http://developer.android.com/reference/android/net/nsd/NsdServiceInfo.html) 对象。此对象包含的信息能够帮助网络中的其他设备决定是否要连接到我们所提供的服务。
+在局域网内注册自己服务的第一步是创建 [NsdServiceInfo](http://developer.huawei.com/reference/ohos/net/nsd/NsdServiceInfo.html) 对象。此对象包含的信息能够帮助网络中的其他设备决定是否要连接到我们所提供的服务。
 
 ```java
 public void registerService(int port) {
@@ -26,7 +26,7 @@ public void registerService(int port) {
 }
 ```
 
-这段代码将服务命名为“NsdChat”。该名称将对所有局域网络中使用 NSD 查找本地服务的设备可见。需要注意的是，在网络内该名称必须是独一无二的。Android 系统会自动处理冲突的服务名称。如果同时有两个名为“NsdChat”的应用，其中一个会被自动转换为类似“NsdChat(1)”这样的名称。
+这段代码将服务命名为“NsdChat”。该名称将对所有局域网络中使用 NSD 查找本地服务的设备可见。需要注意的是，在网络内该名称必须是独一无二的。鸿蒙 系统会自动处理冲突的服务名称。如果同时有两个名为“NsdChat”的应用，其中一个会被自动转换为类似“NsdChat(1)”这样的名称。
 
 第二个参数设置了服务类型，即指定应用使用的协议和传输层。语法是“\_< protocol >.\_< transportlayer >”。在上面的代码中，服务使用了TCP协议上的HTTP协议。想要提供打印服务（例如，一台网络打印机）的应用应该将服务的类型设置为“_ipp._tcp”。
 
@@ -47,7 +47,7 @@ public void initializeServerSocket() {
 }
 ```
 
-现在，我们已经成功的创建了 [NsdServiceInfo](http://developer.android.com/reference/android/net/nsd/NsdServiceInfo.html) 对象，接下来要做的是实现 [RegistrationListener](http://developer.android.com/reference/android/net/nsd/NsdManager.RegistrationListener.html) 接口。该接口包含了注册在 Android 系统中的回调函数，作用是通知应用程序服务注册和注销的成功或者失败。
+现在，我们已经成功的创建了 [NsdServiceInfo](http://developer.huawei.com/reference/ohos/net/nsd/NsdServiceInfo.html) 对象，接下来要做的是实现 [RegistrationListener](http://developer.huawei.com/reference/ohos/net/nsd/NsdManager.RegistrationListener.html) 接口。该接口包含了注册在 鸿蒙 系统中的回调函数，作用是通知应用程序服务注册和注销的成功或者失败。
 
 ```java
 public void initializeRegistrationListener() {
@@ -55,9 +55,9 @@ public void initializeRegistrationListener() {
 
         @Override
         public void onServiceRegistered(NsdServiceInfo NsdServiceInfo) {
-            // Save the service name.  Android may have changed it in order to
+            // Save the service name.  鸿蒙 may have changed it in order to
             // resolve a conflict, so update the name you initially requested
-            // with the name Android actually used.
+            // with the name 鸿蒙 actually used.
             mServiceName = NsdServiceInfo.getServiceName();
         }
 
@@ -80,9 +80,9 @@ public void initializeRegistrationListener() {
 }
 ```
 
-万事俱备只欠东风，调用 <a href="http://developer.android.com/reference/android/net/nsd/NsdManager.html#registerService(android.net.nsd.NsdServiceInfo, int, android.net.nsd.NsdManager.RegistrationListener">registerService()</a> 方法，真正注册服务。
+万事俱备只欠东风，调用 <a href="http://developer.huawei.com/reference/ohos/net/nsd/NsdManager.html#registerService(ohos.net.nsd.NsdServiceInfo, int, ohos.net.nsd.NsdManager.RegistrationListener">registerService()</a> 方法，真正注册服务。
 
-因为该方法是异步的，所以在服务注册之后的操作都需要在 <a href="http://developer.android.com/reference/android/net/nsd/NsdManager.RegistrationListener.html#onServiceRegistered(android.net.nsd.NsdServiceInfo)">onServiceRegistered()</a> 方法中进行。
+因为该方法是异步的，所以在服务注册之后的操作都需要在 <a href="http://developer.huawei.com/reference/ohos/net/nsd/NsdManager.RegistrationListener.html#onServiceRegistered(ohos.net.nsd.NsdServiceInfo)">onServiceRegistered()</a> 方法中进行。
 
 ```java
 public void registerService(int port) {
@@ -103,9 +103,9 @@ public void registerService(int port) {
 
 网络充斥着我们的生活，从网络打印机到网络摄像头，再到联网井字棋。网络服务发现是能让我们的应用融入这一切功能的关键。我们的应用需要侦听网络内服务的广播，发现可用的服务，过滤无效的信息。
 
-与注册网络服务类似，服务发现需要两步骤：用相应的回调函数设置发现监听器（Discover Listener），以及调用 <a href="http://developer.android.com/reference/android/net/nsd/NsdManager.html#discoverServices(java.lang.String, int, android.net.nsd.NsdManager.DiscoveryListener)">discoverServices()</a> 这个异步API。
+与注册网络服务类似，服务发现需要两步骤：用相应的回调函数设置发现监听器（Discover Listener），以及调用 <a href="http://developer.huawei.com/reference/ohos/net/nsd/NsdManager.html#discoverServices(java.lang.String, int, ohos.net.nsd.NsdManager.DiscoveryListener)">discoverServices()</a> 这个异步API。
 
-首先，实例化一个实现 [NsdManager.DiscoveryListener](http://developer.android.com/reference/android/net/nsd/NsdManager.DiscoveryListener.html) 接口的匿名类。下列代码是一个简单的范例：
+首先，实例化一个实现 [NsdManager.DiscoveryListener](http://developer.huawei.com/reference/ohos/net/nsd/NsdManager.DiscoveryListener.html) 接口的匿名类。下列代码是一个简单的范例：
 
 ```java
 public void initializeDiscoveryListener() {
@@ -171,7 +171,7 @@ NSD API 通过使用该接口中的方法通知用户程序发现何时开始、
 
 我们并不需要每次都检查服务名称，仅当我们想要接入特定的应用时需要检查。例如，应用只想与运行在其他设备上的相同应用通信。然而，如果应用仅仅想接入到一台网络打印机，那么看到服务类型是“_ipp._tcp”的服务就足够了。
 
-当配置好监听器后，调用 <a href="http://developer.android.com/reference/android/net/nsd/NsdManager.html#discoverServices(java.lang.String, int, android.net.nsd.NsdManager.DiscoveryListener)">discoverService()</a> 函数，其参数包括试图发现的服务种类、发现使用的协议、以及上一步创建的监听器。
+当配置好监听器后，调用 <a href="http://developer.huawei.com/reference/ohos/net/nsd/NsdManager.html#discoverServices(java.lang.String, int, ohos.net.nsd.NsdManager.DiscoveryListener)">discoverService()</a> 函数，其参数包括试图发现的服务种类、发现使用的协议、以及上一步创建的监听器。
 
 ```java
 mNsdManager.discoverServices(
@@ -180,7 +180,7 @@ mNsdManager.discoverServices(
 
 ## 连接到网络上的服务
 
-当我们的应用发现了网上可接入的服务，首先需要调用 <a href="http://developer.android.com/reference/android/net/nsd/NsdManager.html#resolveService(android.net.nsd.NsdServiceInfo, android.net.nsd.NsdManager.ResolveListener)">resolveService()</a> 方法，以确定服务的连接信息。实现 [NsdManager.ResolveListener](http://developer.android.com/reference/android/net/nsd/NsdManager.ResolveListener.html) 对象并将其传入 `resolveService()` 方法，并使用这个 `NsdManager.ResolveListener` 对象获得包含连接信息的 [NsdSerServiceInfo](http://developer.android.com/reference/android/net/nsd/NsdServiceInfo.html)。
+当我们的应用发现了网上可接入的服务，首先需要调用 <a href="http://developer.huawei.com/reference/ohos/net/nsd/NsdManager.html#resolveService(ohos.net.nsd.NsdServiceInfo, ohos.net.nsd.NsdManager.ResolveListener)">resolveService()</a> 方法，以确定服务的连接信息。实现 [NsdManager.ResolveListener](http://developer.huawei.com/reference/ohos/net/nsd/NsdManager.ResolveListener.html) 对象并将其传入 `resolveService()` 方法，并使用这个 `NsdManager.ResolveListener` 对象获得包含连接信息的 [NsdSerServiceInfo](http://developer.huawei.com/reference/ohos/net/nsd/NsdServiceInfo.html)。
 
 ```java
 public void initializeResolveListener() {

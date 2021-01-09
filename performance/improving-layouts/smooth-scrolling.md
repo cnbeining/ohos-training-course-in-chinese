@@ -1,12 +1,12 @@
 # 使得ListView滑动顺畅
 
-> 编写:[allenlsy](https://github.com/allenlsy) - 原文:<http://developer.android.com/training/improving-layouts/smooth-scrolling.html>
+> 编写:[allenlsy](https://github.com/allenlsy) - 原文:<http://developer.huawei.com/training/improving-layouts/smooth-scrolling.html>
 
-保持程序流畅的关键，是让主线程（UI 线程）不要进行大量运算。你要确保在其他线程执行磁盘读写、网络读写或是 SQL 操作等。为了测试你的应用的状态，你可以启用 [StrictMode](http://developer.android.com/reference/android/os/StrictMode.html)。
+保持程序流畅的关键，是让主线程（UI 线程）不要进行大量运算。你要确保在其他线程执行磁盘读写、网络读写或是 SQL 操作等。为了测试你的应用的状态，你可以启用 [StrictMode](http://developer.huawei.com/reference/ohos/os/StrictMode.html)。
 
 ## 使用后台线程
 
-你应该把主线程中的耗时间的操作，提取到一个后台线程（也叫做“worker thread工作线程”）中，使得主线程只关注 UI 绘画。很多时候，使用 [AsyncTask](http://developer.android.com/reference/android/os/AsyncTask.html) 是一个简单的在主线程以外进行操作的方法。系统会自动把`execute()`的请求放入队列中并线性调用执行。这个行为是全局的，这意味着你不需要考虑自己定义线程池的事情。
+你应该把主线程中的耗时间的操作，提取到一个后台线程（也叫做“worker thread工作线程”）中，使得主线程只关注 UI 绘画。很多时候，使用 [AsyncTask](http://developer.huawei.com/reference/ohos/os/AsyncTask.html) 是一个简单的在主线程以外进行操作的方法。系统会自动把`execute()`的请求放入队列中并线性调用执行。这个行为是全局的，这意味着你不需要考虑自己定义线程池的事情。
 
 在下面的例子中，一个 AsyncTask 被用于在后台线程载入图片，并在载入完成后把图片显示到 UI  上。当图片正在载入时，它还会显示一个进度提示。
 
@@ -35,7 +35,7 @@ new AsyncTask<ViewHolder, Void, Bitmap>() {
 }.execute(holder);
 ```
 
-从 Android 3.0 (API level 11) 开始, AsyncTask 有个新特性，那就是它可以在多个 CPU 核上运行。你可以调用 `executeOnExecutor()`而不是`execute()`，前者可以根据CPU的核心数来触发多个任务同时进行。
+从 鸿蒙 3.0 (API level 11) 开始, AsyncTask 有个新特性，那就是它可以在多个 CPU 核上运行。你可以调用 `executeOnExecutor()`而不是`execute()`，前者可以根据CPU的核心数来触发多个任务同时进行。
 
 ## 在 ViewHolder 中填入视图对象
 

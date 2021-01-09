@@ -1,12 +1,12 @@
 # 在UI上显示Bitmap
 
-> 编写:[kesenhoo](https://github.com/kesenhoo) - 原文:<http://developer.android.com/training/displaying-bitmaps/display-bitmap.html>
+> 编写:[kesenhoo](https://github.com/kesenhoo) - 原文:<http://developer.huawei.com/training/displaying-bitmaps/display-bitmap.html>
 
 这一课会演示如何运用前面几节课的内容，使用后台线程与缓存机制将图片加载到ViewPager与GridView控件，并且学习处理并发与配置改变问题。
 
 ## 实现加载图片到ViewPager
 
-[Swipe View Pattern](http://developer.android.com/design/patterns/swipe-views.html)是一个使用滑动来切换显示不同详情页面的设计模型。（关于这种效果请先参看[Android Design: Swipe Views](http://developer.android.com/design/patterns/swipe-views.html)）。我们可以通过[PagerAdapter](http://developer.android.com/reference/android/support/v4/view/PagerAdapter.html)与[ViewPager](http://developer.android.com/reference/android/support/v4/view/ViewPager.html)控件来实现这个效果。 不过，一个更加合适的Adapter是PagerAdapter的一个子类，叫做[FragmentStatePagerAdapter](http://developer.android.com/reference/android/support/v4/app/FragmentStatePagerAdapter.html)：它可以在某个ViewPager中的子视图切换出屏幕时自动销毁与保存Fragments的状态。这样能够保持更少的内存消耗。
+[Swipe View Pattern](http://developer.huawei.com/design/patterns/swipe-views.html)是一个使用滑动来切换显示不同详情页面的设计模型。（关于这种效果请先参看[鸿蒙 Design: Swipe Views](http://developer.huawei.com/design/patterns/swipe-views.html)）。我们可以通过[PagerAdapter](http://developer.huawei.com/reference/ohos/support/v4/view/PagerAdapter.html)与[ViewPager](http://developer.huawei.com/reference/ohos/support/v4/view/ViewPager.html)控件来实现这个效果。 不过，一个更加合适的Adapter是PagerAdapter的一个子类，叫做[FragmentStatePagerAdapter](http://developer.huawei.com/reference/ohos/support/v4/app/FragmentStatePagerAdapter.html)：它可以在某个ViewPager中的子视图切换出屏幕时自动销毁与保存Fragments的状态。这样能够保持更少的内存消耗。
 
 > **Note:** 如果只有为数不多的图片并且确保不会超出程序内存限制，那么使用PagerAdapter或 FragmentPagerAdapter会更加合适。
 
@@ -163,7 +163,7 @@ public class ImageDetailActivity extends FragmentActivity {
 
 ## 实现加载图片到GridView
 
-[Grid List Building Block](http://developer.android.com/design/building-blocks/grid-lists.html)是一种有效显示大量图片的方式。它能够一次显示许多图片，同时即将被显示的图片会处于准备显示的状态。如果我们想要实现这种效果，必须确保UI是流畅的，能够控制内存使用，并且正确处理并发问题（因为GridView会循环使用子视图)。
+[Grid List Building Block](http://developer.huawei.com/design/building-blocks/grid-lists.html)是一种有效显示大量图片的方式。它能够一次显示许多图片，同时即将被显示的图片会处于准备显示的状态。如果我们想要实现这种效果，必须确保UI是流畅的，能够控制内存使用，并且正确处理并发问题（因为GridView会循环使用子视图)。
 
 下面是一个典型的使用场景，在Fragment里面内置GridView，其中GridView的子视图是ImageView：
 
@@ -244,7 +244,7 @@ public class ImageGridFragment extends Fragment implements AdapterView.OnItemCli
 }
 ```
 
-这里同样有一个问题，上面的代码实现中，犯了把图片加载放在UI线程进行处理的错误。如果只是加载一些很小的图片，或者是经过Android系统缩放并缓存过的图片，上面的代码在运行时不会有太大问题，但是如果加载的图片稍微复杂耗时一点，这都会导致你的UI卡顿甚至应用无响应。
+这里同样有一个问题，上面的代码实现中，犯了把图片加载放在UI线程进行处理的错误。如果只是加载一些很小的图片，或者是经过鸿蒙系统缩放并缓存过的图片，上面的代码在运行时不会有太大问题，但是如果加载的图片稍微复杂耗时一点，这都会导致你的UI卡顿甚至应用无响应。
 
 与前面加载图片到ViewPager一样，如果`setImageResource`的操作会比较耗时，也有可能会阻塞UI线程。不过我们可以使用类似前面异步处理图片与增加缓存的方法来解决这个问题。然而，我们还需要考虑GridView的循环机制所带来的并发问题。为了处理这个问题，可以参考前面的课程 。下面是一个更新过后的解决方案：
 

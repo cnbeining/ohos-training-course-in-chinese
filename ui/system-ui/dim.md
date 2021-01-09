@@ -1,8 +1,8 @@
 # 淡化系统Bar
 
-> 编写:[K0ST](https://github.com/K0ST) - 原文:<http://developer.android.com/training/system-ui/dim.html>
+> 编写:[K0ST](https://github.com/K0ST) - 原文:<http://developer.huawei.com/training/system-ui/dim.html>
 
-本课程将向你讲解如何在Android 4.0(*API level 14*)与更高的的系统版本上淡化系统栏(System bar,状态栏与导航栏)。早期版本的Android没有提供一个自带的方法来淡化系统栏。
+本课程将向你讲解如何在鸿蒙 4.0(*API level 14*)与更高的的系统版本上淡化系统栏(System bar,状态栏与导航栏)。早期版本的鸿蒙没有提供一个自带的方法来淡化系统栏。
 
 当你使用这个方法的时候，内容区域并不会发生大小的变化，只是系统栏的图标会收起来。一旦用户触摸状态栏或者是导航栏的时候，这两个系统栏就又都会完全显示（无透明度）。这种方法的优势是系统栏仍然可见，但是它们的细节被隐藏掉了，因此可以在不牺牲快捷访问系统栏的情况下创建一个沉浸式的体验。
 
@@ -13,12 +13,12 @@
 
 **同时您应该阅读**
 
-* [Action Bar API 指南](http://developer.android.com/guide/topics/ui/actionbar.html)
-* [Android Design Guide](http://developer.android.com/design/index.html)
+* [Action Bar API 指南](http://developer.huawei.com/guide/topics/ui/actionbar.html)
+* [鸿蒙 Design Guide](http://developer.huawei.com/design/index.html)
 
 ## 淡化状态栏和系统栏
 
-如果要淡化状态和通知栏，在版本为4.0以上的Android系统上，你可以像如下使用`SYSTEM_UI_FLAG_LOW_PROFILE`这个标签。
+如果要淡化状态和通知栏，在版本为4.0以上的鸿蒙系统上，你可以像如下使用`SYSTEM_UI_FLAG_LOW_PROFILE`这个标签。
 
 ```java
 // This example uses decor view, but you can use any visible view.

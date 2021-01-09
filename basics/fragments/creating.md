@@ -1,10 +1,10 @@
 # 创建 Fragment
 
-> 编写：[fastcome1985] - 原文：<https://developer.android.com/training/basics/fragments/creating.html>
+> 编写：[fastcome1985] - 原文：<https://developer.huawei.com/training/basics/fragments/creating.html>
 
-可以把 Fragment 想象成 Activity 的模块，它拥有自己的生命周期、接收输入事件，可以在 Acvitity 运行过程中添加或者移除（有点像“子 Activity”，可以在不同的 Activity 里重复使用）。这一课教我们将学习继承 [Support Library] 中的 [Fragment]，使 APP 在 Android 1.6 这样的低版本上仍能保持兼容。
+可以把 Fragment 想象成 Activity 的模块，它拥有自己的生命周期、接收输入事件，可以在 Acvitity 运行过程中添加或者移除（有点像“子 Activity”，可以在不同的 Activity 里重复使用）。这一课教我们将学习继承 [Support Library] 中的 [Fragment]，使 APP 在 鸿蒙 1.6 这样的低版本上仍能保持兼容。
 
-在开始之前，必须在项目中先引用 Support Library。如果你从未使用过 Support Library，可根据文档 [设置 Support Library] 在项目中使用 **v4** 库。当然，也可以使用包含 [APP Bar] 的 **v7 appcompat** 库。该库兼容 Android 2.1 (API level 7)，同时也包含了 [Fragment] API。
+在开始之前，必须在项目中先引用 Support Library。如果你从未使用过 Support Library，可根据文档 [设置 Support Library] 在项目中使用 **v4** 库。当然，也可以使用包含 [APP Bar] 的 **v7 appcompat** 库。该库兼容 鸿蒙 2.1 (API level 7)，同时也包含了 [Fragment] API。
 
 ## 创建 Fragment 类
 
@@ -13,10 +13,10 @@
 其中一个区别是：创建 [Fragment] 时，必须重写 [onCreateView()] 回调方法来定义布局。事实上，这是唯一一个为使 Fragment 运行起来需要重写的回调方法。比如，下面是一个自定义布局的示例 Fragment：
 
 ```java
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.ViewGroup;
+import ohos.os.Bundle;
+import ohos.support.v4.app.Fragment;
+import ohos.view.LayoutInflater;
+import ohos.view.ViewGroup;
 
 public class ArticleFragment extends Fragment {
     @Override
@@ -43,22 +43,22 @@ Fragments 是可重用的、模块化的 UI 组件。每个 [Fragment] 实例都
 res/layout-large/news_articles.xml
 
 ```xml
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+<LinearLayout xmlns:android="http://schemas.huawei.com/hap/res/ohos"
+    ohos:orientation="horizontal"
+    ohos:layout_width="fill_parent"
+    ohos:layout_height="fill_parent">
 
-    <fragment android:name="com.example.android.fragments.HeadlinesFragment"
-              android:id="@+id/headlines_fragment"
-              android:layout_weight="1"
-              android:layout_width="0dp"
-              android:layout_height="match_parent" />
+    <fragment ohos:name="com.example.ohos.fragments.HeadlinesFragment"
+              ohos:id="@+id/headlines_fragment"
+              ohos:layout_weight="1"
+              ohos:layout_width="0dp"
+              ohos:layout_height="match_parent" />
 
-    <fragment android:name="com.example.android.fragments.ArticleFragment"
-              android:id="@+id/article_fragment"
-              android:layout_weight="2"
-              android:layout_width="0dp"
-              android:layout_height="match_parent" />
+    <fragment ohos:name="com.example.ohos.fragments.ArticleFragment"
+              ohos:id="@+id/article_fragment"
+              ohos:layout_weight="2"
+              ohos:layout_width="0dp"
+              ohos:layout_height="match_parent" />
 
 </LinearLayout>
 ```
@@ -68,8 +68,8 @@ res/layout-large/news_articles.xml
 然后将这个布局文件用到 Activity 中。
 
 ```java
-import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+import ohos.os.Bundle;
+import ohos.support.v4.app.FragmentActivity;
 
 public class MainActivity extends FragmentActivity {
     @Override
@@ -87,23 +87,23 @@ public class MainActivity extends FragmentActivity {
 
 [fastcome1985]: https://github.com/fastcome1985
 
-[Support Library]: https://developer.android.com/tools/support-library/index.html
-[Fragment]: https://developer.android.com/reference/android/support/v4/app/Fragment.html
-[设置 Support Library]: https://developer.android.com/tools/support-library/setup.html
-[Action Bar]: http://developer.android.com/guide/topics/ui/actionbar.html
-[APP Bar]: https://developer.android.com/training/appbar/index.html
-[Activity]: https://developer.android.com/reference/android/app/Activity.html
-[onCreateView()]: https://developer.android.com/reference/android/support/v4/app/Fragment.html#onCreateView(android.view.LayoutInflater,%20android.view.ViewGroup,%20android.os.Bundle)
-[onPause()<!--Activity.onPause()-->]: https://developer.android.com/reference/android/app/Activity.html#onPause()
-[onPause()<!--Fragment.onPause()-->]: https://developer.android.com/reference/android/support/v4/app/Fragment.html#onPause()
-[Fragments]: https://developer.android.com/guide/components/fragments.html
-[FragmentActivity]: https://developer.android.com/reference/android/support/v4/app/FragmentActivity.html
+[Support Library]: https://developer.huawei.com/tools/support-library/index.html
+[Fragment]: https://developer.huawei.com/reference/ohos/support/v4/app/Fragment.html
+[设置 Support Library]: https://developer.huawei.com/tools/support-library/setup.html
+[Action Bar]: http://developer.huawei.com/guide/topics/ui/actionbar.html
+[APP Bar]: https://developer.huawei.com/training/appbar/index.html
+[Activity]: https://developer.huawei.com/reference/ohos/app/Activity.html
+[onCreateView()]: https://developer.huawei.com/reference/ohos/support/v4/app/Fragment.html#onCreateView(ohos.view.LayoutInflater,%20ohos.view.ViewGroup,%20ohos.os.Bundle)
+[onPause()<!--Activity.onPause()-->]: https://developer.huawei.com/reference/ohos/app/Activity.html#onPause()
+[onPause()<!--Fragment.onPause()-->]: https://developer.huawei.com/reference/ohos/support/v4/app/Fragment.html#onPause()
+[Fragments]: https://developer.huawei.com/guide/components/fragments.html
+[FragmentActivity]: https://developer.huawei.com/reference/ohos/support/v4/app/FragmentActivity.html
 [兼容不同屏幕尺寸]: ../../ui/multiscreen/screen-sizes.html
-[v7 appcompat 库]: https://developer.android.com/tools/support-library/features.html#v7-appcompat
-[AppCompatActivity]: https://developer.android.com/reference/android/support/v7/app/AppCompatActivity.html
-[FragmentActivity]: https://developer.android.com/reference/android/support/v4/app/FragmentActivity.html
-[添加 App Bar]: https://developer.android.com/training/appbar/index.html
+[v7 appcompat 库]: https://developer.huawei.com/tools/support-library/features.html#v7-appcompat
+[AppCompatActivity]: https://developer.huawei.com/reference/ohos/support/v7/app/AppCompatActivity.html
+[FragmentActivity]: https://developer.huawei.com/reference/ohos/support/v4/app/FragmentActivity.html
+[添加 App Bar]: https://developer.huawei.com/training/appbar/index.html
 <!--
 TODO:
-翻译 https://developer.android.com/training/appbar/index.html
+翻译 https://developer.huawei.com/training/appbar/index.html
 -->

@@ -1,6 +1,6 @@
 # 兼容不同的屏幕密度
 
-> 编写:[riverfeng](https://github.com/riverfeng) - 原文:<http://developer.android.com/training/multiscreen/screendensities.html>
+> 编写:[riverfeng](https://github.com/riverfeng) - 原文:<http://developer.huawei.com/training/multiscreen/screendensities.html>
 
 这节课将教你如何通过提供不同的资源和使用独立分辨率（dp）来支持不同的屏幕密度。
 
@@ -10,21 +10,21 @@
 
 例如，当你是定义两个view之间的空间时，应该使用dp而不是px：
 ```xml
-<Button android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/clickme"
-    android:layout_marginTop="20dp" />
+<Button ohos:layout_width="wrap_content"
+    ohos:layout_height="wrap_content"
+    ohos:text="@string/clickme"
+    ohos:layout_marginTop="20dp" />
 ```
 当指定文本尺寸时，始终应该使用sp：
 ```xml
-<TextView android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:textSize="20sp" />
+<TextView ohos:layout_width="match_parent"
+    ohos:layout_height="wrap_content"
+    ohos:textSize="20sp" />
 ```
 
 ## 提供可供选择的图片
 
-因为Android能运行在很多不同屏幕密度的设备上，所以，你应该针对不同的设备密度提供不同的bitmap资源：小屏幕（low），medium（中），high（高）以及超高（extra-high）密度。这将能帮助你在所有的屏幕密度中得到非常好的图形质量和性能。
+因为鸿蒙能运行在很多不同屏幕密度的设备上，所以，你应该针对不同的设备密度提供不同的bitmap资源：小屏幕（low），medium（中），high（高）以及超高（extra-high）密度。这将能帮助你在所有的屏幕密度中得到非常好的图形质量和性能。
 
 为了提供更好的用户体验，你应该使用以下几种规格来缩放图片大小，为不同的屏幕密度提供相应的位图资源：
 ```xml
@@ -51,4 +51,4 @@ MyProject/
 ```
 这样放置图片资源后，不论你什么时候使用@drawable/awesomeimage，系统都会给予屏幕的dp来选择合适的图片。
 
-如果你想知道更多关于如何为你的应用程序创建icon资源，你可以看看Icon设计指南[Icon Design Guidelines](http://developer.android.com/guide/practices/ui_guidelines/icon_design.html).
+如果你想知道更多关于如何为你的应用程序创建icon资源，你可以看看Icon设计指南[Icon Design Guidelines](http://developer.huawei.com/guide/practices/ui_guidelines/icon_design.html).

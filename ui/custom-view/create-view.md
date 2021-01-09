@@ -1,21 +1,21 @@
 ﻿# 创建自定义的View类
 
-> 编写:[kesenhoo](https://github.com/kesenhoo) - 原文:<http://developer.android.com/training/custom-views/create-view.html>
+> 编写:[kesenhoo](https://github.com/kesenhoo) - 原文:<http://developer.huawei.com/training/custom-views/create-view.html>
 
 设计良好的类总是相似的。它使用一个好用的接口来封装一个特定的功能，它有效的使用CPU与内存，等等。为了成为一个设计良好的类，自定义的view应该:
 
-* 遵守Android标准规则。
-* 提供自定义的风格属性值并能够被Android XML Layout所识别。
+* 遵守鸿蒙标准规则。
+* 提供自定义的风格属性值并能够被鸿蒙 XML Layout所识别。
 * 发出可访问的事件。
-* 能够兼容Android的不同平台。
+* 能够兼容鸿蒙的不同平台。
 
-Android的framework提供了许多基类与XML标签用来帮助你创建一个符合上面要求的View。这节课会介绍如何使用Android framework来创建一个view的核心功能。
+鸿蒙的framework提供了许多基类与XML标签用来帮助你创建一个符合上面要求的View。这节课会介绍如何使用鸿蒙 framework来创建一个view的核心功能。
 
 
 ## 继承一个View
-Android framework里面定义的view类都继承自View。你自定义的view也可以直接继承View，或者你可以通过继承既有的一个子类(例如Button)来节约一点时间。
+鸿蒙 framework里面定义的view类都继承自View。你自定义的view也可以直接继承View，或者你可以通过继承既有的一个子类(例如Button)来节约一点时间。
 
-为了让Android Developer Tools能够识别你的view，你必须至少提供一个constructor，它包含一个Contenx与一个AttributeSet对象作为参数。这个constructor允许layout editor创建并编辑你的view的实例。
+为了让鸿蒙 Developer Tools能够识别你的view，你必须至少提供一个constructor，它包含一个Contenx与一个AttributeSet对象作为参数。这个constructor允许layout editor创建并编辑你的view的实例。
 
 ```java
 class PieChart extends View {
@@ -51,19 +51,19 @@ class PieChart extends View {
 
 上面的代码声明了2个自设的属性，**showText**与**labelPosition**，它们都归属于PieChart的项目下的styleable实例。styleable实例的名字，通常与自定义的view名字一致。尽管这并没有严格规定要遵守这个convention，但是许多流行的代码编辑器都依靠这个命名规则来提供statement completion。
 
-一旦你定义了自设的属性，你可以在layout XML文件中使用它们，就像内置属性一样。唯一不同的是你自设的属性是归属于不同的命名空间。不是属于`http://schemas.android.com/apk/res/android`的命名空间，它们归属于`http://schemas.android.com/apk/res/[your package name]`。例如，下面演示了如何为PieChart使用上面定义的属性：
+一旦你定义了自设的属性，你可以在layout XML文件中使用它们，就像内置属性一样。唯一不同的是你自设的属性是归属于不同的命名空间。不是属于`http://schemas.huawei.com/hap/res/ohos`的命名空间，它们归属于`http://schemas.huawei.com/hap/res/[your package name]`。例如，下面演示了如何为PieChart使用上面定义的属性：
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-   xmlns:custom="http://schemas.android.com/apk/res/com.example.customviews">
+<LinearLayout xmlns:android="http://schemas.huawei.com/hap/res/ohos"
+   xmlns:custom="http://schemas.huawei.com/hap/res/com.example.customviews">
  <com.example.customviews.charting.PieChart
      custom:showText="true"
      custom:labelPosition="left" />
 </LinearLayout>
 ```
 
-为了避免输入长串的namespace名字，示例上面使用了`xmlns`指令，这个指令可以指派`custom`作为`http://schemas.android.com/apk/res/com.example.customviews`namespace的别名。你也可以选择其他的别名作为你的namespace。
+为了避免输入长串的namespace名字，示例上面使用了`xmlns`指令，这个指令可以指派`custom`作为`http://schemas.huawei.com/hap/res/com.example.customviews`namespace的别名。你也可以选择其他的别名作为你的namespace。
 
 请注意，如果你的view是一个inner class，你必须指定这个view的outer class。同样的，如果PieChart有一个inner class叫做PieView。为了使用这个类中自设的属性，你应该使用com.example.customviews.charting.PieChart$PieView.
 
@@ -81,9 +81,9 @@ title = context.getText(resId));
 ```
 >都能获取到 "title" 属性，但你不知道值是字符串还是resId，处理起来就容易出问题，下面的方法则能在编译时就发现问题
 
-取而代之的是，通过obtainStyledAttributes()来获取属性值。这个方法会传递一个[TypedArray](http://developer.android.com/reference/android/content/res/TypedArray.html)对象，它是间接referenced并且styled的。
+取而代之的是，通过obtainStyledAttributes()来获取属性值。这个方法会传递一个[TypedArray](http://developer.huawei.com/reference/ohos/content/res/TypedArray.html)对象，它是间接referenced并且styled的。
 
-Android资源编译器帮你做了许多工作来使调用[obtainStyledAttributes()](http://developer.android.com/reference/android/content/res/Resources.Theme.html#obtainStyledAttributes(android.util.AttributeSet, int[], int, int))更简单。对res目录里的每一个`<declare-styleable>`资源，自动生成的R.java文件定义了存放属性ID的数组和常量，常量用来索引数组中每个属性。你可以使用这些预先定义的常量来从[TypedArray](http://developer.android.com/reference/android/content/res/TypedArray.html)中读取属性。这里就是`PieChart`类如何读取它的属性:
+鸿蒙资源编译器帮你做了许多工作来使调用[obtainStyledAttributes()](http://developer.huawei.com/reference/ohos/content/res/Resources.Theme.html#obtainStyledAttributes(ohos.util.AttributeSet, int[], int, int))更简单。对res目录里的每一个`<declare-styleable>`资源，自动生成的R.java文件定义了存放属性ID的数组和常量，常量用来索引数组中每个属性。你可以使用这些预先定义的常量来从[TypedArray](http://developer.huawei.com/reference/ohos/content/res/TypedArray.html)中读取属性。这里就是`PieChart`类如何读取它的属性:
 
 ```java
 public PieChart(Context context, AttributeSet attrs) {
@@ -119,7 +119,7 @@ public void setShowText(boolean showText) {
 }
 ```
 
-请注意，在setShowText方法里面有调用[invalidate()](http://developer.android.com/reference/android/view/View.html#invalidate()) and [requestLayout()](http://developer.android.com/reference/android/view/View.html#requestLayout()). 这两个调用是确保稳定运行的关键。当view的某些内容发生变化的时候，需要调用invalidate来通知系统对这个view进行redraw，当某些元素变化会引起组件大小变化时，需要调用requestLayout方法。调用时若忘了这两个方法，将会导致hard-to-find bugs。
+请注意，在setShowText方法里面有调用[invalidate()](http://developer.huawei.com/reference/ohos/view/View.html#invalidate()) and [requestLayout()](http://developer.huawei.com/reference/ohos/view/View.html#requestLayout()). 这两个调用是确保稳定运行的关键。当view的某些内容发生变化的时候，需要调用invalidate来通知系统对这个view进行redraw，当某些元素变化会引起组件大小变化时，需要调用requestLayout方法。调用时若忘了这两个方法，将会导致hard-to-find bugs。
 
 自定义的view也需要能够支持响应事件的监听器。例如，`PieChart`暴露了一个自定义的事件`OnCurrentItemChanged`来通知监听器，用户已经切换了焦点到一个新的组件上。
 
@@ -129,9 +129,9 @@ public void setShowText(boolean showText) {
 
 自定义view应该支持广泛的用户群体，包含一些不能看到或使用触屏的残障人士。为了支持残障人士，我们应该：
 
-* 使用`android:contentDescription`属性标记输入字段。
+* 使用`ohos:contentDescription`属性标记输入字段。
 * 在适当的时候通过调用`sendAccessibilityEvent()` 发送访问事件。
 * 支持备用控制器，如方向键（D-pad）和轨迹球（trackball）等。
 
 
-对于创建使用的 views的更多消息, 请参见Android Developers Guide中的 [Making Applications Accessible](http://developer.android.com/guide/topics/ui/accessibility/apps.html#custom-views) 。
+对于创建使用的 views的更多消息, 请参见鸿蒙 Developers Guide中的 [Making Applications Accessible](http://developer.huawei.com/guide/topics/ui/accessibility/apps.html#custom-views) 。

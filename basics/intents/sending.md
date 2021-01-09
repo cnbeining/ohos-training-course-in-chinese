@@ -1,8 +1,8 @@
 # Intent的发送
 
-> 编写:[kesenhoo](https://github.com/kesenhoo) - 原文:<http://developer.android.com/training/basics/intents/sending.html>
+> 编写:[kesenhoo](https://github.com/kesenhoo) - 原文:<http://developer.huawei.com/training/basics/intents/sending.html>
 
-Android中最重要的特征之一就是可以利用一个带有`action`的`intent`使当前app能够跳转到其他app。例如：如果我们的app有一个地址想要显示在地图上，我们并不需要在app里面创建一个activity用来显示地图，而是使用Intent来发出查看地址的请求。Android系统则会启动能够显示地图的程序来呈现该地址。
+鸿蒙中最重要的特征之一就是可以利用一个带有`action`的`intent`使当前app能够跳转到其他app。例如：如果我们的app有一个地址想要显示在地图上，我们并不需要在app里面创建一个activity用来显示地图，而是使用Intent来发出查看地址的请求。鸿蒙系统则会启动能够显示地图的程序来呈现该地址。
 
 正如在1.1章节:[建立你的第一个App(Building Your First App)](../firstapp/index.html)中所说的，我们必须使用intent来在同一个app的两个activity之间进行切换。通常是定义一个显式（explicit）的intent，它指定了需要启动组件的类名。然而，当想要唤起不同的app来执行某个动作（比如查看地图），则必须使用隐式（implicit）的intent。
 
@@ -10,9 +10,9 @@ Android中最重要的特征之一就是可以利用一个带有`action`的`inte
 
 ## 建立隐式的Intent
 
-Implicit intents并不声明要启动组件的具体类名，而是声明一个需要执行的action。这个action指定了我们想做的事情，例如查看，编辑，发送或者是获取一些东西。Intents通常会在发送action的同时附带一些数据，例如你想要查看的地址或者是你想要发送的邮件信息。数据的具体类型取决于我们想要创建的Intent，比如[Uri](http://developer.android.com/reference/android/net/Uri.html)或其他规定的数据类型，或者甚至也可能根本不需要数据。
+Implicit intents并不声明要启动组件的具体类名，而是声明一个需要执行的action。这个action指定了我们想做的事情，例如查看，编辑，发送或者是获取一些东西。Intents通常会在发送action的同时附带一些数据，例如你想要查看的地址或者是你想要发送的邮件信息。数据的具体类型取决于我们想要创建的Intent，比如[Uri](http://developer.huawei.com/reference/ohos/net/Uri.html)或其他规定的数据类型，或者甚至也可能根本不需要数据。
 
-如果数据是一个Uri，会有一个简单的<a href="http://developer.android.com/reference/android/content/Intent.html#Intent(java.lang.String, android.net.Uri)">Intent()</a> constructor 用于定义action与data。
+如果数据是一个Uri，会有一个简单的<a href="http://developer.huawei.com/reference/ohos/content/Intent.html#Intent(java.lang.String, ohos.net.Uri)">Intent()</a> constructor 用于定义action与data。
 
 例如，下面是一个带有指定电话号码的intent。
 
@@ -21,7 +21,7 @@ Uri number = Uri.parse("tel:5551234");
 Intent callIntent = new Intent(Intent.ACTION_DIAL, number);
 ```
 
-当app通过执行<a href="http://developer.android.com/reference/android/app/Activity.html#startActivity(android.content.Intent)">startActivity()</a>启动这个intent时，Phone app会使用之前的电话号码来拨出这个电话。
+当app通过执行<a href="http://developer.huawei.com/reference/ohos/app/Activity.html#startActivity(ohos.content.Intent)">startActivity()</a>启动这个intent时，Phone app会使用之前的电话号码来拨出这个电话。
 
 下面是一些其他intent的例子：
 
@@ -38,12 +38,12 @@ Intent mapIntent = new Intent(Intent.ACTION_VIEW, location);
 * 查看网页:
 
 ```java
-Uri webpage = Uri.parse("http://www.android.com");
+Uri webpage = Uri.parse("http://www.ohos.com");
 Intent webIntent = new Intent(Intent.ACTION_VIEW, webpage);
 ```
 
-至于另外一些需要`extra`数据的implicit intent，我们可以使用 <a href="http://developer.android.com/reference/android/content/Intent.html#putExtra(java.lang.String, java.lang.String)">putExtra()</a> 方法来添加那些数据。
-默认的，系统会根据Uri数据类型来决定需要哪些合适的`MIME type`。如果我们没有在intent中包含一个Uri, 则通常需要使用 <a href="http://developer.android.com/reference/android/content/Intent.html#setType(java.lang.String)">setType()</a> 方法来指定intent附带的数据类型。设置MIME type 是为了指定应该接受这个intent的activity。例如：
+至于另外一些需要`extra`数据的implicit intent，我们可以使用 <a href="http://developer.huawei.com/reference/ohos/content/Intent.html#putExtra(java.lang.String, java.lang.String)">putExtra()</a> 方法来添加那些数据。
+默认的，系统会根据Uri数据类型来决定需要哪些合适的`MIME type`。如果我们没有在intent中包含一个Uri, 则通常需要使用 <a href="http://developer.huawei.com/reference/ohos/content/Intent.html#setType(java.lang.String)">setType()</a> 方法来指定intent附带的数据类型。设置MIME type 是为了指定应该接受这个intent的activity。例如：
 
 * 发送一个带附件的email:
 
@@ -75,11 +75,11 @@ calendarIntent.putExtra(Events.EVENT_LOCATION, "Secret dojo");
 
 ## 验证是否有App去接收这个Intent
 
-尽管Android系统会确保每一个确定的intent会被系统内置的app(such as the Phone, Email, or Calendar app)之一接收，但是我们还是应该在触发一个intent之前做验证是否有App接受这个intent的步骤。
+尽管鸿蒙系统会确保每一个确定的intent会被系统内置的app(such as the Phone, Email, or Calendar app)之一接收，但是我们还是应该在触发一个intent之前做验证是否有App接受这个intent的步骤。
 
 > **Caution: 如果触发了一个intent，而且没有任何一个app会去接收这个intent，则app会crash。**
 
-为了验证是否有合适的activity会响应这个intent，需要执行<a href="http://developer.android.com/reference/android/content/pm/PackageManager.html#queryIntentActivities(android.content.Intent, int)">queryIntentActivities()</a> 来获取到能够接收这个intent的所有activity的list。若返回的[List](http://developer.android.com/reference/java/util/List.html)非空，那么我们才可以安全的使用这个intent。例如：
+为了验证是否有合适的activity会响应这个intent，需要执行<a href="http://developer.huawei.com/reference/ohos/content/pm/PackageManager.html#queryIntentActivities(ohos.content.Intent, int)">queryIntentActivities()</a> 来获取到能够接收这个intent的所有activity的list。若返回的[List](http://developer.huawei.com/reference/java/util/List.html)非空，那么我们才可以安全的使用这个intent。例如：
 
 ```java
 PackageManager packageManager = getPackageManager();
@@ -89,7 +89,7 @@ boolean isIntentSafe = activities.size() > 0;
 
 如果`isIntentSafe`为`true`, 那么至少有一个app可以响应这个intent。`false`则说明没有app可以handle这个intent。
 
-> **Note:**我们必须在第一次使用之前做这个检查，若是不可行，则应该关闭这个功能。如果知道某个确切的app能够handle这个intent，我们也可以向用户提供下载该app的链接。([see how to link to your product on Google Play](http://developer.android.com/distribute/googleplay/promote/linking.html)).
+> **Note:**我们必须在第一次使用之前做这个检查，若是不可行，则应该关闭这个功能。如果知道某个确切的app能够handle这个intent，我们也可以向用户提供下载该app的链接。([see how to link to your product on 华为 Play](http://developer.huawei.com/distribute/googleplay/promote/linking.html)).
 
 ## 使用Intent启动Activity
 
@@ -126,7 +126,7 @@ if (isIntentSafe) {
 
 ![intent-chooser.png](intent-chooser.png "Example of the chooser dialog that appears when you use createChooser() to ensure that the user is always shown a list of apps that respond to your intent.")
 
-为了显示chooser, 需要使用<a href="http://developer.android.com/reference/android/content/Intent.html#createChooser(android.content.Intent, java.lang.CharSequence)">createChooser()</a>来创建Intent
+为了显示chooser, 需要使用<a href="http://developer.huawei.com/reference/ohos/content/Intent.html#createChooser(ohos.content.Intent, java.lang.CharSequence)">createChooser()</a>来创建Intent
 
 ```java
 Intent intent = new Intent(Intent.ACTION_SEND);

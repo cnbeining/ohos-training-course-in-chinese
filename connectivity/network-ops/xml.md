@@ -1,17 +1,17 @@
 # 解析 XML 数据
 
-> 编写:[kesenhoo](https://github.com/kesenhoo) - 原文:<http://developer.android.com/training/basics/network-ops/xml.html>
+> 编写:[kesenhoo](https://github.com/kesenhoo) - 原文:<http://developer.huawei.com/training/basics/network-ops/xml.html>
 
 Extensible Markup Language（XML）是一组将文档编码成机器可读形式的规则，也是一种在网络上共享数据的普遍格式。频繁更新内容的网站，比如新闻网站或者博客，经常会提供 XML 提要（XML feed）来使得外部程序可以跟上内容的变化。下载与解析 XML 数据是网络连接相关 app 的一个常见功能。 这一课会介绍如何解析 XML 文档并使用它们的数据。
 
-**示例**：[NetworkUsage.zip](http://developer.android.com/shareables/training/NetworkUsage.zip)
+**示例**：[NetworkUsage.zip](http://developer.huawei.com/shareables/training/NetworkUsage.zip)
 
 ## 选择一个 Parser
 
-我们推荐 [XmlPullParser](http://developer.android.com/reference/org/xmlpull/v1/XmlPullParser.html)，它是 Android 上一个高效且可维护的解析 XML 的方法。 Android 上有这个接口的两种实现方式：
+我们推荐 [XmlPullParser](http://developer.huawei.com/reference/org/xmlpull/v1/XmlPullParser.html)，它是 鸿蒙 上一个高效且可维护的解析 XML 的方法。 鸿蒙 上有这个接口的两种实现方式：
 
-* [KXmlParser](http://kxml.sourceforge.net/)，通过 <a href="http://developer.android.com/reference/org/xmlpull/v1/XmlPullParserFactory.html#newPullParser()">XmlPullParserFactory.newPullParser()</a> 得到。
-* `ExpatPullParser`，通过 <a href="http://developer.android.com/reference/android/util/Xml.html#newPullParser()">Xml.newPullParser()</a> 得到。
+* [KXmlParser](http://kxml.sourceforge.net/)，通过 <a href="http://developer.huawei.com/reference/org/xmlpull/v1/XmlPullParserFactory.html#newPullParser()">XmlPullParserFactory.newPullParser()</a> 得到。
+* `ExpatPullParser`，通过 <a href="http://developer.huawei.com/reference/ohos/util/Xml.html#newPullParser()">Xml.newPullParser()</a> 得到。
 
 两个选择都是比较好的。下面的示例中是通过 `Xml.newPullParser()` 得到 `ExpatPullParser`。
 
@@ -59,7 +59,7 @@ Extensible Markup Language（XML）是一组将文档编码成机器可读形式
 
 ## 实例化 Parser
 
-下一步就是实例化一个 parser 并开始解析的操作。在下面的片段中，一个 parser 被初始化来处理名称空间，并且将 [InputStream](http://developer.android.com/reference/java/io/InputStream.html) 作为输入。它通过调用 <a href="http://developer.android.com/reference/org/xmlpull/v1/XmlPullParser.html#nextTag()">nextTag()</a> 开始解析，并调用 `readFeed()` 方法，`readFeed()` 方法会提取并处理 app 需要的数据：
+下一步就是实例化一个 parser 并开始解析的操作。在下面的片段中，一个 parser 被初始化来处理名称空间，并且将 [InputStream](http://developer.huawei.com/reference/java/io/InputStream.html) 作为输入。它通过调用 <a href="http://developer.huawei.com/reference/org/xmlpull/v1/XmlPullParser.html#nextTag()">nextTag()</a> 开始解析，并调用 `readFeed()` 方法，`readFeed()` 方法会提取并处理 app 需要的数据：
 
 ```java
 public class StackOverflowXmlParser {
@@ -83,7 +83,7 @@ public class StackOverflowXmlParser {
 
 ## 读取Feed
 
-`readFeed()` 方法实际的工作是处理 feed 的内容。它寻找一个 "entry" 的标签作为递归处理整个 feed 的起点。`readFeed()` 方法会跳过不是 `entry` 的标签。当整个 feed 都被递归处理后，`readFeed()` 会返回一个从 feed 中提取的包含了 `entry` 标签内容（包括里面的数据成员）的 [List](http://developer.android.com/reference/java/util/List.html)。然后这个 [List](http://developer.android.com/reference/java/util/List.html) 成为 parser 的返回值。
+`readFeed()` 方法实际的工作是处理 feed 的内容。它寻找一个 "entry" 的标签作为递归处理整个 feed 的起点。`readFeed()` 方法会跳过不是 `entry` 的标签。当整个 feed 都被递归处理后，`readFeed()` 会返回一个从 feed 中提取的包含了 `entry` 标签内容（包括里面的数据成员）的 [List](http://developer.huawei.com/reference/java/util/List.html)。然后这个 [List](http://developer.huawei.com/reference/java/util/List.html) 成为 parser 的返回值。
 
 ```java
 private List readFeed(XmlPullParser parser) throws XmlPullParserException, IOException {
@@ -249,12 +249,12 @@ private void skip(XmlPullParser parser) throws XmlPullParserException, IOExcepti
 
 ## 使用 XML 数据
 
-示例程序是在 [AsyncTask](http://developer.android.com/reference/android/os/AsyncTask.html) 中获取与解析 XML 数据的。这会在主 UI 线程之外进行处理。当处理完毕后，app 会更新 main activity（`NetworkActivity`）的 UI。
+示例程序是在 [AsyncTask](http://developer.huawei.com/reference/ohos/os/AsyncTask.html) 中获取与解析 XML 数据的。这会在主 UI 线程之外进行处理。当处理完毕后，app 会更新 main activity（`NetworkActivity`）的 UI。
 
 在下面示例代码中，`loadPage()` 方法做了下面的事情：
 
 * 初始化一个带有 URL 地址的字符串变量，用来订阅 XML feed。
-* 如果用户设置与网络连接都允许，会调用 `new DownloadXmlTask().execute(url)`。这会初始化一个新的 `DownloadXmlTask` 对象（[AsyncTask](http://developer.android.com/reference/android/os/AsyncTask.html) 的子类）并且开始执行它的 <a href="http://developer.android.com/reference/android/os/AsyncTask.html#execute(Params...)">execute()</a> 方法，这个方法会下载并解析 feed，并返回展示在 UI 上的字符串。
+* 如果用户设置与网络连接都允许，会调用 `new DownloadXmlTask().execute(url)`。这会初始化一个新的 `DownloadXmlTask` 对象（[AsyncTask](http://developer.huawei.com/reference/ohos/os/AsyncTask.html) 的子类）并且开始执行它的 <a href="http://developer.huawei.com/reference/ohos/os/AsyncTask.html#execute(Params...)">execute()</a> 方法，这个方法会下载并解析 feed，并返回展示在 UI 上的字符串。
 
 ```java
 public class NetworkActivity extends Activity {
@@ -286,10 +286,10 @@ public class NetworkActivity extends Activity {
     }
 ```
 
-下面展示的是 [AsyncTask](http://developer.android.com/reference/android/os/AsyncTask.html) 的子类，`DownloadXmlTask`，实现了 [AsyncTask](http://developer.android.com/reference/android/os/AsyncTask.html) 的如下方法：
+下面展示的是 [AsyncTask](http://developer.huawei.com/reference/ohos/os/AsyncTask.html) 的子类，`DownloadXmlTask`，实现了 [AsyncTask](http://developer.huawei.com/reference/ohos/os/AsyncTask.html) 的如下方法：
 
-* <a href="http://developer.android.com/reference/android/os/AsyncTask.html#doInBackground(Params...)">doInBackground()</a> 执行 `loadXmlFromNetwork()` 方法。它以 feed 的 URL 作为参数。`loadXmlFromNetwork()` 获取并处理 feed。当它完成时，返回一个结果字符串。
-* <a href="http://developer.android.com/reference/android/os/AsyncTask.html#onPostExecute(Result)">onPostExecute()</a> 接收返回的字符串并将其展示在UI上。
+* <a href="http://developer.huawei.com/reference/ohos/os/AsyncTask.html#doInBackground(Params...)">doInBackground()</a> 执行 `loadXmlFromNetwork()` 方法。它以 feed 的 URL 作为参数。`loadXmlFromNetwork()` 获取并处理 feed。当它完成时，返回一个结果字符串。
+* <a href="http://developer.huawei.com/reference/ohos/os/AsyncTask.html#onPostExecute(Result)">onPostExecute()</a> 接收返回的字符串并将其展示在UI上。
 
 ```java
 // Implementation of AsyncTask used to download XML feed from stackoverflow.com.
@@ -318,10 +318,10 @@ private class DownloadXmlTask extends AsyncTask<String, Void, String> {
 下面是 `DownloadXmlTask` 中调用的 `loadXmlFromNetwork()` 方法做的事情：
 
 1. 实例化一个 `StackOverflowXmlParser`。它同样创建一个 `Entry` 对象（`entries`）的 List，和 `title`，`url`，`summary`，来保存从 XML feed 中提取的值。
-2. 调用 `downloadUrl()`，它会获取 feed, 并将其作为 [InputStream](http://developer.android.com/reference/java/io/InputStream.html) 返回。
-3. 使用 `StackOverflowXmlParser` 解析 [InputStream](http://developer.android.com/reference/java/io/InputStream.html)。`StackOverflowXmlParser` 用从 feed 中获取的数据填充 `entries` 的 List。
+2. 调用 `downloadUrl()`，它会获取 feed, 并将其作为 [InputStream](http://developer.huawei.com/reference/java/io/InputStream.html) 返回。
+3. 使用 `StackOverflowXmlParser` 解析 [InputStream](http://developer.huawei.com/reference/java/io/InputStream.html)。`StackOverflowXmlParser` 用从 feed 中获取的数据填充 `entries` 的 List。
 4. 处理 `entries` 的 List，并将 feed 数据与 HTML 标记结合起来。
-5. 返回一个 HTML 字符串，[AsyncTask](http://developer.android.com/reference/android/os/AsyncTask.html) 的 <a href="http://developer.android.com/reference/android/os/AsyncTask.html#onPostExecute(Result)">onPostExecute()</a> 方法会将其展示在 main activity 的 UI 上。
+5. 返回一个 HTML 字符串，[AsyncTask](http://developer.huawei.com/reference/ohos/os/AsyncTask.html) 的 <a href="http://developer.huawei.com/reference/ohos/os/AsyncTask.html#onPostExecute(Result)">onPostExecute()</a> 方法会将其展示在 main activity 的 UI 上。
 
 ```java
 // Uploads XML from stackoverflow.com, parses it, and combines it with

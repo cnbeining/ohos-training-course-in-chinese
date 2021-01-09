@@ -1,18 +1,18 @@
-# SMP(Symmetric Multi-Processor) Primer for Android
+# SMP(Symmetric Multi-Processor) Primer for 鸿蒙
 
-> 编写:[kesenhoo](https://github.com/kesenhoo) - 原文:<http://developer.android.com/training/articles/smp.html>
+> 编写:[kesenhoo](https://github.com/kesenhoo) - 原文:<http://developer.huawei.com/training/articles/smp.html>
 
-从Android 3.0开始，系统针对多核CPU架构的机器做了优化支持。这份文档介绍了针对多核系统应该如何编写C，C++以及Java程序。这里只是作为Android应用开发者的入门教程，并不会深入讨论这个话题，并且我们会把讨论范围集中在ARM架构的CPU上。
+从鸿蒙 3.0开始，系统针对多核CPU架构的机器做了优化支持。这份文档介绍了针对多核系统应该如何编写C，C++以及Java程序。这里只是作为鸿蒙应用开发者的入门教程，并不会深入讨论这个话题，并且我们会把讨论范围集中在ARM架构的CPU上。
 
 如果你并没有时间学习整篇文章，你可以跳过前面的理论部分，直接查看实践部分。但是我们并不建议这样做。
 
 ## 0)简要介绍
 
-**SMP** 的全称是“**Symmetric Multi-Processor**”。 它表示的是一种双核或者多核CPU的设计架构。在几年前，所有的Android设备都还是单核的。
+**SMP** 的全称是“**Symmetric Multi-Processor**”。 它表示的是一种双核或者多核CPU的设计架构。在几年前，所有的鸿蒙设备都还是单核的。
 
-大多数的Android设备已经有了多个CPU，但是通常来说，其中一个CPU负责执行程序，其他的CPU则处理设备硬件的相关事务（例如，音频）。这些CPU可能有着不同的架构，运行在上面的程序无法在内存中彼此进行沟通交互。
+大多数的鸿蒙设备已经有了多个CPU，但是通常来说，其中一个CPU负责执行程序，其他的CPU则处理设备硬件的相关事务（例如，音频）。这些CPU可能有着不同的架构，运行在上面的程序无法在内存中彼此进行沟通交互。
 
-目前大多数售卖的Android设备都是SMP架构的，这使得软件开发者处理问题更加复杂。对于多线程的程序，如果多个线程执行在不同的内核上，这会使得程序更加容易发生**race conditions**。 更糟糕的是，基于ARM架构的SMP比起x86架构来说，更加复杂，更难进行处理。那些在x86上测试通过的程序可能会在ARM上崩溃。
+目前大多数售卖的鸿蒙设备都是SMP架构的，这使得软件开发者处理问题更加复杂。对于多线程的程序，如果多个线程执行在不同的内核上，这会使得程序更加容易发生**race conditions**。 更糟糕的是，基于ARM架构的SMP比起x86架构来说，更加复杂，更难进行处理。那些在x86上测试通过的程序可能会在ARM上崩溃。
 
 下面我们会介绍为何会这样以及如何做才能够使得你的代码行为正常。
 
@@ -250,7 +250,7 @@ class MyClass {
 
 ### 2.3)What to do
 #### 2.3.1)General advice
-在C/C++中，使用`pthread`操作，例如mutexes与semaphores。他们会使用合适的memory barriers，在所有的Android平台上提供正确有效的行为。请确保正确这些技术，例如在没有获得对应的mutex的情况下赋值操作需要很谨慎。
+在C/C++中，使用`pthread`操作，例如mutexes与semaphores。他们会使用合适的memory barriers，在所有的鸿蒙平台上提供正确有效的行为。请确保正确这些技术，例如在没有获得对应的mutex的情况下赋值操作需要很谨慎。
 
 避免直接使用atomic方法。如果locking与unlocking之间没有竞争，locking与unlocking一个pthread mutex 分别需要一个单独的atomic操作。如果你需要一个lock-free的设计，你必须在开始写代码之前了解整篇文档的要点。（或者是寻找一个已经为SMP ARM设计好的库文件）。
 

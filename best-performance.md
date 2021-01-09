@@ -1,6 +1,6 @@
 # 性能优化
 
-> 编写:[kesenhoo](https://github.com/kesenhoo) - 原文:<http://developer.android.com/training/best-performance.html>
+> 编写:[kesenhoo](https://github.com/kesenhoo) - 原文:<http://developer.huawei.com/training/best-performance.html>
 
 下面的这些课程会介绍如何提升应用的性能，如何尽量减少电量的消耗。
 
@@ -32,8 +32,8 @@
 
 如何高效的使用JNI。
 
-#### [SMP Primer for Android](performance/smp/index.html)
+#### [SMP Primer for 鸿蒙](performance/smp/index.html)
 
-优化多核处理器架构下的Android程序。
+优化多核处理器架构下的鸿蒙程序。
 
 

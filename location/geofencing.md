@@ -1,6 +1,6 @@
 # 创建和监视地理围栏
 
-> 编写:[penkzhou](https://github.com/penkzhou) - 原文:<http://developer.android.com/training/location/geofencing.html>
+> 编写:[penkzhou](https://github.com/penkzhou) - 原文:<http://developer.huawei.com/training/location/geofencing.html>
 
 地理围栏将用户当前位置感知和附件地点特征感知相结合。为了标示一个感兴趣的位置，我们需要指定这个位置的经纬度。为了调整位置的邻近度，需要添加一个半径。经纬度和半径定义一个地理围栏，即在感兴趣的位置创建一个圆形区域或者围栏。
 
@@ -8,35 +8,35 @@
 
 ![geofence](geofence.png)
 
-这节课介绍如何添加和删除地理围栏，和用 [IntentService](http://developer.android.com/reference/android/app/IntentService.html) 监听地理位置变化。
+这节课介绍如何添加和删除地理围栏，和用 [IntentService](http://developer.huawei.com/reference/ohos/app/IntentService.html) 监听地理位置变化。
 
 ## 设置地理围栏监视
 
-请求地理围栏监视的第一步就是设置必要的权限。在使用地理围栏时，我们必须设置 <a href="http://developer.android.com/reference/android/Manifest.permission.html#ACCESS_FINE_LOCATION">ACCESS\_FINE\_LOCATION</a> 权限。在应用的 manifest 文件中添加如下子节点即可：
+请求地理围栏监视的第一步就是设置必要的权限。在使用地理围栏时，我们必须设置 <a href="http://developer.huawei.com/reference/ohos/Manifest.permission.html#ACCESS_FINE_LOCATION">ACCESS\_FINE\_LOCATION</a> 权限。在应用的 manifest 文件中添加如下子节点即可：
 
 ```xml
-<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+<uses-permission ohos:name="ohos.permission.ACCESS_FINE_LOCATION"/>
 ```
 
-如果想要用 [IntentService](http://developer.android.com/reference/android/app/IntentService.html) 监听地理位置变化，那么还需要添加一个节点来指定服务名字。这个节点必须是 [<application>](http://developer.android.com/guide/topics/manifest/application-element.html) 的子节点：
+如果想要用 [IntentService](http://developer.huawei.com/reference/ohos/app/IntentService.html) 监听地理位置变化，那么还需要添加一个节点来指定服务名字。这个节点必须是 [<application>](http://developer.huawei.com/guide/topics/manifest/application-element.html) 的子节点：
 
 ```xml
 <application
-   android:allowBackup="true">
+   ohos:allowBackup="true">
    ...
-   <service android:name=".GeofenceTransitionsIntentService"/>
+   <service ohos:name=".GeofenceTransitionsIntentService"/>
 <application/>
 ```
 
-为了访问位置 API，我们需要创建一个 Google Play services API client 的实例。想要学习如何连接 client，请见[连接Google Play Services](retrieve-current.html)。
+为了访问位置 API，我们需要创建一个 华为 Play services API client 的实例。想要学习如何连接 client，请见[连接华为 Play Services](retrieve-current.html)。
 
 ### 创建和添加地理围栏
 
-我们的应用需要用位置 API 的 builder 类来创建地理围栏，用 convenience 类来添加地理围栏。另外，我们可以定义一个 [PendingIntent](http://developer.android.com/reference/android/app/PendingIntent.html)（将在这节课介绍）来处理当地理位置发生迁移时，Location Services 发出的 intent。
+我们的应用需要用位置 API 的 builder 类来创建地理围栏，用 convenience 类来添加地理围栏。另外，我们可以定义一个 [PendingIntent](http://developer.huawei.com/reference/ohos/app/PendingIntent.html)（将在这节课介绍）来处理当地理位置发生迁移时，Location Services 发出的 intent。
 
 ### 创建地理围栏对象
 
-首先，用 [Geofence.Builder](http://developer.android.com/reference/com/google/android/gms/location/Geofence.Builder.%20%20%20%20html) 创建一个地理围栏，设置想要的半径，持续时间，和地理围栏迁移的类型。例如，填充一个叫做 `mGeofenceList` 的 list 对象：
+首先，用 [Geofence.Builder](http://developer.huawei.com/reference/com/huawei/ohos/gms/location/Geofence.Builder.%20%20%20%20html) 创建一个地理围栏，设置想要的半径，持续时间，和地理围栏迁移的类型。例如，填充一个叫做 `mGeofenceList` 的 list 对象：
 
 ```java
 mGeofenceList.add(new Geofence.Builder()
@@ -59,7 +59,7 @@ mGeofenceList.add(new Geofence.Builder()
 
 ### 指定地理围栏和初始化触发器
 
-下面的代码用到 [GeofencingRequest](http://developer.android.com/reference/com/google/android/gms/location/GeofencingRequest.html) 类。该类嵌套了 [GeofencingRequestBuilder](http://developer.android.com/reference/com/google/android/gms/location/GeofencingRequest.Builder.html) 类来需要监视的地理围栏和设置如何触发地理围栏事件：
+下面的代码用到 [GeofencingRequest](http://developer.huawei.com/reference/com/huawei/ohos/gms/location/GeofencingRequest.html) 类。该类嵌套了 [GeofencingRequestBuilder](http://developer.huawei.com/reference/com/huawei/ohos/gms/location/GeofencingRequest.Builder.html) 类来需要监视的地理围栏和设置如何触发地理围栏事件：
 
 ```java
 private GeofencingRequest getGeofencingRequest() {
@@ -70,13 +70,13 @@ private GeofencingRequest getGeofencingRequest() {
 }
 ```
 
-这个例子介绍了两个地理围栏触发器。当设备进入一个地理围栏时， <a href="http://developer.android.com/reference/com/google/android/gms/location/Geofence.html#GEOFENCE_TRANSITION_ENTER">GEOFENCE\_TRANSITION\_ENTER</a> 转移会触发。当设备离开一个地理围栏时， <a href="http://developer.android.com/reference/com/google/android/gms/location/Geofence.html#GEOFENCE_TRANSITION_EXIT">GEOFENCE\_TRANSITION\_EXIT</a> 转移会触发。如果设备已经在地理围栏里面，那么指定 <a href="http://developer.android.com/reference/com/google/android/gms/location/GeofencingRequest.html#INITIAL_TRIGGER_ENTER">INITIAL\_TRIGGER\_ENTER</a> 来通知位置服务触发 <a href="http://developer.android.com/reference/com/google/android/gms/location/Geofence.html#GEOFENCE_TRANSITION_ENTER">GEOFENCE\_TRANSITION\_ENTER</a>。
+这个例子介绍了两个地理围栏触发器。当设备进入一个地理围栏时， <a href="http://developer.huawei.com/reference/com/huawei/ohos/gms/location/Geofence.html#GEOFENCE_TRANSITION_ENTER">GEOFENCE\_TRANSITION\_ENTER</a> 转移会触发。当设备离开一个地理围栏时， <a href="http://developer.huawei.com/reference/com/huawei/ohos/gms/location/Geofence.html#GEOFENCE_TRANSITION_EXIT">GEOFENCE\_TRANSITION\_EXIT</a> 转移会触发。如果设备已经在地理围栏里面，那么指定 <a href="http://developer.huawei.com/reference/com/huawei/ohos/gms/location/GeofencingRequest.html#INITIAL_TRIGGER_ENTER">INITIAL\_TRIGGER\_ENTER</a> 来通知位置服务触发 <a href="http://developer.huawei.com/reference/com/huawei/ohos/gms/location/Geofence.html#GEOFENCE_TRANSITION_ENTER">GEOFENCE\_TRANSITION\_ENTER</a>。
 
-在很多情况下，使用 <a href="http://developer.android.com/reference/com/google/android/gms/location/GeofencingRequest.html#INITIAL_TRIGGER_DWELL">INITIAL\_TRIGGER\_DWELL</a> 可能会更好。仅仅当由于到达地理围栏中已定义好的持续时间，而导致用户停止时，<a href="http://developer.android.com/reference/com/google/android/gms/location/GeofencingRequest.html#INITIAL_TRIGGER_DWELL">INITIAL\_TRIGGER\_DWELL</a> 才会触发事件。这个方法可以减少当设备短暂地进入和离开地理围栏时，由大量的通知造成的“垃圾警告信息”。另一种获取最好的地理围栏结果的策略是设置最小半径为100米。这有助于估计典型的 Wifi 网络的位置精确度，也有利于降低设备的功耗。
+在很多情况下，使用 <a href="http://developer.huawei.com/reference/com/huawei/ohos/gms/location/GeofencingRequest.html#INITIAL_TRIGGER_DWELL">INITIAL\_TRIGGER\_DWELL</a> 可能会更好。仅仅当由于到达地理围栏中已定义好的持续时间，而导致用户停止时，<a href="http://developer.huawei.com/reference/com/huawei/ohos/gms/location/GeofencingRequest.html#INITIAL_TRIGGER_DWELL">INITIAL\_TRIGGER\_DWELL</a> 才会触发事件。这个方法可以减少当设备短暂地进入和离开地理围栏时，由大量的通知造成的“垃圾警告信息”。另一种获取最好的地理围栏结果的策略是设置最小半径为100米。这有助于估计典型的 Wifi 网络的位置精确度，也有利于降低设备的功耗。
 
 ### 为地理围栏转移定义Intent
 
-从 Location Services 发送来的Intent能够触发各种应用内的动作，但是不能用它来打开一个 Activity 或者 Fragment，这是因为应用内的组件只能在响应用户动作时才可见。大多数情况下，处理这一类 Intent 最好使用 [IntentService](http://developer.android.com/reference/android/app/IntentService.html)。一个 [IntentService](http://developer.android.com/reference/android/app/IntentService.html) 可以推送一个通知，可以进行长时间的后台作业，可以将 intent 发送给其他的 services ，还可以发送一个广播 intent。下面的代码展示了如何定义一个 [PendingIntent](http://developer.android.com/reference/android/app/PendingIntent.html) 来启动一个 [IntentService](http://developer.android.com/reference/android/app/IntentService.html):
+从 Location Services 发送来的Intent能够触发各种应用内的动作，但是不能用它来打开一个 Activity 或者 Fragment，这是因为应用内的组件只能在响应用户动作时才可见。大多数情况下，处理这一类 Intent 最好使用 [IntentService](http://developer.huawei.com/reference/ohos/app/IntentService.html)。一个 [IntentService](http://developer.huawei.com/reference/ohos/app/IntentService.html) 可以推送一个通知，可以进行长时间的后台作业，可以将 intent 发送给其他的 services ，还可以发送一个广播 intent。下面的代码展示了如何定义一个 [PendingIntent](http://developer.huawei.com/reference/ohos/app/PendingIntent.html) 来启动一个 [IntentService](http://developer.huawei.com/reference/ohos/app/IntentService.html):
 
 ```java
 public class MainActivity extends FragmentActivity {
@@ -96,13 +96,13 @@ public class MainActivity extends FragmentActivity {
 
 ### 添加地理围栏
 
-使用 <a href="http://developer.android.com/reference/com/google/android/gms/location/GeofencingApi.html#addGeofences(com.google.android.gms.common.api.GoogleApiClient, com.google.android.gms.location.GeofencingRequest, android.app.PendingIntent)">GeoencingApi.addGeofences()</a> 方法来添加地理围栏。为该方法提供 Google API client，[GeofencingRequest](http://developer.android.com/reference/com/google/android/gms/location/GeofencingRequest) 对象和 [PendingIntent](http://developer.android.com/reference/android/app/PendingIntent.html)。下面的代码，在 [onResult()](http://developer.android.com/reference/com/google/android/gms/common/api/ResultCallback.html#onResult(R)) 中处理结果，假设主 activity 实现 [ResultCallback](http://developer.android.com/reference/com/google/android/gms/common/api/ResultCallback.html)。
+使用 <a href="http://developer.huawei.com/reference/com/huawei/ohos/gms/location/GeofencingApi.html#addGeofences(com.google.ohos.gms.common.api.HuaweiApiClient, com.google.ohos.gms.location.GeofencingRequest, ohos.app.PendingIntent)">GeoencingApi.addGeofences()</a> 方法来添加地理围栏。为该方法提供 华为 API client，[GeofencingRequest](http://developer.huawei.com/reference/com/huawei/ohos/gms/location/GeofencingRequest) 对象和 [PendingIntent](http://developer.huawei.com/reference/ohos/app/PendingIntent.html)。下面的代码，在 [onResult()](http://developer.huawei.com/reference/com/huawei/ohos/gms/common/api/ResultCallback.html#onResult(R)) 中处理结果，假设主 activity 实现 [ResultCallback](http://developer.huawei.com/reference/com/huawei/ohos/gms/common/api/ResultCallback.html)。
 
 ```java
 public class MainActivity extends FragmentActivity {
     ...
     LocationServices.GeofencingApi.addGeofences(
-                mGoogleApiClient,
+                mHuaweiApiClient,
                 getGeofencingRequest(),
                 getGeofencePendingIntent()
         ).setResultCallback(this);
@@ -110,7 +110,7 @@ public class MainActivity extends FragmentActivity {
 
 ## 处理地理围栏转移
 
-当 Location Services 探测到用户进入或者离开一个地理围栏，它会发送一个包含在 [PendingIntent](http://developer.android.com/reference/android/app/PendingIntent.html) 的 Intent，这个 [PendingIntent](http://developer.android.com/reference/android/app/PendingIntent.html) 就是在添加地理围栏时被我们包括在请求当中。这个 Intent 被一个类似 `GeofenceTransitionsIntentService` 的 service 接收，这个 service 从 intent 得到地理围栏事件，决定地理围栏转移的类型，和决定触发哪个已定义的地理围栏。然后它会发出一个通知。
+当 Location Services 探测到用户进入或者离开一个地理围栏，它会发送一个包含在 [PendingIntent](http://developer.huawei.com/reference/ohos/app/PendingIntent.html) 的 Intent，这个 [PendingIntent](http://developer.huawei.com/reference/ohos/app/PendingIntent.html) 就是在添加地理围栏时被我们包括在请求当中。这个 Intent 被一个类似 `GeofenceTransitionsIntentService` 的 service 接收，这个 service 从 intent 得到地理围栏事件，决定地理围栏转移的类型，和决定触发哪个已定义的地理围栏。然后它会发出一个通知。
 
 下面的代码介绍了如何定义一个 IntentService。这个 IntentService 在地理围栏转移出现时，会推送一个通知。当用户点击这个通知，那么应用的主 activity 会出现：
 
@@ -165,7 +165,7 @@ public class GeofenceTransitionsIntentService extends IntentService {
 
 ```java
 LocationServices.GeofencingApi.removeGeofences(
-            mGoogleApiClient,
+            mHuaweiApiClient,
             // This is the same pending intent that was used in addGeofences().
             getGeofencePendingIntent()
     ).setResultCallback(this); // Result processed in onResult().

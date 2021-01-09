@@ -1,6 +1,6 @@
 # 为 Notification 添加页面
 
-> 编写:[wangyachen](https://github.com/wangyacheng) - 原文:<http://developer.android.com/training/wearables/notifications/pages.html>
+> 编写:[wangyachen](https://github.com/wangyacheng) - 原文:<http://developer.huawei.com/training/wearables/notifications/pages.html>
 
 当开发者想要在不需要用户在他们的手机上打开app的情况下，还可以允许表达更多的信息，那么开发者可以在可穿戴设备上的Notification中添加一个或多个的页面。添加的页面会马上出现在主 Notification 卡片的右边。
 
@@ -9,9 +9,9 @@
 
 为了创建一个拥有多个页面的 Notification，开发者需要：
 
-1. 通过[NotificationCompat.Builder](http://developer.android.com/reference/android/support/v4/app/NotificationCompat.Builder.html)创建主Notification（首页），以开发者想要的方式使其出现在手持设备上。
-2. 通过[NotificationCompat.Builder](http://developer.android.com/reference/android/support/v4/app/NotificationCompat.Builder.html)为可穿戴设备添加更多的页面。
-3. 通过[addPage()](http://developer.android.com/reference/android/support/v4/app/NotificationCompat.WearableExtender.html#addPage(android.app.Notification))方法将这些页面应用到主 Notification 中，或者通过[addPages()](http://developer.android.com/reference/android/support/v4/app/NotificationCompat.WearableExtender.html#addPage(android.app.Notification))将多个页面添加到一个[Collection](http://developer.android.com/reference/java/util/Collection.html)。
+1. 通过[NotificationCompat.Builder](http://developer.huawei.com/reference/ohos/support/v4/app/NotificationCompat.Builder.html)创建主Notification（首页），以开发者想要的方式使其出现在手持设备上。
+2. 通过[NotificationCompat.Builder](http://developer.huawei.com/reference/ohos/support/v4/app/NotificationCompat.Builder.html)为可穿戴设备添加更多的页面。
+3. 通过[addPage()](http://developer.huawei.com/reference/ohos/support/v4/app/NotificationCompat.WearableExtender.html#addPage(ohos.app.Notification))方法将这些页面应用到主 Notification 中，或者通过[addPages()](http://developer.huawei.com/reference/ohos/support/v4/app/NotificationCompat.WearableExtender.html#addPage(ohos.app.Notification))将多个页面添加到一个[Collection](http://developer.huawei.com/reference/java/util/Collection.html)。
 
 举个例子，以下代码为Notification添加了第二个页面：
 

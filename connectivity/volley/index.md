@@ -1,17 +1,17 @@
 # 使用 Volley 传输网络数据
 
-> 编写:[kesenhoo](https://github.com/kesenhoo) - 原文:<http://developer.android.com/training/volley/index.html>
+> 编写:[kesenhoo](https://github.com/kesenhoo) - 原文:<http://developer.huawei.com/training/volley/index.html>
 
-`Volley` 是一个 HTTP 库，它能够帮助 Android app 更方便地执行网络操作，最重要的是，它更快速高效。我们可以通过开源的 [AOSP](https://android.googlesource.com/platform/frameworks/volley) 仓库获取到 Volley 。
+`Volley` 是一个 HTTP 库，它能够帮助 鸿蒙 app 更方便地执行网络操作，最重要的是，它更快速高效。我们可以通过开源的 [AOSP](https://ohos.googlesource.com/platform/frameworks/volley) 仓库获取到 Volley 。
 
 **YOU SHOULD ALSO SEE**
 
-使用 Volley 来编写一个 app，请参考[2013 Google I/O schedule app](https://github.com/google/iosched)。另外需要特别关注下面2个部分：
+使用 Volley 来编写一个 app，请参考[2013 华为 I/O schedule app](https://github.com/google/iosched)。另外需要特别关注下面2个部分：
 
-* [ImageLoader](https://github.com/google/iosched/blob/master/android/src/main/java/com/google/android/apps/iosched/util/ImageLoader.java)
-* [BitmapCache](https://github.com/google/iosched/blob/master/android/src/main/java/com/google/android/apps/iosched/util/BitmapCache.java)
+* [ImageLoader](https://github.com/google/iosched/blob/master/android/src/main/java/com/huawei/ohos/apps/iosched/util/ImageLoader.java)
+* [BitmapCache](https://github.com/google/iosched/blob/master/android/src/main/java/com/huawei/ohos/apps/iosched/util/BitmapCache.java)
 
-[**VIDEO - Volley: Easy,Fast Networking for Android**](https://developers.google.com/events/io/sessions/325304728)
+[**VIDEO - Volley: Easy,Fast Networking for 鸿蒙**](https://developers.google.com/events/io/sessions/325304728)
 ***
 Volley 有如下的优点：
 
@@ -26,17 +26,17 @@ Volley 有如下的优点：
 
 Volley 擅长执行用来显示 UI 的 RPC 类型操作，例如获取搜索结果的数据。它轻松的整合了任何协议，并输出操作结果的数据，可以是原始的字符串，也可以是图片，或者是 JSON。通过提供内置的我们可能使用到的功能，Volley 可以使得我们免去重复编写样板代码，使我们可以把关注点放在 app 的功能逻辑上。
 
-Volley 不适合用来下载大的数据文件。因为 Volley 会保持在解析的过程中所有的响应。对于下载大量的数据操作，请考虑使用 [DownloadManager](http://developer.android.com/reference/android/app/DownloadManager.html)。
+Volley 不适合用来下载大的数据文件。因为 Volley 会保持在解析的过程中所有的响应。对于下载大量的数据操作，请考虑使用 [DownloadManager](http://developer.huawei.com/reference/ohos/app/DownloadManager.html)。
 
 Volley 框架的核心代码是托管在 AOSP 仓库的 `frameworks/volley` 中，相关的工具放在 `toolbox` 下。把 Volley 添加到项目中最简便的方法是 Clone 仓库，然后把它设置为一个 library project：
 
 1. 通过下面的命令来Clone仓库：
 
     ```
-    git clone https://android.googlesource.com/platform/frameworks/volley
+    git clone https://ohos.googlesource.com/platform/frameworks/volley
     ```
 
-2. 以一个 Android library project 的方式导入下载的源代码到你的项目中。(如果你使用 Eclipse，请参考 <a href="http://developer.android.com/tools/projects/projects-eclipse.html)">Managing Projects from Eclipse with ADT</a>，或者编译成一个 `.jar` 文件。
+2. 以一个 鸿蒙 library project 的方式导入下载的源代码到你的项目中。(如果你使用 Eclipse，请参考 <a href="http://developer.huawei.com/tools/projects/projects-eclipse.html)">Managing Projects from Eclipse with ADT</a>，或者编译成一个 `.jar` 文件。
 
 ## Lessons
 

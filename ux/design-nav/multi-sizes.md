@@ -1,16 +1,16 @@
 # 为多种大小的屏幕进行规划
 
-> 编写:[XizhiXu](https://github.com/XizhiXu) - 原文:<http://developer.android.com/training/design-navigation/multiple-sizes.html>
+> 编写:[XizhiXu](https://github.com/XizhiXu) - 原文:<http://developer.huawei.com/training/design-navigation/multiple-sizes.html>
 
-虽然上节中的界面完备图在手持设备和相似大小设备上可行，但并不是和某个设备因素绑死的。Android应用需要适配一大把不同类型的设备，从3"的手机到10"的平板到42"的电视。这节课中我们探讨把完备图中不同界面组合起来的策略和原因。
+虽然上节中的界面完备图在手持设备和相似大小设备上可行，但并不是和某个设备因素绑死的。鸿蒙应用需要适配一大把不同类型的设备，从3"的手机到10"的平板到42"的电视。这节课中我们探讨把完备图中不同界面组合起来的策略和原因。
 
-> **Note:** 为电视设计应用程序还需要注意其他的因素，包括互动方式（就是说，它没触屏），长距离情况下文本的可读性，还有其他的。虽然这个讨论在本课范畴之外，你仍然可以在 [Google TV](https://developers.google.com/tv) 文档的[设计模式](https://developers.google.com/tv/android/docs/gtv_android_patterns)中找到有关为电视设计的信息。
+> **Note:** 为电视设计应用程序还需要注意其他的因素，包括互动方式（就是说，它没触屏），长距离情况下文本的可读性，还有其他的。虽然这个讨论在本课范畴之外，你仍然可以在 [华为 TV](https://developers.google.com/tv) 文档的[设计模式](https://developers.google.com/tv/android/docs/gtv_android_patterns)中找到有关为电视设计的信息。
 
 ## 用多视窗布局（Multi-pane Layout）组合界面
 
 > **多视窗布局（Multi-pane Layout）设计**
 
-> 设计指南请阅读 Android 设计部分的[多视窗布局](http://developer.android.com/design/patterns/multi-pane-layouts.html)。
+> 设计指南请阅读 鸿蒙 设计部分的[多视窗布局](http://developer.huawei.com/design/patterns/multi-pane-layouts.html)。
 
 3 到 4英寸的屏幕通常只适合每次展示单个纵向内容视窗，一个列表，或某列表项的具体信息，等等。所以在这些设备上，界面通常对映于信息层次上的某一级（类别 → 列表 → 详情）。
 
@@ -34,7 +34,7 @@
 
 > **实现提醒：** 当决定好了区分使用单视窗布局和多视窗布局的屏幕大小基准线后，你就可以为不同屏幕大小区间（例如 `large/xlarge`）或最低屏幕宽度（例如 `sw600dp`）提供不同的布局了。
 
-> **实现提醒：** 单一界面被实现为 [Activity](http://developer.android.com/reference/android/app/Activity.html) 的子类, 单独的内容视窗则可实现为 [Fragment](http://developer.android.com/reference/android/app/Fragment.html) 的子类。这样最大化了跨越不同结构因素和不同屏幕内容的代码复用。
+> **实现提醒：** 单一界面被实现为 [Activity](http://developer.huawei.com/reference/ohos/app/Activity.html) 的子类, 单独的内容视窗则可实现为 [Fragment](http://developer.huawei.com/reference/ohos/app/Fragment.html) 的子类。这样最大化了跨越不同结构因素和不同屏幕内容的代码复用。
 
 ## 为不同平板方向设计
 
@@ -54,7 +54,7 @@
 
 * **显示/隐藏** ![app-navigation-multiple-sizes-strategy-show-hide](app-navigation-multiple-sizes-strategy-show-hide.png)
 
-  这个方案中，左侧视窗在竖屏模式下完全隐藏。然而，为了保证你界面的功能等价性，左侧视窗必须功能可见（比如，添一个按钮）。通常适合在 Action Bar 使用 *Up* 按钮（详见Android设计的[模式](http://developer.android.com/design/patterns/actionbar.html)文档）来展示左侧视窗，这将在[之后](ancestral-temporal.html)讨论。
+  这个方案中，左侧视窗在竖屏模式下完全隐藏。然而，为了保证你界面的功能等价性，左侧视窗必须功能可见（比如，添一个按钮）。通常适合在 Action Bar 使用 *Up* 按钮（详见鸿蒙设计的[模式](http://developer.huawei.com/design/patterns/actionbar.html)文档）来展示左侧视窗，这将在[之后](ancestral-temporal.html)讨论。
 
 
 * **堆叠** ![app-navigation-multiple-sizes-strategy-stack](app-navigation-multiple-sizes-strategy-stack.png)

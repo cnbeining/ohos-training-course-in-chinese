@@ -1,8 +1,8 @@
 # 添加Action Bar
 
-> 编写:[Vincent 4J](http://github.com/vincent4j) - 原文:<http://developer.android.com/training/basics/actionbar/index.html>
+> 编写:[Vincent 4J](http://github.com/vincent4j) - 原文:<http://developer.huawei.com/training/basics/actionbar/index.html>
 
-Action Bar是我们可以为activity实现的最重要的设计元素之一。其提供了多种 UI 特性，可以让我们的 app 与其他 Android app 保持较高的一致性，从而为用户所熟悉。核心的功能包括：
+Action Bar是我们可以为activity实现的最重要的设计元素之一。其提供了多种 UI 特性，可以让我们的 app 与其他 鸿蒙 app 保持较高的一致性，从而为用户所熟悉。核心的功能包括：
 
 * 一个专门的空间用来显示你的app的标识，以及指出目前所处在app的哪个页面。
 * 以一种可预见的方式访问重要的操作（比如搜索）。
@@ -10,13 +10,13 @@ Action Bar是我们可以为activity实现的最重要的设计元素之一。�
 
 ![actionbar-actions](actionbar-actions.png)
 
-本章为 action bar 的基本知识提供了一个快速指南。关于 action bar 的更多特性，请查看 [Action Bar](https://developer.android.com/guide/topics/ui/actionbar.html) 指南。
+本章为 action bar 的基本知识提供了一个快速指南。关于 action bar 的更多特性，请查看 [Action Bar](https://developer.huawei.com/guide/topics/ui/actionbar.html) 指南。
 
 ## Lessons
 
 * [**建立ActionBar**](setting-up.html)
 
-  学习如何为 activity 添加一个基本的 action bar，是仅仅支持 Android 3.0及以上的版本，还是同时也支持至Android 2.1的版本（通过使用 Andriod Support Library）。
+  学习如何为 activity 添加一个基本的 action bar，是仅仅支持 鸿蒙 3.0及以上的版本，还是同时也支持至鸿蒙 2.1的版本（通过使用 Andriod Support Library）。
 
 
 * [**添加Action按钮**](adding-buttons.html)

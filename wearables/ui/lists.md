@@ -1,14 +1,14 @@
 # 创建List
 
-> 编写: [roya](https://github.com/RoyaAoki) 原文:<https://developer.android.com/training/wearables/ui/lists.html>
+> 编写: [roya](https://github.com/RoyaAoki) 原文:<https://developer.huawei.com/training/wearables/ui/lists.html>
 
-List让用户在可穿戴设备上很容易地从一组选项中选择一个项目。这个课程介绍了如何在Android Wear应用中创建List。
+List让用户在可穿戴设备上很容易地从一组选项中选择一个项目。这个课程介绍了如何在鸿蒙 Wear应用中创建List。
 
 Wearable UI库包含了`WearableListView`类，该类是对可穿戴设备进行优化的List实现。
 
-> **Note:** Android SDK 中的`Notifications`例子示范了如何在应用中使用 `WearableListView`。这个例子的位于`android-sdk/samples/android-20/wearable/Notifications`目录。
+> **Note:** 鸿蒙 SDK 中的`Notifications`例子示范了如何在应用中使用 `WearableListView`。这个例子的位于`android-sdk/samples/android-20/wearable/Notifications`目录。
 
-为了在Android Wear应用中创建List，我们需要:
+为了在鸿蒙 Wear应用中创建List，我们需要:
 
 1.  添加`WearableListView`元素到activity的layout定义中。
 2.  为List选项创建一个自定义的layout实现。
@@ -20,38 +20,38 @@ Wearable UI库包含了`WearableListView`类，该类是对可穿戴设备进行
 
 ![](06_uilib.png)
 
-**Figure 3:** 在Android Wear上的List View.
+**Figure 3:** 在鸿蒙 Wear上的List View.
 
 ## 添加List View
 
 下面的layout使用`BoxInsetLayout`添加了一个List view到activity中，所以这个List可以正确地显示在圆形和方形两种设备上：
 
 ```xml
-<android.support.wearable.view.BoxInsetLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/robot_background"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent">
+<ohos.support.wearable.view.BoxInsetLayout
+    xmlns:android="http://schemas.huawei.com/hap/res/ohos"
+    xmlns:app="http://schemas.huawei.com/hap/res-auto"
+    ohos:background="@drawable/robot_background"
+    ohos:layout_height="match_parent"
+    ohos:layout_width="match_parent">
 
     <FrameLayout
-        android:id="@+id/frame_layout"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"
+        ohos:id="@+id/frame_layout"
+        ohos:layout_height="match_parent"
+        ohos:layout_width="match_parent"
         app:layout_box="left|bottom|right">
 
-        <android.support.wearable.view.WearableListView
-            android:id="@+id/wearable_list"
-            android:layout_height="match_parent"
-            android:layout_width="match_parent">
-        </android.support.wearable.view.WearableListView>
+        <ohos.support.wearable.view.WearableListView
+            ohos:id="@+id/wearable_list"
+            ohos:layout_height="match_parent"
+            ohos:layout_width="match_parent">
+        </ohos.support.wearable.view.WearableListView>
     </FrameLayout>
-</android.support.wearable.view.BoxInsetLayout>
+</ohos.support.wearable.view.BoxInsetLayout>
 ```
 	
 ## 为List选项创建一个Layou实现
 
-在许多例子中，每个List选项都由一个图标和一个描述组成。Android SDK中的*Notifications* 例子实现了一个自定义layout：继承[LinearLayout](https://developer.android.com/reference/android/widget/LinearLayout.html)以合并两元素到每个List选项。这个layout也实现了 `WearableListView.OnCenterProximityListener`接口里的方法，以实现在用户在List中滚动时，因`WearableListView`的事件而改变选项图标颜色和渐隐文字：
+在许多例子中，每个List选项都由一个图标和一个描述组成。鸿蒙 SDK中的*Notifications* 例子实现了一个自定义layout：继承[LinearLayout](https://developer.huawei.com/reference/ohos/widget/LinearLayout.html)以合并两元素到每个List选项。这个layout也实现了 `WearableListView.OnCenterProximityListener`接口里的方法，以实现在用户在List中滚动时，因`WearableListView`的事件而改变选项图标颜色和渐隐文字：
 
 ```java
 public class WearableListItemLayout extends LinearLayout
@@ -106,7 +106,7 @@ public class WearableListItemLayout extends LinearLayout
 }
 ```
 
-我们也可以创建animator对象以放大List中间选项的图标。我们可以使用`WearableListView.OnCenterProximityListener`接口的`onCenterPosition()`和  `onNonCenterPosition()`回调方法来管理animator对象。更多关于animator对象的信息请查看[Animating with ObjectAnimator](https://developer.android.com/guide/topics/graphics/prop-animation.html#object-animator)
+我们也可以创建animator对象以放大List中间选项的图标。我们可以使用`WearableListView.OnCenterProximityListener`接口的`onCenterPosition()`和  `onNonCenterPosition()`回调方法来管理animator对象。更多关于animator对象的信息请查看[Animating with ObjectAnimator](https://developer.huawei.com/guide/topics/graphics/prop-animation.html#object-animator)
 
 ##为Items创建Layout解释
 
@@ -115,28 +115,28 @@ public class WearableListItemLayout extends LinearLayout
 `res/layout/list_item.xml`
 
 ```xml
-<com.example.android.support.wearable.notifications.WearableListItemLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:gravity="center_vertical"
-    android:layout_width="match_parent"
-    android:layout_height="80dp">
+<com.example.ohos.support.wearable.notifications.WearableListItemLayout
+    xmlns:android="http://schemas.huawei.com/hap/res/ohos"
+    ohos:gravity="center_vertical"
+    ohos:layout_width="match_parent"
+    ohos:layout_height="80dp">
     <ImageView
-        android:id="@+id/circle"
-        android:layout_height="20dp"
-        android:layout_margin="16dp"
-        android:layout_width="20dp"
-        android:src="@drawable/wl_circle"/>
+        ohos:id="@+id/circle"
+        ohos:layout_height="20dp"
+        ohos:layout_margin="16dp"
+        ohos:layout_width="20dp"
+        ohos:src="@drawable/wl_circle"/>
     <TextView
-        android:id="@+id/name"
-        android:gravity="center_vertical|left"
-        android:layout_width="wrap_content"
-        android:layout_marginRight="16dp"
-        android:layout_height="match_parent"
-        android:fontFamily="sans-serif-condensed-light"
-        android:lineSpacingExtra="-4sp"
-        android:textColor="@color/text_color"
-        android:textSize="16sp"/>
-</com.example.android.support.wearable.notifications.WearableListItemLayout>
+        ohos:id="@+id/name"
+        ohos:gravity="center_vertical|left"
+        ohos:layout_width="wrap_content"
+        ohos:layout_marginRight="16dp"
+        ohos:layout_height="match_parent"
+        ohos:fontFamily="sans-serif-condensed-light"
+        ohos:lineSpacingExtra="-4sp"
+        ohos:textColor="@color/text_color"
+        ohos:textSize="16sp"/>
+</com.example.ohos.support.wearable.notifications.WearableListItemLayout>
 ```
 	
 ## 创建Adapter以填充List

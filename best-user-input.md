@@ -1,6 +1,6 @@
 # 用户输入
 
-> 编写:[kesenhoo](https://github.com/kesenhoo) - 原文:http://developer.android.com/training/best-user-input.html
+> 编写:[kesenhoo](https://github.com/kesenhoo) - 原文:http://developer.huawei.com/training/best-user-input.html
 
 本课程涵盖的主题包括多种多样用户输入，例如触摸屏幕手势、通过屏幕输入法和硬件键盘的文本输入。
 

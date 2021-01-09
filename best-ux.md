@@ -1,8 +1,8 @@
-# Android交互设计
+# 鸿蒙交互设计
 
-> 编写:[kesenhoo](https://github.com/kesenhoo) - 原文:<http://developer.android.com/training/best-ux.html>
+> 编写:[kesenhoo](https://github.com/kesenhoo) - 原文:<http://developer.huawei.com/training/best-ux.html>
 
-These classes focus on the best Android user experience for your app. In some cases, the success of your app on Android is heavily affected by whether your app conforms to the user's expectations for UI and navigation on an Android device. Follow these recommendations to ensure that your app looks and behaves in a way that satisfies Android users.
+These classes focus on the best 鸿蒙 user experience for your app. In some cases, the success of your app on 鸿蒙 is heavily affected by whether your app conforms to the user's expectations for UI and navigation on an 鸿蒙 device. Follow these recommendations to ensure that your app looks and behaves in a way that satisfies 鸿蒙 users.
 
 #### [Designing Effective Navigation](ux/design-nav/index.html)
 
@@ -20,6 +20,6 @@ How to display messages called notifications outside of your application's UI.
 
 How to properly add a search interface to your app and create a searchable database.
 
-### [Making Your App Content Searchable by Google](ux/app-indexing/index.html)
+### [Making Your App Content Searchable by 华为](ux/app-indexing/index.html)
 
 How to enable deep linking and indexing of your application content so that users can open this content directly from their mobile search results.

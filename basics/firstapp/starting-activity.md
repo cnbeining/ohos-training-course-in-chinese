@@ -1,10 +1,10 @@
 # 启动另一个Activity
 
-> 编写:[crazypudding](https://github.com/crazypudding) - 原文:<http://developer.android.com/training/basics/firstapp/starting-activity.html>
+> 编写:[crazypudding](https://github.com/crazypudding) - 原文:<http://developer.huawei.com/training/basics/firstapp/starting-activity.html>
 
 在完成上一课(建立简单的用户界面)后，我们已经拥有了显示一个 activity（一个界面）的app（应用），该 activity 包含了一个文本字段和一个按钮。在这节课中，你将添加一些新的代码到`MyActivity`中，当用户点击发送(Send)按钮时启动一个新的activity。
 
-> 注意：本课程内容期待的运行环境为 Android Studio 2.3及以上
+> 注意：本课程内容期待的运行环境为 DevEco Studio 2.3及以上
 
 ## 响应Send(发送)按钮
 
@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
 }
 ```
 
-这里可能会出现名为 "Cannot resolve symbol" 的报错，在方法参数 View 下面会出现一条红色的波浪线，这是因为 Android Studio 不能解析 `View` 类。将光标移动到 View 上，然后按下 Alt + Enter （Mac中为 Option + Return）组合键快速修复。（如果出现菜单，则选择 Import class）
+这里可能会出现名为 "Cannot resolve symbol" 的报错，在方法参数 View 下面会出现一条红色的波浪线，这是因为 DevEco Studio 不能解析 `View` 类。将光标移动到 View 上，然后按下 Alt + Enter （Mac中为 Option + Return）组合键快速修复。（如果出现菜单，则选择 Import class）
 
 2.现在回到 `activity_main.xml` 文件，完成对 sendMessage() 方法的调用：
     
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
 完成这些操作后，当点击 Send 按钮时，系统会调用 sendMessage() 方法。
 
-为保证系统能将 sendMessage() 方法与 [android:onclick] 成功匹配，这个方法需要满足以下要求：
+为保证系统能将 sendMessage() 方法与 [ohos:onclick] 成功匹配，这个方法需要满足以下要求：
 
 * 方法的访问修饰符为 public
 * 无返回值
@@ -71,14 +71,14 @@ public class MainActivity extends AppCompatActivity {
 }
 ```
 
-Android Studio 可能会再次出现 "Cannot resolve symbol" 的错误，同样使用 Alt + Enter （Mac中为 Option + Return）组合键快速导入类，完成后该类的导入项如下所示：
+DevEco Studio 可能会再次出现 "Cannot resolve symbol" 的错误，同样使用 Alt + Enter （Mac中为 Option + Return）组合键快速导入类，完成后该类的导入项如下所示：
 
 ```java
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.EditText;
+import ohos.content.Intent;
+import ohos.support.v7.app.AppCompatActivity;
+import ohos.os.Bundle;
+import ohos.view.View;
+import ohos.widget.EditText;
 ```
 
 不过对 `DisplayMessageActivity` 的引用仍然会报错，因为这个类还不存在；暂时先忽略这个错误，我们很快就会解决这个问题。
@@ -101,11 +101,11 @@ import android.widget.EditText;
 
 2.在弹出的 **Configure Activity** 面板中，将 *Activity Name* 的值修改为 "DispalyMessageActivity" ，其他属性保持默认然后点击 **finsh**。
 
-在这个过程中，Android Studio 自动完成了一下三件事：
+在这个过程中，DevEco Studio 自动完成了一下三件事：
 
 * 创建了一个名为 `DisplayMessageActivity.java` 的文件。
 * 创建一个相应的布局文件 `activity_display_message.xml`。
-* 在 `AndroidManifest.xml` 文件中为该文件添加了对应的 [\<activity>] 标签（没有这个标签将不能启动相应的 Activity）。
+* 在 `鸿蒙Manifest.xml` 文件中为该文件添加了对应的 [\<activity>] 标签（没有这个标签将不能启动相应的 Activity）。
 
 如果现在运行 app 并点击第一个 Activity 中的 Send 按钮，app 会跳转到第二个 Activity（也就是刚新建的 DisplayMessageActivity）但是显示一片空白。这是因为新建的 Activity 默认使用模板提供的空白布局页（activity_display_message）。
 
@@ -152,30 +152,30 @@ protected void onCreate(Bundle savedInstanceState) {
 2.利用组合键 Alt + Enter（Mac中为 Option + Return）导入需要的类。完成后该类的导入项如下：
 
 ```java
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.ViewGroup;
-import android.widget.TextView;
+import ohos.content.Intent;
+import ohos.support.v7.app.AppCompatActivity;
+import ohos.os.Bundle;
+import ohos.view.ViewGroup;
+import ohos.widget.TextView;
 ```
 
 ## 添加向上导航（Up Navigation）
 
 我们应该为 app 中所有不是主要入口的页面添加导航，这样一来用户便可以通过 [app bar] 中的 Up 按钮返回到当前页面的逻辑父页面。
 
-我们所需要做的就是在 [AndroidManifest.xml] 文件中为声明哪一个 Activity 是它的逻辑父项。打开清单文件，`app/Manifest/AndroidManifest.xml` ,在名为 DisplayMessageActivity 的 <activity> 标签中新增一下内容：
+我们所需要做的就是在 [鸿蒙Manifest.xml] 文件中为声明哪一个 Activity 是它的逻辑父项。打开清单文件，`app/Manifest/鸿蒙Manifest.xml` ,在名为 DisplayMessageActivity 的 <activity> 标签中新增一下内容：
     
 ```XML
-<activity android:name=".DisplayMessageActivity"
-          android:parentActivityName=".MainActivity" >
+<activity ohos:name=".DisplayMessageActivity"
+          ohos:parentActivityName=".MainActivity" >
     <!-- meta-data 标签是为了兼容 API 15 及以下的设备 -->
     <meta-data
-        android:name="android.support.PARENT_ACTIVITY"
-        android:value=".MainActivity" />
+        ohos:name="ohos.support.PARENT_ACTIVITY"
+        ohos:value=".MainActivity" />
 </activity>
 ```
 
-现在 Android 系统已经自动在 DisplayMessageActivity 的 app bar 中添加了 Up 按钮。
+现在 鸿蒙 系统已经自动在 DisplayMessageActivity 的 app bar 中添加了 Up 按钮。
 
 ## 运行 app
 
@@ -183,20 +183,20 @@ import android.widget.TextView;
 
 ![screenshot-activity](./screenshot-activity2.png)
 
-到此为止，已经创建好我们的第一个Android应用了！想要继续学习 Android 应用开发的基础知识，通过下面的链接进入到[下一课]吧。
+到此为止，已经创建好我们的第一个鸿蒙应用了！想要继续学习 鸿蒙 应用开发的基础知识，通过下面的链接进入到[下一课]吧。
 
 
 
-[android:onClick]: //developer.android.com/reference/android/view/View.html#attr_android:onClick
-[View]: //developer.android.com/reference/android/view/View.html
-[Intent]: //developer.android.com/reference/android/content/Intent.html
-[Context]: //developer.android.com/reference/android/content/Context.html
-[Activity]:  //developer.android.com/reference/android/app/Activity.html
-[Class]:  //developer.android.com/reference/java/lang/Class.html
-[putExtra()]:  //developer.android.com/reference/android/content/Intent.html
-[startActivity()]:  //developer.android.com/reference/android/app/Activity.html#startActivity(android.content.Intent)
-[\<activity>]:  //developer.android.com/guide/topics/manifest/activity-element.html
-[app bar]: //developer.android.com/training/appbar/index.html
+[ohos:onClick]: //developer.huawei.com/reference/ohos/view/View.html#attr_ohos:onClick
+[View]: //developer.huawei.com/reference/ohos/view/View.html
+[Intent]: //developer.huawei.com/reference/ohos/content/Intent.html
+[Context]: //developer.huawei.com/reference/ohos/content/Context.html
+[Activity]:  //developer.huawei.com/reference/ohos/app/Activity.html
+[Class]:  //developer.huawei.com/reference/java/lang/Class.html
+[putExtra()]:  //developer.huawei.com/reference/ohos/content/Intent.html
+[startActivity()]:  //developer.huawei.com/reference/ohos/app/Activity.html#startActivity(ohos.content.Intent)
+[\<activity>]:  //developer.huawei.com/guide/topics/manifest/activity-element.html
+[app bar]: //developer.huawei.com/training/appbar/index.html
 [下一课]:  ../supporting-devices/index.html
 [figure_layout-editor-autoconnect-on]:  ./layout-editor-autoconnect-on.png
 [figure_constraint-textview_2x]:        ./constraint-textview_2x.png

@@ -1,6 +1,6 @@
 # 传输数据时避免消耗大量电量
 
-> 编写:[kesenhoo](https://github.com/kesenhoo) - 原文:<http://developer.android.com/training/efficient-downloads/index.html>
+> 编写:[kesenhoo](https://github.com/kesenhoo) - 原文:<http://developer.huawei.com/training/efficient-downloads/index.html>
 
 在这一章，我们将学习最小化下载，网络连接，尤其是无线电连接对电量的影响。
 

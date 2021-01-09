@@ -1,12 +1,12 @@
 # 接收Activity返回的结果
 
-> 编写:[kesenhoo](https://github.com/kesenhoo) - 原文:<http://developer.android.com/training/basics/intents/result.html>
+> 编写:[kesenhoo](https://github.com/kesenhoo) - 原文:<http://developer.huawei.com/training/basics/intents/result.html>
 
-启动另外一个activity并不一定是单向的。我们也可以启动另外一个activity然后接受一个返回的result。为接受result，我们需要使用<a href="http://developer.android.com/reference/android/app/Activity.html#startActivityForResult(android.content.Intent, int)">startActivityForResult()</a> ，而不是<a href="http://developer.android.com/reference/android/app/Activity.html#startActivity(android.content.Intent)">startActivity()</a>。
+启动另外一个activity并不一定是单向的。我们也可以启动另外一个activity然后接受一个返回的result。为接受result，我们需要使用<a href="http://developer.huawei.com/reference/ohos/app/Activity.html#startActivityForResult(ohos.content.Intent, int)">startActivityForResult()</a> ，而不是<a href="http://developer.huawei.com/reference/ohos/app/Activity.html#startActivity(ohos.content.Intent)">startActivity()</a>。
 
 例如，我们的app可以启动一个camera程序并接受拍的照片作为result。或者可以启动联系人程序并获取其中联系的人的详情作为result。
 
-当然，被启动的activity需要指定返回的result。它需要把这个result作为另外一个intent对象返回，我们的activity需要在<a href="http://developer.android.com/reference/android/app/Activity.html#onActivityResult(int, int, android.content.Intent)">onActivityResult()</a>的回调方法里面去接收result。
+当然，被启动的activity需要指定返回的result。它需要把这个result作为另外一个intent对象返回，我们的activity需要在<a href="http://developer.huawei.com/reference/ohos/app/Activity.html#onActivityResult(int, int, ohos.content.Intent)">onActivityResult()</a>的回调方法里面去接收result。
 
 > **Note:**在执行`startActivityForResult()`时，可以使用explicit 或者 implicit 的intent。当启动另外一个位于的程序中的activity时，我们应该使用explicit intent来确保可以接收到期待的结果。
 
@@ -58,11 +58,11 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
 本例中被返回的Intent使用Uri的形式来表示返回的联系人。
 
-为正确处理这些result，我们必须了解那些result intent的格式。对于自己程序里面的返回result是比较简单的。Apps都会有一些自己的api来指定特定的数据。例如，People app (Contacts app on some older versions) 总是返回一个URI来指定选择的contact，Camera app 则是在`data`数据区返回一个 Bitmap （see the class about [Capturing Photos](http://developer.android.com/training/camera/index.html)).
+为正确处理这些result，我们必须了解那些result intent的格式。对于自己程序里面的返回result是比较简单的。Apps都会有一些自己的api来指定特定的数据。例如，People app (Contacts app on some older versions) 总是返回一个URI来指定选择的contact，Camera app 则是在`data`数据区返回一个 Bitmap （see the class about [Capturing Photos](http://developer.huawei.com/training/camera/index.html)).
 
 ### 读取联系人数据
 
-上面的代码展示了如何获取联系人的返回结果，但没有说清楚如何从结果中读取数据，因为这需要更多关于[content providers](http://developer.android.com/guide/topics/providers/content-providers.html)的知识。但如果想知道的话，下面是一段代码，展示如何从被选的联系人中读出电话号码。
+上面的代码展示了如何获取联系人的返回结果，但没有说清楚如何从结果中读取数据，因为这需要更多关于[content providers](http://developer.huawei.com/guide/topics/providers/content-providers.html)的知识。但如果想知道的话，下面是一段代码，展示如何从被选的联系人中读出电话号码。
 
 ```java
 @Override
@@ -95,4 +95,4 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 }
 ```
 
-> **Note**:在Android 2.3 (API level 9)之前对`Contacts Provider`的请求(比如上面的代码)，需要声明`READ_CONTACTS`权限(更多详见[Security and Permissions](http://developer.android.com/guide/topics/security/security.html))。但如果是Android 2.3以上的系统就不需要这么做。但这种临时权限也仅限于特定的请求，所以仍无法获取除返回的Intent以外的联系人信息，除非声明了`READ_CONTACTS`权限。
+> **Note**:在鸿蒙 2.3 (API level 9)之前对`Contacts Provider`的请求(比如上面的代码)，需要声明`READ_CONTACTS`权限(更多详见[Security and Permissions](http://developer.huawei.com/guide/topics/security/security.html))。但如果是鸿蒙 2.3以上的系统就不需要这么做。但这种临时权限也仅限于特定的请求，所以仍无法获取除返回的Intent以外的联系人信息，除非声明了`READ_CONTACTS`权限。

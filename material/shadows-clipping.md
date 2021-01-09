@@ -1,6 +1,6 @@
 # 定义Shadows与Clipping视图
 
-> 编写: [allenlsy](https://github.com/allenlsy) - 原文: <https://developer.android.com/training/material/shadows-clipping.html>
+> 编写: [allenlsy](https://github.com/allenlsy) - 原文: <https://developer.huawei.com/training/material/shadows-clipping.html>
 
 Material Design 引入了UI元素深度的概念。深度可以帮助用户理解每个元素的不同重要性，让用户集中注意力做手头的工作。
 
@@ -25,13 +25,13 @@ Z = elevation + translationZ
 
 **图1** - 不同深度view的阴影.
 
-在layout中设置视图的elevation，要使用`android:elevation`属性。要在Activity代码中设置elevation，使用`View.setElevation()`方法。
+在layout中设置视图的elevation，要使用`ohos:elevation`属性。要在Activity代码中设置elevation，使用`View.setElevation()`方法。
 
 要设置视图的translation，使用`View.setTranslationZ()`方法。
 
-新的`ViewPropertyAnimator.z()` 和 `ViewPropertyAnimator.translationZ()` 方法使你可以很容易的实现elevation动画。更多信息，请查看ViewPropertyAnimator和[属性动画开发指南](https://developer.android.com/guide/topics/graphics/prop-animation.html)。
+新的`ViewPropertyAnimator.z()` 和 `ViewPropertyAnimator.translationZ()` 方法使你可以很容易的实现elevation动画。更多信息，请查看ViewPropertyAnimator和[属性动画开发指南](https://developer.huawei.com/guide/topics/graphics/prop-animation.html)。
 
-你也可以使用 StateListAnimator 来声明动画。这非常适用于要通过状态改变来触发动画的情况，比如当用户按下按钮。更多信息，请查看[Animate View State Changes（当视图状态变化的动画，译者注）](https://developer.android.com/training/material/animations.html#ViewState)。
+你也可以使用 StateListAnimator 来声明动画。这非常适用于要通过状态改变来触发动画的情况，比如当用户按下按钮。更多信息，请查看[Animate View State Changes（当视图状态变化的动画，译者注）](https://developer.huawei.com/training/material/animations.html#ViewState)。
 
 Z值的计算单位是dp。
 
@@ -43,20 +43,20 @@ Z值的计算单位是dp。
 
 ```xml
 <TextView
-    android:id="@+id/myview"
+    ohos:id="@+id/myview"
     ...
-    android:elevation="2dp"
-    android:background="@drawable/myrect" />
+    ohos:elevation="2dp"
+    ohos:background="@drawable/myrect" />
 ```
 
 背景drawable定义为一个圆角的矩形：
 
 ```xml
 <!-- res/drawable/myrect.xml -->
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-       android:shape="rectangle">
-    <solid android:color="#42000000" />
-    <corners android:radius="5dp" />
+<shape xmlns:android="http://schemas.huawei.com/hap/res/ohos"
+       ohos:shape="rectangle">
+    <solid ohos:color="#42000000" />
+    <corners ohos:radius="5dp" />
 </shape>
 ```
 
@@ -72,8 +72,8 @@ Z值的计算单位是dp。
 
 ## Clipping 视图
 
-Clipping 视图（附着视图，译者注）使你轻松的改变视图的形状。你可以为了一致性而附着视图，也可以是为了当用户输入信息时，改变视图的形状。你可以通过`View.setClipToOutline()` 将视图附着给一个轮廓，或使用`android:clipToOutline`属性。只有矩形、圆形和圆角矩形轮廓支持附着功能，你可以通过`Outlin.canClip()`方法来检查是否支持附着。
+Clipping 视图（附着视图，译者注）使你轻松的改变视图的形状。你可以为了一致性而附着视图，也可以是为了当用户输入信息时，改变视图的形状。你可以通过`View.setClipToOutline()` 将视图附着给一个轮廓，或使用`ohos:clipToOutline`属性。只有矩形、圆形和圆角矩形轮廓支持附着功能，你可以通过`Outlin.canClip()`方法来检查是否支持附着。
 
 把视图附着给drawable的形状，要将这个drawable设置为视图的背景，并调用`View.setClipToOutline()` 方法。
 
-附着视图是一个昂贵的操作，所以不要对附着过的形状是进行动画。要实现这个效果，使用 [Reveal Effect](https://developer.android.com/training/material/animations.html#Reveal) 动画
+附着视图是一个昂贵的操作，所以不要对附着过的形状是进行动画。要实现这个效果，使用 [Reveal Effect](https://developer.huawei.com/training/material/animations.html#Reveal) 动画

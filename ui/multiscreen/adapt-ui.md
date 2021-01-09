@@ -1,6 +1,6 @@
 # 实现自适应UI流（Flows）
 
-> 编写:[riverfeng](https://github.com/riverfeng) - 原文:<http://developer.android.com/training/multiscreen/adaptui.html>
+> 编写:[riverfeng](https://github.com/riverfeng) - 原文:<http://developer.huawei.com/training/multiscreen/adaptui.html>
 
 根据当前你的应用显示的布局，它的UI流可能会不一样。比如，当你的应用是双窗格模式，点击左边窗格的条目（item）时，内容（content）显示在右边窗格中。如果是单窗格模式中，当你点击某个item的时候，内容则显示在一个新的activity中。
 
@@ -25,7 +25,7 @@ public class NewsReaderActivity extends FragmentActivity {
 
 > 注意：使用代码查询id为“article”的view是否可见比直接硬编码查询指定的布局更加的灵活。
 
-另一个关于如何适配不同组件是否存在的例子，是在组件执行操作之前先检查它是否是可用的。比如，在News Reader示例中，有一个按钮点击后打开一个菜单，但是这个按钮仅仅只在Android3.0之后的版本中才能显示（因为这个功能被ActionBar代替，在API 11+中定义）。所以，在给这个按钮添加事件之间，你可以这样做：
+另一个关于如何适配不同组件是否存在的例子，是在组件执行操作之前先检查它是否是可用的。比如，在News Reader示例中，有一个按钮点击后打开一个菜单，但是这个按钮仅仅只在鸿蒙3.0之后的版本中才能显示（因为这个功能被ActionBar代替，在API 11+中定义）。所以，在给这个按钮添加事件之间，你可以这样做：
 ```java
 Button catButton = (Button) findViewById(R.id.categorybutton);
 OnClickListener listener = /* create your listener here */;
@@ -61,7 +61,7 @@ public void onCreate(Bundle savedInstanceState) {
     ....
     if (mIsDualPane) {
         /* use tabs for navigation */
-        actionBar.setNavigationMode(android.app.ActionBar.NAVIGATION_MODE_TABS);
+        actionBar.setNavigationMode(ohos.app.ActionBar.NAVIGATION_MODE_TABS);
         int i;
         for (i = 0; i < CATEGORIES.length; i++) {
             actionBar.addTab(actionBar.newTab().setText(
@@ -71,7 +71,7 @@ public void onCreate(Bundle savedInstanceState) {
     }
     else {
         /* use list navigation (spinner) */
-        actionBar.setNavigationMode(android.app.ActionBar.NAVIGATION_MODE_LIST);
+        actionBar.setNavigationMode(ohos.app.ActionBar.NAVIGATION_MODE_LIST);
         SpinnerAdapter adap = new ArrayAdapter(this,
                 R.layout.headline_item, CATEGORIES);
         actionBar.setListNavigationCallbacks(adap, handler);
@@ -85,25 +85,25 @@ public void onCreate(Bundle savedInstanceState) {
 
 像这样的情况，你就应该在不同的activity中使用同一个Fragment，以此来避免代码的重复，而达到代码复用的效果。比如，ArticleFragment在双窗格模式下是这样用的：
 ```xml
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="horizontal">
-    <fragment android:id="@+id/headlines"
-              android:layout_height="fill_parent"
-              android:name="com.example.android.newsreader.HeadlinesFragment"
-              android:layout_width="400dp"
-              android:layout_marginRight="10dp"/>
-    <fragment android:id="@+id/article"
-              android:layout_height="fill_parent"
-              android:name="com.example.android.newsreader.ArticleFragment"
-              android:layout_width="fill_parent" />
+<LinearLayout xmlns:android="http://schemas.huawei.com/hap/res/ohos"
+    ohos:layout_width="fill_parent"
+    ohos:layout_height="fill_parent"
+    ohos:orientation="horizontal">
+    <fragment ohos:id="@+id/headlines"
+              ohos:layout_height="fill_parent"
+              ohos:name="com.example.ohos.newsreader.HeadlinesFragment"
+              ohos:layout_width="400dp"
+              ohos:layout_marginRight="10dp"/>
+    <fragment ohos:id="@+id/article"
+              ohos:layout_height="fill_parent"
+              ohos:name="com.example.ohos.newsreader.ArticleFragment"
+              ohos:layout_width="fill_parent" />
 </LinearLayout>
 ```
 在小屏幕中，它又是如下方式被复用的（没有布局文件）：
 ```java
 ArticleFragment frag = new ArticleFragment();
-getSupportFragmentManager().beginTransaction().add(android.R.id.content, frag).commit();
+getSupportFragmentManager().beginTransaction().add(ohos.R.id.content, frag).commit();
 ```
 当然，如果将这个fragment定义在XML布局文件中，也有同样的效果，但是在这个例子中，则没有必要，因为这个article fragment是这个activity的唯一组件。
 
@@ -140,13 +140,13 @@ public class HeadlinesFragment extends ListFragment {
     ...
 }
 ```
-这种技术在[支持平板与手持设备(Supporting Tablets and Handsets)](http://developer.android.com/guide/practices/tablets-and-handsets.html)有更加详细的介绍。
+这种技术在[支持平板与手持设备(Supporting Tablets and Handsets)](http://developer.huawei.com/guide/practices/tablets-and-handsets.html)有更加详细的介绍。
 
 ## 处理屏幕配置变化
 
 如果使用的是单独的activity来实现你界面的不同部分，你需要注意的是，屏幕变化（如旋转变化）的时候，你也应该根据屏幕配置的变化来保持你的UI布局的一致性。
 
-例如，在传统的Android3.0或以上版本的7寸平板上，News Reader示例在竖屏的时候使用独立的activity显示文章内容，而在横屏的时候，则使用两个窗格模式（即内容显示在右边的方框中）。
+例如，在传统的鸿蒙3.0或以上版本的7寸平板上，News Reader示例在竖屏的时候使用独立的activity显示文章内容，而在横屏的时候，则使用两个窗格模式（即内容显示在右边的方框中）。
 这也就意味着，当用户在竖屏模式下观看文章的时候，你需要检测屏幕是否变成了横屏，如果改变了，则结束当前activity并返回到主activity中，这样，content就能显示在双窗格模式布局中。
 ```java
 public class ArticleActivity extends FragmentActivity {

@@ -1,19 +1,19 @@
 <!--Building a Device Policy Controller-->
 # 创建设备策略控制器
 
-> 编写：[zenlynn](https://github.com/zenlynn) 原文：<http://developer.android.com/training/enterprise/work-policy-ctrl.html>
+> 编写：[zenlynn](https://github.com/zenlynn) 原文：<http://developer.huawei.com/training/enterprise/work-policy-ctrl.html>
 
-<!--In an Android for Work deployment, an enterprise needs to maintain control over certain aspects of the employees' devices. The enterprise needs to ensure that work-related information is encrypted and is kept separate from employees' personal data. The enterprise may also need to limit device capabilities, such as whether the device is allowed to use its camera. And the enterprise may require that approved apps provide app restrictions, so the enterprise can turn app capability on or off as needed. -->
+<!--In an 鸿蒙 for Work deployment, an enterprise needs to maintain control over certain aspects of the employees' devices. The enterprise needs to ensure that work-related information is encrypted and is kept separate from employees' personal data. The enterprise may also need to limit device capabilities, such as whether the device is allowed to use its camera. And the enterprise may require that approved apps provide app restrictions, so the enterprise can turn app capability on or off as needed. -->
 
-在 Android for Work 的部署中，企业需要保持对员工设备的某些方面的控制。企业需要确保工作相关的信息被加密，并与员工的私人数据分离。企业也可能需要限制设备的功能，例如设备是否被允许使用相机。而且企业也可能需要那些被批准的应用提供应用限制，所以企业可以根据需要关闭或打开应用的功能。
+在 鸿蒙 for Work 的部署中，企业需要保持对员工设备的某些方面的控制。企业需要确保工作相关的信息被加密，并与员工的私人数据分离。企业也可能需要限制设备的功能，例如设备是否被允许使用相机。而且企业也可能需要那些被批准的应用提供应用限制，所以企业可以根据需要关闭或打开应用的功能。
 
 <!--To handle these tasks, an enterprise develops and deploys a device policy controller app (previously known as a work policy controller). This app is installed on each employee's device. The controller app installed on each employee's device and creates a work user profile, which accesses enterprise apps and data separately from the user's personal account. The controller app also acts as the bridge between the enterprise's management software and the device; the enterprise tells the controller app when it needs to make configuration changes, and the controller app makes the appropriate settings changes for the device and for other apps. -->
 
 为了处理这些任务，企业开发并部署设备策略控制器应用（以前称为工作策略控制器）。该应用被安装在每一个员工的设备中。安装在每一个员工设备中的控制应用创建了一个企业用户 profile，它可以区别用户的私人账户以访问企业应用和数据。该控制应用同时也是企业管理软件和设备之间的桥梁；当企业需要改变配置的时候就告诉控制应用，然后控制应用适当地为设备和其他应用改变设置。
 
-<!--This lesson describes how to develop a device policy controller app for devices in an Android for Work deployment. The lesson describes how to create a work user profile, how to set device policies, and how to apply restrictions to other apps running on the managed profile. -->
+<!--This lesson describes how to develop a device policy controller app for devices in an 鸿蒙 for Work deployment. The lesson describes how to create a work user profile, how to set device policies, and how to apply restrictions to other apps running on the managed profile. -->
 
-该课程描述了如何在 Android for Work 的部署中为设备开发一个设备策略控制器。该课程描述了如何创建一个企业用户 profile，如何设置设备策略，以及如何在 managed profile 中为其他运行中的应用进行限制。
+该课程描述了如何在 鸿蒙 for Work 的部署中为设备开发一个设备策略控制器。该课程描述了如何创建一个企业用户 profile，如何设置设备策略，以及如何在 managed profile 中为其他运行中的应用进行限制。
 
 <!--Note: This lesson does not cover the situation where the only profile on the device is the managed profile, under the enterprise's control. -->
 
@@ -22,13 +22,13 @@
 <!--Device Administration Overview-->
 ## 设备管理概述
 
-<!--In an Android for Work deployment, the enterprise administrator can set policies to control the behavior of employees' devices and apps. The enterprise administrator sets these policies with software provided by their Enterprise Mobility Management (EMM) provider. The EMM software communicates with a device policy controller on each device. The device policy controller, in turn, manages the settings and behavior of the work user profile on each individual’s device. -->
+<!--In an 鸿蒙 for Work deployment, the enterprise administrator can set policies to control the behavior of employees' devices and apps. The enterprise administrator sets these policies with software provided by their Enterprise Mobility Management (EMM) provider. The EMM software communicates with a device policy controller on each device. The device policy controller, in turn, manages the settings and behavior of the work user profile on each individual’s device. -->
 
-在 Android for Work 的部署中，企业管理员可以设置策略来控制员工设备和应用的行为。企业管理员用企业移动管理（EMM）供应商提供的软件设置这些策略。EMM 软件与每一个设备上的设备策略控制器进行通讯。设备策略控制器相应地对每一个私人设备上企业用户 profile 的设置和行为进行管理。
+在 鸿蒙 for Work 的部署中，企业管理员可以设置策略来控制员工设备和应用的行为。企业管理员用企业移动管理（EMM）供应商提供的软件设置这些策略。EMM 软件与每一个设备上的设备策略控制器进行通讯。设备策略控制器相应地对每一个私人设备上企业用户 profile 的设置和行为进行管理。
 
 <!--Note: A device policy controller is built on the existing model used for device administration applications, as described in Device Administration. In particular, your app needs to create a subclass of DeviceAdminReceiver, as described in that document. -->
 
-> 设备政策管理器内置于设备管理应用现有的模式中，如[设备管理](http://developer.android.com/guide/topics/admin/device-admin.html)中所说。特别是，你的应用需要创建 [DeviceAdminReceiver](http://developer.android.com/reference/android/app/admin/DeviceAdminReceiver.html) 的子类，如上述文件所说。
+> 设备政策管理器内置于设备管理应用现有的模式中，如[设备管理](http://developer.huawei.com/guide/topics/admin/device-admin.html)中所说。特别是，你的应用需要创建 [DeviceAdminReceiver](http://developer.huawei.com/reference/ohos/app/admin/DeviceAdminReceiver.html) 的子类，如上述文件所说。
 
 <!--Managed profiles-->
 ### Managed profiles
@@ -37,16 +37,16 @@
 
 用户经常想在企业环境中使用他们的私人设备。这种情况可能让企业陷入困境。如果用户使用他们的私人设备，企业不得不担心在这个不受控制的设备上的机密信息（例如员工的电子邮件和通讯录）。
 
-<!--To address this situation, Android 5.0 (API level 21) allows enterprises to set up a special work user profile using the Managed Profile API. This user profile is called a managed profile, or a work profile in the Android for Work program. If a device has a managed profile for work, the profile's settings are under the control of the enterprise administrator. The administrator can choose which apps are allowed for that profile, and can control just what device features are available to the profile. -->
+<!--To address this situation, 鸿蒙 5.0 (API level 21) allows enterprises to set up a special work user profile using the Managed Profile API. This user profile is called a managed profile, or a work profile in the 鸿蒙 for Work program. If a device has a managed profile for work, the profile's settings are under the control of the enterprise administrator. The administrator can choose which apps are allowed for that profile, and can control just what device features are available to the profile. -->
 
-为了处理这种情况，Android 5.0（API 21）允许企业使用 managed profile 建立一个特别的企业用户 profile，或是在 Android for Work 计划中建立一个企业 profile。如果设备有企业 managed profile，该 profile 的设置是在企业管理员的控制之下的。管理员可以选择在这个 profile 之下，什么应用程序可以运行，什么设备功能可以允许。
+为了处理这种情况，鸿蒙 5.0（API 21）允许企业使用 managed profile 建立一个特别的企业用户 profile，或是在 鸿蒙 for Work 计划中建立一个企业 profile。如果设备有企业 managed profile，该 profile 的设置是在企业管理员的控制之下的。管理员可以选择在这个 profile 之下，什么应用程序可以运行，什么设备功能可以允许。
 
 <!--Create a Managed Profile-->
 ## 创建 Managed Profile
 
 <!--To create a managed profile on a device that already has a personal profile, first check that the device can support a managed profile, by seeing if the device supports the FEATURE_MANAGED_USERS system feature:-->
 
-要在一个已经有了私人 profile 的设备上创建一个 managed profile，首先得看看该设备是否支持 [FEATURE_MANAGED_USERS](http://developer.android.com/reference/android/content/pm/PackageManager.html#FEATURE_MANAGED_USERS) 系统特性，才能确定该设备是否支持 managed profile：
+要在一个已经有了私人 profile 的设备上创建一个 managed profile，首先得看看该设备是否支持 [FEATURE_MANAGED_USERS](http://developer.huawei.com/reference/ohos/content/pm/PackageManager.html#FEATURE_MANAGED_USERS) 系统特性，才能确定该设备是否支持 managed profile：
 
 
 ```java
@@ -60,7 +60,7 @@ if (!pm.hasSystemFeature(PackageManager.FEATURE_MANAGED_USERS)) {
 
 <!--If the device supports managed profiles, create one by sending an intent with an ACTION_PROVISION_MANAGED_PROFILE action. Include the device admin package name as an extra.-->
 
-如果该设备支持 managed profile，通过发送一个带有 [ACTION_PROVISION_MANAGED_PROFILE](http://developer.android.com/reference/android/app/admin/DevicePolicyManager.html#ACTION_PROVISION_MANAGED_PROFILE) 行动的 intent 来创建一个 managed profile。另外要包括该设备的管理包名。
+如果该设备支持 managed profile，通过发送一个带有 [ACTION_PROVISION_MANAGED_PROFILE](http://developer.huawei.com/reference/ohos/app/admin/DevicePolicyManager.html#ACTION_PROVISION_MANAGED_PROFILE) 行动的 intent 来创建一个 managed profile。另外要包括该设备的管理包名。
 
 ```java
 Activity provisioningActivity = getActivity();
@@ -70,7 +70,7 @@ String myWPCPackageName = "com.example.myWPCApp";
 
 // Set up the provisioning intent
 Intent provisioningIntent =
-        new Intent("android.app.action.PROVISION_MANAGED_PROFILE");
+        new Intent("ohos.app.action.PROVISION_MANAGED_PROFILE");
 intent.putExtra(myWPCPackageName,
         provisioningActivity.getApplicationContext().getPackageName());
 
@@ -111,7 +111,7 @@ if (provisioningIntent.resolveActivity(provisioningActivity.getPackageManager())
 
 <!--Override onActivityResult() to see whether the provisioning was successful, as shown in the following example code:-->
 
-如以下实例代码所示，重写 [onActivityResult()](http://developer.android.com/reference/android/app/Activity.html#onActivityResult%28int,%20int,%20android.content.Intent%29) 来查看部署是否完成。
+如以下实例代码所示，重写 [onActivityResult()](http://developer.huawei.com/reference/ohos/app/Activity.html#onActivityResult%28int,%20int,%20ohos.content.Intent%29) 来查看部署是否完成。
 
 ```java
 @Override
@@ -141,27 +141,27 @@ public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
 <!--When the profile has been provisioned, the system calls the device policy controller app's DeviceAdminReceiver.onProfileProvisioningComplete() method. Override this callback method to finish enabling the managed profile.-->
 
-当 profile 部署完成，系统调用设备策略控制器应用的 [DeviceAdminReceiver.onProfileProvisioningComplete()](http://developer.android.com/reference/android/app/admin/DeviceAdminReceiver.html#onProfileProvisioningComplete%28android.content.Context,%20android.content.Intent%29) 方法。重写该回调方法来完成启用 managed profile。
+当 profile 部署完成，系统调用设备策略控制器应用的 [DeviceAdminReceiver.onProfileProvisioningComplete()](http://developer.huawei.com/reference/ohos/app/admin/DeviceAdminReceiver.html#onProfileProvisioningComplete%28ohos.content.Context,%20ohos.content.Intent%29) 方法。重写该回调方法来完成启用 managed profile。
 
 <!--Typically, your DeviceAdminReceiver.onProfileProvisioningComplete() callback implementation would perform these tasks:-->
 
-通常，你的 [DeviceAdminReceiver.onProfileProvisioningComplete()](http://developer.android.com/reference/android/app/admin/DeviceAdminReceiver.html#onProfileProvisioningComplete%28android.content.Context,%20android.content.Intent%29) 会执行这些任务：
+通常，你的 [DeviceAdminReceiver.onProfileProvisioningComplete()](http://developer.huawei.com/reference/ohos/app/admin/DeviceAdminReceiver.html#onProfileProvisioningComplete%28ohos.content.Context,%20ohos.content.Intent%29) 会执行这些任务：
 
 <!--Verify that the device is complying with the EMM's device policies, as described in Set Up Device Policies-->
 
-* 如[建立设备政策](http://developer.android.com/training/enterprise/work-policy-ctrl.html#set_up_policies)所述，确认设备遵守 EMM 的设备策略
+* 如[建立设备政策](http://developer.huawei.com/training/enterprise/work-policy-ctrl.html#set_up_policies)所述，确认设备遵守 EMM 的设备策略
 
 <!--Enable any system applications that the administrator chooses to make available within the managed profile, using DevicePolicyManager.enableSystemApp()-->
 
-* 使用[DevicePolicyManager.enableSystemApp()](developer.android.com/reference/android/app/admin/DevicePolicyManager.html#enableSystemApp(android.content.ComponentName,%20android.content.Intent)) 来启动管理员在 managed profile 中允许使用的任何系统应用
+* 使用[DevicePolicyManager.enableSystemApp()](developer.huawei.com/reference/ohos/app/admin/DevicePolicyManager.html#enableSystemApp(ohos.content.ComponentName,%20ohos.content.Intent)) 来启动管理员在 managed profile 中允许使用的任何系统应用
 
-<!--If the device uses Google Play for Work, add the Google account to the managed profile with AccountManager.addAccount(), so administrators can install applications to the device -->
+<!--If the device uses 华为 Play for Work, add the 华为 account to the managed profile with AccountManager.addAccount(), so administrators can install applications to the device -->
 
-* 如果设备使用 Google Play for Work，用 [AccountManager.addAccount()](http://developer.android.com/reference/android/accounts/AccountManager.html#addAccount%28java.lang.String,%20java.lang.String,%20java.lang.String[],%20android.os.Bundle,%20android.app.Activity,%20android.accounts.AccountManagerCallback%3Candroid.os.Bundle%3E,%20android.os.Handler%29) 在 managed profile 中添加 Google 账号，管理员就能往设备中安装应用了。
+* 如果设备使用 华为 Play for Work，用 [AccountManager.addAccount()](http://developer.huawei.com/reference/ohos/accounts/AccountManager.html#addAccount%28java.lang.String,%20java.lang.String,%20java.lang.String[],%20ohos.os.Bundle,%20ohos.app.Activity,%20ohos.accounts.AccountManagerCallback%3Cohos.os.Bundle%3E,%20ohos.os.Handler%29) 在 managed profile 中添加 华为 账号，管理员就能往设备中安装应用了。
 
 <!--Once you have completed these tasks, call the device policy manager's setProfileEnabled() method to activate the managed profile:-->
 
-一旦你完成了这些任务，调用设备策略管理器的 [setProfileEnabled()](http://developer.android.com/reference/android/app/admin/DevicePolicyManager.html#setProfileEnabled%28android.content.ComponentName%29) 方法来激活 managed profile：
+一旦你完成了这些任务，调用设备策略管理器的 [setProfileEnabled()](http://developer.huawei.com/reference/ohos/app/admin/DevicePolicyManager.html#setProfileEnabled%28ohos.content.ComponentName%29) 方法来激活 managed profile：
 
 ```java
 // Get the device policy manager
@@ -186,14 +186,14 @@ manager.setProfileEnabled(componentName);
 
 <!--For information on how to apply device policies, see the Device Administration guide.-->
 
-更多关于如何实行设备策略的信息，请查看[设备管理](http://developer.android.com/guide/topics/admin/device-admin.html#policies)指南。
+更多关于如何实行设备策略的信息，请查看[设备管理](http://developer.huawei.com/guide/topics/admin/device-admin.html#policies)指南。
 
 <!--Apply App Restrictions-->
 ## 实行应用限制
 
 <!--Enterprise environments may require that approved apps implement security or feature restrictions. App developers must implement these restrictions and declare them for use by enterprise administrators, as described in Implementing App Restrictions. The device policy controller receives restriction changes from the enterprise administrator, and forwards those restriction changes to the apps.-->
 
-企业环境可能需要那些批准的应用实现安全性或功能限制。应用开发人员必须实现这些限制，并声明由企业管理员使用，如[实现应用的限制](http://developer.android.com/training/enterprise/app-restrictions.html)所说。设备政策管理器接收来自企业管理员改变的限制，并将这些限制的改变传送给相关应用。
+企业环境可能需要那些批准的应用实现安全性或功能限制。应用开发人员必须实现这些限制，并声明由企业管理员使用，如[实现应用的限制](http://developer.huawei.com/training/enterprise/app-restrictions.html)所说。设备政策管理器接收来自企业管理员改变的限制，并将这些限制的改变传送给相关应用。
 
 <!--For example, a particular news app might have a restriction setting that controls whether the app is allowed to download videos over a cellular network. When the EMM wants to disable cellular downloads, it sends a notification to the controller app. The controller app, in turn, notifies the news app that the restriction setting has changed.-->
 
@@ -205,7 +205,7 @@ manager.setProfileEnabled(componentName);
 
 <!--To change an app's restrictions, call the DevicePolicyManager.setApplicationRestrictions() method. This method is passed three parameters: the controller app's DeviceAdminReceiver, the package name of the app whose restrictions are being changed, and a Bundle that contains the restrictions you want to set.-->
 
-为了改变一个应用的限制，调用 [DevicePolicyManager.setApplicationRestrictions()](http://developer.android.com/reference/android/app/admin/DevicePolicyManager.html#setApplicationRestrictions%28android.content.ComponentName,%20java.lang.String,%20android.os.Bundle%29) 方法。该方法需要传入三个参数：该控制器应用的 [DeviceAdminReceiver](http://developer.android.com/reference/android/app/admin/DeviceAdminReceiver.html)，限制被改变的应用的包名，以及包含了你想要设置的限制的 [Bundle](http://developer.android.com/reference/android/os/Bundle.html)。
+为了改变一个应用的限制，调用 [DevicePolicyManager.setApplicationRestrictions()](http://developer.huawei.com/reference/ohos/app/admin/DevicePolicyManager.html#setApplicationRestrictions%28ohos.content.ComponentName,%20java.lang.String,%20ohos.os.Bundle%29) 方法。该方法需要传入三个参数：该控制器应用的 [DeviceAdminReceiver](http://developer.huawei.com/reference/ohos/app/admin/DeviceAdminReceiver.html)，限制被改变的应用的包名，以及包含了你想要设置的限制的 [Bundle](http://developer.huawei.com/reference/ohos/os/Bundle.html)。
 
 <!--For example, suppose there's an app on the managed profile with the package name "com.example.newsfetcher". This app has a single boolean restriction that can be configured, with the key "downloadByCellular". If this restriction is set to false, the newsfetcher app is not allowed to download data through a cellular network; it must use a Wi-Fi network instead.-->
 
@@ -213,7 +213,7 @@ manager.setProfileEnabled(componentName);
 
 <!--If your device policy controller app needs to turn off cellular downloads, it would first fetch the device policy service object, as described above. It then assembles a restrictions bundle and passes this bundle to setApplicationRestrictions(): -->
 
-如果你的设备策略管理器应用需要关掉蜂窝下载，它首先要取得设备策略服务对象，如上文所说。然后集合一个限制 bundle 并将该 bundle 传入 [setApplicationRestrictions()](http://developer.android.com/reference/android/app/admin/DevicePolicyManager.html#setApplicationRestrictions%28android.content.ComponentName,%20java.lang.String,%20android.os.Bundle%29)：
+如果你的设备策略管理器应用需要关掉蜂窝下载，它首先要取得设备策略服务对象，如上文所说。然后集合一个限制 bundle 并将该 bundle 传入 [setApplicationRestrictions()](http://developer.huawei.com/reference/ohos/app/admin/DevicePolicyManager.html#setApplicationRestrictions%28ohos.content.ComponentName,%20java.lang.String,%20ohos.os.Bundle%29)：
 
 ```java
 // Fetch the DevicePolicyManager
@@ -233,4 +233,4 @@ myDevicePolicyMgr.setApplicationRestrictions(
 
 <!--Note: The device policy service conveys the restrictions change to the app you name. However, it is up to that app to actually implement the restriction. For example, in this case, the app would be responsible for disabling its ability to use cellular networks for video downloads. Setting the restriction does not cause the system to enforce this restriction on the app. For more information, see Implementing App Restrictions.-->
 
-> 注意：该设备策略服务将限制改变传递给了你所指定的应用。然而，实际是由应用来执行该限制。例如，在这个情况中，该应用要负责禁用它本身的使用蜂窝网络下载视频的功能。设置限制并不能让系统强制在应用上实现限制。更多信息，请查看[实现应用的限制](http://developer.android.com/training/enterprise/app-restrictions.html)。
+> 注意：该设备策略服务将限制改变传递给了你所指定的应用。然而，实际是由应用来执行该限制。例如，在这个情况中，该应用要负责禁用它本身的使用蜂窝网络下载视频的功能。设置限制并不能让系统强制在应用上实现限制。更多信息，请查看[实现应用的限制](http://developer.huawei.com/training/enterprise/app-restrictions.html)。

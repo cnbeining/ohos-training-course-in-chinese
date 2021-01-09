@@ -1,9 +1,9 @@
 {
-    "name": "Android官方培训课程",
-    "introduction": "Android官方培训课程：http://developer.android.com/training/index.html 中文版，开源协同项目：https://github.com/kesenhoo/android-training-course-in-chinese",
-    "title": "Android官方培训课程(中文版)",
-    "keywords": "Android Training Google",
-    "description": "Android官方培训课程(中文版)",
+    "name": "鸿蒙官方培训课程",
+    "introduction": "鸿蒙官方培训课程：http://developer.huawei.com/training/index.html 中文版，开源协同项目：https://github.com/kesenhoo/android-training-course-in-chinese",
+    "title": "鸿蒙官方培训课程(中文版)",
+    "keywords": "鸿蒙 Training 华为",
+    "description": "鸿蒙官方培训课程(中文版)",
     "path": {
         "toc": "SUMMARY.md"
         }

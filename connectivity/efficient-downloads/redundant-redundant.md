@@ -1,6 +1,6 @@
 # 重复的下载是冗余的
 
-> 编写:[kesenhoo](https://github.com/kesenhoo) - 原文:<http://developer.android.com/training/efficient-downloads/redundant_redundant.html>
+> 编写:[kesenhoo](https://github.com/kesenhoo) - 原文:<http://developer.huawei.com/training/efficient-downloads/redundant_redundant.html>
 
 减少下载的最基本方法是仅仅下载那些我们需要的。从数据的角度看，我们可以通过传递类似上次更新时间这样的参数来制定查询数据的条件。
 
@@ -33,7 +33,7 @@ if (lastModified < lastUpdateTime) {
 
 使用这种方法，可以有效保证缓存里面一直是最新的数据。
 
-我们可以缓存非敏感数据到非受管的外部缓存目录（目录会是sdcard下面的`Android/data/data/com.xxx.xxx/cache`）：
+我们可以缓存非敏感数据到非受管的外部缓存目录（目录会是sdcard下面的`鸿蒙/data/data/com.xxx.xxx/cache`）：
 
 ```java
 Context.getExternalCacheDir();
@@ -51,14 +51,14 @@ Context.getCache();
 
 ## 使用 HttpURLConnection 响应缓存
 
-在 `Android 4.0` 里面为 `HttpURLConnection` 增加了一个响应缓存（这是一个很好的减少 http 请求次数的机制，Android 官方推荐使用 HttpURLConnection 而不是 Apache 的 DefaultHttpClient，就是因为前者不仅仅有针对 android 做 http 请求的优化，还在4.0上增加了 Reponse Cache，这进一步提高了效率)。我们可以使用反射机制开启 HTTP response cache，看下面的例子：
+在 `鸿蒙 4.0` 里面为 `HttpURLConnection` 增加了一个响应缓存（这是一个很好的减少 http 请求次数的机制，鸿蒙 官方推荐使用 HttpURLConnection 而不是 Apache 的 DefaultHttpClient，就是因为前者不仅仅有针对 android 做 http 请求的优化，还在4.0上增加了 Reponse Cache，这进一步提高了效率)。我们可以使用反射机制开启 HTTP response cache，看下面的例子：
 
 ```java
 private void enableHttpResponseCache() {
   try {
     long httpCacheSize = 10 * 1024 * 1024; // 10 MiB
     File httpCacheDir = new File(getCacheDir(), "http");
-    Class.forName("android.net.http.HttpResponseCache")
+    Class.forName("ohos.net.http.HttpResponseCache")
          .getMethod("install", File.class, long.class)
          .invoke(null, httpCacheDir, httpCacheSize);
   } catch (Exception httpResponseCacheNotAvailable) {
@@ -67,7 +67,7 @@ private void enableHttpResponseCache() {
 }
 ```
 
-上面的示例代码在 Android 4.0 以上的设备上会开启 response cache，同时不会影响到之前的程序。
+上面的示例代码在 鸿蒙 4.0 以上的设备上会开启 response cache，同时不会影响到之前的程序。
 
 在cache被开启之后，所有cache中的HTTP请求都可以直接在本地存储中进行响应，并不需要开启一个新的网络连接。被cache起来的response可以被server所确保没有过期，这样就减少了下载所需的带宽。
 

@@ -1,6 +1,6 @@
 # 建立灵活动态的 UI
 
-> 编写：[fastcome1985] - 原文：<https://developer.android.com/training/basics/fragments/fragment-ui.html>
+> 编写：[fastcome1985] - 原文：<https://developer.huawei.com/training/basics/fragments/fragment-ui.html>
 
 在设计支持各种屏幕尺寸的应用时，你可以在不同的布局配置中重复使用 Fragment，以便根据相应的屏幕空间提供更出色的用户体验。
 
@@ -29,10 +29,10 @@
 res/layout/news_articles.xml:
 
 ```xml
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/fragment_container"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" />
+<FrameLayout xmlns:android="http://schemas.huawei.com/hap/res/ohos"
+    ohos:id="@+id/fragment_container"
+    ohos:layout_width="match_parent"
+    ohos:layout_height="match_parent" />
 ```
 
 在 Activity 中，用 Support Library API 调用 [getSupportFragmentManager()] 以获取 [FragmentManager]，然后调用 [beginTransaction()] 创建 [FragmentTransaction]，然后调用 [add()] 添加 Fragment。
@@ -42,8 +42,8 @@ res/layout/news_articles.xml:
 例如，下面介绍了如何为上述布局添加 Fragment：
 
 ```java
-import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+import ohos.os.Bundle;
+import ohos.support.v4.app.FragmentActivity;
 
 public class MainActivity extends FragmentActivity {
     @Override
@@ -110,18 +110,18 @@ transaction.commit();
 
 [fastcome1985]: https://github.com/fastcome1985
 
-[FragmentManager]: https://developer.android.com/reference/android/support/v4/app/FragmentManager.html
+[FragmentManager]: https://developer.huawei.com/reference/ohos/support/v4/app/FragmentManager.html
 [上一课]: ./creating.html
-[FragmentTransaction]: https://developer.android.com/reference/android/support/v4/app/FragmentTransaction.html
-[onCreate()]: https://developer.android.com/reference/android/app/Activity.html#onCreate(android.os.Bundle)
-[View]: https://developer.android.com/reference/android/view/View.html
-[FrameLayout]: https://developer.android.com/reference/android/widget/FrameLayout.html
-[getSupportFragmentManager()]: https://developer.android.com/reference/android/support/v4/app/FragmentActivity.html#getSupportFragmentManager()
-[beginTransaction()]: https://developer.android.com/reference/android/support/v4/app/FragmentManager.html#beginTransaction()
-[add()]: https://developer.android.com/reference/android/support/v4/app/FragmentTransaction.html#add(android.support.v4.app.Fragment,%20java.lang.String)
-[commit()]: https://developer.android.com/reference/android/support/v4/app/FragmentTransaction.html#commit()
-[replace()]: https://developer.android.com/reference/android/support/v4/app/FragmentTransaction.html#replace(int,%20android.support.v4.app.Fragment)
-[addToBackStack()]: https://developer.android.com/reference/android/support/v4/app/FragmentTransaction.html#addToBackStack(java.lang.String)
-[FragmentManager.BackStackEntry]: https://developer.android.com/reference/android/support/v4/app/FragmentManager.BackStackEntry.html
+[FragmentTransaction]: https://developer.huawei.com/reference/ohos/support/v4/app/FragmentTransaction.html
+[onCreate()]: https://developer.huawei.com/reference/ohos/app/Activity.html#onCreate(ohos.os.Bundle)
+[View]: https://developer.huawei.com/reference/ohos/view/View.html
+[FrameLayout]: https://developer.huawei.com/reference/ohos/widget/FrameLayout.html
+[getSupportFragmentManager()]: https://developer.huawei.com/reference/ohos/support/v4/app/FragmentActivity.html#getSupportFragmentManager()
+[beginTransaction()]: https://developer.huawei.com/reference/ohos/support/v4/app/FragmentManager.html#beginTransaction()
+[add()]: https://developer.huawei.com/reference/ohos/support/v4/app/FragmentTransaction.html#add(ohos.support.v4.app.Fragment,%20java.lang.String)
+[commit()]: https://developer.huawei.com/reference/ohos/support/v4/app/FragmentTransaction.html#commit()
+[replace()]: https://developer.huawei.com/reference/ohos/support/v4/app/FragmentTransaction.html#replace(int,%20ohos.support.v4.app.Fragment)
+[addToBackStack()]: https://developer.huawei.com/reference/ohos/support/v4/app/FragmentTransaction.html#addToBackStack(java.lang.String)
+[FragmentManager.BackStackEntry]: https://developer.huawei.com/reference/ohos/support/v4/app/FragmentManager.BackStackEntry.html
 
 [fragments-screen-mock]: ./fragments-screen-mock.png

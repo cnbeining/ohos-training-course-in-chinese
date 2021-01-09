@@ -1,6 +1,6 @@
 # 缩放View
 
-> 编写:[XizhiXu](https://github.com/XizhiXu) - 原文:<http://developer.android.com/training/animation/zoom.html>
+> 编写:[XizhiXu](https://github.com/XizhiXu) - 原文:<http://developer.huawei.com/training/animation/zoom.html>
 
 这节课展示怎样实现点击缩放动画，这对相册很有用，他能为相片从缩略图转换成原图并填充屏幕提供动画。
 
@@ -18,7 +18,7 @@ scroll top left; padding: 26px 68px 38px 72px; overflow: hidden;">
 
 </div>
 
-如果你想直接查看整个例子，[下载](http://developer.android.com/shareables/training/Animations.zip)并运行App样例然后选择缩放的例子。查看下列文件中的代码实现：
+如果你想直接查看整个例子，[下载](http://developer.huawei.com/shareables/training/Animations.zip)并运行App样例然后选择缩放的例子。查看下列文件中的代码实现：
 
 * `src/TouchHighlightImageButton.java`（简单的helper类，当Image Button被按下它显示蓝色高亮）
 * `src/ZoomActivity.java`
@@ -26,27 +26,27 @@ scroll top left; padding: 26px 68px 38px 72px; overflow: hidden;">
 
 ## 创建View
 
-为想要缩放的内容创建一大一小两个版本布局文件。下面的例子为可点击的缩略图新建了一个[`ImageButton`](http://developer.android.com/reference/android/widget/ImageButton.html)和一个[`ImageView`](http://developer.android.com/reference/android/widget/ImageView.html)来展示原图：
+为想要缩放的内容创建一大一小两个版本布局文件。下面的例子为可点击的缩略图新建了一个[`ImageButton`](http://developer.huawei.com/reference/ohos/widget/ImageButton.html)和一个[`ImageView`](http://developer.huawei.com/reference/ohos/widget/ImageView.html)来展示原图：
 
 ```xml
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/container"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<FrameLayout xmlns:android="http://schemas.huawei.com/hap/res/ohos"
+    ohos:id="@+id/container"
+    ohos:layout_width="match_parent"
+    ohos:layout_height="match_parent">
 
-    <LinearLayout android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+    <LinearLayout ohos:layout_width="match_parent"
+        ohos:layout_height="wrap_content"
+        ohos:orientation="vertical"
+        ohos:padding="16dp">
 
         <ImageButton
-            android:id="@+id/thumb_button_1"
-            android:layout_width="100dp"
-            android:layout_height="75dp"
-            android:layout_marginRight="1dp"
-            android:src="@drawable/thumb1"
-            android:scaleType="centerCrop"
-            android:contentDescription="@string/description_image_1" />
+            ohos:id="@+id/thumb_button_1"
+            ohos:layout_width="100dp"
+            ohos:layout_height="75dp"
+            ohos:layout_marginRight="1dp"
+            ohos:src="@drawable/thumb1"
+            ohos:scaleType="centerCrop"
+            ohos:contentDescription="@string/description_image_1" />
 
     </LinearLayout>
 
@@ -58,18 +58,18 @@ scroll top left; padding: 26px 68px 38px 72px; overflow: hidden;">
          -->
 
     <ImageView
-        android:id="@+id/expanded_image"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="invisible"
-        android:contentDescription="@string/description_zoom_touch_close" />
+        ohos:id="@+id/expanded_image"
+        ohos:layout_width="match_parent"
+        ohos:layout_height="match_parent"
+        ohos:visibility="invisible"
+        ohos:contentDescription="@string/description_zoom_touch_close" />
 
 </FrameLayout>
 ```
 
 ## 设置缩放动画
 
-一旦实现了布局，我们需要设置触发缩放动画的事件handler。下面的例子为[`ImageButton`](http://developer.android.com/reference/android/widget/ImageButton.html)添加了一个[`View.OnClickListener`](http://developer.android.com/reference/android/view/View.OnClickListener.html)，当用户点击按钮时它执行放大动画。
+一旦实现了布局，我们需要设置触发缩放动画的事件handler。下面的例子为[`ImageButton`](http://developer.huawei.com/reference/ohos/widget/ImageButton.html)添加了一个[`View.OnClickListener`](http://developer.huawei.com/reference/ohos/view/View.OnClickListener.html)，当用户点击按钮时它执行放大动画。
 
 ```java
 public class ZoomActivity extends FragmentActivity {
@@ -99,7 +99,7 @@ public class ZoomActivity extends FragmentActivity {
 
         // Retrieve and cache the system's default "short" animation time.
         mShortAnimationDuration = getResources().getInteger(
-                android.R.integer.config_shortAnimTime);
+                ohos.R.integer.config_shortAnimTime);
     }
     ...
 }
@@ -109,13 +109,13 @@ public class ZoomActivity extends FragmentActivity {
 
 我们现在需要适时应用放大动画了。通常来说，我们需要按边界来从小号View放大到大号View。下面的方法展示了如何实现缩放动画：
 
-1. 把高清图像资源设置到已经被隐藏的“放大版”的[`ImageView`](http://developer.android.com/reference/android/widget/ImageView.html)中。为表简单，下面的例子在UI线程中加载了一张大图。但是我们需要在一个单独的线程中来加载以免阻塞UI线程，然后再回到UI线程中设置。理想状况下，图片不要大过屏幕尺寸。
+1. 把高清图像资源设置到已经被隐藏的“放大版”的[`ImageView`](http://developer.huawei.com/reference/ohos/widget/ImageView.html)中。为表简单，下面的例子在UI线程中加载了一张大图。但是我们需要在一个单独的线程中来加载以免阻塞UI线程，然后再回到UI线程中设置。理想状况下，图片不要大过屏幕尺寸。
 
-2. 计算[`ImageView`](http://developer.android.com/reference/android/widget/ImageView.html)开始和结束时的边界。
+2. 计算[`ImageView`](http://developer.huawei.com/reference/ohos/widget/ImageView.html)开始和结束时的边界。
 
-3. 从起始边到结束边同步地动态改变四个位置和大小属性[`X`](http://developer.android.com/reference/android/view/View.html#X)，[`Y`](http://developer.android.com/reference/android/view/View.html#Y)（[`SCALE_X`](http://developer.android.com/reference/android/view/View.html#SCALE_X) 和 [`SCALE_Y`](http://developer.android.com/reference/android/view/View.html#SCALE_Y)）。这四个动画被加入到了[`AnimatorSet`](http://developer.android.com/reference/android/animation/AnimatorSet.html)，所以我们可以让它们一起开始。
+3. 从起始边到结束边同步地动态改变四个位置和大小属性[`X`](http://developer.huawei.com/reference/ohos/view/View.html#X)，[`Y`](http://developer.huawei.com/reference/ohos/view/View.html#Y)（[`SCALE_X`](http://developer.huawei.com/reference/ohos/view/View.html#SCALE_X) 和 [`SCALE_Y`](http://developer.huawei.com/reference/ohos/view/View.html#SCALE_Y)）。这四个动画被加入到了[`AnimatorSet`](http://developer.huawei.com/reference/ohos/animation/AnimatorSet.html)，所以我们可以让它们一起开始。
 
-4. 缩小则运行相同的动画，但是是在用户点击屏幕放大时的逆向效果。我们可以在[`ImageView`](http://developer.android.com/reference/android/widget/ImageView.html)中添加一个[`View.OnClickListener`](http://developer.android.com/reference/android/view/View.OnClickListener.html)来实现它。当点击时，[`ImageView`](http://developer.android.com/reference/android/widget/ImageView.html)缩回到原来缩略图的大小，然后设置它的visibility为[`GONE`](http://developer.android.com/reference/android/view/View.html#GONE)来隐藏。
+4. 缩小则运行相同的动画，但是是在用户点击屏幕放大时的逆向效果。我们可以在[`ImageView`](http://developer.huawei.com/reference/ohos/widget/ImageView.html)中添加一个[`View.OnClickListener`](http://developer.huawei.com/reference/ohos/view/View.OnClickListener.html)来实现它。当点击时，[`ImageView`](http://developer.huawei.com/reference/ohos/widget/ImageView.html)缩回到原来缩略图的大小，然后设置它的visibility为[`GONE`](http://developer.huawei.com/reference/ohos/view/View.html#GONE)来隐藏。
 
 ```java
 private void zoomImageFromThumb(final View thumbView, int imageResId) {

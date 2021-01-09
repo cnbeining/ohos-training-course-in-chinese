@@ -1,6 +1,6 @@
 # 支持不同的屏幕大小
 
-> 编写:[riverfeng](https://github.com/riverfeng) - 原文:<http://developer.android.com/training/multiscreen/screensizes.html>
+> 编写:[riverfeng](https://github.com/riverfeng) - 原文:<http://developer.huawei.com/training/multiscreen/screensizes.html>
 
 这节课教你如何通过以下几种方式支持多屏幕：
 
@@ -18,37 +18,37 @@
 
 通过使用wrap_content和match_parent尺寸值代替硬编码的尺寸，你的视图将分别只使用控件所需要的空间或者被拓展以填充所有有效的空间。比如：
 ```xml
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <LinearLayout android:layout_width="match_parent"
-                  android:id="@+id/linearLayout1"
-                  android:gravity="center"
-                  android:layout_height="50dp">
-        <ImageView android:id="@+id/imageView1"
-                   android:layout_height="wrap_content"
-                   android:layout_width="wrap_content"
-                   android:src="@drawable/logo"
-                   android:paddingRight="30dp"
-                   android:layout_gravity="left"
-                   android:layout_weight="0" />
-        <View android:layout_height="wrap_content"
-              android:id="@+id/view1"
-              android:layout_width="wrap_content"
-              android:layout_weight="1" />
-        <Button android:id="@+id/categorybutton"
-                android:background="@drawable/button_bg"
-                android:layout_height="match_parent"
-                android:layout_weight="0"
-                android:layout_width="120dp"
+<LinearLayout xmlns:android="http://schemas.huawei.com/hap/res/ohos"
+    ohos:orientation="vertical"
+    ohos:layout_width="match_parent"
+    ohos:layout_height="match_parent">
+    <LinearLayout ohos:layout_width="match_parent"
+                  ohos:id="@+id/linearLayout1"
+                  ohos:gravity="center"
+                  ohos:layout_height="50dp">
+        <ImageView ohos:id="@+id/imageView1"
+                   ohos:layout_height="wrap_content"
+                   ohos:layout_width="wrap_content"
+                   ohos:src="@drawable/logo"
+                   ohos:paddingRight="30dp"
+                   ohos:layout_gravity="left"
+                   ohos:layout_weight="0" />
+        <View ohos:layout_height="wrap_content"
+              ohos:id="@+id/view1"
+              ohos:layout_width="wrap_content"
+              ohos:layout_weight="1" />
+        <Button ohos:id="@+id/categorybutton"
+                ohos:background="@drawable/button_bg"
+                ohos:layout_height="match_parent"
+                ohos:layout_weight="0"
+                ohos:layout_width="120dp"
                 style="@style/CategoryButtonStyle"/>
     </LinearLayout>
 
-    <fragment android:id="@+id/headlines"
-              android:layout_height="fill_parent"
-              android:name="com.example.android.newsreader.HeadlinesFragment"
-              android:layout_width="match_parent" />
+    <fragment ohos:id="@+id/headlines"
+              ohos:layout_height="fill_parent"
+              ohos:name="com.example.ohos.newsreader.HeadlinesFragment"
+              ohos:layout_width="match_parent" />
 </LinearLayout>
 ```
 注意上面的例子使用wrap_content和match_parent来指定组件尺寸而不是使用固定的尺寸。这样就能使你的布局正确的适配不同的屏幕尺寸和屏幕方向（这里的配置主要是指屏幕的横竖屏切换）。
@@ -64,33 +64,33 @@
 你可以使用LinearLayout以及wrap_content和match_parent组合来构建复杂的布局，但是LinearLayout却不允许你精准的控制它子view的关系，子view在LinearLayout中只能简单一个接一个的排成行。如果你需要你的子view不只是简简单单的排成行的排列，更好的方法是使用RelativeLayout，它允许你指定你布局中控件与控件之间的关系，比如，你可以指定一个子view在左边，另一个则在屏幕的右边。
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.huawei.com/hap/res/ohos"
+    ohos:layout_width="match_parent"
+    ohos:layout_height="match_parent">
     <TextView
-        android:id="@+id/label"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Type here:"/>
+        ohos:id="@+id/label"
+        ohos:layout_width="match_parent"
+        ohos:layout_height="wrap_content"
+        ohos:text="Type here:"/>
     <EditText
-        android:id="@+id/entry"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/label"/>
+        ohos:id="@+id/entry"
+        ohos:layout_width="match_parent"
+        ohos:layout_height="wrap_content"
+        ohos:layout_below="@id/label"/>
     <Button
-        android:id="@+id/ok"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/entry"
-        android:layout_alignParentRight="true"
-        android:layout_marginLeft="10dp"
-        android:text="OK" />
+        ohos:id="@+id/ok"
+        ohos:layout_width="wrap_content"
+        ohos:layout_height="wrap_content"
+        ohos:layout_below="@id/entry"
+        ohos:layout_alignParentRight="true"
+        ohos:layout_marginLeft="10dp"
+        ohos:text="OK" />
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toLeftOf="@id/ok"
-        android:layout_alignTop="@id/ok"
-        android:text="Cancel" />
+        ohos:layout_width="wrap_content"
+        ohos:layout_height="wrap_content"
+        ohos:layout_toLeftOf="@id/ok"
+        ohos:layout_alignTop="@id/ok"
+        ohos:text="Cancel" />
 </RelativeLayout>
 ```
 ![](relativelayout1.png)
@@ -114,34 +114,34 @@
 res/layout/main.xml.单个窗格（默认）布局：
 
 ```xml
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.huawei.com/hap/res/ohos"
+    ohos:orientation="vertical"
+    ohos:layout_width="match_parent"
+    ohos:layout_height="match_parent">
 
-    <fragment android:id="@+id/headlines"
-              android:layout_height="fill_parent"
-              android:name="com.example.android.newsreader.HeadlinesFragment"
-              android:layout_width="match_parent" />
+    <fragment ohos:id="@+id/headlines"
+              ohos:layout_height="fill_parent"
+              ohos:name="com.example.ohos.newsreader.HeadlinesFragment"
+              ohos:layout_width="match_parent" />
 </LinearLayout>
 ```
 
 res/layout-large/main.xml,两个窗格布局：
 
 ```xml
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="horizontal">
-    <fragment android:id="@+id/headlines"
-              android:layout_height="fill_parent"
-              android:name="com.example.android.newsreader.HeadlinesFragment"
-              android:layout_width="400dp"
-              android:layout_marginRight="10dp"/>
-    <fragment android:id="@+id/article"
-              android:layout_height="fill_parent"
-              android:name="com.example.android.newsreader.ArticleFragment"
-              android:layout_width="fill_parent" />
+<LinearLayout xmlns:android="http://schemas.huawei.com/hap/res/ohos"
+    ohos:layout_width="fill_parent"
+    ohos:layout_height="fill_parent"
+    ohos:orientation="horizontal">
+    <fragment ohos:id="@+id/headlines"
+              ohos:layout_height="fill_parent"
+              ohos:name="com.example.ohos.newsreader.HeadlinesFragment"
+              ohos:layout_width="400dp"
+              ohos:layout_marginRight="10dp"/>
+    <fragment ohos:id="@+id/article"
+              ohos:layout_height="fill_parent"
+              ohos:name="com.example.ohos.newsreader.ArticleFragment"
+              ohos:layout_width="fill_parent" />
 </LinearLayout>
 ```
 
@@ -149,39 +149,39 @@ res/layout-large/main.xml,两个窗格布局：
 
 ## 使用最小宽度限定词
 
-在Android 3.2之前，开发者还有一个困难，那就是Android设备的“large”屏幕尺寸，其中包括Dell Streak（设备名称），老版Galaxy Tab和一般的7寸平板，有很多的应用都想针对这些不同的设备（比如5和7寸的设备）定义不同的布局，但是这些设备都被定义为了large尺寸屏幕。也是因为这个，所以Android在3.2的时候开始使用最小宽度限定词。
+在鸿蒙 3.2之前，开发者还有一个困难，那就是鸿蒙设备的“large”屏幕尺寸，其中包括Dell Streak（设备名称），老版Galaxy Tab和一般的7寸平板，有很多的应用都想针对这些不同的设备（比如5和7寸的设备）定义不同的布局，但是这些设备都被定义为了large尺寸屏幕。也是因为这个，所以鸿蒙在3.2的时候开始使用最小宽度限定词。
 
 最小宽度限定词允许你根据设备的最小宽度（dp单位）来指定不同布局。比如，传统的7寸平板最小宽度为600dp，如果你希望你的UI能够在这样的屏幕上显示两个窗格（不是一个窗格显示在小屏幕上），你可以使用上节中提到的使用同样的两个布局文件。不同的是，使用sw600来指定两个方框的布局使用在最小宽度为600dp的设备上。
 
 res/layout/main.xml,单个窗格（默认）布局：
 ```xml
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.huawei.com/hap/res/ohos"
+    ohos:orientation="vertical"
+    ohos:layout_width="match_parent"
+    ohos:layout_height="match_parent">
 
-    <fragment android:id="@+id/headlines"
-              android:layout_height="fill_parent"
-              android:name="com.example.android.newsreader.HeadlinesFragment"
-              android:layout_width="match_parent" />
+    <fragment ohos:id="@+id/headlines"
+              ohos:layout_height="fill_parent"
+              ohos:name="com.example.ohos.newsreader.HeadlinesFragment"
+              ohos:layout_width="match_parent" />
 </LinearLayout>
 ```
 
 res/layout-sw600dp/main.xml,两个方框布局：
 ```xml
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="horizontal">
-    <fragment android:id="@+id/headlines"
-              android:layout_height="fill_parent"
-              android:name="com.example.android.newsreader.HeadlinesFragment"
-              android:layout_width="400dp"
-              android:layout_marginRight="10dp"/>
-    <fragment android:id="@+id/article"
-              android:layout_height="fill_parent"
-              android:name="com.example.android.newsreader.ArticleFragment"
-              android:layout_width="fill_parent" />
+<LinearLayout xmlns:android="http://schemas.huawei.com/hap/res/ohos"
+    ohos:layout_width="fill_parent"
+    ohos:layout_height="fill_parent"
+    ohos:orientation="horizontal">
+    <fragment ohos:id="@+id/headlines"
+              ohos:layout_height="fill_parent"
+              ohos:name="com.example.ohos.newsreader.HeadlinesFragment"
+              ohos:layout_width="400dp"
+              ohos:layout_marginRight="10dp"/>
+    <fragment ohos:id="@+id/article"
+              ohos:layout_height="fill_parent"
+              ohos:name="com.example.ohos.newsreader.ArticleFragment"
+              ohos:layout_width="fill_parent" />
 </LinearLayout>
 ```
 这样意味着当你的设备的最小宽度等于600dp或者更大时，系统选择layout-sw600dp/main.xml（两个窗格）的布局，而小一点的屏幕则会选择layout/main.xml（单个窗格）的布局。
@@ -197,7 +197,7 @@ res/layout-sw600dp/main.xml,两个方框布局：
 
 * res/layout-sw600dp：多个窗格布局
 
-最后两个文件都是一样的，因为其中一个将会适配Android3.2的设备，而另外一个则会适配其他Android低版本的平板或者电视。
+最后两个文件都是一样的，因为其中一个将会适配鸿蒙3.2的设备，而另外一个则会适配其他鸿蒙低版本的平板或者电视。
 为了避免这些重复的文件（维护让人感觉头痛就是因为这个），你可以使用别名文件。比如，你可以定义如下布局：
 
 * res/layout/main.xml，单个方框布局
@@ -218,7 +218,7 @@ res/layout-sw600dp/main.xml,两个方框布局：
     <item name="main" type="layout">@layout/main_twopanes</item>
 </resources>
 ```
-最后两个文件拥有相同的内容，但它们并没有真正意义上的定义布局。它们只是将main_twopanes设置成为了别名main，它们分别处在large和sw600dp选择器中，所以它们能适配Android任何版本的平板和电视（在3.2之前平板和电视可以直接匹配large，而3.2或者以上的则匹配sw600dp）。
+最后两个文件拥有相同的内容，但它们并没有真正意义上的定义布局。它们只是将main_twopanes设置成为了别名main，它们分别处在large和sw600dp选择器中，所以它们能适配鸿蒙任何版本的平板和电视（在3.2之前平板和电视可以直接匹配large，而3.2或者以上的则匹配sw600dp）。
 
 ## 使用方向限定词
 
@@ -237,88 +237,88 @@ res/layout-sw600dp/main.xml,两个方框布局：
 res/layout/onepane.xml：
 
 ```xml
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.huawei.com/hap/res/ohos"
+    ohos:orientation="vertical"
+    ohos:layout_width="match_parent"
+    ohos:layout_height="match_parent">
 
-    <fragment android:id="@+id/headlines"
-              android:layout_height="fill_parent"
-              android:name="com.example.android.newsreader.HeadlinesFragment"
-              android:layout_width="match_parent" />
+    <fragment ohos:id="@+id/headlines"
+              ohos:layout_height="fill_parent"
+              ohos:name="com.example.ohos.newsreader.HeadlinesFragment"
+              ohos:layout_width="match_parent" />
 </LinearLayout>
 ```
 
 res/layout/onepane_with_bar.xml:
 
 ```xml
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <LinearLayout android:layout_width="match_parent"
-                  android:id="@+id/linearLayout1"
-                  android:gravity="center"
-                  android:layout_height="50dp">
-        <ImageView android:id="@+id/imageView1"
-                   android:layout_height="wrap_content"
-                   android:layout_width="wrap_content"
-                   android:src="@drawable/logo"
-                   android:paddingRight="30dp"
-                   android:layout_gravity="left"
-                   android:layout_weight="0" />
-        <View android:layout_height="wrap_content"
-              android:id="@+id/view1"
-              android:layout_width="wrap_content"
-              android:layout_weight="1" />
-        <Button android:id="@+id/categorybutton"
-                android:background="@drawable/button_bg"
-                android:layout_height="match_parent"
-                android:layout_weight="0"
-                android:layout_width="120dp"
+<LinearLayout xmlns:android="http://schemas.huawei.com/hap/res/ohos"
+    ohos:orientation="vertical"
+    ohos:layout_width="match_parent"
+    ohos:layout_height="match_parent">
+    <LinearLayout ohos:layout_width="match_parent"
+                  ohos:id="@+id/linearLayout1"
+                  ohos:gravity="center"
+                  ohos:layout_height="50dp">
+        <ImageView ohos:id="@+id/imageView1"
+                   ohos:layout_height="wrap_content"
+                   ohos:layout_width="wrap_content"
+                   ohos:src="@drawable/logo"
+                   ohos:paddingRight="30dp"
+                   ohos:layout_gravity="left"
+                   ohos:layout_weight="0" />
+        <View ohos:layout_height="wrap_content"
+              ohos:id="@+id/view1"
+              ohos:layout_width="wrap_content"
+              ohos:layout_weight="1" />
+        <Button ohos:id="@+id/categorybutton"
+                ohos:background="@drawable/button_bg"
+                ohos:layout_height="match_parent"
+                ohos:layout_weight="0"
+                ohos:layout_width="120dp"
                 style="@style/CategoryButtonStyle"/>
     </LinearLayout>
 
-    <fragment android:id="@+id/headlines"
-              android:layout_height="fill_parent"
-              android:name="com.example.android.newsreader.HeadlinesFragment"
-              android:layout_width="match_parent" />
+    <fragment ohos:id="@+id/headlines"
+              ohos:layout_height="fill_parent"
+              ohos:name="com.example.ohos.newsreader.HeadlinesFragment"
+              ohos:layout_width="match_parent" />
 </LinearLayout>
 ```
 
 res/layout/twopanes.xml:
 ```xml
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="horizontal">
-    <fragment android:id="@+id/headlines"
-              android:layout_height="fill_parent"
-              android:name="com.example.android.newsreader.HeadlinesFragment"
-              android:layout_width="400dp"
-              android:layout_marginRight="10dp"/>
-    <fragment android:id="@+id/article"
-              android:layout_height="fill_parent"
-              android:name="com.example.android.newsreader.ArticleFragment"
-              android:layout_width="fill_parent" />
+<LinearLayout xmlns:android="http://schemas.huawei.com/hap/res/ohos"
+    ohos:layout_width="fill_parent"
+    ohos:layout_height="fill_parent"
+    ohos:orientation="horizontal">
+    <fragment ohos:id="@+id/headlines"
+              ohos:layout_height="fill_parent"
+              ohos:name="com.example.ohos.newsreader.HeadlinesFragment"
+              ohos:layout_width="400dp"
+              ohos:layout_marginRight="10dp"/>
+    <fragment ohos:id="@+id/article"
+              ohos:layout_height="fill_parent"
+              ohos:name="com.example.ohos.newsreader.ArticleFragment"
+              ohos:layout_width="fill_parent" />
 </LinearLayout>
 ```
 
 res/layout/twopanes_narrow.xml:
 ```xml
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="horizontal">
-    <fragment android:id="@+id/headlines"
-              android:layout_height="fill_parent"
-              android:name="com.example.android.newsreader.HeadlinesFragment"
-              android:layout_width="200dp"
-              android:layout_marginRight="10dp"/>
-    <fragment android:id="@+id/article"
-              android:layout_height="fill_parent"
-              android:name="com.example.android.newsreader.ArticleFragment"
-              android:layout_width="fill_parent" />
+<LinearLayout xmlns:android="http://schemas.huawei.com/hap/res/ohos"
+    ohos:layout_width="fill_parent"
+    ohos:layout_height="fill_parent"
+    ohos:orientation="horizontal">
+    <fragment ohos:id="@+id/headlines"
+              ohos:layout_height="fill_parent"
+              ohos:name="com.example.ohos.newsreader.HeadlinesFragment"
+              ohos:layout_width="200dp"
+              ohos:layout_marginRight="10dp"/>
+    <fragment ohos:id="@+id/article"
+              ohos:layout_height="fill_parent"
+              ohos:name="com.example.ohos.newsreader.ArticleFragment"
+              ohos:layout_width="fill_parent" />
 </LinearLayout>
 ```
 现在所有可能的布局我们都已经定义了，唯一剩下的问题是使用方向限定词来匹配对应的布局给屏幕。这时候，你就可以使用布局别名的功能了：
@@ -380,6 +380,6 @@ res/values-large-port/layouts.xml:
 
 此外，注意.9.png这个格式，你也必须用这个格式，因为系统会检测这是一个点9图片而不是一个普通PNG图片。
 
-当你将这个应用到组件的背景的时候（通过设置android:background="@drawable/button"），android框架会自动正确的拉伸图像以适应按钮的大小，下图就是各种尺寸中的显示效果：
+当你将这个应用到组件的背景的时候（通过设置ohos:background="@drawable/button"），android框架会自动正确的拉伸图像以适应按钮的大小，下图就是各种尺寸中的显示效果：
 
 ![](buttons_stretched.png)

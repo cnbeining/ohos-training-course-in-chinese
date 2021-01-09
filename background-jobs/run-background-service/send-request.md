@@ -1,6 +1,6 @@
 # 向后台服务发送任务请求
 
-> 编写:[kesenhoo](https://github.com/kesenhoo) - 原文:<http://developer.android.com/training/run-background-service/send-request.html>
+> 编写:[kesenhoo](https://github.com/kesenhoo) - 原文:<http://developer.huawei.com/training/run-background-service/send-request.html>
 
 前一篇文章演示了如何创建一个IntentService类。这次会演示如何通过发送一个Intent来触发IntentService执行任务。这个Intent可以传递一些数据给IntentService。我们可以在Activity或者Fragment的任何时间点发送这个Intent。
 
@@ -36,4 +36,4 @@ getActivity().startService(mServiceIntent);
 
 一旦执行了startService()，IntentService在自己本身的`onHandleIntent()`方法里面开始执行这个任务，任务结束之后，会自动停止这个Service。
 
-下一步是如何把工作任务的执行结果返回给发送任务的Activity或者Fragment。下节课会演示如何使用[BroadcastReceiver](http://developer.android.com/reference/android/content/BroadcastReceiver.html)来完成这个任务。
+下一步是如何把工作任务的执行结果返回给发送任务的Activity或者Fragment。下节课会演示如何使用[BroadcastReceiver](http://developer.huawei.com/reference/ohos/content/BroadcastReceiver.html)来完成这个任务。

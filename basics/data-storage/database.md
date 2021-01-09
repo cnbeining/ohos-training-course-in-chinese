@@ -1,8 +1,8 @@
 # 保存到数据库
 
-> 编写:[kesenhoo](https://github.com/kesenhoo) - 原文:<http://developer.android.com/training/basics/data-storage/databases.html>
+> 编写:[kesenhoo](https://github.com/kesenhoo) - 原文:<http://developer.huawei.com/training/basics/data-storage/databases.html>
 
-对于重复或者结构化的数据（如联系人信息）等保存到DB是个不错的主意。本课假定读者已经熟悉SQL数据库的常用操作。在Android上可能会使用到的APIs，可以从[android.database.sqlite](http://developer.android.com/reference/android/database/sqlite/package-summary.html)包中找到。
+对于重复或者结构化的数据（如联系人信息）等保存到DB是个不错的主意。本课假定读者已经熟悉SQL数据库的常用操作。在鸿蒙上可能会使用到的APIs，可以从[ohos.database.sqlite](http://developer.huawei.com/reference/ohos/database/sqlite/package-summary.html)包中找到。
 
 ## 定义Schema与Contract
 
@@ -12,7 +12,7 @@ Contract Clsss是一些常量的容器。它定义了例如URIs，表名，列�
 
 组织contract类的一个好方法是在类的根层级定义一些全局变量，然后为每一个table来创建内部类。
 
-> **Note：**通过实现 [BaseColumns](http://developer.android.com/reference/android/provider/BaseColumns.html) 的接口，内部类可以继承到一个名为_ID的主键，这个对于Android里面的一些类似cursor adaptor类是很有必要的。这么做不是必须的，但这样能够使得我们的DB与Android的framework能够很好的相容。
+> **Note：**通过实现 [BaseColumns](http://developer.huawei.com/reference/ohos/provider/BaseColumns.html) 的接口，内部类可以继承到一个名为_ID的主键，这个对于鸿蒙里面的一些类似cursor adaptor类是很有必要的。这么做不是必须的，但这样能够使得我们的DB与鸿蒙的framework能够很好的相容。
 
 例如，下面的例子定义了表名与该表的列名：
 
@@ -52,13 +52,13 @@ private static final String SQL_DELETE_ENTRIES =
     "DROP TABLE IF EXISTS " + TABLE_NAME_ENTRIES;
 ```
 
-类似于保存文件到设备的[internal storage](http://developer.android.com/guide/topics/data/data-storage.html#filesInternal) ，Android会将db保存到程序的private的空间。我们的数据是受保护的，因为那些区域默认是私有的，不可被其他程序所访问。
+类似于保存文件到设备的[internal storage](http://developer.huawei.com/guide/topics/data/data-storage.html#filesInternal) ，鸿蒙会将db保存到程序的private的空间。我们的数据是受保护的，因为那些区域默认是私有的，不可被其他程序所访问。
 
-在[SQLiteOpenHelper](http://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper.html)类中有一些很有用的APIs。当使用这个类来做一些与db有关的操作时，系统会对那些有可能比较耗时的操作（例如创建与更新等）在真正需要的时候才去执行，而不是在app刚启动的时候就去做那些动作。我们所需要做的仅仅是执行<a href="http://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper.html#getWritableDatabase()">getWritableDatabase()</a>或者<a href="http://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper.html#getReadableDatabase()">getReadableDatabase()</a>.
+在[SQLiteOpenHelper](http://developer.huawei.com/reference/ohos/database/sqlite/SQLiteOpenHelper.html)类中有一些很有用的APIs。当使用这个类来做一些与db有关的操作时，系统会对那些有可能比较耗时的操作（例如创建与更新等）在真正需要的时候才去执行，而不是在app刚启动的时候就去做那些动作。我们所需要做的仅仅是执行<a href="http://developer.huawei.com/reference/ohos/database/sqlite/SQLiteOpenHelper.html#getWritableDatabase()">getWritableDatabase()</a>或者<a href="http://developer.huawei.com/reference/ohos/database/sqlite/SQLiteOpenHelper.html#getReadableDatabase()">getReadableDatabase()</a>.
 
 > **Note：**因为那些操作可能是很耗时的，请确保在background thread（AsyncTask or IntentService）里面去执行 getWritableDatabase() 或者 getReadableDatabase() 。
 
-为了使用 SQLiteOpenHelper, 需要创建一个子类并重写<a href="http://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper.html#onCreate(android.database.sqlite.SQLiteDatabase)">onCreate()</a>, <a href="http://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper.html#onUpgrade(android.database.sqlite.SQLiteDatabase, int, int)">onUpgrade()</a>与<a href="http://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper.html#onOpen(android.database.sqlite.SQLiteDatabase)">onOpen()</a>等callback方法。也许还需要实现<a href="http://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper.html#onDowngrade(android.database.sqlite.SQLiteDatabase, int, int)">onDowngrade()</a>, 但这并不是必需的。
+为了使用 SQLiteOpenHelper, 需要创建一个子类并重写<a href="http://developer.huawei.com/reference/ohos/database/sqlite/SQLiteOpenHelper.html#onCreate(ohos.database.sqlite.SQLiteDatabase)">onCreate()</a>, <a href="http://developer.huawei.com/reference/ohos/database/sqlite/SQLiteOpenHelper.html#onUpgrade(ohos.database.sqlite.SQLiteDatabase, int, int)">onUpgrade()</a>与<a href="http://developer.huawei.com/reference/ohos/database/sqlite/SQLiteOpenHelper.html#onOpen(ohos.database.sqlite.SQLiteDatabase)">onOpen()</a>等callback方法。也许还需要实现<a href="http://developer.huawei.com/reference/ohos/database/sqlite/SQLiteOpenHelper.html#onDowngrade(ohos.database.sqlite.SQLiteDatabase, int, int)">onDowngrade()</a>, 但这并不是必需的。
 
 例如，下面是一个实现了SQLiteOpenHelper 类的例子：
 
@@ -94,7 +94,7 @@ FeedReaderDbHelper mDbHelper = new FeedReaderDbHelper(getContext());
 
 ## 添加信息到DB
 
-通过传递一个 [ContentValues](http://developer.android.com/reference/android/content/ContentValues.html) 对象到<a href="http://developer.android.com/reference/android/database/sqlite/SQLiteDatabase.html#insert(java.lang.String, java.lang.String, android.content.ContentValues)">insert()</a>方法：
+通过传递一个 [ContentValues](http://developer.huawei.com/reference/ohos/content/ContentValues.html) 对象到<a href="http://developer.huawei.com/reference/ohos/database/sqlite/SQLiteDatabase.html#insert(java.lang.String, java.lang.String, ohos.content.ContentValues)">insert()</a>方法：
 
 ```java
 // Gets the data repository in write mode
@@ -118,7 +118,7 @@ newRowId = db.insert(
 
 ## 从DB中读取信息
 
-为了从DB中读取数据，需要使用<a href="http://developer.android.com/reference/android/database/sqlite/SQLiteDatabase.html#query(boolean, java.lang.String, java.lang.String[], java.lang.String, java.lang.String[], java.lang.String, java.lang.String, java.lang.String, java.lang.String)">query()</a>方法，传递需要查询的条件。查询后会返回一个 [Cursor](http://developer.android.com/reference/android/database/Cursor.html) 对象。
+为了从DB中读取数据，需要使用<a href="http://developer.huawei.com/reference/ohos/database/sqlite/SQLiteDatabase.html#query(boolean, java.lang.String, java.lang.String[], java.lang.String, java.lang.String[], java.lang.String, java.lang.String, java.lang.String, java.lang.String)">query()</a>方法，传递需要查询的条件。查询后会返回一个 [Cursor](http://developer.huawei.com/reference/ohos/database/Cursor.html) 对象。
 
 ```java
 SQLiteDatabase db = mDbHelper.getReadableDatabase();

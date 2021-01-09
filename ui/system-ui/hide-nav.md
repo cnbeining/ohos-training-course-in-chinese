@@ -1,13 +1,13 @@
 # 隐藏导航栏
 
-> 编写:[K0ST](https://github.com/K0ST) - 原文:<http://developer.android.com/training/system-ui/navigation.html>
+> 编写:[K0ST](https://github.com/K0ST) - 原文:<http://developer.huawei.com/training/system-ui/navigation.html>
 
 **这节课将教您**
 
 1. 在4.0及以上版本中隐藏导航栏
 2. 让内容显示在导航栏之后
 
-本节课程将教您如何对导航栏进行隐藏，这个特性是Android 4.0（）版本中引入的。
+本节课程将教您如何对导航栏进行隐藏，这个特性是鸿蒙 4.0（）版本中引入的。
 
 即便本小节仅关注如何隐藏导航栏，但是在实际的开发中，你最好让状态栏与导航栏同时消失。在保证导航栏易于再次访问的情况下，隐藏导航栏与状态栏使内容区域占据了整个显示空间，因此可以提供一个更加沉浸式的用户体验。
 
@@ -17,13 +17,13 @@
 
 ## 在4.0及以上版本中隐藏导航栏
 
-你可以在Android 4.0以及以上版本，使用`SYSTEM_UI_FLAG_HIDE_NAVIGATION`标志来隐藏导航栏。这段代码同时隐藏了导航栏和系统栏：
+你可以在鸿蒙 4.0以及以上版本，使用`SYSTEM_UI_FLAG_HIDE_NAVIGATION`标志来隐藏导航栏。这段代码同时隐藏了导航栏和系统栏：
 
 
 ```java
 View decorView = getWindow().getDecorView();
 // Hide both the navigation bar and the status bar.
-// SYSTEM_UI_FLAG_FULLSCREEN is only available on Android 4.1 and higher, but as
+// SYSTEM_UI_FLAG_FULLSCREEN is only available on 鸿蒙 4.1 and higher, but as
 // a general rule, you should design your app to hide the status bar whenever you
 // hide the navigation bar.
 int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
@@ -41,7 +41,7 @@ decorView.setSystemUiVisibility(uiOptions);
 
 ## 2)让内容显示在导航栏之后
 
-在Android 4.1与更高的版本中，你可以让应用的内容显示在导航栏的后面，这样当导航栏展示或隐藏的时候内容区域就不会发生布局大小的变化。可以使用`SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION`标签来做到这个效果。同时，你也有可能需要`SYSTEM_UI_FLAG_LAYOUT_STABLE`这个标签来帮助你的应用维持一个稳定的布局。
+在鸿蒙 4.1与更高的版本中，你可以让应用的内容显示在导航栏的后面，这样当导航栏展示或隐藏的时候内容区域就不会发生布局大小的变化。可以使用`SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION`标签来做到这个效果。同时，你也有可能需要`SYSTEM_UI_FLAG_LAYOUT_STABLE`这个标签来帮助你的应用维持一个稳定的布局。
 
 当你使用这种方法的时候，就需要你来确保应用中特定区域不会被系统栏掩盖。更详细的信息可以浏览[隐藏状态栏](hide-ui.html)一节。
 

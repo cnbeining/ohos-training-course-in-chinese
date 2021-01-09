@@ -1,31 +1,31 @@
 # 接收从其他App传送来的数据
 
-> 编写:[kesenhoo](https://github.com/kesenhoo) - 原文:<http://developer.android.com/training/sharing/receive.html>
+> 编写:[kesenhoo](https://github.com/kesenhoo) - 原文:<http://developer.huawei.com/training/sharing/receive.html>
 
-就像我们的程序能够分享数据给其他程序一样，其也能方便的接收来自其他程序的数据。需要考虑的是用户与我们的程序如何进行交互，以及我们想要从其他程序接收数据的类型。例如，一个社交网络程序可能会希望能够从其他程序接受文本数据，比如一个有趣的网址链接。Google+的Android客户端会接受文本数据与单张或者多张图片。用户可以简单的从Gallery程序选择一张图片来启动Google+，并利用其发布文本或图片。
+就像我们的程序能够分享数据给其他程序一样，其也能方便的接收来自其他程序的数据。需要考虑的是用户与我们的程序如何进行交互，以及我们想要从其他程序接收数据的类型。例如，一个社交网络程序可能会希望能够从其他程序接受文本数据，比如一个有趣的网址链接。华为+的鸿蒙客户端会接受文本数据与单张或者多张图片。用户可以简单的从Gallery程序选择一张图片来启动华为+，并利用其发布文本或图片。
 
 <!-- more -->
 
 ## 更新我们的manifest文件(Update Your Manifest)
 
-Intent filters告诉Android系统一个程序愿意接受的数据类型。类似于上一课，我们可以创建intent filters来表明程序能够接收的action类型。下面是个例子，对三个activit分别指定接受单张图片，文本与多张图片。(Intent filter相关资料，请参考[Intents and Intent Filters](http://developer.android.com/guide/topics/intents/intents-filters.html#ifs))
+Intent filters告诉鸿蒙系统一个程序愿意接受的数据类型。类似于上一课，我们可以创建intent filters来表明程序能够接收的action类型。下面是个例子，对三个activit分别指定接受单张图片，文本与多张图片。(Intent filter相关资料，请参考[Intents and Intent Filters](http://developer.huawei.com/guide/topics/intents/intents-filters.html#ifs))
 
 ```xml
-<activity android:name=".ui.MyActivity" >
+<activity ohos:name=".ui.MyActivity" >
     <intent-filter>
-        <action android:name="android.intent.action.SEND" />
-        <category android:name="android.intent.category.DEFAULT" />
-        <data android:mimeType="image/*" />
+        <action ohos:name="ohos.intent.action.SEND" />
+        <category ohos:name="ohos.intent.category.DEFAULT" />
+        <data ohos:mimeType="image/*" />
     </intent-filter>
     <intent-filter>
-        <action android:name="android.intent.action.SEND" />
-        <category android:name="android.intent.category.DEFAULT" />
-        <data android:mimeType="text/plain" />
+        <action ohos:name="ohos.intent.action.SEND" />
+        <category ohos:name="ohos.intent.category.DEFAULT" />
+        <data ohos:mimeType="text/plain" />
     </intent-filter>
     <intent-filter>
-        <action android:name="android.intent.action.SEND_MULTIPLE" />
-        <category android:name="android.intent.category.DEFAULT" />
-        <data android:mimeType="image/*" />
+        <action ohos:name="ohos.intent.action.SEND_MULTIPLE" />
+        <category ohos:name="ohos.intent.category.DEFAULT" />
+        <data ohos:mimeType="image/*" />
     </intent-filter>
 </activity>
 ```

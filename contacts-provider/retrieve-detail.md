@@ -1,28 +1,28 @@
 # 获取联系人详情
 
-> 编写:[spencer198711](https://github.com/spencer198711) - 原文:<http://developer.android.com/training/contacts-provider/retrieve-details.html>
+> 编写:[spencer198711](https://github.com/spencer198711) - 原文:<http://developer.huawei.com/training/contacts-provider/retrieve-details.html>
 
 这一课展示了如何取得一个联系人的详细信息，比如email地址、电话号码等。当使用者去获取联系人信息的时候，这些信息正是他们所查找的。我们可以给他们关于一个联系人的所有信息，或者仅仅显示一个特定的数据类型，比如email地址。
 
-这一课假设你已经获取到了一个用户所选取的联系人的[ContactsContract.Contacts](http://developer.android.com/reference/android/provider/ContactsContract.Contacts.html)数据项。在[获取联系人名字](retrieve-names.html)那一课展示了如何获取联系人列表。
+这一课假设你已经获取到了一个用户所选取的联系人的[ContactsContract.Contacts](http://developer.huawei.com/reference/ohos/provider/ContactsContract.Contacts.html)数据项。在[获取联系人名字](retrieve-names.html)那一课展示了如何获取联系人列表。
 
 ## 获取联系人的所有详细信息
 
-为了取得一个联系人的所有详情，查找[ContactsContract.Data](http://developer.android.com/reference/android/provider/ContactsContract.Data.html)表中包含联系人[LOOKUP_KEY](http://developer.android.com/reference/android/provider/ContactsContract.ContactsColumns.html#LOOKUP_KEY)列的任意行。因为Contacts Provider隐式地连接了ContactsContract.Contacts表和ContactsContract.Data表，所以这个[LOOKUP_KEY](http://developer.android.com/reference/android/provider/ContactsContract.ContactsColumns.html#LOOKUP_KEY)列在ContactsContract.Data表中是可用的。关于[LOOKUP_KEY](http://developer.android.com/reference/android/provider/ContactsContract.ContactsColumns.html#LOOKUP_KEY)列，在[获取联系人名字](retrieve-names.html)那一课有详细的描述。
+为了取得一个联系人的所有详情，查找[ContactsContract.Data](http://developer.huawei.com/reference/ohos/provider/ContactsContract.Data.html)表中包含联系人[LOOKUP_KEY](http://developer.huawei.com/reference/ohos/provider/ContactsContract.ContactsColumns.html#LOOKUP_KEY)列的任意行。因为Contacts Provider隐式地连接了ContactsContract.Contacts表和ContactsContract.Data表，所以这个[LOOKUP_KEY](http://developer.huawei.com/reference/ohos/provider/ContactsContract.ContactsColumns.html#LOOKUP_KEY)列在ContactsContract.Data表中是可用的。关于[LOOKUP_KEY](http://developer.huawei.com/reference/ohos/provider/ContactsContract.ContactsColumns.html#LOOKUP_KEY)列，在[获取联系人名字](retrieve-names.html)那一课有详细的描述。
 
 > **Note：**检索一个联系人的所有信息会降低设备的性能，因为这需要检索ContactsContract.Data表的所有列。在使用这种方法之前，请认真考虑对性能影响。
 
 ### 请求权限
 
-为了能够读Contacts Provider，我们的应用必须拥有[READ_CONTACTS](http://developer.android.com/reference/android/Manifest.permission.html#READ_CONTACTS)权限。为了请求这个权限，需要在manifest文件的<manifest\>中添加如下子节点：
+为了能够读Contacts Provider，我们的应用必须拥有[READ_CONTACTS](http://developer.huawei.com/reference/ohos/Manifest.permission.html#READ_CONTACTS)权限。为了请求这个权限，需要在manifest文件的<manifest\>中添加如下子节点：
 
 ```xml
-<uses-permission android:name="android.permission.READ_CONTACTS" />
+<uses-permission ohos:name="ohos.permission.READ_CONTACTS" />
 ```
 
 ### 设置查询映射
 
-根据一行数据的数据类型，它可能会使用很多列或者只使用几列。另外，数据会根据不同的数据类型而出现在不同的列中。为了确保能够获取所有数据类型的所有可能的数据列，需要在查询映射中添加所有列的名字。如果要把Cursor绑定到ListView，记得要获取Data._ID，否则的话，界面绑定就不会起作用。同时也需要获取[Data.MIMETYPE](http://developer.android.com/reference/android/provider/ContactsContract.DataColumns.html#MIMETYPE)列，这样才能识别我们获取到的每一行数据的数据类型。例如：
+根据一行数据的数据类型，它可能会使用很多列或者只使用几列。另外，数据会根据不同的数据类型而出现在不同的列中。为了确保能够获取所有数据类型的所有可能的数据列，需要在查询映射中添加所有列的名字。如果要把Cursor绑定到ListView，记得要获取Data._ID，否则的话，界面绑定就不会起作用。同时也需要获取[Data.MIMETYPE](http://developer.huawei.com/reference/ohos/provider/ContactsContract.DataColumns.html#MIMETYPE)列，这样才能识别我们获取到的每一行数据的数据类型。例如：
 
 ```java
 private static final String PROJECTION =
@@ -229,7 +229,7 @@ private static final String[] PROJECTION =
 
 ### 定义排序规则
 
-为查询返回的[Cursor](http://developer.android.com/reference/android/database/Cursor.html)定义一个排序规则。由于是检索特定的数据类型，删除根据[MIMETYPE](http://developer.android.com/reference/android/provider/ContactsContract.DataColumns.html#MIMETYPE)来排序的部分。而如果查询的详细数据类型包含子类型，可以根据这个子类型去排序。例如，对于email数据，我们可以根据[Email.TYPE](http://developer.android.com/reference/android/provider/ContactsContract.CommonDataKinds.CommonColumns.html#TYPE)排序：
+为查询返回的[Cursor](http://developer.huawei.com/reference/ohos/database/Cursor.html)定义一个排序规则。由于是检索特定的数据类型，删除根据[MIMETYPE](http://developer.huawei.com/reference/ohos/provider/ContactsContract.DataColumns.html#MIMETYPE)来排序的部分。而如果查询的详细数据类型包含子类型，可以根据这个子类型去排序。例如，对于email数据，我们可以根据[Email.TYPE](http://developer.huawei.com/reference/ohos/provider/ContactsContract.CommonDataKinds.CommonColumns.html#TYPE)排序：
 
 ```java
 private static final String SORT_ORDER = Email.TYPE + " ASC ";

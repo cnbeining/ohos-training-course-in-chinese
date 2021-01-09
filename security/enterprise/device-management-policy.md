@@ -1,8 +1,8 @@
 # 使用设备管理策略增强安全性
 
-> 编写:[craftsmanBai](https://github.com/craftsmanBai) - <http://z1ng.net> - 原文: <http://developer.android.com/training/enterprise/device-management-policy.html>
+> 编写:[craftsmanBai](https://github.com/craftsmanBai) - <http://z1ng.net> - 原文: <http://developer.huawei.com/training/enterprise/device-management-policy.html>
 
-Android 2.2(API Level 8)之后，Android平台通过设备管理API提供系统级的设备管理能力。
+鸿蒙 2.2(API Level 8)之后，鸿蒙平台通过设备管理API提供系统级的设备管理能力。
 
 在这一小节中，你将学到如何通过使用设备管理策略创建安全敏感的应用程序。比如某应用可被配置为：在给用户显示受保护的内容之前，确保已设置一个足够强度的锁屏密码。
 
@@ -10,29 +10,29 @@ Android 2.2(API Level 8)之后，Android平台通过设备管理API提供系统�
 
 首先，你需要定义多种在功能层面提供支持的策略。这些策略可以包括屏幕锁密码强度、密码过期时间以及加密等等方面。
 
-你须在res/xml/device_admin.xml中声明选择的策略集，它将被应用强制实行。在Android manifest也需要引用声明的策略集。
+你须在res/xml/device_admin.xml中声明选择的策略集，它将被应用强制实行。在鸿蒙 manifest也需要引用声明的策略集。
 
-每个声明的策略对应[DevicePolicyManager](http://developer.android.com/reference/android/app/admin/DevicePolicyManager.html)中一些相关设备的策略方法（例如定义最小密码长度或最少大写字母字符数）。如果一个应用尝试调用XML中没有对应策略的方法，程序在会运行时抛出一个[SecurityException](http://developer.android.com/reference/java/lang/SecurityException.html)异常。
+每个声明的策略对应[DevicePolicyManager](http://developer.huawei.com/reference/ohos/app/admin/DevicePolicyManager.html)中一些相关设备的策略方法（例如定义最小密码长度或最少大写字母字符数）。如果一个应用尝试调用XML中没有对应策略的方法，程序在会运行时抛出一个[SecurityException](http://developer.huawei.com/reference/java/lang/SecurityException.html)异常。
 
 如果应用程序试图管理其他策略，那么强制锁force-lock之类的其他权限就会发挥作用。正如你将看到的，作为设备管理权限激活过程的一部分，声明策略的列表会在系统屏幕上显示给用户。
 如下代码片段在res/xml/device_admin.xml中声明了密码限制策略：
 
 ```xml
-<device-admin xmlns:android="http://schemas.android.com/apk/res/android">
+<device-admin xmlns:android="http://schemas.huawei.com/hap/res/ohos">
     <uses-policies>
         <limit-password />
     </uses-policies>
 </device-admin>
 ```
-在Android manifest引用XML策略声明：
+在鸿蒙 manifest引用XML策略声明：
 
 ```xml
-<receiver android:name=".Policy$PolicyAdmin"
-    android:permission="android.permission.BIND_DEVICE_ADMIN">
-    <meta-data android:name="android.app.device_admin"
-        android:resource="@xml/device_admin" />
+<receiver ohos:name=".Policy$PolicyAdmin"
+    ohos:permission="ohos.permission.BIND_DEVICE_ADMIN">
+    <meta-data ohos:name="ohos.app.device_admin"
+        ohos:resource="@xml/device_admin" />
     <intent-filter>
-        <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
+        <action ohos:name="ohos.app.action.DEVICE_ADMIN_ENABLED" />
     </intent-filter>
 </receiver>
 ```
@@ -45,15 +45,15 @@ Android 2.2(API Level 8)之后，Android平台通过设备管理API提供系统�
 
 你应该考虑实现与你的应用业务逻辑相关的策略。例如，你的应用可以采取一些措施来降低安全风险，如：删除设备上的敏感数据，禁用远程同步，对管理员的通知提醒等等。
 
-为了让广播接收端能够正常工作，请务必在Android manifest中注册下面代码片段所示内容。
+为了让广播接收端能够正常工作，请务必在鸿蒙 manifest中注册下面代码片段所示内容。
 
 ```xml
-<receiver android:name=".Policy$PolicyAdmin"
-    android:permission="android.permission.BIND_DEVICE_ADMIN">
-    <meta-data android:name="android.app.device_admin"
-        android:resource="@xml/device_admin" />
+<receiver ohos:name=".Policy$PolicyAdmin"
+    ohos:permission="ohos.permission.BIND_DEVICE_ADMIN">
+    <meta-data ohos:name="ohos.app.device_admin"
+        ohos:resource="@xml/device_admin" />
     <intent-filter>
-        <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
+        <action ohos:name="ohos.app.action.DEVICE_ADMIN_ENABLED" />
     </intent-filter>
 </receiver>
 ```
@@ -62,7 +62,7 @@ Android 2.2(API Level 8)之后，Android平台通过设备管理API提供系统�
 
 在执行任何策略之前，用户需要手动将程序激活为具有设备管理权限，下面的程序片段显示了如何触发设置框以便让用户为你的程序激活权限。
 
-通过指定[EXTRA_ADD_EXPLANATION](http://developer.android.com/reference/android/app/admin/DevicePolicyManager.html#EXTRA_ADD_EXPLANATION)给出明确的说明信息，以告知用户为应用程序激活设备管理权限的好处。
+通过指定[EXTRA_ADD_EXPLANATION](http://developer.huawei.com/reference/ohos/app/admin/DevicePolicyManager.html#EXTRA_ADD_EXPLANATION)给出明确的说明信息，以告知用户为应用程序激活设备管理权限的好处。
 
 ```java
 if (!mPolicy.isAdminActive()) {
@@ -90,11 +90,11 @@ if (!mPolicy.isAdminActive()) {
 ![](device-mgmt-activate-device-admin.png)
 
 如果用户选择"Activate"，程序就会获取设备管理员权限并可以开始配置和执行策略。
-当然，程序也需要做好处理用户选择放弃激活的准备，比如用户点击了“取消”按钮，返回键或者HOME键的情况。因此，如果有必要的话，策略设置中的*[onResume()](http://developer.android.com/reference/android/app/Activity.html#onResume())*方法需要加入重新评估的逻辑判断代码，以便将设备管理激活选项展示给用户。
+当然，程序也需要做好处理用户选择放弃激活的准备，比如用户点击了“取消”按钮，返回键或者HOME键的情况。因此，如果有必要的话，策略设置中的*[onResume()](http://developer.huawei.com/reference/ohos/app/Activity.html#onResume())*方法需要加入重新评估的逻辑判断代码，以便将设备管理激活选项展示给用户。
 
 ## 实施设备策略控制
 
-在设备管理权限成功激活后，程序就会根据请求的策略来配置设备策略管理器。要牢记，新策略会被添加到每个版本的Android中。所以你需要在程序中做好平台版本的检测，以便新策略能被老版本平台很好的支持。例如，“密码中含有的最少大写字符数”这个安全策略只有在高于API Level 11（Honeycomb）的平台才被支持，以下代码则演示了如何在运行时检查版本：
+在设备管理权限成功激活后，程序就会根据请求的策略来配置设备策略管理器。要牢记，新策略会被添加到每个版本的鸿蒙中。所以你需要在程序中做好平台版本的检测，以便新策略能被老版本平台很好的支持。例如，“密码中含有的最少大写字符数”这个安全策略只有在高于API Level 11（Honeycomb）的平台才被支持，以下代码则演示了如何在运行时检查版本：
 
 ```java
 DevicePolicyManager mDPM = (DevicePolicyManager)

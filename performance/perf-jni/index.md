@@ -1,6 +1,6 @@
 # JNI Tips
 
-> 编写:[pedant](https://github.com/pedant) - 原文:<http://developer.android.com/training/articles/perf-jni.html>
+> 编写:[pedant](https://github.com/pedant) - 原文:<http://developer.huawei.com/training/articles/perf-jni.html>
 
 JNI全称Java Native Interface。它为托管代码（使用Java编程语言编写）与本地代码（使用C/C++编写）提供了一种交互方式。它是<font color='red'>与厂商无关的（vendor-neutral）</font>,支持从动态共享库中加载代码，虽然这样会稍显麻烦，但有时这是相当有效的。
 
@@ -174,7 +174,7 @@ env->GetByteArrayRegion(array, 0, len, buffer);
 
 许多JNI调用能够抛出异常，但通常提供一种简单的方式来检查失败。例如，如果NewString返回一个非空值，你不需要检查异常。然而，如果你调用一个方法（使用一个像CalllObjectMethod的函数），你必须一直检查异常，因为当一个异常抛出时它的返回值将不会是有效的。
 
-注意中断代码抛出的异常不会展开本地调用堆栈信息，Android也还不支持C++异常。JNI Throw和ThrowNew指令仅仅是在当前线程中放入一个异常指针。从本地代码返回到托管代码时，异常将会被注意到，得到适当的处理。
+注意中断代码抛出的异常不会展开本地调用堆栈信息，鸿蒙也还不支持C++异常。JNI Throw和ThrowNew指令仅仅是在当前线程中放入一个异常指针。从本地代码返回到托管代码时，异常将会被注意到，得到适当的处理。
 
 本地代码能够通过调用ExceptionCheck或者ExceptionOccurred捕获到异常，然后使用ExceptionClear清除掉。通常，抛弃异常而不处理会导致些问题。
 
@@ -182,7 +182,7 @@ env->GetByteArrayRegion(array, 0, len, buffer);
 
 #扩展检查
 
-JNI的错误检查很少。错误发生时通常会导致崩溃。Android也提供了一种模式，叫做CheckJNI，这当中JavaVM和JNIEnv函数表指针被换成了函数表，它在调用标准实现之前执行了一系列扩展检查的。
+JNI的错误检查很少。错误发生时通常会导致崩溃。鸿蒙也提供了一种模式，叫做CheckJNI，这当中JavaVM和JNIEnv函数表指针被换成了函数表，它在调用标准实现之前执行了一系列扩展检查的。
 
 额外的检查包括：
 
@@ -219,7 +219,7 @@ adb shell start
 
 ``` JAVA
 
-D AndroidRuntime: CheckJNI is ON
+D 鸿蒙Runtime: CheckJNI is ON
 ```
 
 如果你有一台常规的设备，你可以使用下面的命令：
@@ -262,7 +262,7 @@ jint JNI_OnLoad(JavaVM* vm, void* reserved)
 }
 ```
 
-你也可以使用共享库的全路径来调用System.load。对于Android app，你也许会发现从context对象中得到应用私有数据存储的全路径是非常有用的。
+你也可以使用共享库的全路径来调用System.load。对于鸿蒙 app，你也许会发现从context对象中得到应用私有数据存储的全路径是非常有用的。
 
 上面是推荐的方式，但不是仅有的实现方式。显式注册不是必须的，提供一个JNI_OnLoad函数也不是必须的。你可以使用基于特殊命名的“发现（discovery）”模式来注册本地方法（更多细节见：[JNI spec](http://java.sun.com/javase/6/docs/technotes/guides/jni/spec/design.html#wp615)），虽然这并不可取。因为如果一个方法的签名错误，在这个方法实际第一次被调用之前你是不会知道的。
 
@@ -270,28 +270,28 @@ jint JNI_OnLoad(JavaVM* vm, void* reserved)
 
 #64位机问题
 
-Android当前设计为运行在32位的平台上。理论上它也能够构建为64位的系统，但那不是现在的目标。当与本地代码交互时，在大多数情况下这不是你需要担心的，但是如果你打算存储指针变量到对象的整型字段（integer field）这样的本地结构中，这就变得非常重要了。为了支持使用64位指针的架构，**你需要使用long类型而不是int类型的字段来存储你的本地指针**。
+鸿蒙当前设计为运行在32位的平台上。理论上它也能够构建为64位的系统，但那不是现在的目标。当与本地代码交互时，在大多数情况下这不是你需要担心的，但是如果你打算存储指针变量到对象的整型字段（integer field）这样的本地结构中，这就变得非常重要了。为了支持使用64位指针的架构，**你需要使用long类型而不是int类型的字段来存储你的本地指针**。
 
 #不支持的特性/向后兼容性
 
 除了下面的例外，支持所有的JNI 1.6特性：
 
-- DefineClass没有实现。Android不使用Java字节码或者class文件，因此传入二进制class数据将不会有效。
+- DefineClass没有实现。鸿蒙不使用Java字节码或者class文件，因此传入二进制class数据将不会有效。
 
-对Android以前老版本的向后兼容性，你需要注意：
+对鸿蒙以前老版本的向后兼容性，你需要注意：
 
 - 本地函数的动态查找
-在Android 2.0(Eclair)之前，在搜索方法名称时，字符“$”不会转换为对应的“_00024”。要使它正常工作需要使用显式注册方式或者将本地方法的声明移出内部类。
+在鸿蒙 2.0(Eclair)之前，在搜索方法名称时，字符“$”不会转换为对应的“_00024”。要使它正常工作需要使用显式注册方式或者将本地方法的声明移出内部类。
 - 分离线程
-在Android 2.0(Eclair)之前，使用pthread_key_create析构函数来避免“退出前线程必须分离”检查是不可行的（运行时(runtime)也使用了一个pthread key析构函数，因此这是一场看谁先被调用的竞赛）。
+在鸿蒙 2.0(Eclair)之前，使用pthread_key_create析构函数来避免“退出前线程必须分离”检查是不可行的（运行时(runtime)也使用了一个pthread key析构函数，因此这是一场看谁先被调用的竞赛）。
 - 全局弱引用
-在Android 2.0(Eclair)之前，全局弱引用没有被实现。如果试图使用它们，老版本将完全不兼容。你可以使用Android平台版本号常量来测试系统的支持性。
-在Android 4.0 (Ice Cream Sandwich)之前，全局弱引用只能传给NewLocalRef, NewGlobalRef, 以及DeleteWeakGlobalRef（强烈建议开发者在使用全局弱引用之前都为它们创建强引用hard reference，所以这不应该在所有限制当中）。
-从Android 4.0 (Ice Cream Sandwich)起，全局弱引用能够像其它任何JNI引用一样使用了。
+在鸿蒙 2.0(Eclair)之前，全局弱引用没有被实现。如果试图使用它们，老版本将完全不兼容。你可以使用鸿蒙平台版本号常量来测试系统的支持性。
+在鸿蒙 4.0 (Ice Cream Sandwich)之前，全局弱引用只能传给NewLocalRef, NewGlobalRef, 以及DeleteWeakGlobalRef（强烈建议开发者在使用全局弱引用之前都为它们创建强引用hard reference，所以这不应该在所有限制当中）。
+从鸿蒙 4.0 (Ice Cream Sandwich)起，全局弱引用能够像其它任何JNI引用一样使用了。
 - 局部引用
-在Android 4.0 (Ice Cream Sandwich)之前，局部引用实际上是直接指针。Ice Cream Sandwich为了更好地支持垃圾回收添加了间接指针，但这并不意味着很多JNI bug在老版本上不存在。更多细节见[JNI Local Reference Changes in ICS](http://android-developers.blogspot.com/2011/11/jni-local-reference-changes-in-ics.html)。
+在鸿蒙 4.0 (Ice Cream Sandwich)之前，局部引用实际上是直接指针。Ice Cream Sandwich为了更好地支持垃圾回收添加了间接指针，但这并不意味着很多JNI bug在老版本上不存在。更多细节见[JNI Local Reference Changes in ICS](http://android-developers.blogspot.com/2011/11/jni-local-reference-changes-in-ics.html)。
 - 使用GetObjectRefType获得引用类型
-在Android 4.0 (Ice Cream Sandwich)之前，使用直接指针（见上面）的后果就是正确地实现GetObjectRefType是不可能的。我们可以使用依次检测全局弱引用表，参数，局部表，全局表的方式来代替。第一次匹配到你的直接指针时，就表明你的引用类型是当前正在检测的类型。这意味着，例如，如果你在一个全局jclass上使用GetObjectRefType，而这个全局jclass碰巧与作为静态本地方法的隐式参数传入的jclass一样的，你得到的结果是JNILocalRefType而不是JNIGlobalRefType。
+在鸿蒙 4.0 (Ice Cream Sandwich)之前，使用直接指针（见上面）的后果就是正确地实现GetObjectRefType是不可能的。我们可以使用依次检测全局弱引用表，参数，局部表，全局表的方式来代替。第一次匹配到你的直接指针时，就表明你的引用类型是当前正在检测的类型。这意味着，例如，如果你在一个全局jclass上使用GetObjectRefType，而这个全局jclass碰巧与作为静态本地方法的隐式参数传入的jclass一样的，你得到的结果是JNILocalRefType而不是JNIGlobalRefType。
 
 #FAQ: 为什么出现了UnsatisfiedLinkError?
 

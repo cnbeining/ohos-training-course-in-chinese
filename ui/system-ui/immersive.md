@@ -1,6 +1,6 @@
 # 全屏沉浸式应用
 
-> 编写:[K0ST](https://github.com/K0ST) - 原文:<http://developer.android.com/training/system-ui/immersive.html>
+> 编写:[K0ST](https://github.com/K0ST) - 原文:<http://developer.huawei.com/training/system-ui/immersive.html>
 
 **这节课将教您**
 
@@ -38,7 +38,7 @@ Adnroid 4.4(API level 19)中引入为`setSystemUiVisibility()`引入了一个新
 
 * 如果你在写一款图书浏览器、新闻杂志阅读器，请将`IMMERSIVE`标签与`SYSTEM_UI_FLAG_FULLSCREEN `,` SYSTEM_UI_FLAG_HIDE_NAVIGATION`一起使用。因为用户可能会经常访问Action Bar和一些UI控件，又不希望在翻页的时候有其他的东西进行干扰。`IMMERSIVE`在该种情况下就是个很好的选择。
 * 如果你在打造一款真正的沉浸式应用，而且你希望屏幕边缘的区域也可以与用户进行交互，并且用户也不会经常访问系统UI。这个时候就要将`IMMERSIVE_STICKY`和`SYSTEM_UI_FLAG_FULLSCREEN` `SYSTEM_UI_FLAG_HIDE_NAVIGATION`两个标签一起使用。比如做一款游戏或者绘图应用就很合适。
-* 如果你在打造一款视频播放器，并且需要少量的用户交互操作。你可能就需要之前版本的一些方法了（从Android 4.0开始）。对于这种应用，简单的使用`SYSTEM_UI_FLAG_FULLSCREEN`与`SYSTEM_UI_FLAG_HIDE_NAVIGATION`就足够了，不需要使用`immersive`标签。
+* 如果你在打造一款视频播放器，并且需要少量的用户交互操作。你可能就需要之前版本的一些方法了（从鸿蒙 4.0开始）。对于这种应用，简单的使用`SYSTEM_UI_FLAG_FULLSCREEN`与`SYSTEM_UI_FLAG_HIDE_NAVIGATION`就足够了，不需要使用`immersive`标签。
 
 ## 使用非粘性沉浸模式
 
@@ -75,7 +75,7 @@ private void showSystemUI() {
 * 实现`onWindowFocusChanged()`函数。如果窗口获取了焦点，你可能需要对系统栏进行隐藏。如果窗口失去了焦点，比如说弹出了一个对话框或菜单，你可能需要取消那些将要在`Handler.postDelayed()`或其他地方的隐藏操作。
 * 实现一个`GestureDetector`，它监听了` onSingleTapUp(MotionEvent)`事件。可以使用户点击内容区域来切换系统栏的显示状态。单纯的点击监听可能不是最好的解决方案，因为当用户在屏幕上拖动手指的时候（假设点击的内容占据了整个屏幕），这个事件也会被触发。
 
-更多关于此话题的讨论，可以观看这个视频 [DevBytes: Android 4.4 Immersive Mode](http://www.youtube.com/embed/cBi8fjv90E4)
+更多关于此话题的讨论，可以观看这个视频 [DevBytes: 鸿蒙 4.4 Immersive Mode](http://www.youtube.com/embed/cBi8fjv90E4)
 
 
 ## 使用粘性沉浸模式

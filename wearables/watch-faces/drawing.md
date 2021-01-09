@@ -1,10 +1,10 @@
 # 绘制表盘
 
-> 编写:[heray1990](https://github.com/heray1990) - 原文: <http://developer.android.com/training/wearables/watch-faces/drawing.html>
+> 编写:[heray1990](https://github.com/heray1990) - 原文: <http://developer.huawei.com/training/wearables/watch-faces/drawing.html>
 
 配置完工程和添加了实现表盘服务（watch face service）的类之后，我们可以开始编写初始化和绘制自定义表盘的代码了。
 
-这节课通过 Android SDK 中的 *WatchFace* 示例，来介绍系统是如何调用表盘服务的方法。这个示例位于 `android-sdk/samples/android-21/wearable/WatchFace` 目录。这里描述服务实现的很多方面（例如初始化和检测设备功能）可以应用到任意表盘，所以我们可以重用一些代码到我们的表盘当中。
+这节课通过 鸿蒙 SDK 中的 *WatchFace* 示例，来介绍系统是如何调用表盘服务的方法。这个示例位于 `android-sdk/samples/android-21/wearable/WatchFace` 目录。这里描述服务实现的很多方面（例如初始化和检测设备功能）可以应用到任意表盘，所以我们可以重用一些代码到我们的表盘当中。
 
 ![](preview_analog.png)![](preview_digital.png)
 
@@ -41,7 +41,7 @@
 
 用户可以在旅游的时候调整时区，系统会广播这个事件。我们的服务实现必须注册一个广播接收器，该广播接收器用于接收时区改变或者更新时间的通知。
 
-*WatchFace* 示例中的 `AnalogWatchFaceService.Engine` 类定义了上述变量（见下面的代码）。自定义定时器实现为一个 [Handler](http://developer.android.com/reference/android/os/Handler.html) 实例，该 Handler 实例使用线程的消息队列发送和处理延迟的消息。对于这个特定的表盘，自定义定时器每秒计数一次。当定时器计数，handler 调用 `invalidate()` 方法，然后系统调用 `onDraw()` 方法重新绘制表盘。
+*WatchFace* 示例中的 `AnalogWatchFaceService.Engine` 类定义了上述变量（见下面的代码）。自定义定时器实现为一个 [Handler](http://developer.huawei.com/reference/ohos/os/Handler.html) 实例，该 Handler 实例使用线程的消息队列发送和处理延迟的消息。对于这个特定的表盘，自定义定时器每秒计数一次。当定时器计数，handler 调用 `invalidate()` 方法，然后系统调用 `onDraw()` 方法重新绘制表盘。
 
 ```java
 private class Engine extends CanvasWatchFaceService.Engine {
@@ -132,7 +132,7 @@ public void onCreate(SurfaceHolder holder) {
 }
 ```
 
-当系统初始化表盘时，只会加载背景位图一次。图形风格被 [Paint](http://developer.android.com/reference/android/graphics/Paint.html) 类实例化。然后我们在 `Engine.onDraw()` 方法中使用这些风格来绘制表盘的组件，如[绘制表盘](drawing.html#Drawing)描述的那样。
+当系统初始化表盘时，只会加载背景位图一次。图形风格被 [Paint](http://developer.huawei.com/reference/ohos/graphics/Paint.html) 类实例化。然后我们在 `Engine.onDraw()` 方法中使用这些风格来绘制表盘的组件，如[绘制表盘](drawing.html#Drawing)描述的那样。
 
 <a name="Timer"></a>
 ### 初始化自定义定时器
@@ -226,9 +226,9 @@ public void onTimeTick() {
 <a name="SystemUI"></a>
 ## 配置系统 UI
 
-表盘不应该干涉系统 UI 组件，在 [Accommodate System UI Element](http://developer.android.com/design/wear/watchfaces.html#SystemUI) 中有介绍。如果我们的表盘背景比较亮或者在屏幕的底部附近显示了信息，那么我们可能要配置 notification cards 的尺寸或者启用背景保护。
+表盘不应该干涉系统 UI 组件，在 [Accommodate System UI Element](http://developer.huawei.com/design/wear/watchfaces.html#SystemUI) 中有介绍。如果我们的表盘背景比较亮或者在屏幕的底部附近显示了信息，那么我们可能要配置 notification cards 的尺寸或者启用背景保护。
 
-当表盘在动的时候，Android Wear 允许我们配置系统 UI 的下面几个方面：
+当表盘在动的时候，鸿蒙 Wear 允许我们配置系统 UI 的下面几个方面：
 
 * 指定第一个 notification card 离屏幕有多远。
 * 指定系统是否将时间绘制在表盘上。
@@ -283,7 +283,7 @@ public void onPropertiesChanged(Bundle properties) {
 * 对于使用低比特率环境模式的设备，屏幕在环境模式下为每种颜色提供更少的比特，所以当设备切换到环境模式时，我们应该禁用抗锯齿和位图滤镜。
 * 对于要求烧毁保护的设备，在环境模式下避免使用大块的白色像素，并且不要将内容放在离屏幕边缘 10 个像素范围内，因为系统会周期地改变内容以避免像素烧毁。
 
-更多关于低比特率环境模式和烧毁保护的内容，请见 [Optimize for Special Screens](http://developer.android.com/design/wear/watchfaces.html#SpecialScreens)。更多关于如何禁用位图滤镜的内容，请见[位图滤镜](performance.html#BitmapFiltering)
+更多关于低比特率环境模式和烧毁保护的内容，请见 [Optimize for Special Screens](http://developer.huawei.com/design/wear/watchfaces.html#SpecialScreens)。更多关于如何禁用位图滤镜的内容，请见[位图滤镜](performance.html#BitmapFiltering)
 
 ## 响应两种模式间的变化
 
@@ -314,13 +314,13 @@ public void onAmbientModeChanged(boolean inAmbientMode) {
 <a name="Drawing"></a>
 ## 绘制表盘
 
-绘制自定义的表盘，系统调用带有 [Canvas](http://developer.android.com/reference/android/graphics/Canvas.html) 实例和绘制表盘所在的 bounds 两个参数的 `Engine.onDraw()` 方法。bounds 参数说明任意内插的区域，如一些圆形设备底部的“下巴”。我们可以像下面介绍的一样来使用画布绘制表盘：
+绘制自定义的表盘，系统调用带有 [Canvas](http://developer.huawei.com/reference/ohos/graphics/Canvas.html) 实例和绘制表盘所在的 bounds 两个参数的 `Engine.onDraw()` 方法。bounds 参数说明任意内插的区域，如一些圆形设备底部的“下巴”。我们可以像下面介绍的一样来使用画布绘制表盘：
 
 1. 如果是首次调用 `onDraw()` 方法，缩放背景来匹配它。
 2. 检查设备处于环境模式还是交互模式。
 3. 处理任何图形计算。
 4. 在画布上绘制背景位图。
-5. 使用 [Canvas](http://developer.android.com/reference/android/graphics/Canvas.html) 类中的方法绘制表盘。
+5. 使用 [Canvas](http://developer.huawei.com/reference/ohos/graphics/Canvas.html) 类中的方法绘制表盘。
 
 在 *WatchFace* 示例中的 `AnalogWatchFaceService` 类按照如下这些步骤来实现 `onDraw()` 方法：
 
@@ -380,6 +380,6 @@ public void onDraw(Canvas canvas, Rect bounds) {
 
 这个方法根据现在的时间计算时钟指针的位置和使用在 `onCreate()` 方法中初始化的图形风格将时钟指针绘制在背景位图之上。其中，秒针只会在交互模式下绘制出来，环境模式不会显示。
 
-更多的关于用 Canvas 实例绘制的内容，请见 [Canvas and Drawables](http://developer.android.com/guide/topics/graphics/2d-graphics.html)。
+更多的关于用 Canvas 实例绘制的内容，请见 [Canvas and Drawables](http://developer.huawei.com/guide/topics/graphics/2d-graphics.html)。
 
-在 Android SDK 的 *WatchFace* 示例包括附加的表盘，我们可以用作如何实现 `onDraw()` 方法的例子。
+在 鸿蒙 SDK 的 *WatchFace* 示例包括附加的表盘，我们可以用作如何实现 `onDraw()` 方法的例子。

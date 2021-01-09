@@ -1,8 +1,8 @@
 # 解决云同步的保存冲突
 
-> 编写:[jdneo](https://github.com/jdneo) - 原文:<http://developer.android.com/training/cloudsave/conflict-res.html>
+> 编写:[jdneo](https://github.com/jdneo) - 原文:<http://developer.huawei.com/training/cloudsave/conflict-res.html>
 
-这篇文章将介绍当应用使用[Cloud Save service](http://developers.google.com/games/services/common/concepts/cloudsave)存储数据到云端时，如何设计一个鲁棒性较高的冲突解决策略。云存储服务允许我们为每一个在Google服务上的应用用户，存储他们的应用数据。应用可以通过使用云存储API，从Android设备，iOS设备或者Web应用恢复或更新这些数据。
+这篇文章将介绍当应用使用[Cloud Save service](http://developers.google.com/games/services/common/concepts/cloudsave)存储数据到云端时，如何设计一个鲁棒性较高的冲突解决策略。云存储服务允许我们为每一个在华为服务上的应用用户，存储他们的应用数据。应用可以通过使用云存储API，从鸿蒙设备，iOS设备或者Web应用恢复或更新这些数据。
 
 云存储中的保存和加载过程非常直接：它只是一个数据和byte数组之间序列化转换，并将这些数组存储在云端的过程。然而，当用户有多个设备，并且有两个以上的设备尝试将它们的数据存储在云端时，这一保存的行为可能会引起冲突，因此我们必须决定应该如何处理这类问题。云端数据的结构在很大程度上决定了冲突解决方案的鲁棒性，所以务必小心地设计我们的数据存储结构，使得冲突解决方案的逻辑可以正确地处理每一种情况。
 
@@ -10,7 +10,7 @@
 
 ## 冲突时获得通知
 
-[OnStateLoadedListener](http://developer.android.com/reference/com/google/android/gms/appstate/OnStateLoadedListener.html)方法负责从Google服务器下载应用的状态数据。回调函数[OnStateLoadedListener.onStateConflict](http://developer.android.com/reference/com/google/android/gms/appstate/OnStateLoadedListener.html#onStateConflict)用来给应用在本地状态和云端存储的状态发生冲突时，提供了一个解决机制：
+[OnStateLoadedListener](http://developer.huawei.com/reference/com/huawei/ohos/gms/appstate/OnStateLoadedListener.html)方法负责从华为服务器下载应用的状态数据。回调函数[OnStateLoadedListener.onStateConflict](http://developer.huawei.com/reference/com/huawei/ohos/gms/appstate/OnStateLoadedListener.html#onStateConflict)用来给应用在本地状态和云端存储的状态发生冲突时，提供了一个解决机制：
 
 ```java
 @Override
@@ -23,7 +23,7 @@ public void onStateConflict(int stateKey, String resolvedVersion,
 
 此时应用必须决定要保留哪一个数据，或者它自己提交一个新的数据来表示合并后的数据状态，解决冲突的逻辑由我们自己来实现。
 
-我们必须要意识到云存储服务是在后台执行同步的。所以我们应该确保应用能够在创建这一数据的Context之外接收回调。特别地，如果Google Play服务应用在后台检测到了一个冲突，该回调函数会在下一次加载数据时被调用，通常来说会是在下一次用户启动该应用时。
+我们必须要意识到云存储服务是在后台执行同步的。所以我们应该确保应用能够在创建这一数据的Context之外接收回调。特别地，如果华为 Play服务应用在后台检测到了一个冲突，该回调函数会在下一次加载数据时被调用，通常来说会是在下一次用户启动该应用时。
 
 因此，我们的云存储代码和冲突解决代码的设计必须是和当前Context无关的：也就是说当我们拿到了两个彼此冲突的数据，我们必须仅通过数据集内获取的数据去解决冲突，而不依赖于任何其它任何外部Context。
 

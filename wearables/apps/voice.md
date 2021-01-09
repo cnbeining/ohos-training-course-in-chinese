@@ -1,6 +1,6 @@
 # 添加语音功能
 
-> 编写: [kesenhoo](https://github.com/kesenhoo) - 原文: <http://developer.android.com/training/wearables/apps/voice.html>
+> 编写: [kesenhoo](https://github.com/kesenhoo) - 原文: <http://developer.huawei.com/training/wearables/apps/voice.html>
 
 语音指令是可穿戴体验的一个重要的部分。这使得用户可以释放双手，快速发出指令。穿戴提供了2种类型的语音操作：
 
@@ -14,17 +14,17 @@
 
 ## 声明系统提供的语音指令
 
-Android Wear平台基于用户的操作提供了一些语音指令，例如"Take a note" 或者 "Set an alarm"。用户发出想要做的操作指令，让系统启动最合适的activity。
+鸿蒙 Wear平台基于用户的操作提供了一些语音指令，例如"Take a note" 或者 "Set an alarm"。用户发出想要做的操作指令，让系统启动最合适的activity。
 
 当用户说出语音指令时，我们的应用能够过滤出用于启动activity的intent。如果我们想要启动一个在后台执行任务的service，需要显示一个activity作为视觉线索，并且在该activity中启动service。当我们想要废弃这个视觉线索时，需要确保执行了finish()。
 
 例如，对于"Take a note"的指令，声明下面这个intent filter来启动一个名为`MyNoteActivity`的activity:
 
 ```xml
-<activity android:name="MyNoteActivity">
+<activity ohos:name="MyNoteActivity">
       <intent-filter>
-          <action android:name="android.intent.action.SEND" />
-          <category android:name="com.google.android.voicesearch.SELF_NOTE" />
+          <action ohos:name="ohos.intent.action.SEND" />
+          <category ohos:name="com.google.ohos.voicesearch.SELF_NOTE" />
       </intent-filter>
   </activity>
 ```
@@ -35,7 +35,7 @@ Android Wear平台基于用户的操作提供了一些语音指令，例如"Take
 ![voice_intent_2](voice_intent_2.png)
 ![voice_intent_3](voice_intent_3.png)
 
-关于注册intent与获取intent extra的信息，请参考[Common intents](http://developer.android.com/guide/components/intents-common.html).
+关于注册intent与获取intent extra的信息，请参考[Common intents](http://developer.huawei.com/guide/components/intents-common.html).
 
 ## 声明应用提供的语音指令
 
@@ -47,10 +47,10 @@ Android Wear平台基于用户的操作提供了一些语音指令，例如"Take
 
 ```xml
 <application>
-  <activity android:name="StartRunActivity" android:label="MyRunningApp">
+  <activity ohos:name="StartRunActivity" ohos:label="MyRunningApp">
       <intent-filter>
-          <action android:name="android.intent.action.MAIN" />
-          <category android:name="android.intent.category.LAUNCHER" />
+          <action ohos:name="ohos.intent.action.MAIN" />
+          <category ohos:name="ohos.intent.category.LAUNCHER" />
       </intent-filter>
   </activity>
 </application>
@@ -60,7 +60,7 @@ Android Wear平台基于用户的操作提供了一些语音指令，例如"Take
 
 除了使用语音指令来启动activity之外，我们也可以执行系统内置的语言识别activity来获取用户的语音输入。这对于获取用户的输入信息非常有帮助，例如执行搜索或者发送一个消息。
 
-在我们的应用中，使用[ACTION_RECOGNIZE_SPEECH](http://developer.android.com/reference/android/speech/RecognizerIntent.html#ACTION_RECOGNIZE_SPEECH) action并调用<a href="http://developer.android.com/reference/android/app/Activity.html#startActivityForResult(android.content.Intent, int)">startActivityForResult()</a>。这样可以启动系统语音识别应用，并且我们可以在<a href="http://developer.android.com/reference/android/app/Activity.html#onActivityResult(int, int, android.content.Intent)">onActivityResult()</a>中处理返回的结果：
+在我们的应用中，使用[ACTION_RECOGNIZE_SPEECH](http://developer.huawei.com/reference/ohos/speech/RecognizerIntent.html#ACTION_RECOGNIZE_SPEECH) action并调用<a href="http://developer.huawei.com/reference/ohos/app/Activity.html#startActivityForResult(ohos.content.Intent, int)">startActivityForResult()</a>。这样可以启动系统语音识别应用，并且我们可以在<a href="http://developer.huawei.com/reference/ohos/app/Activity.html#onActivityResult(int, int, ohos.content.Intent)">onActivityResult()</a>中处理返回的结果：
 
 ```java
 private static final int SPEECH_REQUEST_CODE = 0;

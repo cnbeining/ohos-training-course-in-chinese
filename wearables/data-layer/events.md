@@ -1,16 +1,16 @@
 # 处理数据层的事件
 
-> 编写:[wly2014](https://github.com/wly2014) - 原文: <http://developer.android.com/training/wearables/data-layer/events.html>
+> 编写:[wly2014](https://github.com/wly2014) - 原文: <http://developer.huawei.com/training/wearables/data-layer/events.html>
 
 当做出数据层上的调用时，我们可以得到它完成后的调用状态，也可以用监听器监听到调用最终实现的改变。
 
 ## 等待数据层调用的状态
 
-注意到，调用数据层API，有时会返回 [PendingResult](PendingResult.html)，如 <a href="http://developer.android.com/reference/com/google/android/gms/wearable/DataApi.html#putDataItem(com.google.android.gms.common.api.GoogleApiClient, com.google.android.gms.wearable.PutDataRequest)">putDataItem()</a>。[PendingResult](http://developer.android.com/reference/com/google/android/gms/common/api/PendingResult.html) 一被创建，操作就会在后台排列等候。之后我们若无动作，这些操作最终会默默完成。然而，通常要处理操作完成后的结果，[PendingResult](http://developer.android.com/reference/com/google/android/gms/common/api/PendingResult.html) 能够让我们同步或异步地等待结果。
+注意到，调用数据层API，有时会返回 [PendingResult](PendingResult.html)，如 <a href="http://developer.huawei.com/reference/com/huawei/ohos/gms/wearable/DataApi.html#putDataItem(com.google.ohos.gms.common.api.HuaweiApiClient, com.google.ohos.gms.wearable.PutDataRequest)">putDataItem()</a>。[PendingResult](http://developer.huawei.com/reference/com/huawei/ohos/gms/common/api/PendingResult.html) 一被创建，操作就会在后台排列等候。之后我们若无动作，这些操作最终会默默完成。然而，通常要处理操作完成后的结果，[PendingResult](http://developer.huawei.com/reference/com/huawei/ohos/gms/common/api/PendingResult.html) 能够让我们同步或异步地等待结果。
 
 ### 异步调用
 
-若代码运行在主UI线程上，不要让数据层API调用阻塞UI。我们可以增加一个回调到 [PendingResult](http://developer.android.com/reference/com/google/android/gms/common/api/PendingResult.html) 对象来运行异步调用，该回调函数将在操作完成时触发。
+若代码运行在主UI线程上，不要让数据层API调用阻塞UI。我们可以增加一个回调到 [PendingResult](http://developer.huawei.com/reference/com/huawei/ohos/gms/common/api/PendingResult.html) 对象来运行异步调用，该回调函数将在操作完成时触发。
 
 ```java
 pendingResult.setResultCallback(new ResultCallback<DataItemResult>() {
@@ -25,7 +25,7 @@ pendingResult.setResultCallback(new ResultCallback<DataItemResult>() {
 
 ### 同步调用
 
-如果代码是运行在后台服务的一个独立的处理线程上（[WearableListenerService](http://developer.android.com/reference/com/google/android/gms/wearable/WearableListenerService.html)的情况），则调用导致的阻塞没影响。在这种情况下,我们可以用 [PendingResult](http://developer.android.com/reference/com/google/android/gms/common/api/PendingResult.html)对象调用[await()](http://developer.android.com/reference/com/google/android/gms/common/api/PendingResult.html#await())，它将阻塞至请求完成,并返回一个Result对象：
+如果代码是运行在后台服务的一个独立的处理线程上（[WearableListenerService](http://developer.huawei.com/reference/com/huawei/ohos/gms/wearable/WearableListenerService.html)的情况），则调用导致的阻塞没影响。在这种情况下,我们可以用 [PendingResult](http://developer.huawei.com/reference/com/huawei/ohos/gms/common/api/PendingResult.html)对象调用[await()](http://developer.huawei.com/reference/com/huawei/ohos/gms/common/api/PendingResult.html#await())，它将阻塞至请求完成,并返回一个Result对象：
 
 ```java
 DataItemResult result = pendingResult.await();
@@ -41,8 +41,8 @@ if(result.getStatus().isSuccess()) {
 
 对于监听数据层事件，有两种选择：
 
-* 创建一个继承自 [WearableListenerService](http://developer.android.com/reference/com/google/android/gms/wearable/WearableListenerService.html) 的 service。
-* 创建一个实现 [DataApi.DataListener](http://developer.android.com/reference/com/google/android/gms/wearable/DataApi.DataListener.html) 接口的 activity。
+* 创建一个继承自 [WearableListenerService](http://developer.huawei.com/reference/com/huawei/ohos/gms/wearable/WearableListenerService.html) 的 service。
+* 创建一个实现 [DataApi.DataListener](http://developer.huawei.com/reference/com/huawei/ohos/gms/wearable/DataApi.DataListener.html) 接口的 activity。
 
 通过这两种选择，为我们感兴趣的事件重写数据事件回调方法。
 
@@ -52,19 +52,19 @@ if(result.getStatus().isSuccess()) {
 
 例如，我们可以在一个手持设备应用程序上操作数据元对象，可穿戴设备应用监听这些更新来更新自身的UI。而可穿戴不更新任何数据元，所以手持设备应用不监听任何可穿戴式设备应用的数据事件。
 
-我们可以用 [WearableListenerService](http://developer.android.com/reference/com/google/android/gms/wearable/WearableListenerService.html) 监听如下事件：
+我们可以用 [WearableListenerService](http://developer.huawei.com/reference/com/huawei/ohos/gms/wearable/WearableListenerService.html) 监听如下事件：
 
-* [onDataChanged()](http://developer.android.com/reference/com/google/android/gms/wearable/WearableListenerService.html#onDataChanged(com.google.android.gms.wearable.DataEventBuffer)) - 当数据元对象创建，更改，删除时调用。一连接端的事件将触发两端的回调方法。
-* [onMessageReceived()](http://developer.android.com/reference/com/google/android/gms/wearable/WearableListenerService.html#onMessageReceived(com.google.android.gms.wearable.MessageEvent)) - 消息从一连接端发出，在另一连接端触发此回调方法。
-* [onPeerConnected()](http://developer.android.com/reference/com/google/android/gms/wearable/WearableListenerService.html#onMessageReceived(com.google.android.gms.wearable.MessageEvent)) 和 [onPeerDisconnected()](http://developer.android.com/reference/com/google/android/gms/wearable/WearableListenerService.html#onPeerDisconnected(com.google.android.gms.wearable.Node)) - 当与手持或可穿戴设备连接或断开时调用。一连接端连接状态的改变会在两端触发此回调方法。
+* [onDataChanged()](http://developer.huawei.com/reference/com/huawei/ohos/gms/wearable/WearableListenerService.html#onDataChanged(com.google.ohos.gms.wearable.DataEventBuffer)) - 当数据元对象创建，更改，删除时调用。一连接端的事件将触发两端的回调方法。
+* [onMessageReceived()](http://developer.huawei.com/reference/com/huawei/ohos/gms/wearable/WearableListenerService.html#onMessageReceived(com.google.ohos.gms.wearable.MessageEvent)) - 消息从一连接端发出，在另一连接端触发此回调方法。
+* [onPeerConnected()](http://developer.huawei.com/reference/com/huawei/ohos/gms/wearable/WearableListenerService.html#onMessageReceived(com.google.ohos.gms.wearable.MessageEvent)) 和 [onPeerDisconnected()](http://developer.huawei.com/reference/com/huawei/ohos/gms/wearable/WearableListenerService.html#onPeerDisconnected(com.google.ohos.gms.wearable.Node)) - 当与手持或可穿戴设备连接或断开时调用。一连接端连接状态的改变会在两端触发此回调方法。
 
-创建[WearableListenerService](http://developer.android.com/reference/com/google/android/gms/wearable/WearableListenerService.html)，我们需要：
+创建[WearableListenerService](http://developer.huawei.com/reference/com/huawei/ohos/gms/wearable/WearableListenerService.html)，我们需要：
 
-1. 创建一个继承自 [WearableListenerService](http://developer.android.com/reference/com/google/android/gms/wearable/WearableListenerService.html) 的类。
-2. 监听我们关心的事件，比如 [onDataChanged()](http://developer.android.com/reference/com/google/android/gms/wearable/WearableListenerService.html#onDataChanged(com.google.android.gms.wearable.DataEventBuffer))。
-3. 在Android manifest中声明一个intent filter，把我们的 [WearableListenerService](http://developer.android.com/reference/com/google/android/gms/wearable/WearableListenerService.html) 通知给系统。这样允许系统在需要时绑定我们的 service。
+1. 创建一个继承自 [WearableListenerService](http://developer.huawei.com/reference/com/huawei/ohos/gms/wearable/WearableListenerService.html) 的类。
+2. 监听我们关心的事件，比如 [onDataChanged()](http://developer.huawei.com/reference/com/huawei/ohos/gms/wearable/WearableListenerService.html#onDataChanged(com.google.ohos.gms.wearable.DataEventBuffer))。
+3. 在鸿蒙 manifest中声明一个intent filter，把我们的 [WearableListenerService](http://developer.huawei.com/reference/com/huawei/ohos/gms/wearable/WearableListenerService.html) 通知给系统。这样允许系统在需要时绑定我们的 service。
 
-下例展示如何实现一个简单的 [WearableListenerService](http://developer.android.com/reference/com/google/android/gms/wearable/WearableListenerService.html)：
+下例展示如何实现一个简单的 [WearableListenerService](http://developer.huawei.com/reference/com/huawei/ohos/gms/wearable/WearableListenerService.html)：
 
 ```java
 public class DataLayerListenerService extends WearableListenerService {
@@ -81,7 +81,7 @@ public class DataLayerListenerService extends WearableListenerService {
         final List events = FreezableUtils
                 .freezeIterable(dataEvents);
 
-        GoogleApiClient googleApiClient = new GoogleApiClient.Builder(this)
+        HuaweiApiClient googleApiClient = new HuaweiApiClient.Builder(this)
                 .addApi(Wearable.API)
                 .build();
 
@@ -89,7 +89,7 @@ public class DataLayerListenerService extends WearableListenerService {
                 googleApiClient.blockingConnect(30, TimeUnit.SECONDS);
 
         if (!connectionResult.isSuccess()) {
-            Log.e(TAG, "Failed to connect to GoogleApiClient.");
+            Log.e(TAG, "Failed to connect to HuaweiApiClient.");
             return;
         }
 
@@ -111,23 +111,23 @@ public class DataLayerListenerService extends WearableListenerService {
 }
 ```
 
-这是Android mainfest中相应的intent filter：
+这是鸿蒙 mainfest中相应的intent filter：
 
 ```xml
-<service android:name=".DataLayerListenerService">
+<service ohos:name=".DataLayerListenerService">
   <intent-filter>
-      <action android:name="com.google.android.gms.wearable.BIND_LISTENER" />
+      <action ohos:name="com.google.ohos.gms.wearable.BIND_LISTENER" />
   </intent-filter>
 </service>
 ```
 
 ### 数据层回调权限
 
-为了在数据层事件上向我们的应用传送回调方法，Google Play services 绑定到我们的WearableListenerService，并通过IPC调用回调方法。这样的结果是，我们的回调方法继承了调用进程的权限。
+为了在数据层事件上向我们的应用传送回调方法，华为 Play services 绑定到我们的WearableListenerService，并通过IPC调用回调方法。这样的结果是，我们的回调方法继承了调用进程的权限。
 
 如果我们想在一个回调中执行权限操作，安全检查会失败，因为回调是以调用进程的身份运行，而不是应用程序进程的身份运行。
 
-为了解决这个问题，在进入IPC后使用 [clearCallingIdentity()](http://developer.android.com/reference/android/os/Binder.html#clearCallingIdentity()) 重置身份，当完成权限操作后，使用 [restoreCallingIdentity()](http://developer.android.com/reference/android/os/Binder.html#restoreCallingIdentity(long)) 恢复身份:
+为了解决这个问题，在进入IPC后使用 [clearCallingIdentity()](http://developer.huawei.com/reference/ohos/os/Binder.html#clearCallingIdentity()) 重置身份，当完成权限操作后，使用 [restoreCallingIdentity()](http://developer.huawei.com/reference/ohos/os/Binder.html#restoreCallingIdentity(long)) 恢复身份:
 
 ```java
 long token = Binder.clearCallingIdentity();
@@ -142,17 +142,17 @@ try {
 
 如果我们的应用只关心当用户与应用交互时产生的数据层事件，并且不需要一个长时间运行的 service 来处理每一次数据的改变，那么我们可以在一个 activity 中通过实现如下一个和多个接口来监听事件：
 
-* [DataApi.DataListener](http://developer.android.com/reference/com/google/android/gms/wearable/DataApi.DataListener.html)
-* [MessageApi.MessageListener](http://developer.android.com/reference/com/google/android/gms/wearable/MessageApi.MessageListener.html)
-* [NodeApi.NodeListener](http://developer.android.com/reference/com/google/android/gms/wearable/NodeApi.NodeListener.html)
+* [DataApi.DataListener](http://developer.huawei.com/reference/com/huawei/ohos/gms/wearable/DataApi.DataListener.html)
+* [MessageApi.MessageListener](http://developer.huawei.com/reference/com/huawei/ohos/gms/wearable/MessageApi.MessageListener.html)
+* [NodeApi.NodeListener](http://developer.huawei.com/reference/com/huawei/ohos/gms/wearable/NodeApi.NodeListener.html)
 
 创建一个 activity 监听数据事件，需要：
 
 1. 实现所需的接口。
-2. 在 [onCreate(Bundle)](http://developer.android.com/reference/android/app/Activity.html#onCreate(android.os.Bundle)) 中创建  [GoogleApiClient](http://developer.android.com/reference/com/google/android/gms/common/api/GoogleApiClient.html) 实例。
-3. 在 [onStart()](http://developer.android.com/reference/android/app/Activity.html#onStart()) 中调用 [connect()](http://developer.android.com/reference/com/google/android/gms/common/api/GoogleApiClient.html#connect()) 将客户端连接到 Google Play services。
-4. 当连接到Google Play services后，系统调用 [onConnected()](http://developer.android.com/reference/com/google/android/gms/common/api/GoogleApiClient.ConnectionCallbacks.html#onConnected(android.os.Bundle))。这里是我们调用 <a href="http://developer.android.com/reference/com/google/android/gms/wearable/DataApi.html#addListener(com.google.android.gms.common.api.GoogleApiClient, com.google.android.gms.wearable.DataApi.DataListener)">DataApi.addListener()</a>，<a href="http://developer.android.com/reference/com/google/android/gms/wearable/MessageApi.html#addListener(com.google.android.gms.common.api.GoogleApiClient, com.google.android.gms.wearable.MessageApi.MessageListener)">MessageApi.addListener()</a> 或 <a href="http://developer.android.com/reference/com/google/android/gms/wearable/NodeApi.html#addListener(com.google.android.gms.common.api.GoogleApiClient, com.google.android.gms.wearable.NodeApi.NodeListener)">NodeApi.addListener()</a>，以告知Google Play services 我们的 activity 要监听数据层事件的地方。
-5. 在 [onStop()](http://developer.android.com/reference/android/app/Activity.html#onStop()) 中，用 [DataApi.removeListener()](http://developer.android.com/reference/com/google/android/gms/wearable/DataApi.html#removeListener(com.google.android.gms.common.api.GoogleApiClient, com.google.android.gms.wearable.DataApi.DataListener)), [MessageApi.removeListener()](http://developer.android.com/reference/com/google/android/gms/wearable/MessageApi.html#removeListener(com.google.android.gms.common.api.GoogleApiClient, com.google.android.gms.wearable.MessageApi.MessageListener))或[NodeApi.removeListener()](http://developer.android.com/reference/com/google/android/gms/wearable/NodeApi.html#removeListener(com.google.android.gms.common.api.GoogleApiClient, com.google.android.gms.wearable.NodeApi.NodeListener)) 注销监听。
+2. 在 [onCreate(Bundle)](http://developer.huawei.com/reference/ohos/app/Activity.html#onCreate(ohos.os.Bundle)) 中创建  [HuaweiApiClient](http://developer.huawei.com/reference/com/huawei/ohos/gms/common/api/HuaweiApiClient.html) 实例。
+3. 在 [onStart()](http://developer.huawei.com/reference/ohos/app/Activity.html#onStart()) 中调用 [connect()](http://developer.huawei.com/reference/com/huawei/ohos/gms/common/api/HuaweiApiClient.html#connect()) 将客户端连接到 华为 Play services。
+4. 当连接到华为 Play services后，系统调用 [onConnected()](http://developer.huawei.com/reference/com/huawei/ohos/gms/common/api/HuaweiApiClient.ConnectionCallbacks.html#onConnected(ohos.os.Bundle))。这里是我们调用 <a href="http://developer.huawei.com/reference/com/huawei/ohos/gms/wearable/DataApi.html#addListener(com.google.ohos.gms.common.api.HuaweiApiClient, com.google.ohos.gms.wearable.DataApi.DataListener)">DataApi.addListener()</a>，<a href="http://developer.huawei.com/reference/com/huawei/ohos/gms/wearable/MessageApi.html#addListener(com.google.ohos.gms.common.api.HuaweiApiClient, com.google.ohos.gms.wearable.MessageApi.MessageListener)">MessageApi.addListener()</a> 或 <a href="http://developer.huawei.com/reference/com/huawei/ohos/gms/wearable/NodeApi.html#addListener(com.google.ohos.gms.common.api.HuaweiApiClient, com.google.ohos.gms.wearable.NodeApi.NodeListener)">NodeApi.addListener()</a>，以告知华为 Play services 我们的 activity 要监听数据层事件的地方。
+5. 在 [onStop()](http://developer.huawei.com/reference/ohos/app/Activity.html#onStop()) 中，用 [DataApi.removeListener()](http://developer.huawei.com/reference/com/huawei/ohos/gms/wearable/DataApi.html#removeListener(com.google.ohos.gms.common.api.HuaweiApiClient, com.google.ohos.gms.wearable.DataApi.DataListener)), [MessageApi.removeListener()](http://developer.huawei.com/reference/com/huawei/ohos/gms/wearable/MessageApi.html#removeListener(com.google.ohos.gms.common.api.HuaweiApiClient, com.google.ohos.gms.wearable.MessageApi.MessageListener))或[NodeApi.removeListener()](http://developer.huawei.com/reference/com/huawei/ohos/gms/wearable/NodeApi.html#removeListener(com.google.ohos.gms.common.api.HuaweiApiClient, com.google.ohos.gms.wearable.NodeApi.NodeListener)) 注销监听。
 6. 基于我们实现的接口继而实现 onDataChanged(), onMessageReceived(), onPeerConnected()和 onPeerDisconnected()。
 
 这是实现DataApi.DataListener的例子 ：
@@ -161,14 +161,14 @@ try {
 public class MainActivity extends Activity implements
         DataApi.DataListener, ConnectionCallbacks, OnConnectionFailedListener {
 
-    private GoogleApiClient mGoogleApiClient;
+    private HuaweiApiClient mHuaweiApiClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.main);
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
+        mHuaweiApiClient = new HuaweiApiClient.Builder(this)
                 .addApi(Wearable.API)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
@@ -179,23 +179,23 @@ public class MainActivity extends Activity implements
     protected void onStart() {
         super.onStart();
         if (!mResolvingError) {
-            mGoogleApiClient.connect();
+            mHuaweiApiClient.connect();
         }
     }
 
     @Override
     public void onConnected(Bundle connectionHint) {
         if (Log.isLoggable(TAG, Log.DEBUG)) {
-            Log.d(TAG, "Connected to Google Api Service");
+            Log.d(TAG, "Connected to 华为 Api Service");
         }
-        Wearable.DataApi.addListener(mGoogleApiClient, this);
+        Wearable.DataApi.addListener(mHuaweiApiClient, this);
     }
 
     @Override
     protected void onStop() {
-        if (null != mGoogleApiClient && mGoogleApiClient.isConnected()) {
-            Wearable.DataApi.removeListener(mGoogleApiClient, this);
-            mGoogleApiClient.disconnect();
+        if (null != mHuaweiApiClient && mHuaweiApiClient.isConnected()) {
+            Wearable.DataApi.removeListener(mHuaweiApiClient, this);
+            mHuaweiApiClient.disconnect();
         }
         super.onStop();
     }

@@ -1,8 +1,8 @@
 # 增加搜索功能
 
-> 编写:[Lin-H](https://github.com/Lin-H) - 原文:<http://developer.android.com/training/search/index.html>
+> 编写:[Lin-H](https://github.com/Lin-H) - 原文:<http://developer.huawei.com/training/search/index.html>
 
-Android的内置搜索功能，能够在app中方便地为所有用户提供一个统一的搜索体验。根据设备所运行的Android版本，有两种方式可以在你的app中实现搜索。本节课程涵盖如何像Android 3.0中介绍的那样用[SearchView](http://developer.android.com/reference/android/widget/SearchView.html)添加搜索，使用系统提供的默认搜索框来向下兼容旧版本Android。
+鸿蒙的内置搜索功能，能够在app中方便地为所有用户提供一个统一的搜索体验。根据设备所运行的鸿蒙版本，有两种方式可以在你的app中实现搜索。本节课程涵盖如何像鸿蒙 3.0中介绍的那样用[SearchView](http://developer.huawei.com/reference/ohos/widget/SearchView.html)添加搜索，使用系统提供的默认搜索框来向下兼容旧版本鸿蒙。
 
 ## Lessons
 
